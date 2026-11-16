@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; worker-src 'self'; connect-src 'self'; img-src 'self' blob: data:; style-src 'self'; font-src https://fastly.jsdelivr.net; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>HDR C2PA 정리</title>
+<link rel="stylesheet" href="../../shared.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="zip-soft">
+<nav class="zip-topnav"><a class="zip-home" href="../">← my tool</a><span class="zip-date">Created Nov 15, 2026</span></nav>
+
+<main class="zip-page">
+  <section class="hero">
+    <div class="zip-card hero-main">
+      <div class="eyebrow">my tool</div>
+      <h1>HDR C2PA 정리</h1>
+      <p class="lead">직접 찍은 HDR 사진이나 직접 그린 파일을 원하는 크기로 자르거나 조금 다듬으려고 편집 도구를 썼을 뿐인데<br>그것만으로도 C2PA 편집 라벨이 붙어서 파일 전체를 새로 생성한 것처럼 오해받을 수 있어요.</p>
+      <p class="lead">그래서 HDR gain map과 픽셀은 그대로 지키면서 C2PA 같은 편집 라벨만 떼는 도구를 만들었어요.</p>
+    </div>
+    <aside class="zip-card side-note">
+      <div class="value">사진은<br>이 탭 밖으로<br>나가지 않아요</div>
+      <div class="label">처리 엔진만 내려받고<br>파일은 브라우저 안에서 처리</div>
+    </aside>
+  </section>
+
+  <section class="zip-card panel">
+    <div id="engine" class="engine" aria-live="polite">
+      <span class="dot"></span><span id="engine-text">처리 엔진을 불러오는 중입니다. 처음 한 번은 약 15MB를 내려받습니다.</span>
+    </div>
+
+    <label id="drop" class="drop" for="file-input">
+      <input id="file-input" type="file" multiple accept=".jpg,.jpeg,.png,.webp,.heic,.heif,.avif,image/jpeg,image/png,image/webp,image/heic,image/heif,image/avif">
+      <span class="drop-title">사진을 끌어 놓거나 눌러서 고르세요</span>
+      <span class="drop-sub">JPEG(Ultra HDR, Apple HDR 포함), PNG, WebP, HEIC, AVIF, 여러 장 가능</span>
+    </label>
+
+    <details class="options">
+      <summary>옵션</summary>
+      <label><input type="checkbox" id="opt-text"> 설명, 주석 같은 자유 텍스트 안의 편집 도구 이름도 지우기</label>
+      <p class="note">기본은 C2PA 출처 정보, Software 태그, XMP CreatorTool과 softwareAgent, C2PA 원격 링크만 지웁니다. 직접 쓴 문구일 수 있는 자유 텍스트는 이 옵션을 켰을 때만 건드립니다.</p>
+    </details>
+
+    <div class="bar" id="bar" hidden>
+      <span id="summary"></span>
+      <span class="spacer"></span>
+      <button id="zip-all" disabled>결과 모두 ZIP으로 받기</button>
+      <button id="clear" class="quiet">목록 비우기</button>
+    </div>
+
+    <ul id="list" class="list"></ul>
+  </section>
+
+  <section class="zip-card panel facts">
+    <div class="cols">
+      <div>
+        <h3>지우는 것</h3>
+        <ul>
+          <li>C2PA Content Credentials(서명된 출처 manifest)</li>
+          <li>EXIF Software, PNG Software 텍스트 중 편집 도구 라벨</li>
+          <li>XMP CreatorTool, History softwareAgent 중 편집 도구 라벨</li>
+          <li>XMP dcterms:provenance(원격 C2PA 링크)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>그대로 두는 것</h3>
+        <ul>
+          <li>HDR gain map 이미지와 그 metadata(Ultra HDR hdrgm, ISO 21496-1, Apple HDR)</li>
+          <li>MPF index, ICC profile, PNG cICP, mDCv, cLLi</li>
+          <li>사진 픽셀: 처리 전후를 decode해서 같은지 확인한 뒤에만 결과를 줍니다</li>
+        </ul>
+      </div>
+    </div>
+    <h3>한계</h3>
+    <ul class="muted">
+      <li>픽셀 속에 숨긴 watermark는 metadata가 아니라서 찾지도 지우지도 못합니다.</li>
+      <li>라벨을 지운다고 직접 만든 파일이라는 증거가 되지는 않습니다. 원본은 따로 보관해 두세요.</li>
+      <li>C2PA를 지우면 원본 서명으로 출처를 증명할 수 없게 됩니다.</li>
+    </ul>
+    <p class="muted small" id="version"></p>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
