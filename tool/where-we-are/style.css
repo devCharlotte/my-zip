@@ -110,19 +110,22 @@ body.zip-soft .card .close {
 
 .stage.all .card { display: block; width: 178px; padding: 9px 12px; }
 .stage.all .card .close,
-.stage.all .card .school,
 .stage.all .card .date,
 .stage.all .card .climate { display: none; }
 .stage.all .card-head { padding-right: 0; }
 .stage.all .clock { font-size: 1.1rem; }
+.stage.all .school { margin-top: 3px; font-size: 0.74rem; line-height: 1.3; }
 
-.people { display: flex; gap: 8px; padding: 14px 2px 4px; overflow-x: auto; scrollbar-width: thin; }
+.people {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  gap: 8px;
+  padding: 14px 2px 4px;
+}
 body.zip-soft .person {
-  flex: none;
   display: flex;
   align-items: center;
   gap: 8px;
-  min-width: 112px;
   min-height: 0;
   padding: 8px 12px;
   border: 1px solid var(--my-line);
