@@ -8,7 +8,7 @@ const HDR_KIND = {
 const MIME = { jpeg: "image/jpeg", png: "image/png", webp: "image/webp", heif: "image/heif" };
 
 const $ = (s) => document.querySelector(s);
-const worker = new Worker("worker.js");
+const worker = new Worker("worker.js?v=20261116");
 const pending = new Map();
 let seq = 0;
 let engineReady = false;
