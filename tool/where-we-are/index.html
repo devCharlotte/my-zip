@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>where we are</title>
+<link rel="stylesheet" href="../../shared.css">
+<link rel="stylesheet" href="style.css?v=20261116">
+</head>
+<body class="zip-soft">
+<nav class="zip-topnav"><a class="zip-home" href="../">← my tool</a><span class="zip-date">Created Nov 16, 2026</span></nav>
+
+<main class="zip-page">
+  <section class="zip-card top">
+    <div>
+      <div class="eyebrow">my tool</div>
+      <h1>where we are</h1>
+    </div>
+    <div class="top-side">
+      <div class="seoul">
+        <span>한국 시간</span>
+        <strong id="seoul">--:--:--</strong>
+        <small id="seoul-date"></small>
+      </div>
+      <div class="controls">
+        <input id="search" type="search" placeholder="친구, 도시 검색" aria-label="친구 검색">
+        <button id="toggle-all" type="button" aria-pressed="false">모두 펼치기</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="zip-card map-card">
+    <div class="stage" id="stage">
+      <div class="map" id="map">
+        <svg id="world" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="세계 지도">
+          <rect class="ocean" width="1200" height="600"></rect>
+        </svg>
+      </div>
+      <svg id="leaders" aria-hidden="true">
+        <defs></defs>
+        <g id="lines"></g>
+      </svg>
+      <div id="cards"></div>
+    </div>
+    <nav class="people" id="people" aria-label="친구 목록"></nav>
+    <p class="credit">날씨 Open-Meteo</p>
+  </section>
+</main>
+
+<script src="people.js?v=20261116"></script>
+<script src="app.js?v=20261116"></script>
+</body>
+</html>
