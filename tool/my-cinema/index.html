@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>좌석 시야 미리보기 · 예매</title>
+  <meta name="description" content="좌석을 고르면 그 자리에서 보이는 스크린을 미리 확인할 수 있는 예매 화면 샘플">
+  <link rel="stylesheet" href="../../shared.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="zip-topnav"><a class="zip-home" href="../">← my tool</a><span class="zip-date">Created Nov 12, 2026</span></nav>
+  <header class="topbar">
+    <a class="brand" href="./">좌석 시야<small>예매 샘플</small></a>
+    <ol class="steps" id="steps">
+      <li data-step="1">영화·시간</li>
+      <li data-step="2">좌석</li>
+      <li data-step="3">결제</li>
+    </ol>
+  </header>
+
+  <main>
+    <section class="page" data-page="1">
+      <div class="theaters" id="theaters"></div>
+      <p class="theater-desc" id="theaterDesc"></p>
+      <div class="dates" id="dates"></div>
+      <ul class="movies" id="movies"></ul>
+    </section>
+
+    <section class="page" data-page="2" hidden>
+      <div class="show-head">
+        <button class="back" data-go="1" aria-label="이전">&larr;</button>
+        <div>
+          <h2 id="showTitle"></h2>
+          <p id="showMeta"></p>
+        </div>
+      </div>
+
+      <div class="seat-layout">
+        <div class="seat-pane">
+          <div class="pane-tools">
+            <div class="party">
+              <span>인원</span>
+              <button type="button" id="partyMinus" aria-label="인원 줄이기">&minus;</button>
+              <output id="partyCount">2</output>
+              <button type="button" id="partyPlus" aria-label="인원 늘리기">+</button>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="gradeToggle">
+              <span>시야 등급 보기</span>
+            </label>
+          </div>
+          <div class="recs" id="recs"></div>
+          <div class="seatmap" id="seatmap"></div>
+          <ul class="legend">
+            <li><i class="lg-free"></i>선택 가능</li>
+            <li><i class="lg-taken"></i>예매 완료</li>
+            <li><i class="lg-picked"></i>선택</li>
+            <li><i class="lg-wheel"></i>휠체어석</li>
+            <li class="grade-only"><i class="g-best"></i>명당</li>
+            <li class="grade-only"><i class="g-good"></i>좋음</li>
+            <li class="grade-only"><i class="g-fair"></i>보통</li>
+            <li class="grade-only"><i class="g-poor"></i>아쉬움</li>
+          </ul>
+        </div>
+
+        <div class="view-pane">
+          <div class="viewer" id="viewer">
+            <p class="viewer-empty" id="viewerEmpty">좌석을 누르면 그 자리에 앉았을 때 보이는 화면으로 이동해요.</p>
+            <div class="viewer-ctrl">
+              <button type="button" id="btnOverview">전체 보기</button>
+              <button type="button" id="btnMySeat" disabled>내 자리 시점</button>
+              <button type="button" id="btnSub" class="toggle">자막</button>
+            </div>
+            <span class="viewer-tip" id="viewerTip">드래그해서 둘러보기</span>
+          </div>
+
+          <div class="metrics" id="metrics" hidden>
+            <div class="metrics-head">
+              <strong id="mSeat"></strong>
+              <span class="grade" id="mGrade"></span>
+            </div>
+            <p class="rec-badge" id="mRec" hidden></p>
+            <dl class="figures">
+              <div><dt>스크린까지</dt><dd id="mDist"></dd></div>
+              <div><dt>수평 시야각</dt><dd id="mH"></dd></div>
+              <div><dt>올려보는 각도</dt><dd id="mV"></dd></div>
+              <div><dt>정면에서 벗어남</dt><dd id="mOff"></dd></div>
+              <div><dt>앞줄 시선 여유</dt><dd id="mC"></dd></div>
+              <div><dt>자막 줄 여유</dt><dd id="mSub"></dd></div>
+            </dl>
+            <ul class="notes" id="mNotes"></ul>
+            <p class="fineprint" id="mEst" hidden>상영관 치수 일부가 추정값이라 실제 자리에서 보이는 모습과 다를 수 있어요.</p>
+          </div>
+
+          <details class="hall-spec">
+            <summary>상영관 정보<small class="est-flag" id="hallEst" hidden>일부 수치 추정</small></summary>
+            <dl id="hallSpec"></dl>
+            <p class="fineprint">시야각은 스크린 폭이 시야에서 차지하는 각도예요. 보통 30~36° 이상이면 화면이 꽉 차 보이고, 대형관은 시야를 더 넓게 채우도록 만들어져서 이 페이지는 대형관에서 66~90°를 명당으로 봐요. 앞줄 시선 여유(C값)는 12cm 이상이면 앞사람 머리에 가리지 않아요. 자막 줄 여유는 같은 계산을 자막 위치로 한 값이에요.</p>
+          </details>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="picked-list" id="pickedList"><span class="muted">좌석을 선택해 주세요</span></div>
+        <div class="total">
+          <span id="totalPrice">0원</span>
+          <button type="button" class="primary" id="toPay" disabled>결제하기</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="page narrow" data-page="3" hidden>
+      <div class="show-head">
+        <button class="back" data-go="2" aria-label="이전">&larr;</button>
+        <div><h2>결제</h2></div>
+      </div>
+      <div class="card summary" id="summary"></div>
+      <fieldset class="card pay">
+        <legend>결제 수단</legend>
+        <label><input type="radio" name="pay" value="card" checked> 신용·체크카드</label>
+        <label><input type="radio" name="pay" value="easy"> 간편결제</label>
+        <label><input type="radio" name="pay" value="phone"> 휴대폰 결제</label>
+      </fieldset>
+      <p class="fineprint">샘플 화면이라 실제 결제는 진행되지 않아요. 회차와 가격도 예시예요.</p>
+      <button type="button" class="primary wide" id="payNow">결제하기</button>
+    </section>
+
+    <section class="page narrow" data-page="4" hidden>
+      <div class="ticket" id="ticket"></div>
+      <button type="button" class="ghost wide" id="restart">처음으로</button>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

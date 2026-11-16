@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>내 기기 AI</title>
+<link rel="stylesheet" href="../../shared.css">
+<style>
+  :root {
+    --panel: rgba(255,255,255,.78); --ink: #5B4048; --muted: #94737B; --line: #F7DCE2;
+    --accent: #F5B3C2; --accent-ink: #5B4048; --me: #FDE2E9; --soft: #FFEAF0; --warn: #C0627A;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: "HakgyoansimNadeuriTTF-B", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 12% 8%, rgba(255, 211, 235, .62), transparent 34%),
+      radial-gradient(circle at 88% 10%, rgba(139, 215, 255, .48), transparent 32%),
+      radial-gradient(circle at 50% 100%, rgba(199, 183, 255, .34), transparent 36%),
+      linear-gradient(135deg, #fff7ec 0%, #eef8ff 48%, #f8f0ff 100%);
+    display: grid; grid-template-columns: 260px 1fr; grid-template-rows: auto minmax(0, 1fr);
+    font-size: 15.5px; line-height: 1.7;
+  }
+  .zip-topnav { grid-column: 1 / -1; width: calc(100% - 32px); }
+  aside {
+    padding: 22px 14px; margin: 16px 0 16px 16px; display: flex; flex-direction: column; gap: 12px;
+    overflow-y: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 24px;
+    box-shadow: 0 14px 34px rgba(94,120,160,.12);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  }
+  aside h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; margin: 0 6px; }
+  aside p.note { font-size: .84rem; color: var(--muted); margin: 0 6px 6px; }
+  #chatList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+  #chatList li { display: flex; align-items: center; gap: 6px; padding: 9px 12px; border-radius: 14px; cursor: pointer; }
+  #chatList li.active { background: var(--me); }
+  #chatList li span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #chatList li button { background: none; border: 0; color: var(--muted); cursor: pointer; }
+  main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+  header { padding: 16px 22px 14px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  select, button, textarea, input { font: inherit; color: inherit; }
+  .modes { display: inline-flex; flex-wrap: wrap; background: var(--soft); border-radius: 22px; padding: 4px; gap: 2px; }
+  .modes button { border: 0; background: transparent; padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+  .modes button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+  .level { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 260px; }
+  .level input { flex: 1; accent-color: var(--accent); }
+  #levelName { min-width: 6.5em; }
+  select {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
+    padding: 8px 14px; max-width: 100%; flex: 1; min-width: 220px;
+  }
+  .think { display: inline-flex; align-items: center; gap: 6px; font-size: .9rem; }
+  .think input { accent-color: var(--accent); }
+  #levelInfo { font-size: .85rem; color: var(--muted); }
+  #levelInfo.warn { color: var(--warn); }
+  button.primary { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 999px; padding: 8px 18px; cursor: pointer; }
+  button.plain { background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+  button:disabled, input:disabled, select:disabled { opacity: .45; cursor: not-allowed; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #bar { height: 6px; background: var(--soft); border-radius: 999px; overflow: hidden; }
+  #bar div { height: 100%; width: 0; background: var(--accent); border-radius: 999px; transition: width .25s; }
+  #status { font-size: .85rem; color: var(--muted); }
+  #messages { flex: 1; overflow-y: auto; padding: 26px 22px; }
+  .msg { max-width: 720px; margin: 0 auto 18px; white-space: pre-wrap; word-break: break-word; }
+  .msg.user { background: var(--me); padding: 11px 16px; border-radius: 20px 20px 6px 20px; width: fit-content; margin-left: auto; margin-right: max(0px, calc((100% - 720px) / 2)); max-width: min(720px, 85%); }
+  .msg.assistant { padding: 0 6px; }
+  details.thought { color: var(--muted); font-size: .88rem; margin-bottom: 8px; white-space: normal; }
+  details.thought summary { cursor: pointer; }
+  details.thought div { white-space: pre-wrap; padding: 6px 0 0 12px; border-left: 2px solid var(--line); margin-top: 6px; }
+  .empty { max-width: 460px; margin: 12vh auto 0; color: var(--muted); text-align: center; }
+  form { border-top: 1px solid var(--line); padding: 14px 22px; }
+  .composer { max-width: 760px; margin: 0 auto; display: flex; gap: 10px; align-items: flex-end; }
+  textarea { flex: 1; resize: none; min-height: 48px; max-height: 200px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); }
+  #menuBtn { display: none; }
+  @media (max-width: 760px) {
+    body { grid-template-columns: 1fr; }
+    aside { display: none; }
+    aside.open { display: flex; position: fixed; inset: 0 25% 0 0; z-index: 30; margin: 10px; background: rgba(255,255,255,.94); }
+    .zip-topnav { flex-direction: row; align-items: center; }
+    #menuBtn { display: inline-block; }
+  }
+  @media (prefers-reduced-motion: reduce) { #bar div { transition: none; } }
+</style>
+</head>
+<body>
+<nav class="zip-topnav">
+  <a class="zip-home" href="../">← my ai</a>
+  <span class="zip-date">Created Oct 25, 2026</span>
+</nav>
+<aside id="side">
+  <h1>내 기기 AI</h1>
+  <p class="note">답변은 이 기기 안에서 만들어지고, 다른 곳으로 보내지지 않아요.</p>
+  <button class="primary" id="newChat">새 대화</button>
+  <ul id="chatList"></ul>
+  <button class="plain" id="exportBtn">대화 내보내기</button>
+  <button class="plain" id="importBtn">대화 가져오기</button>
+  <input type="file" id="importFile" accept="application/json" hidden>
+  <button class="plain" id="clearBtn">모든 대화 지우기</button>
+</aside>
+
+<main>
+  <header>
+    <div class="row">
+      <button class="plain" id="menuBtn" aria-label="대화 목록">☰</button>
+      <div class="modes" role="group" aria-label="실행 방식">
+        <button type="button" data-mode="builtin" aria-pressed="false">다운로드 없이 (Chrome 내장)</button>
+        <button type="button" data-mode="gpu" aria-pressed="true">GPU로 실행</button>
+        <button type="button" data-mode="cpu" aria-pressed="false">GPU 없이 (CPU)</button>
+      </div>
+    </div>
+    <div class="row" id="levelRow">
+      <div class="level">
+        <label for="level">똑똑함</label>
+        <input type="range" id="level" min="0" max="4" step="1" value="0">
+        <span id="levelName"></span>
+      </div>
+    </div>
+    <div class="row" id="pickRow">
+      <select id="modelPick" aria-label="모델 고르기"></select>
+      <label class="think" id="thinkWrap"><input type="checkbox" id="think"> 깊게 생각하기</label>
+      <button class="primary" id="loadBtn">불러오기</button>
+    </div>
+    <div id="levelInfo"></div>
+    <div id="bar"><div></div></div>
+    <div id="status">방식과 모델을 고르고 불러오기를 눌러 주세요.</div>
+  </header>
+
+  <div id="messages"></div>
+
+  <form id="form">
+    <div class="composer">
+      <textarea id="input" rows="1" placeholder="모델을 불러온 뒤 물어보세요 (Enter 보내기, Shift+Enter 줄바꿈)" disabled></textarea>
+      <button class="primary" id="sendBtn" type="submit" disabled>보내기</button>
+      <button class="plain" id="stopBtn" type="button" hidden>멈추기</button>
+    </div>
+  </form>
+</main>
+
+<script type="module">
+const $ = (id) => document.getElementById(id);
+const STORE_KEY = "strawberry-ai-chats-v1";
+const SYSTEM = "You are a friendly, helpful assistant. Always answer in the same language the user writes in.";
+const WEBLLM_URL = "https://esm.run/@mlc-ai/web-llm@0.2.85";
+const WLLAMA_BASE = "https://cdn.jsdelivr.net/npm/@wllama/wllama@3.8.1/esm";
+
+const GPU_LEVELS = [
+  { name: "가볍게", models: [
+    { label: "Qwen3.5 0.8B (Alibaba, 2026년 신작, 한국어 좋음)", f16: "Qwen3.5-0.8B-q4f16_1-MLC", f32: "Qwen3.5-0.8B-q4f32_1-MLC", gb: 1.6, think: true },
+    { label: "Qwen2.5 1.5B (Alibaba, 한국어 무난)", f16: "Qwen2.5-1.5B-Instruct-q4f16_1-MLC", f32: "Qwen2.5-1.5B-Instruct-q4f32_1-MLC", gb: 1.6 },
+    { label: "Gemma 3 1B (Google, 가장 가벼움)", f16: "gemma3-1b-it-q4f16_1-MLC", f32: null, gb: 0.7 },
+    { label: "Llama 3.2 1B (Meta)", f16: "Llama-3.2-1B-Instruct-q4f16_1-MLC", f32: "Llama-3.2-1B-Instruct-q4f32_1-MLC", gb: 0.9 },
+    { label: "Qwen3 0.6B (Alibaba)", f16: "Qwen3-0.6B-q4f16_1-MLC", f32: "Qwen3-0.6B-q4f32_1-MLC", gb: 1.4, think: true },
+    { label: "DeepSeek R1 1.5B (DeepSeek, 수학 추론)", f16: "DeepSeek-R1-Distill-Qwen-1.5B-q4f16_1-MLC", f32: "DeepSeek-R1-Distill-Qwen-1.5B-q4f32_1-MLC", gb: 1.6, alwaysThink: true },
+    { label: "SmolLM2 1.7B (Hugging Face, 영어 위주)", f16: "SmolLM2-1.7B-Instruct-q4f16_1-MLC", f32: "SmolLM2-1.7B-Instruct-q4f32_1-MLC", gb: 1.8 },
+    { label: "OLMo 2 1B (AI2, 완전 공개 모델, 영어 위주)", f16: "OLMo-2-0425-1B-Instruct-q4f16_1-MLC", f32: "OLMo-2-0425-1B-Instruct-q4f32_1-MLC", gb: 1.8 },
+  ]},
+  { name: "보통", models: [
+    { label: "Qwen3.5 2B (Alibaba, 이 단계 추천)", f16: "Qwen3.5-2B-q4f16_1-MLC", f32: "Qwen3.5-2B-q4f32_1-MLC", gb: 2.2, think: true },
+    { label: "Qwen3 1.7B (Alibaba)", f16: "Qwen3-1.7B-q4f16_1-MLC", f32: "Qwen3-1.7B-q4f32_1-MLC", gb: 2.0, think: true },
+    { label: "Llama 3.2 3B (Meta)", f16: "Llama-3.2-3B-Instruct-q4f16_1-MLC", f32: "Llama-3.2-3B-Instruct-q4f32_1-MLC", gb: 2.3 },
+    { label: "Hermes 3 3B (Nous, Llama 기반 대화형)", f16: "Hermes-3-Llama-3.2-3B-q4f16_1-MLC", f32: "Hermes-3-Llama-3.2-3B-q4f32_1-MLC", gb: 2.3 },
+    { label: "Ministral 3 3B (Mistral, 다국어)", f16: "Ministral-3-3B-Instruct-2512-BF16-q4f16_1-MLC", f32: "Ministral-3-3B-Instruct-2512-BF16-q4f32_1-MLC", gb: 2.9 },
+    { label: "Qwen2.5 3B (Alibaba)", f16: "Qwen2.5-3B-Instruct-q4f16_1-MLC", f32: "Qwen2.5-3B-Instruct-q4f32_1-MLC", gb: 2.5 },
+    { label: "Gemma 2 2B (Google)", f16: "gemma-2-2b-it-q4f16_1-MLC", f32: "gemma-2-2b-it-q4f32_1-MLC", gb: 1.9 },
+    { label: "Qwen2.5 Coder 3B (Alibaba, 코딩용)", f16: "Qwen2.5-Coder-3B-Instruct-q4f16_1-MLC", f32: "Qwen2.5-Coder-3B-Instruct-q4f32_1-MLC", gb: 2.5 },
+  ]},
+  { name: "똑똑하게", models: [
+    { label: "Qwen3.5 4B (Alibaba, 이 단계 추천)", f16: "Qwen3.5-4B-q4f16_1-MLC", f32: "Qwen3.5-4B-q4f32_1-MLC", gb: 3.9, think: true },
+    { label: "Phi-4 mini (Microsoft, 수학과 영어에 강함)", f16: "Phi-4-mini-instruct-q4f16_1-MLC", f32: "Phi-4-mini-instruct-q4f32_1-MLC", gb: 3.4 },
+    { label: "Qwen3 4B (Alibaba)", f16: "Qwen3-4B-q4f16_1-MLC", f32: "Qwen3-4B-q4f32_1-MLC", gb: 3.4, think: true },
+    { label: "Phi-3.5 mini (Microsoft)", f16: "Phi-3.5-mini-instruct-q4f16_1-MLC", f32: "Phi-3.5-mini-instruct-q4f32_1-MLC", gb: 3.7 },
+    { label: "Mistral 7B v0.3 (Mistral)", f16: "Mistral-7B-Instruct-v0.3-q4f16_1-MLC", f32: "Mistral-7B-Instruct-v0.3-q4f32_1-MLC", gb: 4.6 },
+  ]},
+  { name: "아주 똑똑하게", models: [
+    { label: "Qwen3.5 9B (Alibaba, 브라우저용 중 가장 추천)", f16: "Qwen3.5-9B-q4f16_1-MLC", f32: "Qwen3.5-9B-q4f32_1-MLC", gb: 6.4, think: true },
+    { label: "Llama 3.1 8B (Meta)", f16: "Llama-3.1-8B-Instruct-q4f16_1-MLC", f32: "Llama-3.1-8B-Instruct-q4f32_1-MLC", gb: 5.0 },
+    { label: "Qwen3 8B (Alibaba)", f16: "Qwen3-8B-q4f16_1-MLC", f32: "Qwen3-8B-q4f32_1-MLC", gb: 5.7, think: true },
+    { label: "Qwen2.5 7B (Alibaba)", f16: "Qwen2.5-7B-Instruct-q4f16_1-MLC", f32: "Qwen2.5-7B-Instruct-q4f32_1-MLC", gb: 5.1 },
+    { label: "Gemma 2 9B (Google, 한국어 자연스러움)", f16: "gemma-2-9b-it-q4f16_1-MLC", f32: "gemma-2-9b-it-q4f32_1-MLC", gb: 6.4 },
+    { label: "Qwen2.5 Coder 7B (Alibaba, 코딩용)", f16: "Qwen2.5-Coder-7B-Instruct-q4f16_1-MLC", f32: "Qwen2.5-Coder-7B-Instruct-q4f32_1-MLC", gb: 5.1 },
+    { label: "DeepSeek R1 7B (DeepSeek, 항상 깊게 생각)", f16: "DeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLC", f32: "DeepSeek-R1-Distill-Qwen-7B-q4f32_1-MLC", gb: 5.1, alwaysThink: true },
+    { label: "OLMo 2 7B (AI2, 완전 공개 모델, 영어 위주)", f16: "OLMo-2-1124-7B-Instruct-q4f16_1-MLC", f32: "OLMo-2-1124-7B-Instruct-q4f32_1-MLC", gb: 6.5 },
+  ]},
+  { name: "최대한", models: [
+    { label: "Llama 3.1 70B (Meta, 고성능 PC 전용, 약 31GB)", f16: "Llama-3.1-70B-Instruct-q3f16_1-MLC", f32: null, gb: 31.2 },
+  ]},
+];
+
+const CPU_LEVELS = [
+  { name: "가볍게", models: [
+    { label: "Qwen3.5 0.8B (Alibaba, 한국어 좋음, 추천)", repo: "unsloth/Qwen3.5-0.8B-GGUF", file: "Qwen3.5-0.8B-Q4_K_M.gguf", gb: 0.53, think: true },
+    { label: "LFM2.5 1.2B (Liquid AI, CPU에서 특히 빠름)", repo: "LiquidAI/LFM2.5-1.2B-Instruct-GGUF", file: "LFM2.5-1.2B-Instruct-Q4_K_M.gguf", gb: 0.73 },
+    { label: "Gemma 3 1B (Google)", repo: "unsloth/gemma-3-1b-it-GGUF", file: "gemma-3-1b-it-Q4_K_M.gguf", gb: 0.81 },
+    { label: "Llama 3.2 1B (Meta)", repo: "bartowski/Llama-3.2-1B-Instruct-GGUF", file: "Llama-3.2-1B-Instruct-Q4_K_M.gguf", gb: 0.81 },
+  ]},
+  { name: "보통", models: [
+    { label: "Qwen3.5 2B (Alibaba, 한국어 좋음, 추천)", repo: "unsloth/Qwen3.5-2B-GGUF", file: "Qwen3.5-2B-Q4_K_M.gguf", gb: 1.28, think: true },
+    { label: "Qwen3 1.7B (Alibaba)", repo: "unsloth/Qwen3-1.7B-GGUF", file: "Qwen3-1.7B-Q4_K_M.gguf", gb: 1.11, think: true },
+    { label: "Ministral 3 3B (Mistral, 다국어)", repo: "unsloth/Ministral-3-3B-Instruct-2512-GGUF", file: "Ministral-3-3B-Instruct-2512-Q3_K_M.gguf", gb: 1.8 },
+    { label: "Llama 3.2 3B (Meta)", repo: "bartowski/Llama-3.2-3B-Instruct-GGUF", file: "Llama-3.2-3B-Instruct-Q4_0.gguf", gb: 1.92 },
+  ]},
+  { name: "똑똑하게 (느림)", models: [
+    { label: "Gemma 3 4B (Google, 한국어 자연스러움)", repo: "unsloth/gemma-3-4b-it-GGUF", file: "gemma-3-4b-it-Q3_K_M.gguf", gb: 2.1 },
+    { label: "Phi-4 mini (Microsoft, 수학과 영어에 강함)", repo: "unsloth/Phi-4-mini-instruct-GGUF", file: "Phi-4-mini-instruct-Q3_K_M.gguf", gb: 2.12 },
+  ]},
+];
+
+let mode = "gpu";
+let webllm = null, engine = null, gpuModel = null;
+let wllama = null, cpuModel = null;
+let builtinReady = false;
+let abortCtl = null, busy = false, loading = false;
+let hasF16 = true, gpuHint = null;
+const ramGB = navigator.deviceMemory ?? 8;
+let chats = loadChats();
+let currentId = chats[0]?.id ?? createChat().id;
+
+function loadChats() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) ?? []; } catch { return []; } }
+function saveChats() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(chats)); }
+  catch { setStatus("저장 공간이 부족해요. 오래된 대화를 지우거나 내보낸 뒤 지워 주세요."); }
+}
+function createChat() {
+  const chat = { id: crypto.randomUUID(), title: "새 대화", messages: [], updated: Date.now() };
+  chats.unshift(chat); saveChats(); return chat;
+}
+const current = () => chats.find((c) => c.id === currentId);
+
+const setStatus = (t) => { $("status").textContent = t; };
+const setBar = (r) => { $("bar").firstElementChild.style.width = Math.round(Math.min(1, r) * 100) + "%"; };
+function bubble(role, text) { const d = document.createElement("div"); d.className = "msg " + role; d.textContent = text; return d; }
+function renderList() {
+  const ul = $("chatList"); ul.innerHTML = "";
+  for (const c of chats) {
+    const li = document.createElement("li"); li.className = c.id === currentId ? "active" : "";
+    const span = document.createElement("span"); span.textContent = c.title;
+    const del = document.createElement("button"); del.textContent = "✕"; del.setAttribute("aria-label", "대화 지우기");
+    del.onclick = (e) => {
+      e.stopPropagation(); if (busy) return;
+      chats = chats.filter((x) => x.id !== c.id);
+      if (!chats.length) createChat();
+      if (currentId === c.id) currentId = chats[0].id;
+      saveChats(); renderAll();
+    };
+    li.onclick = () => { if (!busy) { currentId = c.id; renderAll(); $("side").classList.remove("open"); } };
+    li.append(span, del); ul.append(li);
+  }
+}
+function renderMessages() {
+  const box = $("messages"); box.innerHTML = "";
+  const msgs = current().messages;
+  if (!msgs.length) { box.innerHTML = '<div class="empty">무엇이든 물어보세요.<br>질문과 답은 이 기기에만 저장됩니다!</div>'; return; }
+  for (const m of msgs) box.append(bubble(m.role, m.content));
+  box.scrollTop = box.scrollHeight;
+}
+const renderAll = () => { renderList(); renderMessages(); };
+const isReady = () => (mode === "builtin" ? builtinReady : mode === "gpu" ? !!engine : !!cpuModel);
+function setReady(on) { $("input").disabled = !on; $("sendBtn").disabled = !on; if (on) $("input").focus(); }
+
+const levels = () => (mode === "cpu" ? CPU_LEVELS : GPU_LEVELS);
+const pickedModel = () => levels()[+$("level").value].models[+$("modelPick").value];
+const gpuIdOf = (m) => (hasF16 ? m.f16 : m.f32);
+const budget = () => (mode === "cpu" ? ramGB * 0.45 : gpuHint);
+const fmtGB = (g) => (g < 1 ? g.toFixed(1) : g < 10 ? g.toFixed(1).replace(".0", "") : Math.round(g));
+
+function updateLevel() {
+  const L = levels();
+  $("level").max = L.length - 1;
+  if (+$("level").value > L.length - 1) $("level").value = L.length - 1;
+  const lv = +$("level").value;
+  $("levelName").textContent = L[lv].name;
+  const sel = $("modelPick"); sel.innerHTML = "";
+  const b = budget();
+  L[lv].models.forEach((m, i) => {
+    const o = document.createElement("option"); o.value = i;
+    let t = m.label;
+    if (mode === "gpu" && !gpuIdOf(m)) { o.disabled = true; t += " (이 기기 GPU에서는 못 써요)"; }
+    else if (b != null && m.gb > b) t += " (이 기기엔 무거울 수 있음)";
+    o.textContent = t; sel.append(o);
+  });
+  sel.value = Math.max([...sel.options].findIndex((o) => !o.disabled), 0);
+  updatePick();
+}
+function updatePick() {
+  const m = pickedModel(), info = $("levelInfo"), b = budget();
+  info.className = "";
+  let t = mode === "cpu"
+    ? `처음 한 번 약 ${fmtGB(m.gb)}GB를 내려받아요. GPU 없이 CPU로 돌려서 GPU 모드보다 느려요.`
+    : `처음 한 번 약 ${fmtGB(m.gb)}GB를 내려받고 GPU 메모리도 그만큼 써요.`;
+  if (b != null && m.gb > b) { t += " 이 기기에서는 느리거나 실패할 수 있어요."; info.className = "warn"; }
+  info.textContent = t;
+  $("thinkWrap").hidden = !(m.think || m.alwaysThink);
+  $("think").disabled = !!m.alwaysThink;
+  if (m.alwaysThink) $("think").checked = true;
+}
+$("level").addEventListener("input", updateLevel);
+$("modelPick").addEventListener("change", updatePick);
+
+function recommendLevel() {
+  const b = budget(); if (b == null) { $("level").value = 0; return; }
+  let rec = 0;
+  levels().forEach((L, i) => { if (Math.min(...L.models.map((m) => m.gb)) <= b) rec = i; });
+  $("level").value = Math.min(rec, mode === "cpu" ? 1 : 3);
+}
+
+async function probeGPU() {
+  if (!navigator.gpu) return false;
+  try {
+    const adapter = await navigator.gpu.requestAdapter();
+    if (!adapter) return false;
+    hasF16 = adapter.features.has("shader-f16");
+    gpuHint = Math.max((adapter.limits.maxBufferSize / 1024 ** 3) * 2, ramGB * 0.6);
+    return true;
+  } catch { return false; }
+}
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll(".modes button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.mode === m));
+  const builtin = m === "builtin";
+  $("levelRow").style.display = builtin ? "none" : "";
+  $("pickRow").querySelector("select").style.display = builtin ? "none" : "";
+  $("thinkWrap").style.display = builtin ? "none" : "";
+  $("levelInfo").style.display = builtin ? "none" : "";
+  setBar(0);
+  if (!builtin) { recommendLevel(); updateLevel(); }
+  setReady(isReady());
+  if (builtin) setStatus("Chrome에 들어 있는 Gemini Nano를 써요. 사이트마다 따로 받지 않고, 브라우저가 한 번 준비해 두면 계속 써요.");
+  else if (m === "cpu") setStatus(cpuModel ? `준비 완료: ${cpuModel.label}` : "GPU가 없어도 돼요. 가벼운 모델일수록 빨라요.");
+  else setStatus(engine ? `준비 완료: ${gpuModel.label}` : "단계와 모델을 고르고 불러오기를 눌러 주세요.");
+}
+document.querySelectorAll(".modes button").forEach((b) => { b.onclick = () => !busy && !loading && setMode(b.dataset.mode); });
+
+$("loadBtn").onclick = async () => {
+  loading = true;
+  ["loadBtn", "level", "modelPick"].forEach((id) => ($(id).disabled = true));
+  setReady(false);
+  try {
+    if (mode === "builtin") await loadBuiltin();
+    else if (mode === "gpu") await loadGPU();
+    else await loadCPU();
+  } catch (e) {
+    setStatus("불러오지 못했어요: " + (e?.message ?? e) + " 한 단계 낮추거나 다른 모델로 다시 해 보세요.");
+  } finally {
+    loading = false;
+    ["loadBtn", "level", "modelPick"].forEach((id) => ($(id).disabled = false));
+    setReady(isReady());
+    if (mode !== "builtin") updateLevel();
+  }
+};
+
+async function loadBuiltin() {
+  if (!("LanguageModel" in self)) {
+    setStatus("이 브라우저에는 내장 AI가 없어요. 데스크톱 Chrome 최신 버전이 필요하고, 사이트에 따라 Origin Trial 토큰이 필요할 수 있어요.");
+    return;
+  }
+  const a = await LanguageModel.availability();
+  if (a === "unavailable") { setStatus("이 기기에서는 Chrome 내장 AI를 쓸 수 없어요. 다른 방식을 골라 주세요."); return; }
+  setStatus(a === "available" ? "내장 AI 확인 중..." : "Chrome이 내장 모델을 준비하고 있어요. 처음 한 번만 걸려요.");
+  const s = await LanguageModel.create({
+    monitor(m) { m.addEventListener("downloadprogress", (e) => { setBar(e.loaded); setStatus(`내장 모델 준비 중 ${Math.round(e.loaded * 100)}%`); }); },
+  });
+  s.destroy(); setBar(1);
+  builtinReady = true;
+  setStatus("준비 완료: Chrome 내장 AI");
+}
+
+async function loadGPU() {
+  if (!navigator.gpu) { setStatus("이 브라우저나 기기는 WebGPU를 쓸 수 없어요. 'GPU 없이 (CPU)'를 골라 주세요."); return; }
+  const m = pickedModel(), id = gpuIdOf(m);
+  if (!id) throw new Error("이 기기 GPU에서는 이 모델을 쓸 수 없어요.");
+  webllm ??= await import(WEBLLM_URL);
+  if (engine) { await engine.unload(); engine = null; gpuModel = null; }
+  engine = await webllm.CreateMLCEngine(id, { initProgressCallback: (p) => { setBar(p.progress); setStatus(p.text); } });
+  gpuModel = m;
+  setStatus(`준비 완료: ${m.label}`);
+}
+
+async function loadCPU() {
+  const m = pickedModel();
+  if (!wllama) {
+    const { Wllama } = await import(`${WLLAMA_BASE}/index.js`);
+    wllama = new Wllama({ default: `${WLLAMA_BASE}/wasm/wllama.wasm` });
+  }
+  if (cpuModel) { await wllama.exit().catch(() => {}); cpuModel = null; }
+  setStatus("모델 내려받는 중...");
+  let useCache = true;
+  try {
+    const { quota = 0, usage = 0 } = await navigator.storage.estimate();
+    useCache = quota - usage > m.gb * 1e9 * 1.3;
+  } catch {}
+  const params = { n_ctx: 4096, n_gpu_layers: 0 };
+  const onProgress = (loaded, total) => {
+    if (!total) return;
+    setBar(loaded / total);
+    setStatus(`내려받는 중 ${Math.round((loaded / total) * 100)}% (${(loaded / 1e9).toFixed(2)} / ${(total / 1e9).toFixed(2)}GB)`);
+  };
+  if (useCache) {
+    await wllama.loadModelFromHF({ repo: m.repo, file: m.file }, {
+      ...params, progressCallback: ({ loaded, total }) => onProgress(loaded, total),
+    });
+  } else {
+    const res = await fetch(`https://huggingface.co/${m.repo}/resolve/main/${m.file}`);
+    if (!res.ok) throw new Error("모델 파일을 받지 못했어요 (" + res.status + ")");
+    const total = +res.headers.get("content-length") || m.gb * 1e9;
+    const reader = res.body.getReader(), parts = [];
+    let loaded = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      parts.push(value); loaded += value.length; onProgress(loaded, total);
+    }
+    setStatus("모델 여는 중... (저장 공간이 부족해서 이번에는 저장하지 않았어요)");
+    await wllama.loadModel([new Blob(parts)], params);
+  }
+  setBar(1);
+  cpuModel = m;
+  const threads = wllama.isMultithread() ? "여러 코어 사용" : "코어 1개 사용";
+  setStatus(`준비 완료: ${m.label} (${threads})`);
+}
+
+async function* streamAnswer(history) {
+  if (mode === "builtin") {
+    const session = await LanguageModel.create({ initialPrompts: [{ role: "system", content: SYSTEM }, ...history.slice(0, -1)], signal: abortCtl.signal });
+    try { for await (const c of session.promptStreaming(history.at(-1).content, { signal: abortCtl.signal })) yield c; }
+    finally { session.destroy(); }
+  } else if (mode === "gpu") {
+    const req = { messages: [{ role: "system", content: SYSTEM }, ...history], stream: true, temperature: 0.7 };
+    if (gpuModel.think) req.extra_body = { enable_thinking: $("think").checked };
+    for await (const c of await engine.chat.completions.create(req)) yield c.choices[0]?.delta?.content ?? "";
+  } else {
+    const req = { messages: [{ role: "system", content: SYSTEM }, ...history], stream: true, temperature: 0.7, abortSignal: abortCtl.signal };
+    if (cpuModel.think) req.chat_template_kwargs = { enable_thinking: $("think").checked };
+    for await (const c of await wllama.createChatCompletion(req)) yield c.choices?.[0]?.delta?.content ?? "";
+  }
+}
+
+$("form").onsubmit = async (e) => {
+  e.preventDefault();
+  const text = $("input").value.trim();
+  if (!text || busy || !isReady()) return;
+  const chat = current();
+  chat.messages.push({ role: "user", content: text });
+  if (chat.title === "새 대화") chat.title = text.slice(0, 30);
+  $("input").value = ""; renderAll();
+
+  busy = true; abortCtl = new AbortController();
+  $("sendBtn").hidden = true; $("stopBtn").hidden = false;
+  const out = bubble("assistant", ""); $("messages").append(out);
+  const thought = document.createElement("details"); thought.className = "thought";
+  const tSum = document.createElement("summary"), tBody = document.createElement("div");
+  thought.append(tSum, tBody);
+  const final = document.createElement("div"); out.append(final);
+  let raw = "", answer = "";
+  const show = () => {
+    const open = raw.indexOf("<think>"), close = raw.indexOf("</think>");
+    if (open !== -1 || (close !== -1)) {
+      const thinking = raw.slice(open === -1 ? 0 : open + 7, close === -1 ? undefined : close).trim();
+      if (thinking) {
+        if (!thought.isConnected) out.prepend(thought);
+        tSum.textContent = close === -1 ? "생각하는 중..." : "생각한 과정 보기";
+        tBody.textContent = thinking;
+      }
+      answer = close === -1 ? "" : raw.slice(close + 8).trim();
+    } else answer = raw.trim();
+    final.textContent = answer;
+  };
+  try {
+    for await (const piece of streamAnswer(chat.messages.slice(-10))) {
+      raw += piece; show();
+      $("messages").scrollTop = $("messages").scrollHeight;
+    }
+  } catch (err) {
+    if (err?.name !== "AbortError" && !abortCtl.signal.aborted) { answer += "\n\n[오류: " + (err?.message ?? err) + "]"; final.textContent = answer; }
+  }
+  chat.messages.push({ role: "assistant", content: answer || "(멈춤)" });
+  chat.updated = Date.now(); saveChats();
+  busy = false; $("sendBtn").hidden = false; $("stopBtn").hidden = true;
+  renderList();
+};
+$("stopBtn").onclick = () => { abortCtl?.abort(); if (mode === "gpu") engine?.interruptGenerate(); };
+$("input").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); $("form").requestSubmit(); }
+});
+
+$("newChat").onclick = () => { if (!busy) { currentId = createChat().id; renderAll(); } };
+$("menuBtn").onclick = () => $("side").classList.toggle("open");
+$("clearBtn").onclick = () => {
+  if (busy || !confirm("이 브라우저에 저장된 모든 대화를 지울까요?")) return;
+  chats = []; currentId = createChat().id; renderAll();
+};
+$("exportBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(chats, null, 2)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "my-ai-chats.json"; a.click();
+  URL.revokeObjectURL(a.href);
+};
+$("importBtn").onclick = () => $("importFile").click();
+$("importFile").onchange = async (e) => {
+  const file = e.target.files[0]; if (!file) return;
+  try {
+    const data = JSON.parse(await file.text());
+    if (!Array.isArray(data)) throw new Error();
+    const known = new Set(chats.map((c) => c.id));
+    chats = [...data.filter((c) => c.id && Array.isArray(c.messages) && !known.has(c.id)), ...chats];
+    saveChats(); renderAll(); setStatus("대화를 가져왔어요.");
+  } catch { setStatus("이 파일은 가져올 수 없어요. 이 페이지에서 내보낸 JSON 파일을 골라 주세요."); }
+  e.target.value = "";
+};
+
+renderAll();
+(async () => {
+  const hasGPU = await probeGPU();
+  setMode(hasGPU ? "gpu" : "cpu");
+  if (!hasGPU) setStatus("이 기기에서는 GPU를 쓸 수 없어서 CPU 모드로 골라 뒀어요. 가벼운 모델일수록 빨라요.");
+  if ("LanguageModel" in self) {
+    try { if ((await LanguageModel.availability()) === "available") setMode("builtin"); } catch {}
+  }
+})();
+</script>
+</body>
+</html>

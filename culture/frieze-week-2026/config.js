@@ -1,0 +1,6 @@
+window.FRIEZE_CONFIG = {
+  NAVER_MAP_CLIENT_ID: "d13ftwzezf",
+  GITHUB_PAGES_ORIGIN: "https://devcharlotte.github.io",
+  NAVER_MAP_DAILY_LIMIT: 10000,
+  NAVER_MAP_MONTHLY_LIMIT: 100000
+};

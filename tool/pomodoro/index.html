@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JoonHee's pomodoro</title>
+  <link rel="stylesheet" href="../../shared.css" />
+  <style>
+    :root {
+      --body: #efe6d6;
+      --body-edge: #d9ccb4;
+      --face: #fbf8f1;
+      --ink: #2f3a33;
+      --muted: #8a8f84;
+      --green: #2f6b4f;
+      --green-soft: #3f8a66;
+      --orange: #f0893a;
+      --lamp: rgba(255, 196, 120, 0.55);
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      font-family: 'HakgyoansimNadeuriTTF-B', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255, 226, 196, 0.7), transparent 32%),
+        radial-gradient(circle at 85% 90%, rgba(203, 228, 210, 0.7), transparent 34%),
+        linear-gradient(135deg, #fbf6ee, #eef4ee);
+    }
+
+    .page {
+      display: grid;
+      place-items: center;
+      gap: 22px;
+      padding: 28px 16px 48px;
+    }
+
+    .timer {
+      position: relative;
+      --size: min(420px, 92vw);
+      width: var(--size);
+      aspect-ratio: 1;
+      padding: calc(var(--size) * 0.09);
+      border-radius: 18%;
+      background: linear-gradient(160deg, #f6efe2, var(--body));
+      border: 1px solid var(--body-edge);
+      box-shadow:
+        0 30px 60px rgba(90, 75, 50, 0.22),
+        inset 0 2px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -6px 14px rgba(150, 128, 92, 0.18);
+    }
+
+    .magnet {
+      position: absolute;
+      width: 3.2%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff, #cbbd9f);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+
+    .magnet:nth-child(1) { top: 6%; left: 6%; }
+    .magnet:nth-child(2) { top: 6%; right: 6%; }
+    .magnet:nth-child(3) { bottom: 6%; left: 6%; }
+    .magnet:nth-child(4) { bottom: 6%; right: 6%; }
+
+    .top-buttons {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      display: flex;
+      gap: 14px;
+      transform: translateX(-50%);
+    }
+
+    .top-buttons button {
+      width: 74px;
+      height: 26px;
+      border: none;
+      border-radius: 10px 10px 4px 4px;
+      color: #fff;
+      font: inherit;
+      font-size: 0.78rem;
+      cursor: pointer;
+      box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.12) inset, 0 4px 8px rgba(0, 0, 0, 0.12);
+      transition: transform 0.1s ease, filter 0.1s ease;
+    }
+
+    .top-buttons button:active { transform: translateY(3px); }
+    .top-buttons button:focus { outline: none; }
+    .top-buttons button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .top-buttons button:hover { filter: brightness(1.06); }
+
+    #playBtn { background: var(--green); }
+    #lampBtn { background: var(--orange); }
+
+    .face-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      transition: box-shadow 0.4s ease;
+    }
+
+    .timer.lamp-on .face-wrap {
+      box-shadow: 0 0 0 10px var(--lamp), 0 0 60px 20px var(--lamp);
+    }
+
+    .timer.ringing .face-wrap {
+      animation: blink 0.9s steps(2, start) infinite;
+    }
+
+    @keyframes blink {
+      to { box-shadow: 0 0 0 10px rgba(255, 160, 80, 0.85), 0 0 70px 26px rgba(255, 160, 80, 0.7); }
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      touch-action: none;
+      cursor: grab;
+      user-select: none;
+    }
+
+    svg.dragging { cursor: grabbing; }
+
+    .face { fill: var(--face); transition: fill 0.4s ease; }
+    .timer.lamp-on { --face: #fff2da; }
+
+    .num {
+      fill: var(--ink);
+      font-family: 'HakgyoansimNadeuriTTF-B', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    .bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(420px, 92vw);
+      gap: 12px;
+    }
+
+    .readout {
+      font-size: 2rem;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .readout small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0;
+    }
+
+    .switch {
+      display: inline-flex;
+      padding: 4px;
+      border-radius: 999px;
+      background: #e4dac7;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+    }
+
+    .switch button {
+      padding: 7px 12px;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+
+    .switch button.on {
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+
+    .presets {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      width: min(420px, 92vw);
+    }
+
+    .presets button {
+      padding: 8px 14px;
+      border: 1px solid var(--body-edge);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .presets button:hover { background: #fff; }
+
+    .today {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 22px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #e8664a;
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+    }
+
+    .help {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-align: center;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <nav class="zip-topnav">
+    <a class="zip-home" href="../">← my tool</a>
+    <span class="zip-date">Created Nov 12, 2026</span>
+  </nav>
+
+  <main class="page">
+    <div class="timer" id="timer">
+      <span class="magnet"></span><span class="magnet"></span><span class="magnet"></span><span class="magnet"></span>
+      <div class="top-buttons">
+        <button type="button" id="playBtn">시작</button>
+        <button type="button" id="lampBtn">램프</button>
+      </div>
+      <div class="face-wrap">
+        <svg id="dial" viewBox="0 0 300 300" aria-label="다이얼을 돌려 시간 맞추기">
+          <circle class="face" cx="150" cy="150" r="148" stroke="#e3dccd" stroke-width="2" />
+          <g id="ticks"></g>
+          <path id="sector" fill="#3f8a66" opacity="0.88" />
+          <circle cx="150" cy="150" r="34" fill="#2f6b4f" />
+          <circle cx="150" cy="150" r="34" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="3" />
+          <rect id="knobMark" x="147" y="122" width="6" height="18" rx="3" fill="#fff" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="readout"><span id="readout">25:00</span><small id="state">다이얼을 돌려 시간을 맞춰요</small></div>
+      <div class="switch" role="group" aria-label="알림">
+        <button type="button" data-alert="sound" class="on">소리</button>
+        <button type="button" data-alert="light">불빛만</button>
+      </div>
+    </div>
+
+    <div class="presets">
+      <button type="button" data-min="25">집중 25</button>
+      <button type="button" data-min="50">집중 50</button>
+      <button type="button" data-min="5">쉬기 5</button>
+      <button type="button" data-min="10">쉬기 10</button>
+    </div>
+
+    <div class="today" id="today"></div>
+    <p class="help">Space 시작/정지, ← → 1분씩, L 램프</p>
+  </main>
+
+  <script>
+    const KEY = "joonhee-desk-pomodoro";
+    const MAX_MIN = 60;
+
+    const timer = document.getElementById("timer");
+    const dial = document.getElementById("dial");
+    const sector = document.getElementById("sector");
+    const knobMark = document.getElementById("knobMark");
+    const readout = document.getElementById("readout");
+    const stateText = document.getElementById("state");
+    const playBtn = document.getElementById("playBtn");
+    const lampBtn = document.getElementById("lampBtn");
+    const todayBox = document.getElementById("today");
+    const alertButtons = document.querySelectorAll("[data-alert]");
+
+    const saved = load();
+    let setSeconds = saved.setSeconds || 25 * 60;
+    let remaining = setSeconds;
+    let endAt = null;
+    let alertMode = saved.alertMode || "sound";
+    let lampOn = !!saved.lampOn;
+    let done = saved.done || {};
+    let ringTimer = null;
+    let audioCtx = null;
+    let swallowClick = false;
+
+    if (saved.endAt && saved.endAt > Date.now()) {
+      endAt = saved.endAt;
+      remaining = Math.ceil((endAt - Date.now()) / 1000);
+    } else if (!saved.endAt && saved.remaining > 0) {
+      remaining = saved.remaining;
+    }
+
+    function load() {
+      try {
+        return JSON.parse(localStorage.getItem(KEY)) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function save() {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({ setSeconds, remaining, endAt, alertMode, lampOn, done }));
+      } catch (e) {}
+    }
+
+    function todayKey() {
+      const d = new Date();
+      return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+    }
+
+    function point(deg, r) {
+      const rad = (deg - 90) * Math.PI / 180;
+      return [150 + r * Math.cos(rad), 150 + r * Math.sin(rad)];
+    }
+
+    function drawTicks() {
+      const g = document.getElementById("ticks");
+      let html = "";
+      for (let m = 0; m < 60; m++) {
+        const big = m % 5 === 0;
+        const [x1, y1] = point(m * 6, 140);
+        const [x2, y2] = point(m * 6, big ? 126 : 133);
+        html += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${big ? "#2f3a33" : "#b9b3a6"}" stroke-width="${big ? 2.4 : 1.2}" stroke-linecap="round" />`;
+        if (big) {
+          const [tx, ty] = point(m * 6, 112);
+          html += `<text class="num" x="${tx}" y="${ty}">${m}</text>`;
+        }
+      }
+      g.innerHTML = html;
+    }
+
+    function drawSector(seconds) {
+      const deg = Math.min(359.99, (seconds / 60) * 6);
+      if (seconds <= 0) {
+        sector.setAttribute("d", "");
+      } else {
+        const [x, y] = point(deg, 104);
+        const large = deg > 180 ? 1 : 0;
+        sector.setAttribute("d", `M150 150 L150 46 A104 104 0 ${large} 1 ${x} ${y} Z`);
+      }
+      knobMark.setAttribute("transform", `rotate(${deg} 150 150)`);
+    }
+
+    function format(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    }
+
+    function render() {
+      drawSector(remaining);
+      readout.textContent = format(remaining);
+      playBtn.textContent = endAt ? "정지" : "시작";
+      timer.classList.toggle("lamp-on", lampOn);
+      alertButtons.forEach((b) => b.classList.toggle("on", b.dataset.alert === alertMode));
+      document.title = endAt ? `${format(remaining)} · JoonHee's pomodoro` : "JoonHee's pomodoro";
+
+      if (ringTimer) stateText.textContent = "끝! 아무 데나 눌러서 끄기";
+      else if (endAt) stateText.textContent = "집중하는 중";
+      else if (remaining > 0 && remaining < setSeconds) stateText.textContent = "잠깐 멈춤";
+      else stateText.textContent = "다이얼을 돌려 시간을 맞춰요";
+
+      const count = done[todayKey()] || 0;
+      todayBox.innerHTML = count
+        ? `오늘 ${count}번 ` + '<span class="dot"></span>'.repeat(Math.min(count, 12))
+        : "";
+    }
+
+    function setTime(seconds) {
+      stopRing();
+      remaining = Math.max(0, Math.min(MAX_MIN * 60, Math.round(seconds)));
+      setSeconds = remaining || setSeconds;
+      if (endAt) {
+        if (remaining > 0) endAt = Date.now() + remaining * 1000;
+        else endAt = null;
+      }
+      save();
+      render();
+    }
+
+    function start() {
+      if (remaining <= 0) remaining = setSeconds;
+      endAt = Date.now() + remaining * 1000;
+      unlockAudio();
+      save();
+      render();
+    }
+
+    function pause() {
+      if (!endAt) return;
+      remaining = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
+      endAt = null;
+      save();
+      render();
+    }
+
+    function tick() {
+      if (!endAt) return;
+      const left = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
+      if (left === remaining && left > 0) return;
+      remaining = left;
+      if (remaining === 0) finish();
+      render();
+    }
+
+    function finish() {
+      endAt = null;
+      if (setSeconds >= 20 * 60) {
+        const k = todayKey();
+        done = { [k]: (done[k] || 0) + 1 };
+      }
+      save();
+      ring();
+    }
+
+    function unlockAudio() {
+      if (audioCtx) return;
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (Ctx) audioCtx = new Ctx();
+    }
+
+    function bell() {
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      [880, 1320].forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "triangle";
+        osc.frequency.value = freq;
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        gain.gain.setValueAtTime(0.0001, now + i * 0.18);
+        gain.gain.exponentialRampToValueAtTime(0.22, now + i * 0.18 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.18 + 0.9);
+        osc.start(now + i * 0.18);
+        osc.stop(now + i * 0.18 + 1);
+      });
+    }
+
+    function ring() {
+      timer.classList.add("ringing");
+      let count = 0;
+      if (alertMode === "sound") bell();
+      ringTimer = setInterval(() => {
+        count++;
+        if (alertMode === "sound" && count < 8) bell();
+        if (count >= 20) stopRing();
+      }, 1500);
+    }
+
+    function stopRing() {
+      if (!ringTimer) return;
+      clearInterval(ringTimer);
+      ringTimer = null;
+      timer.classList.remove("ringing");
+      if (remaining === 0) remaining = setSeconds;
+      save();
+      render();
+    }
+
+    function angleFromEvent(e) {
+      const box = dial.getBoundingClientRect();
+      const x = e.clientX - (box.left + box.width / 2);
+      const y = e.clientY - (box.top + box.height / 2);
+      let deg = Math.atan2(y, x) * 180 / Math.PI + 90;
+      if (deg < 0) deg += 360;
+      return deg;
+    }
+
+    let dragging = false;
+    let lastDeg = 0;
+    let dragMinutes = 0;
+
+    dial.addEventListener("pointerdown", (e) => {
+      dragging = true;
+      dial.setPointerCapture(e.pointerId);
+      dial.classList.add("dragging");
+      lastDeg = angleFromEvent(e);
+      dragMinutes = Math.round(lastDeg / 6);
+      setTime(dragMinutes * 60);
+    });
+
+    dial.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const deg = angleFromEvent(e);
+      let delta = deg - lastDeg;
+      if (delta > 180) delta -= 360;
+      if (delta < -180) delta += 360;
+      lastDeg = deg;
+      const raw = dragMinutes * 6 + delta;
+      const next = Math.max(0, Math.min(MAX_MIN, raw / 6));
+      dragMinutes = next;
+      setTime(Math.round(next) * 60);
+    });
+
+    function endDrag() {
+      dragging = false;
+      dial.classList.remove("dragging");
+    }
+
+    dial.addEventListener("pointerup", endDrag);
+    dial.addEventListener("pointercancel", endDrag);
+
+    dial.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      const step = e.deltaY < 0 ? 60 : -60;
+      setTime(Math.round(remaining / 60) * 60 + step);
+    }, { passive: false });
+
+    playBtn.addEventListener("click", () => {
+      if (ringTimer) return stopRing();
+      endAt ? pause() : start();
+    });
+
+    lampBtn.addEventListener("click", () => {
+      lampOn = !lampOn;
+      save();
+      render();
+    });
+
+    alertButtons.forEach((b) => b.addEventListener("click", () => {
+      alertMode = b.dataset.alert;
+      save();
+      render();
+    }));
+
+    document.querySelectorAll("[data-min]").forEach((b) => {
+      b.addEventListener("click", () => setTime(Number(b.dataset.min) * 60));
+    });
+
+    document.addEventListener("pointerdown", (e) => {
+      if (!ringTimer) return;
+      stopRing();
+      swallowClick = true;
+      e.stopPropagation();
+    }, true);
+
+    document.addEventListener("click", (e) => {
+      if (!swallowClick) return;
+      swallowClick = false;
+      e.stopPropagation();
+      e.preventDefault();
+    }, true);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.target.closest("input, textarea")) return;
+      if (e.code === "Space") {
+        e.preventDefault();
+        playBtn.click();
+      } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+        e.preventDefault();
+        setTime(Math.round(remaining / 60) * 60 + 60);
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+        e.preventDefault();
+        setTime(Math.round(remaining / 60) * 60 - 60);
+      } else if (e.key.toLowerCase() === "l") {
+        lampBtn.click();
+      }
+    });
+
+    drawTicks();
+    render();
+    setInterval(tick, 250);
+  </script>
+</body>
+</html>

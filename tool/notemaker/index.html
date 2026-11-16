@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>JH Note Maker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Nanum+Pen+Script&family=Gaegu:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;700&family=Hahmlet:wght@400;700&display=swap"
+    />
+    <link rel="stylesheet" href="../../shared.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <nav class="zip-topnav"><a class="zip-home" href="../">← my tool</a><span class="zip-date">Created Nov 2, 2026</span></nav>
+    <header class="top">
+      <h1 class="brand"><b>JH</b> Note Maker</h1>
+    </header>
+
+    <main class="app">
+      <aside class="panel gallery" aria-label="서식 모음">
+        <div class="tabs" id="refHead">
+          <button aria-selected="true" tabindex="-1">레퍼 서랍</button>
+        </div>
+        <div class="cats" id="cats"></div>
+        <div class="cards" id="cards"></div>
+      </aside>
+
+      <section class="stage" aria-label="미리보기">
+        <div class="desk" id="desk">
+          <div class="pagewrap">
+            <canvas
+              id="page"
+              tabindex="0"
+              aria-label="속지 미리보기. 스티커를 끌어서 옮길 수 있어요"
+            ></canvas>
+          </div>
+        </div>
+        <div class="toolbar">
+          <button class="btn" id="pngBtn">PNG 저장</button>
+          <button class="btn ghost" id="pdfBtn">PDF 저장</button>
+          <label class="field" style="grid-auto-flow: column; align-items: center; gap: 6px">
+            <span id="pdfLab">페이지 수</span>
+            <input type="number" id="pdfPages" min="1" max="31" value="1" style="width: 64px" />
+          </label>
+          <span class="sp"></span>
+          <button class="btn ghost" id="resetBtn">처음 상태로</button>
+        </div>
+        <div class="status" id="status"></div>
+      </section>
+
+      <aside class="panel controls" aria-label="편집">
+        <details class="sec" open>
+          <summary>양식</summary>
+          <div class="body">
+            <div class="chips" id="tplChips"></div>
+            <div class="field" data-show="daily">
+              <div class="lab">타임테이블 시작 <b id="startHourV"></b></div>
+              <input type="range" id="startHour" min="4" max="10" step="1" />
+            </div>
+            <div class="field" data-show="daily">
+              <div class="lab">타임테이블 시간 수 <b id="hoursV"></b></div>
+              <input type="range" id="hours" min="12" max="22" step="1" />
+            </div>
+            <div class="field" data-show="review">
+              <div class="lab">회독 수 <b id="roundsV"></b></div>
+              <input type="range" id="rounds" min="3" max="10" step="1" />
+            </div>
+            <div class="field" data-show="wrong,case,calc">
+              <div class="lab">한 장에 들어갈 개수 <b id="repeatV"></b></div>
+              <input type="range" id="repeat" min="1" max="3" step="1" />
+            </div>
+            <div class="field" data-show="split">
+              나누기
+              <div class="chips" id="splitChips"></div>
+            </div>
+            <div class="field" data-show="split,drawsplit">
+              칸 안
+              <div class="chips" id="splitFillChips"></div>
+            </div>
+            <label class="toggle" data-show="split"
+              ><input type="checkbox" id="splitLabel" /> 칸마다 제목 줄</label
+            >
+            <div class="toolbar" data-show="drawsplit" id="customTools">
+              <span class="note" style="flex: 1 1 100%"
+                >미리보기에 가로·세로로 대충 그으면 반듯한 칸으로 맞춰요.</span
+              ><button class="btn ghost sm" id="lineUndo">하나 되돌리기</button
+              ><button class="btn ghost sm" id="lineClear">선 다 지우기</button>
+            </div>
+            <div class="field" data-show="examsheet">
+              <div class="lab">문항 수 (채점표) <b id="qsV"></b></div>
+              <input type="range" id="qs" min="1" max="12" step="1" />
+            </div>
+            <div class="field" data-show="examsheet">
+              페이지
+              <div class="chips" id="sheetChips"></div>
+            </div>
+            <div class="field" data-show="workout">
+              <div class="lab">세트 칸 수 <b id="setsV"></b></div>
+              <input type="range" id="sets" min="3" max="8" step="1" />
+            </div>
+            <label class="field" data-show="monthly"
+              >달 선택<input type="month" id="month"
+            /></label>
+            <div class="field" data-show="weekly,monthly">
+              주 시작
+              <div class="chips" id="weekStartChips"></div>
+            </div>
+            <div class="field" data-show="workout,studio,circuit,fire6,fitness">
+              운동 세부 종류
+              <div class="chips" id="exChips"></div>
+            </div>
+            <div class="field" data-show="fire6">
+              점수표 기준
+              <div class="chips" id="sexChips"></div>
+            </div>
+            <label
+              class="field"
+              data-show="mock,fitness,review,morning,econweek,tablepage,budget,networth"
+              >열 이름 (쉼표로 구분, 비우면 기본값)<input
+                type="text"
+                id="subjects"
+                maxlength="60"
+                placeholder="예: 헌법, 형사법, 경찰학"
+            /></label>
+            <label class="toggle" data-show="daily,weekly"
+              ><input type="checkbox" id="checks" /> 체크박스 넣기</label
+            >
+            <label class="toggle" data-show="grid"
+              ><input type="checkbox" id="major" /> 5칸마다 굵은 선</label
+            >
+            <label class="toggle" data-show="lined"
+              ><input type="checkbox" id="marginLine" /> 왼쪽 여백선</label
+            >
+          </div>
+        </details>
+
+        <details class="sec" open>
+          <summary>페이지</summary>
+          <div class="body">
+            <div class="chips" id="sizeChips"></div>
+            <div class="field">
+              <div class="lab">여백 <b id="marginV"></b></div>
+              <input type="range" id="margin" min="6" max="22" step="1" />
+            </div>
+            <div class="two">
+              <label class="field"
+                >테두리<select id="frame">
+                  <option value="none">없음</option>
+                  <option value="box">직선</option>
+                  <option value="round">둥근 모서리</option>
+                </select></label
+              >
+              <label class="field">글꼴<select id="font"></select></label>
+            </div>
+          </div>
+        </details>
+
+        <details class="sec" open>
+          <summary>색</summary>
+          <div class="body">
+            <div class="swatches" id="swatches"></div>
+            <div class="colors">
+              <label>배경<input type="color" id="bg" /></label>
+              <label>선<input type="color" id="line" /></label>
+              <label>포인트<input type="color" id="accent" /></label>
+              <label>글자<input type="color" id="ink" /></label>
+            </div>
+          </div>
+        </details>
+
+        <details class="sec" open>
+          <summary>줄</summary>
+          <div class="body">
+            <div class="field">
+              <div class="lab">줄 간격 <b id="spacingV"></b></div>
+              <input type="range" id="spacing" min="4" max="14" step="0.5" />
+            </div>
+            <div class="field">
+              <div class="lab">선 굵기 <b id="lwV"></b></div>
+              <input type="range" id="lw" min="0.1" max="0.8" step="0.05" />
+            </div>
+            <div class="field">
+              선 모양
+              <div class="chips" id="styleChips"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="sec" open>
+          <summary>머리말 · 디데이</summary>
+          <div class="body">
+            <label class="toggle"><input type="checkbox" id="header" /> 머리말 보이기</label>
+            <div class="field">
+              스타일
+              <div class="chips" id="hstyleChips"></div>
+            </div>
+            <label class="field"
+              >제목 (비우면 자동)<input type="text" id="title" maxlength="28"
+            /></label>
+            <label class="field"
+              >작은 서명 (제목 위, 비우면 안 보여요)<input
+                type="text"
+                id="brand"
+                maxlength="12"
+                placeholder="JH"
+            /></label>
+            <div class="field">
+              날짜 칸
+              <div class="chips" id="dateChips"></div>
+            </div>
+            <div class="two">
+              <label class="field"
+                >D-day 이름<input
+                  type="text"
+                  id="ddayName"
+                  maxlength="14"
+                  placeholder="예: 국가직 9급"
+              /></label>
+              <label class="field">시험일<input type="date" id="ddayDate" /></label>
+            </div>
+          </div>
+        </details>
+
+        <details class="sec" open>
+          <summary>학교 마크</summary>
+          <div class="body">
+            <label class="field">학교<select id="school"></select></label>
+            <div class="field">
+              위치
+              <div class="chips" id="posChips"></div>
+            </div>
+            <label class="field"
+              >배지 색 (학교색 근사치, 바꿀 수 있어요)<input type="color" id="schoolColor"
+            /></label>
+            <label class="toggle"
+              ><input type="checkbox" id="schoolTheme" /> 속지 색도 학교 색으로 맞추기</label
+            >
+            <div class="toolbar">
+              <label class="btn ghost sm" for="logoFile" style="cursor: pointer"
+                >내 로고 파일 올리기</label
+              >
+              <input type="file" id="logoFile" accept="image/png,image/jpeg,image/svg+xml" hidden />
+              <button class="btn ghost sm" id="logoClear" hidden>로고 지우기</button>
+            </div>
+            <p class="note">
+              교표는 상표라 이름 배지로 대신했어요. 가진 로고 파일이 있으면 올려서 바꿔 쓰세요.
+            </p>
+          </div>
+        </details>
+        <details class="sec" open>
+          <summary>스티커</summary>
+          <div class="body">
+            <div class="chips" id="stkTabs"></div>
+            <div class="stk" id="stkGrid"></div>
+            <div class="selbox" id="selBox" hidden>
+              <div class="field">
+                <div class="lab">크기 <b id="stSizeV"></b></div>
+                <input type="range" id="stSize" min="4" max="70" step="1" />
+              </div>
+              <div class="field">
+                <div class="lab">회전 <b id="stRotV"></b></div>
+                <input type="range" id="stRot" min="-45" max="45" step="1" />
+              </div>
+              <div class="toolbar">
+                <button class="btn ghost sm" id="stFront">맨 앞으로</button
+                ><button class="btn ghost sm" id="stDup">복제</button><span class="sp"></span
+                ><button class="btn danger sm" id="stDel">삭제</button>
+              </div>
+            </div>
+            <p class="note">누르면 가운데에 붙어요. 끌어서 옮기고, Delete 키로 떼요.</p>
+          </div>
+        </details>
+      </aside>
+    </main>
+    <footer class="foot">
+      <span>made by JH</span
+      ><span>시험기간에 쓰려고 하나씩 만든 속지들 · 개인 공부용으로 편하게 쓰세요</span>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/draw.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

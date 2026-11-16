@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pilates &amp; Yoga Sequence Studio</title>
+  <link rel="stylesheet" href="../../shared.css">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <nav class="zip-topnav"><a class="zip-home" href="../">← my tool</a><span class="zip-date">Created May 20, 2026</span></nav>
+
+  <header class="hero">
+    <div class="card hero-main">
+      <p class="eyebrow">my tool</p>
+      <h1>Pilates &amp; Yoga Sequence Studio</h1>
+      <p class="lede">자세를 찾아 수업 순서를 짜고, 인쇄하거나 음성으로 틀어 두고 진행합니다.</p>
+    </div>
+    <aside class="card side-note">
+      <p class="value">수업 준비를<br>한곳에서</p>
+      <p class="label" id="heroStats"></p>
+    </aside>
+  </header>
+
+  <a class="skip-link" href="#builderHeading">내 시퀀스로 건너뛰기</a>
+
+  <div class="shell">
+    <main class="workspace">
+      <div class="tabs" role="tablist" aria-label="작업 화면">
+        <button type="button" role="tab" id="tab-library" aria-controls="view-library" aria-selected="true">자세 라이브러리</button>
+        <button type="button" role="tab" id="tab-concern" aria-controls="view-concern" aria-selected="false" tabindex="-1" hidden>고민별</button>
+        <button type="button" role="tab" id="tab-generate" aria-controls="view-generate" aria-selected="false" tabindex="-1">자동 생성 · 템플릿</button>
+      </div>
+
+      <section id="view-library" class="view" role="tabpanel" aria-labelledby="tab-library">
+        <div class="filters panel">
+          <div class="filter-top">
+            <label class="search">
+              <span class="sr-only">자세 검색</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+              <input type="search" id="search" placeholder="이름, 영문, 산스크리트, 근육으로 검색" autocomplete="off">
+            </label>
+            <div class="segmented" id="disciplineFilter" role="group" aria-label="종목">
+              <button type="button" data-value="all" aria-pressed="true">전체</button>
+              <button type="button" data-value="yoga" aria-pressed="false">요가</button>
+              <button type="button" data-value="pilates" aria-pressed="false">필라테스</button>
+              <button type="button" data-value="desk" aria-pressed="false">데스크</button>
+              <button type="button" data-value="barre" aria-pressed="false">바레</button>
+            </div>
+          </div>
+
+          <div class="chip-row" id="toolFilter" role="group" aria-label="도구"></div>
+
+          <details class="more-filters" id="moreFilters">
+            <summary>상세 필터 <span class="filter-count" id="filterCount"></span></summary>
+            <div class="filter-group">
+              <h3>자세</h3>
+              <div class="chip-row" id="positionFilter" role="group" aria-label="자세"></div>
+            </div>
+            <div class="filter-group">
+              <h3>부위</h3>
+              <div class="chip-row" id="bodyFilter" role="group" aria-label="부위"></div>
+            </div>
+            <div class="filter-split">
+              <div class="filter-group">
+                <h3>레벨</h3>
+                <div class="chip-row" id="levelFilter" role="group" aria-label="레벨"></div>
+              </div>
+              <div class="filter-group">
+                <h3>목적</h3>
+                <div class="chip-row" id="focusFilter" role="group" aria-label="목적"></div>
+              </div>
+            </div>
+          </details>
+
+          <div class="result-bar">
+            <p id="resultCount" aria-live="polite"></p>
+            <div class="result-actions">
+              <button type="button" class="chip fav-chip" id="favOnly" aria-pressed="false">★ 즐겨찾기</button>
+              <button type="button" class="text-btn" id="resetFilters">필터 초기화</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="notice" id="loadNotice" hidden></p>
+        <div class="pose-grid" id="poseGrid"></div>
+        <div class="empty" id="libraryEmpty" hidden>
+          <p>조건에 맞는 자세가 없습니다.</p>
+          <button type="button" class="btn ghost" id="emptyReset">필터 초기화</button>
+        </div>
+        <button type="button" class="btn ghost more-btn" id="moreBtn" hidden>더 보기</button>
+      </section>
+
+      <section id="view-concern" class="view" role="tabpanel" aria-labelledby="tab-concern" hidden>
+        <div class="panel concern-picker">
+          <div class="gen-head">
+            <h2>고민별로 찾기</h2>
+            <p>회원들이 자주 말하는 불편함을 고르면 풀기, 움직이기, 강화, 통합 순서로 자세를 묶어 보여 줍니다.</p>
+          </div>
+          <div class="concern-groups" id="concernGroups"></div>
+        </div>
+        <div id="concernDetail"></div>
+      </section>
+
+      <section id="view-generate" class="view" role="tabpanel" aria-labelledby="tab-generate" hidden>
+        <form class="panel gen-form" id="genForm">
+          <div class="gen-head">
+            <h2>수업 자동 생성</h2>
+            <p>조건을 고르면 웜업부터 이완까지 흐름을 맞춰 짜 줍니다. 다시 누르면 다른 조합이 나옵니다.</p>
+          </div>
+
+          <fieldset>
+            <legend>종목</legend>
+            <div class="segmented" data-name="discipline">
+              <label><input type="radio" name="discipline" value="yoga" checked><span>요가</span></label>
+              <label><input type="radio" name="discipline" value="pilates"><span>필라테스</span></label>
+              <label><input type="radio" name="discipline" value="desk"><span>데스크</span></label>
+              <label><input type="radio" name="discipline" value="barre"><span>바레</span></label>
+              <label><input type="radio" name="discipline" value="mix"><span>혼합</span></label>
+            </div>
+            <div class="check-line" id="mixExtraLine">
+              <span>혼합에 함께 섞기</span>
+              <label><input type="checkbox" name="mixExtra" value="desk"> 데스크 스트레칭</label>
+              <label><input type="checkbox" name="mixExtra" value="barre"> 바레</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>집중 부위 <small>여러 개 선택</small></legend>
+            <div class="chip-row" id="genAreas"></div>
+          </fieldset>
+
+          <fieldset id="genConcernField" hidden>
+            <legend>고민 <small>여러 개 선택, 풀기부터 통합까지 순서대로 넣습니다</small></legend>
+            <div class="chip-row" id="genConcerns"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>쓸 수 있는 도구</legend>
+            <div class="chip-row" id="genTools"></div>
+            <label class="check-line fill-line"><input type="checkbox" name="fill" checked> 부족하면 맨몸 동작으로 채우기 <small>고른 도구의 자세만으로 시간이 모자랄 때 매트 동작을 더합니다</small></label>
+          </fieldset>
+
+          <div class="gen-grid">
+            <fieldset>
+              <legend>시간</legend>
+              <div class="segmented minutes">
+                <label><input type="radio" name="minutes" value="10"><span>10분</span></label>
+                <label><input type="radio" name="minutes" value="20"><span>20분</span></label>
+                <label><input type="radio" name="minutes" value="30" checked><span>30분</span></label>
+                <label><input type="radio" name="minutes" value="45"><span>45분</span></label>
+                <label><input type="radio" name="minutes" value="50"><span>50분</span></label>
+                <label><input type="radio" name="minutes" value="60"><span>60분</span></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>레벨</legend>
+              <div class="segmented">
+                <label><input type="radio" name="level" value="1" checked><span>입문</span></label>
+                <label><input type="radio" name="level" value="2"><span>중급</span></label>
+                <label><input type="radio" name="level" value="3"><span>상급</span></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>수업 성격</legend>
+              <div class="segmented">
+                <label><input type="radio" name="style" value="strength"><span>강화</span></label>
+                <label><input type="radio" name="style" value="flexibility" checked><span>유연성</span></label>
+                <label><input type="radio" name="style" value="recovery"><span>회복</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="gen-actions">
+            <button type="submit" class="btn primary" id="genBtn">시퀀스 만들기</button>
+            <p class="gen-msg" id="genMsg" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <section class="panel gen-result" id="genResult" hidden aria-labelledby="genTitle">
+          <div class="gen-result-head">
+            <div>
+              <p class="eyebrow">생성 결과</p>
+              <h2 id="genTitle"></h2>
+              <p class="muted" id="genMeta"></p>
+            </div>
+            <div class="gen-result-actions">
+              <button type="button" class="btn ghost" id="genAgain">다시 만들기</button>
+              <button type="button" class="btn ghost" id="genPlay">바로 재생</button>
+              <button type="button" class="btn primary" id="genUse">빌더로 가져오기</button>
+            </div>
+          </div>
+          <div class="phase-bar" id="genPhaseBar"></div>
+          <ol class="flow" id="genFlow"></ol>
+        </section>
+
+        <section class="templates" aria-labelledby="templatesTitle">
+          <div class="section-head">
+            <h2 id="templatesTitle">수업 템플릿</h2>
+            <p class="muted">미리 짜 둔 수업을 불러와 고쳐 씁니다.</p>
+          </div>
+          <div class="segmented template-filter" id="templateFilter" role="group" aria-label="템플릿 종목"></div>
+          <div class="template-grid" id="templateGrid"></div>
+        </section>
+      </section>
+    </main>
+
+    <aside class="builder" id="builder" aria-labelledby="builderHeading">
+      <div class="builder-inner">
+        <div class="builder-head">
+          <h2 id="builderHeading" tabindex="-1">내 시퀀스</h2>
+          <button type="button" class="icon-btn sheet-close" id="sheetClose" aria-label="시퀀스 패널 닫기">✕</button>
+        </div>
+        <label class="sr-only" for="seqTitle">시퀀스 제목</label>
+        <input type="text" class="title-input" id="seqTitle" placeholder="시퀀스 이름 (예: 화요일 저녁 힙 오픈)" maxlength="60">
+        <div class="builder-summary">
+          <p><strong id="seqTotal">0분</strong><span id="seqCount">자세 0개</span></p>
+          <div class="phase-bar" id="seqPhaseBar"></div>
+        </div>
+        <ol class="seq-list" id="seqList"></ol>
+        <div class="seq-empty" id="seqEmpty">
+          <p>라이브러리에서 <b>+</b> 를 눌러 자세를 담거나<br>자동 생성으로 수업을 만들어 보세요.</p>
+        </div>
+        <div class="builder-actions">
+          <button type="button" class="btn primary" id="playBtn">재생 · 음성 가이드</button>
+          <button type="button" class="btn ghost" id="storyBtn">스토리 이미지</button>
+          <button type="button" class="btn ghost" id="saveBtn">저장</button>
+          <button type="button" class="btn ghost" id="printBtn">인쇄</button>
+          <button type="button" class="btn ghost danger" id="clearBtn">비우기</button>
+        </div>
+        <details class="saved" id="savedBox">
+          <summary>저장한 시퀀스 <span id="savedCount">0</span></summary>
+          <ul id="savedList"></ul>
+        </details>
+      </div>
+    </aside>
+  </div>
+
+  <button type="button" class="sheet-toggle" id="sheetToggle" aria-controls="builder" aria-expanded="false">
+    <span>내 시퀀스</span><strong id="sheetCount">0</strong><span id="sheetTime">0분</span>
+  </button>
+
+  <dialog class="pose-dialog" id="poseDialog" aria-labelledby="dName">
+    <div class="dialog-inner" id="poseDetail"></div>
+  </dialog>
+
+  <dialog class="player" id="player" aria-labelledby="playerName">
+    <div class="player-top">
+      <div class="player-title">
+        <span id="playerTitle"></span>
+        <span class="phase-tag" id="playerPhase"></span>
+      </div>
+      <div class="player-tools">
+        <label class="switch"><input type="checkbox" id="voiceToggle"><span>음성 안내</span></label>
+        <button type="button" class="btn ghost small" id="guideBtn" aria-expanded="false" aria-controls="guideSettings">안내 설정</button>
+        <button type="button" class="icon-btn" id="playerClose" aria-label="플레이어 닫기">✕</button>
+      </div>
+    </div>
+    <div class="guide-settings" id="guideSettings" hidden>
+      <label class="field">
+        <span>목소리</span>
+        <select id="voiceSelect"></select>
+      </label>
+      <label class="switch"><input type="checkbox" id="recordedToggle"><span>녹음된 목소리 쓰기</span></label>
+      <label class="field">
+        <span>속도 <b id="rateValue">1배</b></span>
+        <input type="range" id="rateRange" min="0.7" max="1.4" step="0.05">
+      </label>
+      <fieldset class="field">
+        <legend>안내 분량</legend>
+        <div class="segmented">
+          <label><input type="radio" name="detail" value="short"><span>간단</span></label>
+          <label><input type="radio" name="detail" value="standard"><span>표준</span></label>
+          <label><input type="radio" name="detail" value="full"><span>자세히</span></label>
+        </div>
+      </fieldset>
+      <label class="field">
+        <span>효과음</span>
+        <select id="effectSelect">
+          <option value="bell">맑은 종</option>
+          <option value="wood">우드블록</option>
+          <option value="soft">부드러운 톡</option>
+          <option value="none">없음</option>
+        </select>
+      </label>
+      <label class="switch"><input type="checkbox" id="largeToggle"><span>큰 글씨</span></label>
+      <p class="voice-notice" id="voiceNotice" hidden></p>
+    </div>
+    <div class="player-progress"><span id="playerBar"></span></div>
+    <div class="player-stage">
+      <div class="player-figure" id="playerFigure"></div>
+      <div class="player-info">
+        <p class="player-step"><span id="playerStep"></span><span id="playerSide"></span><span id="playerTool"></span></p>
+        <h2 id="playerName"></h2>
+        <p class="player-en" id="playerEn"></p>
+        <div class="player-time" id="playerTime" role="timer">0:00</div>
+        <div class="seg-progress"><span id="playerSegBar"></span></div>
+        <p class="player-dose"><span id="playerDose"></span><span id="playerRemain"></span></p>
+        <p class="player-caption" id="playerCaption" aria-live="polite"></p>
+        <ul class="player-cues" id="playerCues"></ul>
+      </div>
+      <div class="player-done">
+        <h2>수업을 마쳤습니다</h2>
+        <p id="playerDoneText"></p>
+        <div class="done-actions">
+          <button type="button" class="btn ghost" id="playerAgain">처음부터 다시</button>
+          <button type="button" class="btn ghost" id="playerStory">스토리 이미지</button>
+          <button type="button" class="btn primary" id="playerDoneClose">닫기</button>
+        </div>
+      </div>
+    </div>
+    <div class="player-bottom">
+      <div class="player-next" id="playerNext"></div>
+      <div class="player-controls">
+        <button type="button" class="btn ghost" id="playerRestart" aria-label="처음부터">처음</button>
+        <button type="button" class="btn ghost" id="playerPrev" aria-label="이전 자세">이전</button>
+        <button type="button" class="btn primary" id="playerToggle" aria-pressed="false">일시정지</button>
+        <button type="button" class="btn ghost" id="playerSkip" aria-label="다음 자세">다음</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="story-dialog" id="storyDialog" aria-labelledby="storyTitle">
+    <div class="story-inner">
+      <div class="story-head">
+        <h2 id="storyTitle">스토리 이미지</h2>
+        <button type="button" class="icon-btn" id="storyClose" aria-label="닫기">✕</button>
+      </div>
+      <p class="muted" id="storyInfo">이미지를 만드는 중입니다.</p>
+      <div class="story-pages" id="storyPages"></div>
+      <div class="story-actions">
+        <button type="button" class="btn ghost" id="storyShare" hidden>공유하기</button>
+        <button type="button" class="btn primary" id="storySave" disabled>이미지 저장</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <section class="print-sheet" id="printSheet" aria-hidden="true"></section>
+</body>
+</html>

@@ -1,0 +1,1431 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="2025–2026 한국 20, 30대 문학 독서 트렌드: 소설, 시, 문학적 비문학의 유행 근거, 작가, 내용, 주제, 독자층을 깊게 분석한 아카이브">
+<meta name="theme-color" content="#fff7ee">
+<title>리딩 트렌드 디깅</title>
+<link rel="stylesheet" href="../../shared.css">
+<style>
+:root {
+  --ink:#263247; --muted:#6d7480; --line:rgba(108, 132, 168, .20);
+  --glass:rgba(255, 255, 255, .73); --glass2:rgba(255, 255, 255, .56);
+  --pink:#ffd9eb; --blue:#91d8ff; --violet:#c8b9ff; --green:#c8ead2; --orange:#ffd8ad;
+  --shadow:0 18px 44px rgba(93, 119, 157, .14); --max:1240px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);font-family:'HakgyoansimNadeuriTTF-B', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(circle at 8% 2%, rgba(255, 210, 233, .62), transparent 30%),
+    radial-gradient(circle at 93% 9%, rgba(145, 216, 255, .46), transparent 29%),
+    radial-gradient(circle at 50% 100%, rgba(200, 185, 255, .34), transparent 35%),
+    linear-gradient(135deg, #fff7ee, #eff9ff 51%, #f8f1ff);
+  min-height:100vh;
+}
+a{color:inherit} button, input, select{font:inherit}
+.nav{
+ position:sticky;top:0;z-index:80;border-bottom:1px solid var(--line);background:rgba(255, 255, 255, .52);
+ backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
+}
+.navin{width:min(var(--max), calc(100% - 28px));margin:auto;min-height:62px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+.brand, .pill{border:1px solid var(--line);background:rgba(255, 255, 255, .72);border-radius:999px;padding:8px 12px;text-decoration:none;font-size:.8rem}
+.navlinks{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.wrap{width:min(var(--max), calc(100% - 28px));margin:auto;padding:18px 0 74px}
+.card{border:1px solid var(--line);background:var(--glass);border-radius:26px;box-shadow:var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.hero{padding:clamp(28px, 6vw, 66px);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;right:-120px;top:-150px;background:rgba(255, 217, 235, .18)}
+.eyebrow{display:inline-flex;padding:7px 11px;border:1px solid var(--line);background:rgba(255, 255, 255, .65);border-radius:999px;font-size:.76rem;color:var(--muted);position:relative}
+h1{font-size:clamp(2.5rem, 7vw, 5.5rem);line-height:.96;letter-spacing:-.06em;margin:18px 0 14px;position:relative}
+.hero p{max-width:850px;font-size:clamp(.98rem, 2vw, 1.13rem);line-height:1.82;color:var(--muted);position:relative}
+.mission{margin-top:23px;padding:18px 20px;border:1px solid rgba(255, 217, 235, .33);background:rgba(255, 255, 255, .72);border-radius:19px;max-width:980px;line-height:1.62;position:relative}
+.mission strong{color:#d45a97}
+.hero-note{margin-top:13px;color:#7a8290;font-size:.78rem;line-height:1.65}
+.stats{display:grid;grid-template-columns:repeat(5, 1fr);gap:10px;margin-top:14px}
+.stat{padding:17px;min-height:125px}
+.stat .num{font-size:clamp(1.6rem, 3vw, 2.25rem);letter-spacing:-.04em}
+.stat .lbl{font-size:.77rem;line-height:1.55;color:var(--muted);margin-top:8px}
+.stat:nth-child(1){background:rgba(255, 226, 240, .67)} .stat:nth-child(2){background:rgba(222, 245, 255, .68)}
+.stat:nth-child(3){background:rgba(237, 230, 255, .70)} .stat:nth-child(4){background:rgba(231, 248, 237, .73)} .stat:nth-child(5){background:rgba(255, 239, 219, .73)}
+section{margin-top:44px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:15px}
+.head h2{margin:0;font-size:clamp(1.65rem, 4vw, 2.4rem);letter-spacing:-.045em}
+.head p{margin:0;max-width:650px;color:var(--muted);font-size:.84rem;line-height:1.7}
+.trendgrid{display:grid;grid-template-columns:repeat(3, 1fr);gap:11px}
+.trend{padding:19px;min-height:183px}
+.trend .n{width:33px;height:33px;border-radius:11px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);font-size:.72rem;color:var(--muted)}
+.trend h3{font-size:1.08rem;margin:14px 0 6px} .trend p{font-size:.8rem;line-height:1.67;color:var(--muted);margin:0}
+.radar{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
+.radarbox{padding:22px}
+.radarbox h3{margin:0 0 13px;font-size:1.1rem}
+.barrow{display:grid;grid-template-columns:150px 1fr 56px;gap:10px;align-items:center;margin:11px 0;font-size:.77rem;color:var(--muted)}
+.bar{height:13px;background:rgba(255, 255, 255, .72);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.fill{height:100%;border-radius:999px;background:linear-gradient(90deg, rgba(255, 217, 235, .72), rgba(145, 216, 255, .84))}
+.pathgrid{display:grid;grid-template-columns:repeat(4, 1fr);gap:9px}
+.path{padding:14px;border-radius:18px;border:1px solid var(--line);background:rgba(255, 255, 255, .57)}
+.path b{display:block;font-size:.84rem;margin-bottom:5px} .path span{font-size:.74rem;color:var(--muted);line-height:1.55}
+.controls{position:sticky;top:72px;z-index:60;padding:11px;display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+#search{flex:1 1 270px;min-height:42px;border:1px solid var(--line);background:rgba(255, 255, 255, .85);border-radius:14px;padding:9px 12px;outline:none}
+#search:focus{box-shadow:0 0 0 4px rgba(145, 216, 255, .20)}
+.filter, .sort{border:1px solid var(--line);background:rgba(255, 255, 255, .73);border-radius:999px;padding:8px 11px;color:var(--muted);cursor:pointer;font-size:.76rem}
+.filter.active{background:linear-gradient(135deg, rgba(255, 217, 235, .37), rgba(145, 216, 255, .35));color:var(--ink)}
+.sort{cursor:default} .count{margin-left:auto;color:var(--muted);font-size:.74rem;padding:0 7px}
+.grid{display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:13px}
+.book{padding:20px;overflow:hidden}
+.booktop{display:grid;grid-template-columns:96px 1fr;gap:15px}
+.cover{min-height:140px;border-radius:18px;padding:12px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;border:1px solid rgba(255, 255, 255, .78)}
+.cover:after{content:"";position:absolute;width:88px;height:88px;border:1px solid rgba(255, 255, 255, .62);border-radius:50%;right:-28px;bottom:-30px}
+.fiction{background:linear-gradient(145deg, #ffe2ee, #dff4ff)} .poetry{background:linear-gradient(145deg, #eee6ff, #ffe7ce)} .nonfiction{background:linear-gradient(145deg, #e2f6e8, #e3f3ff)}
+.cover small{font-size:.65rem;color:rgba(38, 50, 71, .54)} .covertitle{font-size:1rem;line-height:1.17;letter-spacing:-.04em;position:relative;z-index:1}
+.metahead{display:flex;justify-content:space-between;gap:8px} .author{font-size:.76rem;color:#d45a97} .grade{font-size:.63rem;padding:4px 7px;border:1px solid var(--line);background:#fff8;border-radius:999px;white-space:nowrap}
+.book h3{font-size:1.47rem;line-height:1.15;margin:5px 0 3px;letter-spacing:-.045em}
+.submeta{font-size:.72rem;color:var(--muted)} .chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+.chip{font-size:.65rem;padding:5px 7px;border-radius:999px;border:1px solid var(--line);background:rgba(255, 255, 255, .65)}
+.hot{margin-top:14px;padding:14px;border-radius:16px;background:linear-gradient(135deg, rgba(255, 226, 240, .61), rgba(225, 245, 255, .66));border:1px solid rgba(255, 217, 235, .20)}
+.lab{font-size:.67rem;color:#d45a97;margin-bottom:4px} .hot p, .signalbox p{font-size:.82rem;line-height:1.68;margin:0}
+.signalbox{margin-top:9px;padding:12px 13px;border-left:3px solid var(--blue);background:rgba(255, 255, 255, .43);border-radius:0 13px 13px 0}
+.signalbox .lab{color:#557a9c}
+.quickfacts{display:grid;grid-template-columns:repeat(3, 1fr);gap:7px;margin-top:10px}
+.qf{padding:9px 10px;border:1px solid var(--line);border-radius:13px;background:rgba(255, 255, 255, .55)}
+.qf b{display:block;font-size:.62rem;color:#677b92;margin-bottom:3px} .qf span{font-size:.72rem;line-height:1.35}
+details{margin-top:12px;border-top:1px dashed rgba(108, 132, 168, .28);padding-top:11px}
+summary{cursor:pointer;font-size:.78rem;color:#56718f}
+.deep{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.box{padding:12px;border:1px solid var(--line);background:rgba(255, 255, 255, .57);border-radius:14px}
+.box h4{margin:0 0 5px;font-size:.7rem;color:#566d84} .box p{margin:0;font-size:.77rem;line-height:1.67;color:#5f6671}
+.box.wide{grid-column:1/-1}
+.matrix{overflow:auto;padding:6px}
+table{width:100%;border-collapse:separate;border-spacing:0;min-width:900px}
+th, td{padding:12px 11px;border-bottom:1px solid var(--line);font-size:.75rem;line-height:1.5;text-align:left;vertical-align:top}
+th{position:sticky;top:0;background:rgba(255, 255, 255, .92);color:#5c7189}
+.method{padding:22px;display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+.method p, .method li{font-size:.8rem;line-height:1.72;color:var(--muted)} .method h3{margin:0 0 8px}
+.notegrid{display:grid;gap:8px} .note{padding:11px 12px;border:1px solid var(--line);border-radius:14px;background:rgba(255, 255, 255, .58);font-size:.76rem;line-height:1.55}
+.note b{color:#d45a97}
+.empty{display:none;padding:30px;text-align:center;color:var(--muted)} footer{padding:36px 0 8px;text-align:center;color:var(--muted);font-size:.72rem;line-height:1.75}
+@media(max-width:980px){.stats{grid-template-columns:repeat(3, 1fr)}.trendgrid{grid-template-columns:repeat(2, 1fr)}.radar{grid-template-columns:1fr}.pathgrid{grid-template-columns:repeat(2, 1fr)}.grid{grid-template-columns:1fr}}
+@media(max-width:650px){.wrap, .navin{width:calc(100% - 18px)}.navlinks{display:none}.hero{padding:25px 18px}.stats, .trendgrid, .pathgrid{grid-template-columns:1fr}.controls{top:63px}.count{width:100%;margin:0}.book{padding:15px}.booktop{grid-template-columns:79px 1fr;gap:11px}.cover{min-height:119px;border-radius:15px}.book h3{font-size:1.27rem}.deep{grid-template-columns:1fr}.box.wide{grid-column:auto}.quickfacts{grid-template-columns:1fr 1fr}.head{display:block}.head p{margin-top:7px}.barrow{grid-template-columns:110px 1fr 48px}.method{grid-template-columns:1fr}}
+
+.research-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.research-card, .author-card{padding:21px}
+.research-card h3{margin:0 0 8px;font-size:1.14rem}.research-card>p{margin:0;color:var(--muted);font-size:.79rem;line-height:1.7}
+.rqlist{display:grid;gap:8px;margin-top:13px}
+.rq{display:grid;grid-template-columns:54px 1fr;gap:10px;padding:12px;border-radius:15px;border:1px solid var(--line);background:rgba(255, 255, 255, .56)}
+.rqcode{display:grid;place-items:center;min-height:34px;border-radius:11px;background:linear-gradient(135deg, rgba(255, 217, 235, .31), rgba(145, 216, 255, .32));font-size:.7rem}
+.rq b{display:block;font-size:.8rem;margin-bottom:3px}.rq p{margin:0;color:var(--muted);font-size:.73rem;line-height:1.6}
+.framework{margin-top:12px;padding:19px}.framework-grid{display:grid;grid-template-columns:repeat(5, 1fr);gap:8px;margin-top:11px}
+.metric{padding:11px;border-radius:14px;border:1px solid var(--line);background:rgba(255, 255, 255, .57)}
+.metric b{display:block;font-size:.69rem;margin-bottom:4px}.metric span{display:block;color:var(--muted);font-size:.66rem;line-height:1.5}
+.scope{display:grid;grid-template-columns:repeat(4, 1fr);gap:8px;margin-top:11px}.scopebox{padding:11px;border:1px solid var(--line);border-radius:14px;background:rgba(255, 255, 255, .55)}
+.scopebox b{display:block;font-size:.67rem;color:#55718c;margin-bottom:4px}.scopebox span{font-size:.7rem;line-height:1.5}
+.caveat{margin-top:10px;padding:13px;border-radius:14px;background:rgba(255, 239, 219, .67);border:1px solid rgba(255, 191, 126, .29);font-size:.72rem;line-height:1.65;color:#6e6256}
+.authorgrid{display:grid;grid-template-columns:repeat(4, 1fr);gap:10px}.author-card{min-height:230px}
+.author-mode{display:inline-flex;font-size:.62rem;padding:5px 8px;border:1px solid var(--line);border-radius:999px;background:rgba(237, 230, 255, .66);color:#647188}
+.author-card h3{font-size:1.18rem;margin:12px 0 7px}.author-card p{margin:0;color:var(--muted);font-size:.74rem;line-height:1.62}
+.author-meta{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line)}.author-meta b{font-size:.66rem;color:#55718c}.author-meta span{font-size:.7rem;line-height:1.5;color:var(--muted)}
+@media(max-width:1050px){.authorgrid{grid-template-columns:repeat(3, 1fr)}}
+@media(max-width:980px){.research-wrap{grid-template-columns:1fr}.framework-grid{grid-template-columns:repeat(3, 1fr)}.scope{grid-template-columns:repeat(2, 1fr)}}
+@media(max-width:720px){.authorgrid{grid-template-columns:repeat(2, 1fr)}}
+@media(max-width:650px){.framework-grid, .scope, .authorgrid{grid-template-columns:1fr}.rq{grid-template-columns:46px 1fr}}
+
+body,
+.card,
+.book,
+.research-card,
+.author-card,
+.framework,
+.radarbox,
+.trend,
+.stat,
+.box,
+.qf,
+.scopebox,
+.metric,
+.rq{
+  min-width: 0;
+}
+
+p, span, b, strong, h1, h2, h3, h4, td, th, summary, a {
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+}
+
+.wrap,
+.navin {
+  width: min(var(--max), calc(100% - clamp(18px, 3vw, 34px)));
+}
+
+.hero {
+  padding: clamp(24px, 4.8vw, 66px);
+}
+
+.hero p,
+.head p {
+  max-width: min(100%, 850px);
+}
+
+.stats {
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+}
+
+.trendgrid {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+.authorgrid {
+  grid-template-columns: repeat(auto-fit, minmax(min(245px, 100%), 1fr));
+}
+
+.framework-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(175px, 100%), 1fr));
+}
+
+.scope {
+  grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+}
+
+.pathgrid {
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+}
+
+.grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr));
+}
+
+.research-wrap,
+.radar,
+.method {
+  grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr));
+}
+
+.booktop {
+  grid-template-columns: clamp(76px, 8vw, 96px) minmax(0, 1fr);
+}
+
+.chips,
+.navlinks,
+.controls{
+  min-width: 0;
+}
+
+.chip,
+.filter,
+.pill,
+.brand,
+.grade,
+.author-mode{
+  max-width: 100%;
+}
+
+.rq {
+  grid-template-columns: clamp(44px, 5vw, 54px) minmax(0, 1fr);
+}
+
+.barrow {
+  grid-template-columns: minmax(105px, 150px) minmax(90px, 1fr) auto;
+}
+
+.matrix {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+}
+
+table {
+  width: 100%;
+}
+
+@media (max-height: 700px), (min-resolution: 1.25dppx) and (max-width: 1100px) {
+  .controls {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 1180px) {
+  :root {
+    --max: 1120px;
+  }
+
+  .head {
+    align-items: flex-start;
+  }
+
+  .stats {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .authorgrid {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .navin {
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  .navlinks {
+    flex: 1 1 auto;
+  }
+
+  .head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .research-wrap,
+  .radar,
+  .method,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quickfacts {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+
+  .deep {
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  }
+
+  .box.wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 860px) {
+  .navin {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .navlinks {
+    justify-content: flex-start;
+  }
+
+  .hero::before {
+    width: 250px;
+    height: 250px;
+  }
+
+  .mission {
+    max-width: 100%;
+  }
+
+  .controls {
+    position: relative;
+    top: auto;
+  }
+
+  #search {
+    flex-basis: 100%;
+  }
+
+  .count {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .barrow {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .barrow > b {
+    justify-self: start;
+  }
+
+  .deep {
+    grid-template-columns: 1fr;
+  }
+
+  .box.wide {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .wrap,
+  .navin {
+    width: calc(100% - 18px);
+  }
+
+  .hero {
+    border-radius: 22px;
+  }
+
+  .card {
+    border-radius: 22px;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 12vw, 4.25rem);
+  }
+
+  .stats,
+  .trendgrid,
+  .authorgrid,
+  .framework-grid,
+  .scope,
+  .pathgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .booktop {
+    grid-template-columns: clamp(74px, 22vw, 90px) minmax(0, 1fr);
+  }
+
+  .quickfacts {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .research-card,
+  .author-card,
+  .framework,
+  .radarbox,
+  .method {
+    padding: 17px;
+  }
+}
+
+@media (max-width: 520px) {
+  .wrap,
+  .navin {
+    width: calc(100% - 12px);
+  }
+
+  .hero {
+    padding: 23px 15px;
+  }
+
+  .book {
+    padding: 14px;
+  }
+
+  .booktop {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .cover {
+    min-height: 108px;
+    padding: 10px;
+  }
+
+  .book h3 {
+    font-size: 1.18rem;
+  }
+
+  .mission {
+    padding: 15px;
+  }
+
+  .quickfacts {
+    grid-template-columns: 1fr;
+  }
+
+  .rq {
+    grid-template-columns: 1fr;
+  }
+
+  .rqcode {
+    width: fit-content;
+    min-width: 46px;
+    padding: 0 8px;
+  }
+
+  .metahead,
+  .row{
+    flex-wrap: wrap;
+  }
+
+  .filter,
+  .pill,
+  .brand {
+    white-space: normal;
+    text-align: center;
+  }
+
+  th, td {
+    padding: 10px 9px;
+  }
+}
+
+@media (max-width: 380px) {
+  h1 {
+    font-size: clamp(2rem, 14vw, 3rem);
+  }
+
+  .hero,
+  .book,
+  .trend,
+  .stat,
+  .research-card,
+  .author-card,
+  .framework,
+  .radarbox,
+  .method {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .booktop {
+    grid-template-columns: 1fr;
+  }
+
+  .cover {
+    width: min(150px, 100%);
+  }
+}
+
+:root {
+  --pink: #c8baf3;
+  --blue: #7dc9f7;
+  --violet: #aebcff;
+  --green: #c8e7df;
+  --orange: #dfeaf8;
+  --glass: rgba(244, 250, 255, .78);
+  --glass2: rgba(239, 247, 255, .64);
+  --line: rgba(111, 150, 205, .22);
+  --shadow: 0 18px 44px rgba(76, 118, 174, .15);
+}
+
+body {
+  background:
+    radial-gradient(circle at 8% 3%, rgba(197, 218, 255, .62), transparent 31%),
+    radial-gradient(circle at 92% 8%, rgba(112, 197, 249, .58), transparent 32%),
+    radial-gradient(circle at 50% 100%, rgba(166, 184, 244, .38), transparent 38%),
+    linear-gradient(135deg, #f5f8ff 0%, #eaf6ff 40%, #eef2ff 73%, #f5f3ff 100%);
+}
+
+.nav {
+  background: rgba(239, 248, 255, .66);
+  border-bottom-color: rgba(112, 151, 204, .20);
+  box-shadow: 0 10px 28px rgba(87, 137, 194, .08);
+}
+
+.card {
+  background: rgba(245, 250, 255, .78);
+  border-color: rgba(112, 151, 204, .22);
+  box-shadow: 0 18px 44px rgba(77, 119, 174, .15);
+}
+
+.hero {
+  background:
+    linear-gradient(135deg, rgba(244, 250, 255, .88), rgba(238, 242, 255, .83)),
+    rgba(245, 250, 255, .78);
+  padding: clamp(24px, 4.8vw, 66px);
+}
+
+.hero::before { background: rgba(114, 192, 246, .23); }
+
+.mission {
+  background: linear-gradient(135deg, rgba(238, 247, 255, .88), rgba(238, 241, 255, .82));
+  border-color: rgba(126, 165, 216, .27);
+  box-shadow: 0 12px 28px rgba(91, 139, 195, .08);
+}
+
+.stat:nth-child(1) { background: rgba(220, 236, 255, .80); }
+.stat:nth-child(2) { background: rgba(203, 234, 253, .82); }
+.stat:nth-child(3) { background: rgba(219, 227, 255, .80); }
+.stat:nth-child(4) { background: rgba(223, 243, 239, .76); }
+.stat:nth-child(5) { background: rgba(231, 237, 255, .78); }
+
+.research-card,
+.framework,
+.radarbox,
+.author-card,
+.method,
+.book {
+  background: linear-gradient(180deg, rgba(249, 252, 255, .86), rgba(242, 248, 255, .76));
+}
+
+.fiction { background: linear-gradient(145deg, #e5edff, #d8f1ff); }
+.poetry { background: linear-gradient(145deg, #e3e9ff, #e9f3ff); }
+.nonfiction { background: linear-gradient(145deg, #e1f2f2, #dfefff); }
+
+.hot {
+  background: linear-gradient(135deg, rgba(223, 232, 255, .74), rgba(207, 236, 255, .82));
+  border-color: rgba(124, 167, 217, .22);
+}
+
+.signalbox {
+  border-left-color: #7fc8f4;
+  background: linear-gradient(90deg, rgba(225, 241, 255, .66), rgba(248, 251, 255, .46));
+}
+
+.filter.active {
+  background: linear-gradient(135deg, rgba(174, 190, 255, .46), rgba(116, 195, 246, .52));
+}
+
+.fill {
+  background: linear-gradient(90deg, rgba(160, 181, 247, .84), rgba(105, 190, 245, .93));
+}
+
+.rqcode {
+  background: linear-gradient(135deg, rgba(178, 193, 248, .40), rgba(116, 198, 248, .46));
+}
+
+.author-mode { background: rgba(220, 231, 255, .80); }
+
+.qf,
+.metric,
+.scopebox,
+.path,
+.rq,
+.box{
+  background: rgba(245, 250, 255, .66);
+  border-color: rgba(116, 154, 207, .20);
+}
+
+.caveat {
+  background: linear-gradient(135deg, rgba(224, 239, 255, .84), rgba(230, 234, 255, .82));
+  border-color: rgba(134, 164, 211, .23);
+}
+
+.author,
+.lab,
+.mission strong { color: #667dc4; }
+
+#search:focus {
+  box-shadow: 0 0 0 4px rgba(120, 196, 247, .20);
+  border-color: rgba(110, 181, 231, .34);
+}
+
+.wrap,
+.navin {
+  width: min(var(--max), calc(100% - clamp(16px, 3vw, 34px)));
+}
+
+.stats {
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+}
+.trendgrid {
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+}
+.authorgrid {
+  grid-template-columns: repeat(auto-fit, minmax(min(235px, 100%), 1fr));
+}
+.framework-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(165px, 100%), 1fr));
+}
+.scope,
+.pathgrid {
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+}
+.grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr));
+}
+.research-wrap,
+.radar,
+.method {
+  grid-template-columns: repeat(auto-fit, minmax(min(410px, 100%), 1fr));
+}
+.deep {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+.quickfacts {
+  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+}
+
+.book,
+.booktop,
+.research-card,
+.author-card,
+.framework,
+.radarbox,
+.method,
+.trend,
+.stat,
+.box,
+.qf,
+.scopebox,
+.metric,
+.rq,
+.controls,
+.head,
+.navin,
+.navlinks{
+  min-width: 0;
+}
+
+.booktop {
+  grid-template-columns: clamp(72px, 8vw, 96px) minmax(0, 1fr);
+}
+
+h1, h2, h3, h4, p, span, b, strong, td, th, summary, a {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+p, h1, h2, h3, h4, td, th {
+  word-break: keep-all;
+}
+
+.navin { flex-wrap: wrap; }
+.navlinks { flex: 1 1 500px; }
+.controls { align-items: stretch; }
+#search { flex: 1 1 min(360px, 100%); }
+
+.matrix {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+}
+
+@media (max-width: 1180px) {
+  .head { align-items: flex-start; }
+  .navin { gap: 8px; }
+}
+
+@media (max-width: 1024px) {
+  .navin {
+    align-items: flex-start;
+    padding: 9px 0;
+  }
+
+  .head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .research-wrap,
+  .radar,
+  .method,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .deep {
+    grid-template-columns: repeat(auto-fit, minmax(min(245px, 100%), 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .navin { display: grid; grid-template-columns: 1fr; }
+  .navlinks { justify-content: flex-start; }
+  .controls { position: relative; top: auto; }
+  #search { flex-basis: 100%; }
+  .count { width: 100%; margin-left: 0; }
+  .barrow { grid-template-columns: 1fr; gap: 5px; }
+  .deep { grid-template-columns: 1fr; }
+  .box.wide { grid-column: auto; }
+}
+
+@media (max-width: 720px) {
+  .wrap,
+  .navin { width: calc(100% - 18px); }
+
+  .stats,
+  .trendgrid,
+  .authorgrid,
+  .framework-grid,
+  .scope,
+  .pathgrid { grid-template-columns: 1fr; }
+
+  .booktop {
+    grid-template-columns: clamp(74px, 22vw, 90px) minmax(0, 1fr);
+  }
+
+  .quickfacts { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 520px) {
+  .wrap,
+  .navin { width: calc(100% - 12px); }
+
+  .book { padding: 14px; }
+
+  .booktop {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .quickfacts { grid-template-columns: 1fr; }
+  .rq { grid-template-columns: 1fr; }
+  .metahead,
+  .row{ flex-wrap: wrap; }
+}
+
+@media (max-width: 380px) {
+  .booktop { grid-template-columns: 1fr; }
+  .cover { width: min(150px, 100%); }
+}
+
+:root {
+  --pink: #efb9d5;
+  --blue: #b7dcf4;
+  --violet: #c9c4ee;
+  --green: #d8ebe2;
+  --orange: #f1dfcf;
+  --glass: rgba(255, 255, 255, .74);
+  --glass2: rgba(255, 255, 255, .56);
+  --line: rgba(120, 144, 180, .22);
+  --shadow: 0 18px 42px rgba(94, 120, 160, .16);
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 211, 235, .62), transparent 34%),
+    radial-gradient(circle at 88% 10%, rgba(139, 215, 255, .48), transparent 32%),
+    radial-gradient(circle at 50% 100%, rgba(199, 183, 255, .34), transparent 36%),
+    linear-gradient(135deg, #fff7ec 0%, #eef8ff 48%, #f8f0ff 100%);
+  background-attachment: fixed;
+}
+
+.nav {
+  background: rgba(255, 255, 255, .52);
+  border-bottom-color: rgba(129, 145, 171, .13);
+  box-shadow: 0 8px 22px rgba(83, 101, 132, .05);
+  backdrop-filter: blur(18px) saturate(108%);
+  -webkit-backdrop-filter: blur(18px) saturate(108%);
+}
+
+.card {
+  background: rgba(255, 255, 255, .74);
+  border-color: rgba(120, 144, 180, .22);
+  box-shadow: 0 18px 42px rgba(94, 120, 160, .14);
+  backdrop-filter: blur(20px) saturate(108%);
+  -webkit-backdrop-filter: blur(20px) saturate(108%);
+}
+
+.hero {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .80), rgba(250, 245, 255, .70)),
+    rgba(255, 255, 255, .62);
+}
+
+.hero::before {
+  background: rgba(255, 217, 235, .16);
+}
+
+.hero::after {
+  background: rgba(139, 215, 255, .14);
+}
+
+.mission {
+  background: linear-gradient(135deg, rgba(255, 255, 255, .70), rgba(247, 245, 251, .62));
+  border-color: rgba(166, 164, 190, .15);
+  box-shadow: 0 10px 24px rgba(83, 101, 132, .05);
+}
+
+.stat:nth-child(1) { background: rgba(255, 226, 240, .72); }
+.stat:nth-child(2) { background: rgba(222, 245, 255, .72); }
+.stat:nth-child(3) { background: rgba(237, 230, 255, .72); }
+.stat:nth-child(4) { background: rgba(231, 248, 237, .70); }
+.stat:nth-child(5) { background: rgba(255, 239, 219, .70); }
+
+.research-card,
+.framework,
+.radarbox,
+.author-card,
+.method,
+.book {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, .66),
+    rgba(250, 250, 253, .56)
+  );
+}
+
+.fiction {
+  background: linear-gradient(145deg, rgba(248, 229, 239, .76), rgba(223, 241, 252, .76));
+}
+
+.poetry {
+  background: linear-gradient(145deg, rgba(236, 232, 250, .78), rgba(248, 236, 244, .74));
+}
+
+.nonfiction {
+  background: linear-gradient(145deg, rgba(231, 245, 239, .76), rgba(229, 240, 249, .76));
+}
+
+.hot {
+  background: linear-gradient(
+    135deg,
+    rgba(247, 233, 242, .58),
+    rgba(228, 241, 250, .61)
+  );
+  border-color: rgba(160, 168, 193, .14);
+}
+
+.signalbox {
+  border-left-color: #b5d9f1;
+  background: linear-gradient(
+    90deg,
+    rgba(234, 245, 252, .55),
+    rgba(255, 255, 255, .38)
+  );
+}
+
+.filter.active {
+  background: linear-gradient(
+    135deg,
+    rgba(232, 225, 246, .62),
+    rgba(221, 240, 251, .65)
+  );
+  border-color: rgba(150, 165, 192, .15);
+}
+
+.fill {
+  background: linear-gradient(
+    90deg,
+    rgba(201, 193, 234, .76),
+    rgba(178, 216, 241, .80)
+  );
+}
+
+.rqcode {
+  background: linear-gradient(
+    135deg,
+    rgba(230, 223, 246, .62),
+    rgba(218, 239, 251, .66)
+  );
+}
+
+.author-mode {
+  background: rgba(236, 233, 248, .66);
+}
+
+.qf,
+.metric,
+.scopebox,
+.path,
+.rq,
+.box{
+  background: rgba(255, 255, 255, .48);
+  border-color: rgba(129, 145, 171, .13);
+}
+
+.caveat {
+  background: linear-gradient(
+    135deg,
+    rgba(240, 246, 252, .62),
+    rgba(244, 240, 250, .60)
+  );
+  border-color: rgba(151, 160, 185, .14);
+}
+
+.author {
+  color: #c77da8;
+}
+
+.lab,
+.mission strong {
+  color: #b36f98;
+}
+
+#search {
+  background: rgba(255, 255, 255, .70);
+}
+
+#search:focus {
+  box-shadow: 0 0 0 4px rgba(184, 219, 243, .18);
+  border-color: rgba(152, 196, 225, .25);
+}
+
+body, button, input, select, table, th, td {
+  font-family: 'HakgyoansimNadeuriTTF-B', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+body { letter-spacing: .006em; }
+.hot p, .signalbox p { font-size: .84rem; line-height: 1.78; }
+.box p { font-size: .79rem; line-height: 1.76; }
+.trend p, .author-card p, .research-card > p, .rq p, .method p, .method li{ line-height: 1.78; }
+th, td { font-size: .77rem; line-height: 1.62; }
+
+.issuegrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 10px;
+  align-items: start;
+}
+.issue-col { padding: 19px; min-width: 0; }
+@media (min-width: 900px) {
+  .issue-col.wide { grid-column: span 2; }
+  .issue-col.wide .issue-list { grid-template-columns: 1fr 1fr; }
+}
+.issue-col h3 { margin: 10px 0 4px; font-size: 1.08rem; }
+.issue-col > p { margin: 0 0 10px; color: var(--muted); font-size: .74rem; line-height: 1.7; }
+.issue-list { display: grid; gap: 7px; }
+.issue-item {
+  display: block;
+  padding: 11px 12px;
+  border-radius: 15px;
+  border: 1px solid rgba(129, 145, 171, .13);
+  background: rgba(255, 255, 255, .48);
+  text-decoration: none;
+  min-width: 0;
+}
+.issue-item:hover { background: rgba(255, 255, 255, .72); }
+.issue-item b { display: block; font-size: .84rem; margin-bottom: 2px; }
+.issue-item .when { font-size: .64rem; color: #b36f98; }
+.issue-item p { margin: 4px 0 0; color: var(--muted); font-size: .73rem; line-height: 1.66; }
+section { scroll-margin-top: 84px; }
+.issuebox { border-left-color: #e3b3cf; }
+.issuebox .lab { color: #b36f98; }
+.issue-tag { display: inline-block; margin-top: 3px; font-size: .64rem; color: #b36f98; }
+
+@media (max-width: 520px) {
+  .issue-col { padding: 15px; }
+  .hot p, .signalbox p { font-size: .82rem; }
+}
+</style>
+</head>
+<body>
+<nav class="zip-topnav"><a class="zip-home" href="../">← my culture</a><span class="zip-date">Created Aug 26, 2026</span></nav>
+<nav class="nav"><div class="navin">
+<a class="brand" href="#top">📚 Reading Trend Digging</a>
+<div class="navlinks"><a class="pill" href="#research">살펴본 기준</a><a class="pill" href="#trend">트렌드 구조</a><a class="pill" href="#authors">Author Radar</a><a class="pill" href="#issues">이슈 묶음</a><a class="pill" href="#library">작품 아카이브</a><a class="pill" href="#matrix">한눈 비교</a></div>
+</div></nav>
+
+<main class="wrap" id="top">
+<header class="hero card">
+<span class="eyebrow">2030 READING TREND, 2026.08</span>
+<h1>Reading Trend<br>Digging</h1>
+
+<div class="mission"><strong>한 해에 150-200권 내외로 많이 읽지만 유행인 책보다 유행과 거리가 먼 책만 읽어서 또래 세대의 독서 트렌드를 디깅해보기 위함 !!!</strong></div>
+<div class="hero-note">※ ‘2030에서 유행’은 작품별 연령 구매비율이 공개된 경우를 최우선으로 하고, 비공개 작품은 최근 베스트셀러, 오프라인 구매, SNS 역주행, 미디어셀러 현상을 보조 근거로 구분했습니다.</div>
+<div class="hero-note" style="color:#d45a97"><b>스포일러가 있을 수 있습니다</b>, 저는 스포일러를 알아도 작품을 재미있게 읽는 편이라 인물 관계와 중요한 사건, 결말까지 언급한 부분이 있습니다.</div>
+</header>
+
+<div class="stats">
+<div class="stat card"><div class="num">8 / 10</div><div class="lbl">2026 상반기 교보 종합 TOP 10 중 소설</div></div>
+<div class="stat card"><div class="num">+19.3%</div><div class="lbl">2026 상반기 소설 판매권수 전년 동기 대비</div></div>
+<div class="stat card"><div class="num">53.9%</div><div class="lbl">오프라인 소설 구매자 중 20대 30.6% + 30대 23.3%</div></div>
+<div class="stat card"><div class="num">+51.9%</div><div class="lbl">2025년 1020 시집 구매량 전년 대비</div></div>
+<div class="stat card"><div class="num">63</div><div class="lbl">현재 아카이브: 소설 41, 시 16, 문학적 비문학 6 (이슈 묶음 14)</div></div>
+</div>
+
+<section id="research">
+<div class="head"><h2>이번에 어떤 기준으로 살펴봤는지</h2><p>단순히 많이 팔린 책만 모으기보다, <b>실제로 20, 30대의 구매 비중이 높은지, 어떤 계기로 주목받기 시작했는지, 일시적인 화제인지 꾸준히 읽히는 책인지</b>를 함께 살펴봤습니다. 작품의 내용과 작가의 특성이 지금의 또래 독자에게 어떤 지점에서 공감을 얻는지도 같이 보고자 했습니다.</p></div>
+<div class="research-wrap">
+<article class="research-card card"><div style="display:inline-flex;padding:6px 10px;margin-bottom:10px;border-radius:999px;background:linear-gradient(135deg, rgba(255, 217, 235, .35), rgba(145, 216, 255, .35));border:1px solid var(--line);font-size:.72rem;color:#5f6f83">내가 설정해본 RQ!</div><h3>내가 궁금했던 질문들</h3><p>책들을 살펴보다 보니 결국 아래 여섯 가지가 가장 궁금해졌고, 이 질문들을 기준으로 작품과 작가를 계속 모아봤습니다.</p>
+<div class="rqlist">
+<div class="rq"><span class="rqcode">RQ1</span><div><b>실제로 2030이 많이 사는 문학은 무엇인가?</b><p>20–39세 구매 비중, 연령대별 순위, 오프라인/온라인 및 eBook 구매를 구분합니다.</p></div></div>
+<div class="rq"><span class="rqcode">RQ2</span><div><b>책은 어떤 경로로 ‘유행’이 되는가?</b><p>SNS, 독서 인플루언서, 배우, 뮤지션, 평론가 추천, 영화/OTT, 출판사 콘텐츠를 추적합니다.</p></div></div>
+<div class="rq"><span class="rqcode">RQ3</span><div><b>왜 신간이 아닌 오래된 책이 다시 뜨는가?</b><p>『모순』, 『급류』, 『싯다르타』, 『스토너』처럼 백리스트의 재발견 조건을 비교합니다.</p></div></div>
+<div class="rq"><span class="rqcode">RQ4</span><div><b>유행 작품에는 어떤 내용, 형식적 공통점이 있는가?</b><p>사랑/상실, 정체성, 관계, 역사적 기억, 강한 설정, 짧은 문장, 장르성 등을 비교합니다.</p></div></div>
+<div class="rq"><span class="rqcode">RQ5</span><div><b>독서 행동 자체는 어떻게 바뀌는가?</b><p>서점 방문, 필사, 리뷰, 독서노트, 특별판, 굿즈, 플레이리스트, 오디오북 같은 참여형 독서를 봅니다.</p></div></div>
+<div class="rq"><span class="rqcode">RQ6</span><div><b>한 권의 유행이 작가, 전작, 다른 장르로 전이되는가?</b><p>한강의 전작 읽기, 구병모의 영화→신작, 한로로의 음악→소설→추천 시집 이동을 봅니다.</p></div></div>
+</div></article>
+
+</div>
+
+<div class="framework card">
+<h3 style="margin:0">그래서 ‘유행’은 이렇게 살펴봤습니다</h3>
+<div class="framework-grid">
+<div class="metric"><b>① 얼마나 많이 읽히는가</b><span>종합/분야 순위, 연간, 주간 지속성</span></div>
+<div class="metric"><b>② 실제로 또래가 많이 구매하는가</b><span>20대, 30대 직접 구매비율. 1020 자료는 별도 표기</span></div>
+<div class="metric"><b>③ 얼마나 빠르게 주목받았는가</b><span>전주 대비 순위 급등, 전월 대비 판매 증가</span></div>
+<div class="metric"><b>④ 어떤 경로로 확산됐는가</b><span>SNS, 영화, 셀럽, 출판사, 팬덤 등 유입 경로</span></div>
+<div class="metric"><b>⑤ 얼마나 오래 관심이 이어지는가</b><span>일시적 화제인가, 수개월/수년 재구매되는가</span></div>
+</div>
+<div class="scope">
+<div class="scopebox"><b>기간</b><span>핵심 관찰: 2025.01–2026.08.26, 추가분은 2026.11.12까지</span></div>
+<div class="scopebox"><b>연령</b><span>2030 = 20–39세. 단, 시집의 1020 공개자료는 10–29세로 별도 명시</span></div>
+<div class="scopebox"><b>범위</b><span>소설, 시 중심. 산문/인문은 문학 독서와 접점이 클 때만 주변부로 포함</span></div>
+<div class="scopebox"><b>eBook</b><span>평소 eBook으로 자주 읽기 때문에, 가능하면 전자책 지원 여부도 함께 확인</span></div>
+<div class="scopebox"><b>근거 정도</b><span>A = 작품 단위 정량근거 / B = 유행은 확인되나 2030 직접 비율 부족</span></div>
+</div>
+<div class="caveat"><b>참고</b>, 책을 구매했다고 해서 반드시 완독했다는 뜻은 아니며, 교보문고와 YES24 이용자가 한국의 전체 독자를 그대로 대표하는 것도 아닙니다. 또한 시집은 1020 기준으로 공개된 자료가 많아 2030 데이터와 혼합하지 않고 별도로 표시했습니다.</div>
+</div>
+</section>
+
+<section id="trend">
+<div class="head"><h2>2030 문학 유행의 구조</h2><p>지금 유행은 ‘새 책이 많이 팔린다’보다 복합적입니다. <b>과거작이 새 매체를 만나 신작처럼 다시 유통</b>되고, 독자는 작품이 아니라 작가, 출판사, 뮤지션의 취향을 따라 이동합니다. 2025, 2026년에는 여기에 <b>노벨 문학상 발표가 해마다 번역서 판매를 끌어올리는 흐름</b>과 <b>장르소설의 2030 쏠림</b>이 더해졌습니다.</p></div>
+<div class="trendgrid">
+<article class="trend card"><div class="n">01</div><h3>소설의 실물 소비가 힙해짐</h3><p>온라인 쇼핑에 익숙한 20대가 오히려 서점을 직접 방문해 소설을 삽니다. 오프라인에서는 『자몽살구클럽』이 상반기 1위였습니다.</p></article>
+<article class="trend card"><div class="n">02</div><h3>역주행이 예외가 아님</h3><p>『모순』, 『급류』, 『싯다르타』, 『수족관』처럼 출간 후 수년~수십 년 뒤 최고점을 찍는 작품이 반복됩니다.</p></article>
+<article class="trend card"><div class="n">03</div><h3>‘누가 추천했나’가 메타데이터</h3><p>박정민, BTS 뷔, 한로로, 이동진, 출판사 유튜브가 작품 선택에 직접 영향을 줍니다. 큐레이터의 취향을 통째로 따라갑니다.</p></article>
+<article class="trend card"><div class="n">04</div><h3>영상화가 백리스트를 깨움</h3><p>『프로젝트 헤일메리』, 『파과』, 『죽은 왕녀를 위한 파반느』는 영상이 오래된 원작을 다시 현재형 베스트셀러로 만들었습니다.</p></article>
+<article class="trend card"><div class="n">05</div><h3>시집은 ‘포엣코어’가 됨</h3><p>짧은 시구, 표지, 필사, 사진, 플레이리스트, 굿즈가 한 묶음의 취향 표현이 됩니다. 시 읽기와 라이프스타일의 경계가 흐려집니다.</p></article>
+<article class="trend card"><div class="n">06</div><h3>대표작 → 작가 전체 읽기</h3><p>한강처럼 한 권이 뜨면 소설, 시, 산문 전작으로 이동합니다. 베스트셀러가 ‘한 작품’이 아니라 ‘작가 세계’의 입구가 됩니다.</p></article>
+<article class="trend card"><div class="n">07</div><h3>노벨상 효과가 해마다 옴</h3><p>한강 다음 해에는 크러스너호르커이, 그다음 해에는 앤 카슨의 번역서가 발표 직후 서점 실시간 1위에 올랐습니다. 앤 카슨 때는 예스24 발표 당일 구매자 중 2030이 49.6%로, 40~50대가 중심이던 앞선 두 해와 달랐습니다.</p></article>
+<article class="trend card"><div class="n">08</div><h3>장르소설이 2030의 주류</h3><p>『해파리 만개』 47.2%, 『오렌지와 빵칼』 54.4%처럼 SF, 미스터리 신작의 2030 비중이 소설/시/희곡 평균(28.1%)을 크게 웃돕니다. 괴담 아카이브 소설 『한국사 이상현상 연구원』은 교보 종합 1위까지 올랐습니다.</p></article>
+<article class="trend card"><div class="n">09</div><h3>책 밖의 사건이 고전을 깨움</h3><p>천만 영화 ‘왕과 사는 남자’가 『단종애사』를, 놀런의 ‘오디세이’가 『오디세이아』를 다시 불러냈습니다. 영화, 작가의 별세, 해외 문학상처럼 책 바깥의 일이 오래된 책 판매를 몇십 배씩 끌어올립니다.</p></article>
+</div>
+</section>
+
+<section>
+<div class="head"><h2>데이터로 보는 온도</h2><p>정밀 통계가 공개된 지점만 그래프로 표시했습니다. 숫자가 없는 작품은 카드에서 ‘근거 A/B’를 확인하세요.</p></div>
+<div class="radar">
+<div class="radarbox card">
+<h3>연령 구매 신호</h3>
+<div class="barrow"><span>『혼모노』 2030</span><div class="bar"><div class="fill" style="width:66%"></div></div><b>66.0%</b></div>
+<div class="barrow"><span>『파과』 2030</span><div class="bar"><div class="fill" style="width:67.1%"></div></div><b>67.1%</b></div>
+<div class="barrow"><span>『토마토 컵라면』 1020</span><div class="bar"><div class="fill" style="width:60.9%"></div></div><b>60.9%</b></div>
+<div class="barrow"><span>『샤워젤과 소다수』 1020</span><div class="bar"><div class="fill" style="width:51.9%"></div></div><b>51.9%</b></div>
+<div class="barrow"><span>『심장보다 단단한…』 1020</span><div class="bar"><div class="fill" style="width:45.9%"></div></div><b>45.9%</b></div>
+<div class="barrow"><span>『월든』 리커버 2030</span><div class="bar"><div class="fill" style="width:68.4%"></div></div><b>68.4%</b></div>
+<div class="barrow"><span>『오렌지와 빵칼』 2030</span><div class="bar"><div class="fill" style="width:54.4%"></div></div><b>54.4%</b></div>
+<div class="barrow"><span>앤 카슨 책 2030</span><div class="bar"><div class="fill" style="width:49.6%"></div></div><b>49.6%</b></div>
+<div class="barrow"><span>『양면의 조개껍데기』 2030</span><div class="bar"><div class="fill" style="width:48.3%"></div></div><b>48.3%</b></div>
+<div class="barrow"><span>『해파리 만개』 2030</span><div class="bar"><div class="fill" style="width:47.2%"></div></div><b>47.2%</b></div>
+<div class="barrow"><span>『한국사 이상현상…』 20대</span><div class="bar"><div class="fill" style="width:41.5%"></div></div><b>41.5%</b></div>
+</div>
+<div class="radarbox card">
+<h3>취향별 시작점</h3>
+<div class="pathgrid">
+<div class="path"><b>사랑, 관계</b><span>『모순』 → 『급류』 → 『구의 증명』</span></div>
+<div class="path"><b>지적 재미</b><span>『괴테는…』 → 『싯다르타』 → 고전 원전</span></div>
+<div class="path"><b>사회, 윤리</b><span>『혼모노』 → 『절창』 → 『소년이 온다』</span></div>
+<div class="path"><b>요즘 시</b><span>『토마토 컵라면』 → 고선경 → 조말선</span></div>
+<div class="path"><b>영상 원작</b><span>『프로젝트 헤일메리』 → 『파과』 → 『파반느』</span></div>
+<div class="path"><b>작가 전체 읽기</b><span>한강 소설 → 『서랍에 저녁을…』 → 『빛과 실』</span></div>
+<div class="path"><b>가볍게 입문</b><span>『나의 완벽한 장례식』 → 『자몽살구클럽』</span></div>
+<div class="path"><b>시 입문</b><span>나태주 → 박준 → 차정은 → 고선경</span></div>
+<div class="path"><b>노벨상 따라가기</b><span>한강 → 『사탄탱고』 → 『빨강의 자서전』</span></div>
+<div class="path"><b>요즘 SF</b><span>『천 개의 파랑』 → 『해파리 만개』 → 『오렌지와 빵칼』</span></div>
+<div class="path"><b>다시 꺼낸 고전</b><span>『데미안』 → 『이방인』 → 『월든』</span></div>
+<div class="path"><b>영화 보고 원작</b><span>『단종애사』 → 『오디세이아』 → 『폭풍의 언덕』</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="authors">
+<div class="head"><h2>요즘 특히 자주 보이는 작가들</h2><p>요즘은 한 권을 읽고 끝나기보다, 마음에 든 작가의 <b>전작이나 신작, 나아가 그 작가가 추천한 책</b>까지 이어서 읽는 경우가 많아 작가 흐름도 따로 모아봤습니다.</p></div>
+<div class="authorgrid">
+<article class="author-card card">
+<span class="author-mode">작가 전체 읽기</span>
+<h3>한강</h3>
+<p>2024 노벨문학상 이후 한 권이 아니라 『소년이 온다』, 『채식주의자』, 『작별하지 않는다』, 시집, 산문까지 동시에 움직였습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>몸의 감각, 역사적 폭력, 기억과 애도, 침묵과 이미지.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>소년이 온다 → 채식주의자 → 작별하지 않는다 → 서랍에 저녁을 넣어 두었다</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>2025 교보 연간 1위, 9위 + 『빛과 실』 출간 즉시 1위</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">세대 재발견</span>
+<h3>양귀자</h3>
+<p>1998년작 『모순』이 20대 구매 39.2%를 바탕으로 2025 연간 2위까지 올라갔습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>가족, 돈, 사랑처럼 생활적인 문제에서 철학적 모순을 꺼내는 서사.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>모순 → 나는 소망한다 내게 금지된 것을</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>20대가 오래된 작품을 자기 세대의 연애, 결혼 문제로 다시 읽음</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">신세대 문학 스타</span>
+<h3>성해나</h3>
+<p>『혼모노』가 SNS와 박정민 추천을 타고 5주 연속 1위까지 상승했습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>진짜/가짜, 권위, 욕망, 정체성을 빠른 플롯으로 설계.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>혼모노 → 빛을 걷으면 빛</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>『혼모노』 20대 24.2% + 30대 41.8%</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">기성 작가의 재집중</span>
+<h3>김애란</h3>
+<p>2024 『이중 하나는 거짓말』 1위에 이어 2025 『안녕이라 그랬어』가 장기 상위권에 머물렀습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>생활어, 가족, 집, 노동, 관계의 잔여를 매우 구체적인 디테일로 포착.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>이중 하나는 거짓말 → 안녕이라 그랬어 → 바깥은 여름</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>신작이 나올 때 기존 작품까지 다시 읽히는 강한 작가 팬덤</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">출판 형식 실험</span>
+<h3>김금희</h3>
+<p>『첫 여름, 완주』는 박정민의 출판사 무제와 ‘듣는 소설’이라는 형식 자체가 화제가 됐습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>실패한 사람을 불쌍하게 만들지 않는 유머와 다정한 생활 서사.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>첫 여름, 완주 → 경애의 마음 → 대온실 수리 보고서</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>오디오 우선 공개, 접근성 설계, 배우 녹음이 책 유행과 결합</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">영상화 → 신작 이동</span>
+<h3>구병모</h3>
+<p>『파과』 영화화로 2030 여성이 원작에 유입되고, 곧바로 신작 『절창』의 강한 구매층으로 이어졌습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>여성의 몸, 노화, 폭력, 윤리를 판타지, 장르 설정으로 밀어붙임.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>파과 → 절창</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>『파과』 2030 67.1%, 여성 87.6%</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">감정 바이럴</span>
+<h3>정대건</h3>
+<p>『급류』는 일반 독서 인플루언서의 ‘읽고 우는 영상’이 수백만 조회를 기록하며 역주행했습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>사랑, 상실, 죄책감을 빠른 플롯과 재회 구조로 축적.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>급류</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>20대 구매 약 40%대 + SNS 리액션 자체가 콘텐츠화</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">장르, eBook 역주행</span>
+<h3>정해연</h3>
+<p>『홍학의 자리』의 반전이 SNS에서 ‘스포 금지’ 밈처럼 퍼지며 젊은 eBook 독자를 끌어왔습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>페이지터너, 서술 트릭, 강한 첫 문장과 결말 반전.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>홍학의 자리 → 유괴의 날 → 정해연 단편</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>『홍학의 자리』 eBook 2030 71.0%</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">뮤지션 × 작가 × 큐레이터</span>
+<h3>한로로</h3>
+<p>음악 EP와 소설 『자몽살구클럽』을 한 세계로 만들고, 자신이 추천한 시집의 판매까지 움직였습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>청춘, 죽음 충동, 우정과 연대를 음악적 감정선으로 확장.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>자몽살구클럽 + 동명 EP → 한로로 추천 시집</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>작품 팬덤이 독서 큐레이션 팬덤으로 확장</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">Gen Z 포엣코어</span>
+<h3>차정은</h3>
+<p>독립출판 시집에서 시작해 1020 팬덤을 만든 뒤 신작, 굿즈, 플레이리스트까지 확장했습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>과일, 음식, 여름, 편의점 같은 생활 이미지를 젊은 사랑의 언어로 사용.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>토마토 컵라면 → 여름 피치 스파클링 → 에어컨 사라다</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>『토마토 컵라면』 1020 구매 60.9%</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">문단 × 젊은 팬덤</span>
+<h3>고선경</h3>
+<p>신춘문예 등단이라는 전통 경로와 SNS 젊은 독자 팬덤이 동시에 작동합니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>밝고 팝한 생활 사물과 불안, 외로움을 한 화면에 둠.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>샤워젤과 소다수 → 심장보다 단단한 토마토 한 알</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>『샤워젤과 소다수』 1020 51.9%</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">감정 스테디셀러</span>
+<h3>최진영</h3>
+<p>『구의 증명』은 출간 직후의 유행보다 세대가 바뀔 때마다 20대 독자가 새로 들어오는 장기형 작품입니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>사랑, 죽음, 가난을 짧고 뜨거우며 육체적인 언어로 다룸.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>구의 증명 → 단 한 사람</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>SNS 문장 공유, 친구 추천으로 신규 독자가 반복 유입</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">소설가 → 산문 팬덤</span>
+<h3>김영하</h3>
+<p>6년 만의 산문 『단 한 번의 삶』이 2025 연간 TOP 10에 들며 문학 독자의 비문학 이동을 보여줬습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>명료한 구조, 개인 경험에서 보편적 삶의 질문으로 이동하는 산문.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>단 한 번의 삶 → 여행의 이유 → 김영하 소설</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>2025 예스24 연간 8위</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">고전의 20대 재브랜딩</span>
+<h3>헤르만 헤세</h3>
+<p>『싯다르타』가 2026년 20대 중심으로 종합 1위에 오르며 고전도 ‘현재 유행’이 될 수 있음을 보여줬습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>자아 탐구와 정신적 성장, 체험을 통한 깨달음.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>싯다르타 → 데미안 → 수레바퀴 아래서</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>세계문학전집 팬덤, 유튜브, 셀럽 추천</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">영화 → 원작</span>
+<h3>앤디 위어</h3>
+<p>『프로젝트 헤일메리』 영화가 원작 판매를 폭발적으로 끌어올려 2026 상반기 전체 1위가 됐습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>과학, 공학 문제 해결을 서스펜스로 만드는 하드SF.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>프로젝트 헤일메리 → 마션</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>미디어셀러가 장르소설 신규 독자를 대규모 유입</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">조용한 고전 역주행</span>
+<h3>존 윌리엄스</h3>
+<p>『스토너』가 2025년 문학 강세 국면에서 종합 10위 안에 반복 진입했습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>평범한 삶, 실패와 소명, 극적 사건 없이 쌓이는 감정.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>스토너 → 아우구스투스</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>‘도파민 없는 소설’이 오히려 지친 성인 독자에게 재발견</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">노벨상 효과 2025</span>
+<h3>크러스너호르커이 라슬로</h3>
+<p>2025년 10월 9일 노벨문학상 발표 직후 『사탄탱고』가 예스24 실시간 1위에 올랐고, 12시간 판매가 그해 1월부터 수상 직전까지 판매의 약 12배였습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>무너진 동유럽 마을에서 구원과 광기가 소문처럼 번지는 묵시록을 끊기지 않는 긴 문장으로 씀.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>사탄탱고 → 저항의 멜랑콜리 → 벵크하임 남작의 귀향</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>알라딘 판매 수상 전 한 달 약 40부 → 수상 후 약 1,800부, 30대 비중 최다</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">노벨상 효과 2026</span>
+<h3>앤 카슨</h3>
+<p>2026년 10월 8일 수상 발표 뒤 『빨강의 자서전』이 예스24 일일 1위를 나흘 이어 갔고, 발표 당일 구매자 절반 가까이가 2030이었습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>고대 그리스 문학과 지금의 사랑, 상실을 맞붙여 시, 소설, 에세이, 번역의 경계를 허묾.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>빨강의 자서전 → 남편의 아름다움 → 녹스 → 에로스, 달콤씁쓸한</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>예스24 발표 당일 20대 21.6% + 30대 28.0%, 여성 84.1%</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">SF 신작 연타</span>
+<h3>김초엽</h3>
+<p>2025년 『양면의 조개껍데기』, 2026년 『해파리 만개』가 연달아 2030 비중이 높은 신작이 됐습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>인간이 아닌 존재와의 만남으로 인간성의 경계를 다시 묻는 다정하고 서늘한 SF.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>양면의 조개껍데기 → 해파리 만개</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>『해파리 만개』 예스24 2030 47.2%</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">2030 비중 상승형</span>
+<h3>청예</h3>
+<p>2024년작 『오렌지와 빵칼』의 2030 구매 비율이 해마다 올라 2026년 상반기에는 절반을 넘었습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>착하게 굴어야 한다는 압박과 억눌린 분노를 SF적 설정으로 터뜨리는 서사.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>오렌지와 빵칼 → 주와 연</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>예스24 2030 44.2% → 53.4% → 54.4%</span></div>
+</article>
+<article class="author-card card">
+<span class="author-mode">별세 뒤 추모 구매</span>
+<h3>히가시노 게이고</h3>
+<p>2026년 7월 별세 소식이 알려진 뒤 신작 『투명한 나선』이 예스24 7월 5주 종합 1위에 올랐습니다.</p>
+<div class="author-meta"><b>SIGNATURE</b><br><span>트릭보다 동기와 인물의 사정에 무게를 두는 추리소설.</span></div>
+<div class="author-meta"><b>READING PATH</b><br><span>투명한 나선 → 용의자 X의 헌신 → 나미야 잡화점의 기적</span></div>
+<div class="author-meta"><b>TREND SIGNAL</b><br><span>교보 10년 소설 판매 한강 다음 2위, 누적 구매자 30대 30.0%</span></div>
+</article>
+</div>
+</section>
+
+<section id="issues">
+<div class="head"><h2>최근 이슈로 유명해진 책</h2><p>판매 순위만 보면 놓치는 흐름이 있어서, <b>노벨 문학상, 다른 문학상, 영상 원작, SNS, 사회적 사건</b>처럼 분명한 계기가 있었던 책을 따로 묶었습니다. 언제 무슨 일이 있었는지와 2030 반응을 같이 적었고, 반응 수치를 찾지 못한 책은 ‘확인 못 함’으로 남겼습니다.</p></div>
+<div class="issuegrid" id="issueGrid"></div>
+<div class="caveat"><b>참고</b>, 부커상과 인터내셔널 부커상 2025, 2026 수상작은 한국어판 판매 반응을 다룬 보도를 찾지 못해 넣지 않았습니다. 계엄, 탄핵, 대선 뒤에는 헌법, 사회정치서 판매가 늘었다는 보도만 있었고, 소설이나 시가 다시 많이 팔렸다는 수치는 확인 못 했습니다.</div>
+</section>
+
+<section id="library">
+<div class="head"><h2>작가, 작품 딥다이브, Expanded</h2><p>각 카드에는 <b>유행 포인트, 실제 근거, 독자층, 유입 경로, 작가 특징, 에피소드, 주요 인물, 관계, 핵심 사건과 결말, 핵심 주제, 읽기 난도, 토론 질문, 같이 읽을 책</b>까지 들어 있습니다.</p></div>
+<div class="controls card">
+<input id="search" type="search" placeholder="작가, 작품, 주제, 분위기 검색 — 예: 사랑, 20대, 영화화, 포엣코어, 애도">
+<button class="filter active" data-filter="전체">전체</button>
+<button class="filter" data-filter="소설">소설</button>
+<button class="filter" data-filter="시">詩</button>
+<button class="filter" data-filter="비문학">비문학</button>
+<button class="filter" data-filter="역주행">↗ 역주행</button>
+<button class="filter" data-filter="지금">🔥 지금</button>
+<button class="filter" data-filter="이슈">📌 이슈</button>
+<span class="count" id="count"></span>
+</div>
+<div class="grid" id="grid"></div>
+<div class="empty card" id="empty">검색 결과가 없습니다. 다른 키워드로 찾아보세요.</div>
+</section>
+
+<section id="matrix">
+<div class="head"><h2>한눈에 비교</h2><p>카드를 다 열어보기 전에 ‘무슨 이유로 뜨는 책인지’만 빠르게 비교하는 표입니다.</p></div>
+<div class="matrix card"><table>
+<thead><tr><th>작품</th><th>장르</th><th>현재 상태</th><th>주 독자/신호</th><th>유입 경로</th><th>난도</th><th>분위기</th></tr></thead>
+<tbody id="matrixBody"></tbody>
+</table></div>
+</section>
+
+<section id="method">
+<div class="head"><h2>선정 기준과 해석법</h2><p>이 페이지는 ‘좋은 책 순위’를 만들기보다는, <b>또래가 요즘 어떤 책을 어디서 발견하고 왜 읽게 되는지</b> 궁금해서 정리한 기록입니다.</p></div>
+<div class="method card">
+<div>
+<h3>무엇을 근거로 넣었나</h3>
+<ul>
+<li>2025–2026 교보문고, YES24 판매 동향, 주간/상반기/연간 순위를 우선 사용했습니다.</li>
+<li>작품별 연령 구매비율이 공개되면 가장 높은 수준의 근거(A)로 표시했습니다.</li>
+<li>정확한 연령비율이 없더라도 2026 상반기 TOP 10, SNS 역주행, 영화, 셀럽 추천 후 판매 급증처럼 확산 경로가 명확한 경우 포함했습니다.</li>
+<li>시집은 ‘줄거리’ 대신 반복 이미지, 화자의 정서, 언어적 접근성, 팬덤 경로를 분석했습니다.</li>
+<li>작가 에피소드는 확인 가능한 출간, 추천, 영상화, 작가 이력 중심으로만 넣고, 확인하기 어려운 사적 일화는 만들지 않았습니다.</li>
+<li>‘이슈 묶음’은 노벨 문학상, 다른 문학상, 영상 원작, SNS, 사회적 사건처럼 계기가 날짜로 확인되는 책만 넣었고, 2030 반응 수치가 없으면 ‘확인 못 함’으로 남겼습니다.</li>
+<li>추가분 중 줄거리 결말을 출판사 소개나 신뢰할 만한 자료로 확인하지 못한 책은 확인한 전개까지만 적었습니다.</li>
+</ul>
+</div>
+<div class="notegrid">
+<div class="note"><b>근거 A</b>, 연령 구매 비중, 판매 증가율, 순위 등 정량 신호가 작품 단위로 직접 확인됨.</div>
+<div class="note"><b>근거 B</b>, 베스트셀러, 미디어 확산은 명확하지만 작품 단위 2030 비율이 모두 공개되지는 않음.</div>
+<div class="note"><b>중요</b>, ‘유행’과 ‘문학적으로 더 훌륭함’은 같은 말이 아닙니다. 여기서는 시장, 문화 현상을 분석합니다.</div>
+<div class="note"><b>시점</b>, 2026년 8월 26일 기준. 특히 2026년 7~8월 신작은 장기 스테디 여부를 아직 확정할 수 없습니다. 추가한 28권과 이슈 묶음은 2026년 11월 12일에 다시 확인했습니다.</div>
+</div>
+</div>
+</section>
+
+<footer>2026.08.26 정리, 2026.11.12 업데이트</footer>
+</main>
+
+<script>
+const books = [{"type": "소설", "trend": "지금", "title": "괴테는 모든 것을 말했다", "author": "스즈키 유이", "year": "2025", "signal": "2026년 1월 교보문고 종합 1위. 20대부터 50대까지 고르게 읽힌 ‘문학에 관한 소설’의 이례적 흥행.", "evidence": "1위 당시 30대 구매 29.0%, 20대 20.3%. 영화평론가 이동진 추천작으로 알려지며 상승했습니다.", "why": "고전을 직접 읽기 전에 ‘괴테를 둘러싼 미스터리와 지적 놀이’를 소설로 즐길 수 있다는 점이 텍스트힙의 다음 단계와 맞습니다. 읽고 나면 『파우스트』 등 원전으로 이동하고 싶게 만드는 입문형 문학소설입니다.", "author_feature": "방대한 인문학 지식을 서사의 퍼즐처럼 사용합니다. 지적 인용이 장식이 아니라 인물의 세계관과 사건의 단서로 기능합니다.", "episode": "한국에서는 이동진의 추천이 대중적 입구가 되면서 연초 베스트셀러 1위까지 올라갔습니다.", "content": "괴테 연구자가 우연히 발견한 한 문장의 출처를 추적하면서 자신이 믿어온 지식과 삶의 틀을 다시 검토하게 되는 지적 미스터리입니다.", "theme": "고전 읽기, 지식과 권위, 인용과 진위, 사랑, 연구자의 집착, 한 문장이 삶을 흔드는 방식.", "tags": ["30대", "고전입문", "추천효과", "지적소설", "미스터리"], "grade": "A", "audience": "2026년 초 20대, 30대 모두 강하게 구매한 ‘지적 재미’형 베스트셀러", "route": "이동진 추천 → 지적 미스터리 훅 → 괴테/고전 원전 관심으로 확장", "style": "인용, 문헌, 연구자의 집착을 미스터리 구조로 바꾸는 ‘아카데믹 퍼즐’형 소설.", "read": "문학 연구, 인용의 출처 찾기, 고전, 미스터리를 동시에 좋아한다면.", "caution": "괴테 지식이 없어도 읽을 수 있지만, 고전 인용과 학술적 집착 자체를 재미로 느끼지 못하면 건조할 수 있습니다.", "difficulty": "보통", "pace": "보통", "mood": "지적, 미스터리, 고전", "talk": "우리가 믿는 ‘권위 있는 문장’은 출처를 잃는 순간에도 같은 힘을 갖는가?", "other": "읽고 나서 『파우스트』나 괴테의 잠언으로 이동하는 ‘2차 독서’를 유도하는 작품이라는 점이 트렌드상 중요합니다.", "id": "book-01", "search_blob": "소설 지금 괴테는 모든 것을 말했다 스즈키 유이 고전 읽기, 지식과 권위, 인용과 진위, 사랑, 연구자의 집착, 한 문장이 삶을 흔드는 방식. 2026년 초 20대, 30대 모두 강하게 구매한 ‘지적 재미’형 베스트셀러 이동진 추천 → 지적 미스터리 훅 → 괴테/고전 원전 관심으로 확장 지적, 미스터리, 고전 30대 고전입문 추천효과 지적소설 미스터리", "characters": "히로바 도이치 — 일본 최고 수준의 괴테 연구자. 아내와 결혼 25주년을 맞은 중년의 학자이며, ‘괴테가 이미 모든 것을 말했다’는 믿음에 가까운 세계관을 갖고 있습니다. 가족과 주변 인물들은 그의 지적 집착을 비추는 거울 역할을 합니다.", "full_plot": "결혼기념일에 홍차 티백에서 ‘괴테’의 이름이 붙은 낯선 문장을 발견한 도이치는 평생의 연구에도 본 적 없는 이 문장의 출처를 찾기 시작합니다. 처음에는 단순한 문헌 추적이지만, 인터넷의 가짜 명언, 인용의 권위, 말이 원저자의 의도를 떠나 유통되는 방식으로 탐색이 커집니다. 도이치는 ‘괴테가 말했느냐’보다 사람들이 왜 어떤 말을 괴테에게 귀속시키고 싶어 하는지를 마주하게 되고, 결국 언어는 완전히 새로운 무언가라기보다 계속 인용, 변형, 재맥락화되는 것이라는 생각에 도달합니다. 결말은 가짜 혹은 잘못 귀속된 문장이라도 그것을 삶에서 실제로 반복하고 살아내는 과정에서 의미가 생길 수 있다는 쪽으로 열립니다.", "spoiler_note": "핵심은 ‘진짜 괴테 문장 찾기’의 정답보다, 출처와 권위에 대한 도이치의 확신이 흔들리는 과정입니다."}, {"type": "소설", "trend": "지금", "title": "나의 완벽한 장례식", "author": "조현선", "year": "2026", "signal": "2026년 상반기 교보문고 종합 7위. 연초부터 장례식장, 죽음이라는 소재를 따뜻한 판타지로 풀어내며 상위권을 유지했습니다.", "evidence": "교보문고 2026 상반기 TOP 10의 소설 8종 중 하나. 예스24에서도 높은 판매지수를 보였고 도서관 신착자료에서 예약 대기가 확인될 만큼 대중적 관심이 컸습니다.", "why": "‘죽음’이라는 무거운 소재를 공포나 비극이 아니라 미처 끝내지 못한 관계와 부탁을 해결하는 따뜻한 이야기로 바꿉니다. 읽기 쉽고 감정적으로 안전한 편이라 독서 입문, 선물, 독서모임에 모두 잘 맞습니다.", "author_feature": "조현선은 일상적인 공간에 비현실적 존재를 들여놓고, 사건 해결을 통해 관계의 미련과 감정을 정리하는 따뜻한 서사를 구성합니다.", "episode": "2026년 신작임에도 상반기 종합 베스트셀러 10위권에 들어 ‘텍스트힙=무거운 문학만 읽는다’는 인상을 깨는 사례가 됐습니다.", "content": "새벽 두 시 종합병원 매점에 그림자가 없는 수상한 손님들이 찾아옵니다. 매점 아르바이트생은 매점에서 팔지 않는 ‘주문’을 부탁받고, 삶과 죽음의 경계에 남은 사연을 하나씩 해결해 나갑니다.", "theme": "죽음, 미련, 관계, 애도, 남겨진 사람, 마지막 인사, 살아 있는 동안 해야 할 말.", "tags": ["2026신작", "상반기TOP10", "힐링판타지", "죽음", "관계"], "grade": "A", "audience": "20, 30대 일반 독자와 감정 서사, 힐링 판타지를 선호하는 독자", "route": "신작 화제 → 읽기 쉬운 감정 판타지 입소문 → 상반기 베스트셀러", "style": "에피소드형 구조와 따뜻한 판타지 장치를 이용해 죽음의 문제를 무겁지 않게 전달합니다.", "read": "『어서 오세요, 휴남동 서점입니다』류의 따뜻한 이야기와 ‘죽음 이후 남은 마음’ 소재를 좋아한다면.", "caution": "실험적인 문체보다 이야기의 정서적 완결감이 중심이라 문학적 난도 높은 작품을 찾는 독자에게는 다소 익숙하게 느껴질 수 있습니다.", "difficulty": "매우 쉬움", "pace": "빠름", "mood": "따뜻함, 애도, 판타지", "talk": "죽기 전에 반드시 ‘완벽하게 정리해야’ 하는 관계가 실제로 존재하는가?", "other": "2026년 소설 강세가 SF, 고전, 순문학뿐 아니라 대중적인 힐링 판타지까지 넓게 퍼졌음을 보여주는 책입니다.", "id": "book-02", "search_blob": "소설 지금 나의 완벽한 장례식 조현선 죽음, 미련, 관계, 애도, 남겨진 사람, 마지막 인사, 살아 있는 동안 해야 할 말. 20, 30대 일반 독자와 감정 서사, 힐링 판타지를 선호하는 독자 신작 화제 → 읽기 쉬운 감정 판타지 입소문 → 상반기 베스트셀러 따뜻함, 애도, 판타지 2026신작 상반기TOP10 힐링판타지 죽음 관계", "characters": "나희 — 대학 등록금을 벌기 위해 종합병원 매점 야간 아르바이트를 시작한 스무 살. 귀신을 볼 수 있습니다. 이미수 — 매점과 연결되는 주요 어른 인물. 성우 — 교통사고로 죽은 청년 귀신. 강선빈 — 거칠게 살다 죽어 휴대전화를 찾아달라고 집요하게 부탁하는 소년. 희진 등 여러 망자의 사연이 에피소드로 이어집니다.", "full_plot": "새벽 두 시, 나희가 일하는 병원 매점에는 계절과 맞지 않는 옷을 입은 사람이나 이상한 주문을 하는 손님이 나타납니다. 그들은 죽은 뒤 미련 때문에 남은 귀신들입니다. 성우는 사고 직전 다친 동물을 살리고 싶었던 마지막 기억 때문에 소독약과 붕대를 찾고, 어떤 아버지 귀신은 치매를 앓는 아내에게 자신이 먹이고 싶었던 음식을 전하려 합니다. 강선빈은 휴대전화를 찾아달라는 요구로 나희를 괴롭히지만, 나희가 그의 삶을 추적하면서 단순한 ‘문제아’라는 외피 뒤에 있던 사정과 마지막에 바로잡고 싶었던 일이 드러납니다. 나희는 여러 죽음을 통과하며 귀신이 남는 이유가 죽은 사람의 미련만이 아니라 산 사람의 미련일 수도 있음을 배웁니다. 소원이 풀린 귀신들은 오래 머물지 않고 사라지고, 마지막에는 ‘하고 싶은 말이 남았다는 것은 살아 있을 때 했어야 할 말을 하지 못했다는 것’이라는 깨달음이 나희 자신의 삶과 가족을 바라보는 태도까지 바꿉니다.", "spoiler_note": "에피소드형 소설이라 ‘최종 반전’보다 각 망자가 왜 남았는지 밝혀지는 과정 자체가 스포일러입니다."}, {"type": "소설", "trend": "지금", "title": "수족관", "author": "유래혁", "year": "2023", "signal": "2026년 7월 말~8월 초 교보문고 종합 1위를 2주 연속 기록한, 현재 시점의 대표 역주행 소설.", "evidence": "SNS 입소문과 20대 독자층이 상승을 견인했습니다. 2026년 7월 집계에서 1020 구매자가 35.4%였고, 별도 보도에서는 20대 여성 구매 비중이 가장 높게 나타났습니다.", "why": "광고, 대형 출판사 중심의 히트가 아니라 독립출판 계열 작품이 SNS에서 문장과 감정선을 중심으로 확산된 사례라서 중요합니다. ‘여름, 청춘, 상처, 구원’이라는 강한 정서 패키지가 사진 찍기 좋은 푸른 이미지와도 잘 결합합니다.", "author_feature": "홍익대에서 미술을 전공했고 약 7년간 거리 사진을 찍었다고 소개합니다. 시각적 장면을 오래 바라보는 사람의 감각이 서사에도 강하게 묻어나는 편입니다.", "episode": "작가 소개에는 사랑하는 사람에게 편지 쓰는 일을 좋아했고 ‘아주 긴 편지’를 쓰고 싶어 소설을 시작했다는 일화가 실려 있습니다. 첫 장편이 2년 반가량 지나 종합 1위까지 올라간 것도 이례적입니다.", "content": "보육 시설에서 자란 류이치가 먼저 시설을 빠져나온 아카리를 만나며 벌어지는 일을 따라갑니다. 두 사람은 각자의 과거와 상처에서 벗어나 오키나와의 바다로 가는 미래를 꿈꿉니다.", "theme": "과거라는 감옥, 상처 입은 청춘의 연대, 사랑이 구원이 될 수 있는가, 함께 있음과 의존의 경계.", "tags": ["역주행", "SNS", "20대", "청춘", "독립출판"], "grade": "A", "audience": "20대 중심, 특히 젊은 여성 독자와 SNS 독서 계정에서 강함", "route": "SNS 입소문 → 독립출판 발견 → 대형서점 역주행", "style": "장면을 오래 응시하는 시각적 문장, 여백이 있는 감정 묘사, 청춘의 상처를 과도하게 설명하지 않는 서술.", "read": "여름 청춘물, 상처 입은 두 사람의 동행, 사진처럼 장면이 남는 소설을 좋아한다면.", "caution": "구원 서사를 로맨스 하나로 단순화해 읽으면 작품의 불안정성과 의존의 문제를 놓치기 쉽습니다.", "difficulty": "쉬움", "pace": "빠름", "mood": "여름, 쓸쓸함, 청량함", "talk": "사랑은 타인을 과거에서 실제로 꺼내줄 수 있는가?", "other": "첫 장편 중심으로 알려진 신예 작가라 ‘전작 읽기’보다 이 작품 자체의 현상성을 보는 편이 좋습니다.", "id": "book-03", "search_blob": "소설 지금 수족관 유래혁 과거라는 감옥, 상처 입은 청춘의 연대, 사랑이 구원이 될 수 있는가, 함께 있음과 의존의 경계. 20대 중심, 특히 젊은 여성 독자와 SNS 독서 계정에서 강함 SNS 입소문 → 독립출판 발견 → 대형서점 역주행 여름, 쓸쓸함, 청량함 역주행 SNS 20대 청춘 독립출판", "characters": "류이치 — 보육 시설에서 성장한 청년. 아카리 — 류이치보다 먼저 시설에서 도망쳐 나온 인물. 두 사람 모두 과거와 상처에서 완전히 벗어나지 못한 채 서로에게 강하게 끌립니다.", "full_plot": "류이치는 보육 시설 밖에서 아카리를 다시 만나고, 둘은 시설에서의 기억과 각자가 떠안은 상처를 공유하며 서로에게 피난처가 됩니다. 그러나 소설의 ‘수족관’은 단순한 시설이 아니라 과거 전체를 뜻합니다. 두 사람이 서로의 숨을 나누듯 가까워질수록 상대를 살리는 사랑과 상대 없이는 숨 쉬지 못하는 의존이 동시에 커집니다. 둘은 오키나와의 넓은 바다를 수족관 밖의 자유로 상상하며 그곳으로 가는 꿈을 공유합니다. 작품은 ‘함께 탈출하면 모든 것이 해결된다’고 단정하기보다, 과거가 몸과 관계 안에 남아 있다는 사실과 그래도 바다를 향해 움직이고 싶어 하는 욕망을 병치합니다.", "spoiler_note": "이 작품은 사건의 결말보다 수족관/바다의 상징과 류이치, 아카리의 관계를 어떻게 해석하느냐가 더 중요합니다."}, {"type": "소설", "trend": "지금", "title": "자몽살구클럽", "author": "한로로", "year": "2025", "signal": "2026년 상반기 종합 베스트셀러 상위권. 20대 구매 비중 32.7%, 1~5월 연속 소설/시/희곡 TOP 10.", "evidence": "2026년 상반기 교보문고 종합 3위권, 예스24에서도 상반기 종합 9위로 집계될 만큼 장기 체류했습니다.", "why": "‘작가’와 ‘뮤지션’의 팬덤이 분리되지 않습니다. 동명의 EP와 소설이 연결돼 음악을 듣고 책을 읽는 크로스미디어 독서가 만들어졌고, 10, 20대가 자신의 문제처럼 느끼는 청소년의 생존과 상처를 전면에 둡니다.", "author_feature": "싱어송라이터로서 사회의 그늘에 놓인 청춘을 음악으로 다뤄왔고, 소설에서도 감각적인 장면과 직접적인 정서를 긴 호흡으로 확장합니다.", "episode": "한로로는 약 20분의 음악 앨범에 담기 어려운 이야기를 풀기 위해 동명의 소설을 함께 만들었다고 소개합니다. 이후 한로로가 추천한 다른 시집들의 판매도 크게 뛰어 ‘큐레이터’로서 영향력까지 생겼습니다.", "content": "죽고 싶다는 마음을 품은 네 아이가 비밀 클럽에서 만나 서로를 살리기로 합니다. 각자의 가정, 학교, 사회적 상처가 드러나고, ‘살고 싶지 않다’는 마음이 타인과의 관계 속에서 어떻게 변하는지를 따라갑니다.", "theme": "청소년의 위기, 삶과 죽음, 상처의 구조, 연대, 어른의 책임, 서로를 살리는 관계.", "tags": ["20대", "음악×소설", "팬덤", "청춘", "연대"], "grade": "A", "audience": "10대~20대 강세, 2026 상반기 오프라인 서점에서 특히 강한 팬덤형 소설", "route": "뮤지션 팬덤 → 동명 EP/소설 크로스미디어 → 서점 방문 구매 → 추천 도서 확산", "style": "노랫말처럼 감정의 온도가 분명하고, 장면과 대사가 빠르게 이어지는 청춘 서사.", "read": "음악과 소설을 같이 경험하고 싶거나, ‘서로를 살리는 친구들’ 서사와 청소년 문제를 다룬 이야기를 원한다면.", "caution": "자살사고, 가정 문제 등 무거운 소재를 다룹니다. 밝은 제목만 보고 가벼운 청춘물로 예상하면 결이 다릅니다.", "difficulty": "쉬움", "pace": "빠름", "mood": "청춘, 절박함, 연대", "talk": "친구를 ‘살리는 것’과 친구의 삶을 대신 책임지는 것은 어디서 갈리는가?", "other": "한로로의 음악과 함께 읽으면 텍스트가 어떤 방식으로 음반의 서사를 확장하는지 확인할 수 있습니다.", "id": "book-04", "search_blob": "소설 지금 자몽살구클럽 한로로 청소년의 위기, 삶과 죽음, 상처의 구조, 연대, 어른의 책임, 서로를 살리는 관계. 10대~20대 강세, 2026 상반기 오프라인 서점에서 특히 강한 팬덤형 소설 뮤지션 팬덤 → 동명 EP/소설 크로스미디어 → 서점 방문 구매 → 추천 도서 확산 청춘, 절박함, 연대 20대 음악×소설 팬덤 청춘 연대", "characters": "죽고 싶다는 마음을 가진 네 명의 청소년이 중심입니다. 각자 가정과 학교에서 다른 종류의 상처를 갖고 있으며, ‘자몽살구클럽’이라는 비밀스러운 관계 안에서 서로의 생존을 약속합니다.", "full_plot": "네 아이는 각자의 삶에서 버티기 어려운 지점까지 밀려난 상태로 만나 ‘클럽’을 만듭니다. 처음에는 죽고 싶은 마음을 공유하는 것이 연결의 이유지만, 시간이 지나면서 서로의 실제 가정환경과 상처, 어른들이 방치하거나 만들어낸 문제가 드러납니다. 이들은 서로를 완벽히 치료하지 못하고 때로는 상대의 고통을 감당하지 못하지만, 혼자 죽음을 향해 가는 대신 누군가에게 발견되고 붙잡히는 경험을 하게 됩니다. 결말의 핵심은 ‘우정이 모든 문제를 해결한다’가 아니라 죽고 싶은 마음을 가진 사람이 관계 속에서 다시 아주 작은 생의 의지를 획득할 수 있다는 데 있습니다.", "spoiler_note": "자해, 죽음 충동, 가정 문제를 직접 다루므로 밝은 청춘소설보다 훨씬 무거운 내용입니다."}, {"type": "시", "trend": "지금", "title": "에어컨 사라다", "author": "차정은", "year": "2026", "signal": "2026년 7월 출간된 차정은의 최신 시집. 출판유통통합전산망은 전작 누적 판매 7만 부 규모의 젠지 팬덤을 신작의 핵심 배경으로 소개합니다.", "evidence": "2026년 8월 현재 예스24 한국시 분야 베스트셀러 상위권에 노출되고, 교보문고에서 단독 사인본, NFC 플레이리스트 키링 등 팬덤형 출간 이벤트가 진행됐습니다.", "why": "이제 시집이 ‘텍스트만 있는 책’이 아니라 플레이리스트, 굿즈, 표지, 계절감이 한데 묶인 취향 상품으로 움직인다는 걸 가장 잘 보여주는 최신 사례입니다.", "author_feature": "차정은은 토마토, 피치, 워터멜론, 사라다처럼 음식과 계절의 촉각적 이미지를 반복해 자기 세대의 사랑과 우정을 직관적인 언어로 씁니다.", "episode": "교보문고 신작 이벤트에 작가 플레이리스트를 연결한 NFC 아크릴 키링이 등장했습니다. ‘시인의 음악 취향’까지 독서 경험에 포함되는 현재 포엣코어의 형태를 잘 보여줍니다.", "content": "여러 과일이 한 그릇에서 섞이면서도 각자의 맛을 잃지 않는 ‘사라다’를 사랑과 우정의 비유로 삼습니다. 디지털 시대의 연결, 끊김과 아날로그적인 다정함이 함께 등장합니다.", "theme": "사랑과 우정, 각자의 고유성, 함께 있음, 이별, 디지털 시대의 감정, 여름.", "tags": ["2026신작", "포엣코어", "1020", "굿즈", "플레이리스트"], "grade": "A", "audience": "차정은 팬덤, 1020 시 독자, 포엣코어, 필사, 굿즈 소비층", "route": "전작 팬덤 → 신작 예약/굿즈 → 플레이리스트 결합 → 여름 시즌 독서", "style": "밝고 직관적인 생활어, 과일, 냉기, 디지털 인터페이스를 감정 비유로 사용하는 청량한 시.", "read": "요즘 젠지 시의 언어가 실제로 어떤지 가장 최신 상태로 보고 싶다면.", "caution": "출간 직후라 장기 판매 지속성은 아직 판단할 수 없습니다. ‘현재 화제성’과 ‘장기 스테디 가능성’을 구분해야 합니다.", "difficulty": "매우 쉬움", "pace": "짧게 읽기", "mood": "서늘한 여름, 우정, 청춘", "talk": "시집의 굿즈, 플레이리스트, 표지가 작품 감상에 포함될 때 그것도 문학 경험이라고 할 수 있는가?", "other": "『토마토 컵라면』과 비교하면 개인의 뜨거운 감정에서 ‘여러 사람이 섞이되 사라지지 않는 공동체’ 이미지로 확장됩니다.", "id": "book-05", "search_blob": "시 지금 에어컨 사라다 차정은 사랑과 우정, 각자의 고유성, 함께 있음, 이별, 디지털 시대의 감정, 여름. 차정은 팬덤, 1020 시 독자, 포엣코어, 필사, 굿즈 소비층 전작 팬덤 → 신작 예약/굿즈 → 플레이리스트 결합 → 여름 시즌 독서 서늘한 여름, 우정, 청춘 2026신작 포엣코어 1020 굿즈 플레이리스트", "characters": "화자 / 등장하는 존재 — 고정된 서사 인물보다 여름을 통과하는 젊은 화자와 ‘우리’가 중심입니다.", "full_plot": "시집의 정서적 흐름 — 과일, 냉기, 사라다, 디지털 연결 같은 이미지가 반복되며, 서로 섞이되 각자의 맛을 잃지 않는 관계를 사랑과 우정의 모델로 제시합니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "시", "trend": "지금", "title": "여름 피치 스파클링", "author": "차정은", "year": "2025", "signal": "10, 20대 시집 열풍을 상징하는 신예 시인의 히트작. 출간 한 달여 만에 13쇄, 약 1만5천 부 판매가 보도됐습니다.", "evidence": "교보문고에서 2025년 10, 20대 시집 구매 비율이 크게 늘던 시기에 시 분야 베스트셀러 1위에 올랐습니다.", "why": "시를 어렵고 엄숙한 장르가 아니라 ‘지금 내 감정을 바로 저장하는 짧은 텍스트’로 소비합니다. 표지와 시구를 찍어 X, 인스타그램에 공유하고 휴대폰 배경화면으로 만드는 행동까지 포함해 유행합니다.", "author_feature": "아주 젊은 화자의 언어, 일상 사물과 계절감, 감정을 숨기지 않는 직접성이 특징으로 읽힙니다.", "episode": "작가는 19세 대학생으로 소개됐고, 고등학생 때 낸 『토마토 컵라면』 역시 누적 5만 부가량 판매된 것으로 보도됐습니다.", "content": "여름, 사랑, 외로움, 친구와 같은 가까운 감정을 탄산감 있는 일상 이미지로 포착하는 젊은 시편들이 중심입니다.", "theme": "청춘, 여름, 사랑, 불안, 일상의 이미지, 가볍게 보이지만 오래 남는 감정.", "tags": ["1020", "포엣코어", "SNS", "신예시인", "여름"], "grade": "A", "audience": "1020 중심의 포엣코어, 텍스트힙 독자, 차정은 기존 팬덤", "route": "『토마토 컵라면』 팬덤 → 신작 기대 → 표지/제목/SNS 시구 공유 → 여름 시즌성", "style": "과일, 탄산, 편의점, 콘서트 같은 감각적인 생활 사물로 청춘의 사랑과 상실을 직접적으로 붙잡습니다.", "read": "난해한 현대시보다 감각과 정서가 바로 들어오는 시, 여름의 분위기를 좋아한다면.", "caution": "직접적 감정 언어가 장점인 만큼 고도의 언어 실험이나 난해한 상징을 원하는 독자와는 취향이 갈릴 수 있습니다.", "difficulty": "매우 쉬움", "pace": "짧게 읽기", "mood": "여름, 탄산, 청춘", "talk": "‘쉽게 읽히는 시’는 문학적으로 덜 복잡한 시인가?", "other": "『토마토 컵라면』→『여름 피치 스파클링』→『에어컨 사라다』 순으로 읽으면 작가의 청춘 이미지가 어떻게 이동하는지 재미있습니다.", "id": "book-06", "search_blob": "시 지금 여름 피치 스파클링 차정은 청춘, 여름, 사랑, 불안, 일상의 이미지, 가볍게 보이지만 오래 남는 감정. 1020 중심의 포엣코어, 텍스트힙 독자, 차정은 기존 팬덤 『토마토 컵라면』 팬덤 → 신작 기대 → 표지/제목/SNS 시구 공유 → 여름 시즌성 여름, 탄산, 청춘 1020 포엣코어 SNS 신예시인 여름", "characters": "화자 / 등장하는 존재 — 젊은 사랑과 우정을 경험하는 1인칭적 화자, 가까운 ‘너’와 친구들이 반복적으로 호출됩니다.", "full_plot": "시집의 정서적 흐름 — 여름, 복숭아, 탄산 같은 감각이 처음에는 가볍고 밝게 시작하지만, 시집을 따라가며 사랑의 설렘과 끝, 외로움이 겹쳐집니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "비문학", "trend": "지금", "title": "세네카, 오늘을 빼앗기고 있는 당신에게", "author": "세네카, 하와이 대저택 편역", "year": "2026", "signal": "2026년 8월 둘째 주 교보문고 종합 1위. 지금 시점에서 문학 밖으로 살짝 벗어나 보면 가장 눈에 띄는 인문 트렌드.", "evidence": "100만 구독자 규모의 유튜버가 세네카의 『대화편』에서 핵심 사유를 골라 짧은 글 55편으로 재구성한 책입니다.", "why": "고전을 원전 그대로 읽기보다 ‘신뢰하는 큐레이터가 오늘의 언어로 선별해 준 고전’을 읽는 흐름입니다. 『싯다르타』 역주행과 연결해서 보면 2030의 고전 소비가 ‘난이도 낮추기 + 취향 큐레이션’ 방향으로 움직이는 것을 볼 수 있습니다.", "author_feature": "세네카의 스토아 철학은 시간, 죽음, 분노, 마음의 평정처럼 현대 직장인의 고민과 바로 연결되는 주제가 많습니다.", "episode": "출간 직후 소설 『수족관』을 밀어내고 종합 1위에 올라, 2026년 여름 ‘소설 강세’ 속에서도 큐레이션형 고전 인문서가 큰 시장을 만들 수 있음을 보여줬습니다.", "content": "세네카의 여러 대화편에서 시간과 삶, 불안과 욕망, 자기 통제에 관한 생각을 짧게 읽을 수 있도록 재구성한 책입니다.", "theme": "시간, 유한성, 자기 통제, 불안, 평정, 오늘을 빼앗기지 않는 삶.", "tags": ["인문", "고전큐레이션", "유튜브", "현재1위", "스토아"], "grade": "B", "audience": "고전 원전을 부담스러워하지만 시간, 불안, 자기통제에 관심 있는 2030", "route": "유튜버 큐레이션 → 고전 재구성 → 짧은 단위 독서 → 자기계발/인문 교차", "style": "원전 전체보다 오늘 읽기 좋은 핵심 사유를 짧게 재배열한 큐레이션형 고전 읽기.", "read": "스토아 철학을 처음 접하거나 긴 원전보다 짧은 단위로 시작하고 싶다면.", "caution": "편역, 재구성본은 원전 전체의 논증과 맥락을 압축합니다. 깊게 읽으려면 세네카 원전으로 이동하는 것이 좋습니다.", "difficulty": "쉬움", "pace": "짧게 읽기", "mood": "절제, 시간, 평정", "talk": "고전을 ‘오늘의 언어’로 재구성하는 것은 접근성을 높이는가, 맥락을 잃게 하는가?", "other": "2030 고전 트렌드의 한 축이 ‘원전 정독’이 아니라 ‘큐레이터를 통한 진입’이라는 점을 보여줍니다.", "id": "book-07", "search_blob": "비문학 지금 세네카, 오늘을 빼앗기고 있는 당신에게 세네카, 하와이 대저택 편역 시간, 유한성, 자기 통제, 불안, 평정, 오늘을 빼앗기지 않는 삶. 고전 원전을 부담스러워하지만 시간, 불안, 자기통제에 관심 있는 2030 유튜버 큐레이션 → 고전 재구성 → 짧은 단위 독서 → 자기계발/인문 교차 절제, 시간, 평정 인문 고전큐레이션 유튜브 현재1위 스토아", "characters": "비문학이므로 소설적 등장인물보다 저자의 경험, 사상가, 인용되는 인물을 중심으로 읽습니다.", "full_plot": "세네카의 여러 대화편에서 시간과 삶, 불안과 욕망, 자기 통제에 관한 생각을 짧게 읽을 수 있도록 재구성한 책입니다.", "spoiler_note": "논지와 결론을 숨기지 않고 핵심 주장까지 공개합니다."}, {"type": "소설", "trend": "미디어", "title": "죽은 왕녀를 위한 파반느", "author": "박민규", "year": "2009", "signal": "2026년 넷플릭스 영화 공개 직후 원작 판매가 급상승하며 다시 베스트셀러권에 진입했습니다.", "evidence": "2026년 2월 영화 공개 뒤 전주 대비 28계단 상승, 3월에는 교보문고 종합 10위권까지 진입했습니다.", "why": "영상화를 통해 2000년대 한국소설이 2020년대 독자에게 ‘신작처럼’ 재유통되는 사례입니다. 외모 중심 사회와 사랑이라는 주제가 여전히 논쟁적이라 원작을 읽고 영화와 비교하려는 독자가 붙습니다.", "author_feature": "박민규는 대중문화적 리듬, 과장된 비유, 사회의 규범을 비트는 블랙유머로 2000년대 한국문학에서 독특한 위치를 만든 작가입니다.", "episode": "출간 약 17년 뒤 영상화가 새로운 독자 입구가 됐습니다. 2030 트렌드에서 ‘오래된 작품의 미디어 재발견’이 얼마나 강력한지 보여줍니다.", "content": "외모로 사람을 평가하는 사회에서 스스로를 ‘못생겼다’고 여기는 여성과 한 남성의 관계를 통해 사랑, 시선, 자기혐오와 사회적 미의 기준을 다룹니다.", "theme": "외모지상주의, 사랑, 자기혐오, 타인의 시선, 아름다움의 기준, 관계의 환상.", "tags": ["영화화", "역주행", "넷플릭스", "외모지상주의", "2000년대문학"], "grade": "A", "audience": "영화 관객에서 원작으로 이동한 2030 + 박민규를 처음 접하는 신규 독자", "route": "넷플릭스 영화 → 원작 비교 독서 → 과거 한국문학 재발견", "style": "대중문화적 비유와 리듬, 과장과 유머로 사회 규범을 비틀지만 정서적으로는 멜랑콜리합니다.", "read": "영화 원작 비교, 2000년대 한국문학, 사랑과 외모의 문제를 다룬 소설이 궁금하다면.", "caution": "2009년의 젠더, 외모 담론과 2026년의 감각 사이에 거리도 있습니다. 지금 읽었을 때 불편한 부분 자체를 토론거리로 삼기 좋습니다.", "difficulty": "보통", "pace": "보통", "mood": "멜랑콜리, 사랑, 풍자", "talk": "상대를 ‘있는 그대로 사랑한다’는 말에도 내가 만든 환상이 섞여 있지 않은가?", "other": "영상화 역주행 사례인 『파과』와 같이 보면, 영화가 원작 독자층을 새로 만드는 방식이 작품 장르에 따라 어떻게 달라지는지 보입니다.", "id": "book-08", "search_blob": "소설 미디어 죽은 왕녀를 위한 파반느 박민규 외모지상주의, 사랑, 자기혐오, 타인의 시선, 아름다움의 기준, 관계의 환상. 영화 관객에서 원작으로 이동한 2030 + 박민규를 처음 접하는 신규 독자 넷플릭스 영화 → 원작 비교 독서 → 과거 한국문학 재발견 멜랑콜리, 사랑, 풍자 영화화 역주행 넷플릭스 외모지상주의 2000년대문학", "characters": "‘나’ — 외모와 계급의 규범 속에서 살아가는 남성 화자. ‘그녀’ — 사회가 정한 미의 기준에서 벗어났다는 이유로 끊임없이 대상화, 비하를 경험한 여성. 요한 — 화자와 그녀의 관계를 둘러싼 중요한 친구이자 작품의 분위기와 세계관을 확장하는 인물.", "full_plot": "화자는 백화점에서 일하며 외모 때문에 사람들의 시선을 피하는 ‘그녀’를 만나 가까워집니다. 사랑은 그녀에게 처음으로 타인의 시선 밖에서 자신을 경험할 가능성을 주지만, 동시에 화자 역시 ‘나는 외모를 보지 않는 사람’이라는 자기 이미지를 만들 위험을 갖습니다. 둘의 관계는 사랑만으로 사회의 외모 위계가 사라지지 않는다는 사실과 계속 충돌합니다. 요한을 비롯한 주변 인물과의 관계를 통해 소설은 아름다움의 기준, 연애 시장, 소비사회의 시선을 비판합니다. 후반부에는 화자가 기억하고 서술해온 사랑 자체가 얼마나 선택적으로 구성된 것인지 의심하게 하는 장치가 들어가며, ‘사랑이 타인을 있는 그대로 본다’는 낭만적 명제를 그대로 믿기 어렵게 만듭니다.", "spoiler_note": "영화와 원작의 인물 해석, 구성 차이가 있으므로 둘을 비교하면 작품의 젠더 감각과 시선 문제가 더 선명합니다."}, {"type": "소설", "trend": "미디어", "title": "프로젝트 헤일메리", "author": "앤디 위어", "year": "2021", "signal": "2026년 상반기 교보, 예스24 종합 1위. 영화 개봉과 함께 원작이 폭발적으로 재상승했습니다.", "evidence": "2026년 3월 영화 개봉이 원작 판매를 크게 끌어올렸고 상반기 전체 1위를 차지했습니다.", "why": "문학성이 강한 국내소설과 동시에 ‘완전히 재미 중심’의 장르 독서도 2030에서 큽니다. 과학 문제를 퍼즐처럼 푸는 서사, 우정, 생존, 영화 관람 전후 원작 소비가 결합했습니다.", "author_feature": "앤디 위어는 실제 과학, 공학 문제를 서사의 장애물로 바꾸고, 주인공이 계산과 실험으로 해결하는 과정을 엔터테인먼트로 만드는 데 특화되어 있습니다.", "episode": "『마션』에 이어 영상화와 원작 독서가 서로 판매를 증폭시키는 대표 작가가 됐습니다. 2026년에는 이 작품이 한국 상반기 전체 베스트셀러 1위까지 올랐습니다.", "content": "기억을 잃은 채 우주선에서 깨어난 한 남자가 인류 멸망을 막기 위한 임무를 수행합니다. 문제를 하나씩 풀어가며 예상하지 못한 존재와 협력하게 됩니다.", "theme": "과학적 문제 해결, 생존, 우정, 희생, 인류 공동체, 낯선 존재와의 협력.", "tags": ["SF", "영화화", "상반기1위", "과학", "장르"], "grade": "A", "audience": "2026 상반기 전체 1위. 영화 관객과 SF 독자, 2030 일반 독자까지 넓게 유입", "route": "영화 개봉 → 원작 구매 → 온라인 화제 → ‘과학이 재밌다’는 입소문", "style": "과학적 가설을 작은 문제로 쪼개고 주인공이 실험, 계산, 추론으로 해결하게 만드는 공학적 플롯.", "read": "문제 해결형 서사, SF 입문, 우정과 생존, 과학 디테일을 좋아한다면.", "caution": "과학 설정은 서사의 설득력을 위해 단순화되거나 가정된 부분이 있습니다. 과학 교재가 아니라 하드SF 엔터테인먼트입니다.", "difficulty": "쉬움~보통", "pace": "매우 빠름", "mood": "우주, 퍼즐, 우정", "talk": "인류를 구하는 선택과 눈앞의 친구를 구하는 선택이 충돌하면 무엇을 선택해야 하는가?", "other": "『마션』과 비교하면 앤디 위어의 ‘공학 문제 해결’ 공식이 개인 생존에서 종간 협력으로 커진 것을 볼 수 있습니다.", "id": "book-09", "search_blob": "소설 미디어 프로젝트 헤일메리 앤디 위어 과학적 문제 해결, 생존, 우정, 희생, 인류 공동체, 낯선 존재와의 협력. 2026 상반기 전체 1위. 영화 관객과 SF 독자, 2030 일반 독자까지 넓게 유입 영화 개봉 → 원작 구매 → 온라인 화제 → ‘과학이 재밌다’는 입소문 우주, 퍼즐, 우정 SF 영화화 상반기1위 과학 장르", "characters": "라일런드 그레이스 — 중학교 과학 교사 출신 연구자. 기억을 잃은 채 우주선에서 깨어납니다. 로키 — 에리드 행성에서 온 외계 생명체이자 공학자. 에바 스트랫 — 지구의 멸망을 막기 위해 전권에 가까운 권한으로 프로젝트를 밀어붙인 인물.", "full_plot": "그레이스는 혼자 우주선에서 깨어나 기억을 되찾으며 태양의 에너지를 먹는 미생물 ‘아스트로파지’ 때문에 지구가 급격히 추워질 위기에 놓였다는 사실을 알게 됩니다. 인류는 아스트로파지의 영향을 받지 않는 별을 조사하기 위해 자살 임무에 가까운 ‘헤일메리 프로젝트’를 보냈고 그레이스가 생존한 마지막 승무원입니다. 그는 같은 문제를 해결하러 온 외계인 로키를 만나 언어와 단위를 하나씩 맞춰가며 협력합니다. 둘은 아스트로파지를 잡아먹는 생물 ‘타우미바’를 발견하지만, 귀환 과정에서 로키의 종족이 위험에 처한 사실을 알게 됩니다. 그레이스는 지구로 돌아갈 기회를 포기하고 로키를 구하러 갑니다. 지구에는 타우미바 정보가 전달되어 인류가 살아남고, 그레이스는 에리드 행성에서 살아가며 외계 아이들에게 과학을 가르치는 삶을 선택합니다.", "spoiler_note": "영화 보기 전 원작의 가장 큰 감정적 선택까지 포함한 완전 스포일러입니다."}, {"type": "소설", "trend": "역주행", "title": "급류", "author": "정대건", "year": "2022", "signal": "2022년 출간 당시보다 2024~2026년에 더 크게 읽힌 대표 SNS 역주행 소설.", "evidence": "2025년 상반기 20대 구매 비중 40.3%. 2024년 북스타그래머의 ‘읽다가 우는’ 짧은 영상이 수백만 조회를 기록한 뒤 판매가 급증했습니다.", "why": "감정을 ‘설명’하는 대신 독자가 실제로 울고 반응하는 장면이 콘텐츠가 됐습니다. 즉 책의 문장만 바이럴된 것이 아니라 ‘이 책을 읽는 사람의 감정’ 자체가 바이럴됐다는 점이 새롭습니다.", "author_feature": "강한 사건 이후 인물의 죄책감, 사랑, 상실이 시간을 두고 어떻게 변하는지를 비교적 빠른 서사 속에 밀도 있게 배치합니다.", "episode": "유명 연예인이 아니라 일반 독서 인플루언서의 리액션 영상이 역주행을 촉발했습니다. 출판유통 데이터 리포트에서도 새로운 ‘미디어셀러’ 유형으로 언급됐습니다.", "content": "고등학생 도담과 해솔이 강한 끌림으로 가까워지지만 한 사건을 계기로 관계가 끊깁니다. 시간이 흐른 뒤 다시 만난 두 사람이 사랑과 죄책감, 서로에게 남긴 상처를 마주합니다.", "theme": "첫사랑, 죄책감, 사고 이후의 삶, 재회, 용서, 사랑이 상처를 치유하는가.", "tags": ["20대", "역주행", "릴스", "첫사랑", "감정바이럴"], "grade": "A", "audience": "20대 구매 비중 약 40%대가 확인된 SNS 대표 역주행", "route": "북스타그램/릴스 리액션 → ‘울었다’는 감정 바이럴 → 친구 추천 → 스테디셀러", "style": "첫사랑의 속도감과 사고 이후의 죄책감을 시간 점프로 연결해 감정을 빠르게 누적합니다.", "read": "첫사랑, 재회, 상실을 좋아하지만 단순 로맨스보다 죄책감과 성장까지 보고 싶다면.", "caution": "사고, 상실 소재가 핵심입니다. 감정 자극성만으로 읽기보다 인물들이 각자 책임을 해석하는 방식에 주목하면 더 깊습니다.", "difficulty": "쉬움", "pace": "매우 빠름", "mood": "첫사랑, 상실, 재회", "talk": "용서는 상대가 주는 것인가, 내가 나에게 허락하는 것인가?", "other": "『구의 증명』과 같이 읽으면 20대 독자가 좋아하는 ‘사랑+상실’ 서사가 얼마나 다른 윤리와 온도로 쓰이는지 비교하기 좋습니다.", "id": "book-10", "search_blob": "소설 역주행 급류 정대건 첫사랑, 죄책감, 사고 이후의 삶, 재회, 용서, 사랑이 상처를 치유하는가. 20대 구매 비중 약 40%대가 확인된 SNS 대표 역주행 북스타그램/릴스 리액션 → ‘울었다’는 감정 바이럴 → 친구 추천 → 스테디셀러 첫사랑, 상실, 재회 20대 역주행 릴스 첫사랑 감정바이럴", "characters": "도담 — 진평에서 성장한 소녀. 해솔 — 서울에서 어머니와 함께 진평으로 이사 온 소년. 최창석 — 도담의 아버지이자 소방관. 전미영 — 해솔의 어머니. 두 부모의 관계가 도담과 해솔의 첫사랑을 파괴하는 핵심 사건과 연결됩니다.", "full_plot": "열일곱 도담은 물에 빠질 뻔한 해솔을 구하면서 그와 사랑에 빠집니다. 두 사람은 거의 모든 비밀을 공유하지만 도담은 자신의 아버지 최창석과 해솔의 어머니 전미영이 불륜 관계인 것 같은 정황을 발견합니다. 둘은 부모를 뒤쫓고, 그 밤 강가에서 돌이킬 수 없는 사고가 발생합니다. 최창석과 전미영은 결국 시신으로 발견되고, 도담과 해솔은 자신들이 그 사건을 막지 못했다는 죄책감과 서로의 부모를 둘러싼 감정 때문에 관계를 지속할 수 없게 됩니다. 이후 시간은 훌쩍 흐르고 두 사람은 서로 없이 각자의 삶을 살아보지만 사건에서 완전히 빠져나오지 못합니다. 재회한 뒤에도 과거가 사라지는 것은 아니며, 소설은 둘이 서로를 ‘구원’하는 대신 각자가 짊어진 죄책감을 다시 보고 관계를 새롭게 선택할 가능성을 남깁니다.", "spoiler_note": "부모의 죽음은 작품 초반부터 제시되는 핵심 사건이며, 진짜 핵심은 그 죽음 이후 두 사람이 어떻게 살아가는가입니다."}, {"type": "소설", "trend": "역주행", "title": "모순", "author": "양귀자", "year": "1998", "signal": "1998년작이 2025년 종합 연간 2위, 2026년 여름까지 다시 상위권을 유지하는 장기 역주행의 핵심.", "evidence": "2025년 상반기 20대 구매 비중 40.2%. 2025년 내내 베스트셀러 10위권을 거의 벗어나지 않았고 2026년에도 반복 진입했습니다.", "why": "주인공이 20대 중반에 사랑, 결혼, 가족, 돈, 안정 사이에서 선택하는 이야기라 27년 전 작품인데도 지금의 20대가 자기 문제처럼 읽습니다. ‘인용하고 싶은 문장’이 많아 SNS와 필사 문화에도 강합니다.", "author_feature": "생활 세계의 디테일을 통해 철학적 질문을 꺼냅니다. 인물을 선악으로 단순화하지 않고, 인간이 자기 욕망과 반대로 행동하는 아이러니를 집요하게 보여줍니다.", "episode": "2025년 상반기에는 유튜브와 SNS 입소문으로 젊은 독자가 추가 유입됐다는 분석이 나왔습니다. ‘신간이 아니어도 지금의 독자가 다시 베스트셀러를 만든다’는 흐름의 상징입니다.", "content": "스물다섯 안진진이 극단적으로 다른 삶을 사는 어머니와 이모를 바라보며 자신의 삶을 설계합니다. 동시에 서로 다른 매력을 가진 두 남자 사이에서 사랑과 결혼의 선택을 고민합니다.", "theme": "삶의 모순, 사랑과 결혼, 안정과 열정, 가족, 선택과 후회, 행복의 역설.", "tags": ["20대", "역주행", "연애", "결혼", "문장수집"], "grade": "A", "audience": "20대 구매 비중이 매우 높은 장기 역주행. 연애, 결혼, 가족 고민이 시작되는 20대 후반과 강하게 맞닿음", "route": "세대 재발견 → SNS 인용/필사 → 유튜브 추천 → ‘고전 아닌 고전’ 스테디셀러", "style": "생활 밀착형 서사에 철학적 역설을 섞고, 사랑, 돈, 가족을 도덕적 정답 없이 끝까지 모순된 상태로 둡니다.", "read": "연애와 결혼, 안정과 설렘 사이의 선택을 현실적으로 다룬 소설을 좋아한다면.", "caution": "1990년대의 젠더, 가족, 경제 감각이 배경에 있으므로 ‘지금과 동일한 현실’이 아니라 무엇이 여전히 유효한지 비교하며 읽는 편이 좋습니다.", "difficulty": "쉬움", "pace": "빠름", "mood": "생활, 유머, 씁쓸함", "talk": "행복을 ‘선택’할 수 있다면, 우리는 왜 종종 행복과 반대되는 선택을 하는가?", "other": "양귀자의 『나는 소망한다 내게 금지된 것을』과 비교하면 여성 주인공의 욕망과 시대 차이가 선명합니다.", "id": "book-11", "search_blob": "소설 역주행 모순 양귀자 삶의 모순, 사랑과 결혼, 안정과 열정, 가족, 선택과 후회, 행복의 역설. 20대 구매 비중이 매우 높은 장기 역주행. 연애, 결혼, 가족 고민이 시작되는 20대 후반과 강하게 맞닿음 세대 재발견 → SNS 인용/필사 → 유튜브 추천 → ‘고전 아닌 고전’ 스테디셀러 생활, 유머, 씁쓸함 20대 역주행 연애 결혼 문장수집", "characters": "안진진 — 스물다섯 살 주인공. 어머니 — 가난과 폭력적인 남편, 문제 많은 자녀를 버티며 살아온 인물. 이모 — 어머니의 일란성쌍둥이지만 경제적으로 완벽하고 안정된 삶을 살았습니다. 김장우 — 가난하고 즉흥적인 야생화 사진가. 나영규 — 경제적으로 안정되고 모든 것을 계획하는 남자. 안진모 — 진진의 남동생.", "full_plot": "안진진은 자신과 똑같이 태어났지만 전혀 다른 삶을 산 어머니와 이모를 비교하며 인생을 이해하려 합니다. 어머니는 폭력적이고 가출을 반복하는 남편과 사고를 치는 아들을 감당하며 거칠지만 생명력 있게 살아갑니다. 반면 이모는 계획적이고 능력 있는 이모부와 풍족하게 살지만 극심한 권태와 공허를 느낍니다. 진진에게도 두 남자가 있습니다. 김장우에게는 실제로 사랑을 느끼지만 그는 자신의 아버지처럼 불안정합니다. 나영규는 이모부처럼 안정적이지만 너무 예측 가능합니다. 중풍과 치매를 앓게 된 아버지가 오랜 가출 끝에 돌아오고, 행복해 보이던 이모는 결국 스스로 목숨을 끊습니다. 진진은 자신이 사랑하는 사람이 김장우라는 사실을 알면서도 최종적으로 나영규를 선택합니다. 즉 이모의 죽음을 보았음에도 이모와 닮을 수도 있는 안정된 삶을 선택하는 것이 마지막 ‘모순’입니다. 소설은 이를 정답이나 실패로 판정하지 않고, 인간은 교훈을 알아도 똑같은 불로 다시 걸어 들어가며 살아가면서 삶을 탐구한다고 끝맺습니다.", "spoiler_note": "이모의 자살과 진진의 최종 선택이 작품 해석의 핵심이므로 완전 스포일러를 포함합니다."}, {"type": "소설", "trend": "역주행", "title": "싯다르타", "author": "헤르만 헤세", "year": "1922", "signal": "2026년 6월 말 교보문고 종합 1위. 세계문학전집이 정상에 오른 매우 드문 사례입니다.", "evidence": "20대가 역주행을 주도했고 20대 여성 구매 비중이 21.9%로 가장 높았습니다. SNS, 유튜브에서 세계문학전집이 재조명되고 BTS 뷔의 추천도 확산에 영향을 줬습니다.", "why": "요즘의 ‘텍스트힙’이 신작만 소비하는 현상이 아니라는 걸 보여줍니다. 오래된 고전도 표지, 전집 팬덤, 편집자 콘텐츠, 셀럽 추천을 통해 동시대 취향으로 다시 패키징되면 20대 베스트셀러가 됩니다.", "author_feature": "헤세는 성장소설과 내면 탐구를 통해 자아, 종교, 문명 사이의 긴장을 반복적으로 다룹니다. 사건보다 정신적 변화와 자기 탐색의 궤적이 중요합니다.", "episode": "2026년에는 민음사 세계문학전집의 편집자, 출판 콘텐츠 자체가 팬덤을 형성하며 오래된 번역 고전의 판매를 끌어올렸다는 분석이 나왔습니다.", "content": "브라만의 아들 싯다르타가 기존 종교의 가르침만으로는 만족하지 못하고 수행, 쾌락, 부, 상실을 직접 통과하며 자기만의 깨달음에 이르는 여정을 그립니다.", "theme": "자기 탐구, 경험과 지식의 차이, 욕망과 초월, 삶의 순환, 타인의 답이 아닌 자기만의 깨달음.", "tags": ["고전역주행", "세계문학", "20대", "셀럽추천", "텍스트힙"], "grade": "A", "audience": "2026년 역주행에서 20대 독자가 핵심. 세계문학전집, 민음사TV 팬덤과 연결", "route": "세계문학전집 팬덤 + 유튜브 큐레이션 + 셀럽 추천 + ‘힙불교’", "style": "사건을 촘촘히 쌓기보다 한 인간의 정신적 변화와 인식의 전환을 우화적이고 상징적으로 전개.", "read": "‘왜 사는가’ 같은 질문을 직접 다루는 성장소설, 동양사상 입문, 고전인데 술술 읽히는 책을 찾는다면.", "caution": "불교 교리 입문서라기보다 헤세가 상상한 정신적 성장소설입니다. 종교적 정확성과 문학적 상징을 구분해 읽는 것이 좋습니다.", "difficulty": "보통", "pace": "보통", "mood": "사색, 여행, 고요", "talk": "타인의 가르침으로 얻은 지식과 내가 살아낸 경험은 어떻게 다른가?", "other": "같이 읽기: 『데미안』, 『수레바퀴 아래서』. ‘헤세식 성장’이 어떻게 달라지는지 비교하면 좋습니다.", "id": "book-12", "search_blob": "소설 역주행 싯다르타 헤르만 헤세 자기 탐구, 경험과 지식의 차이, 욕망과 초월, 삶의 순환, 타인의 답이 아닌 자기만의 깨달음. 2026년 역주행에서 20대 독자가 핵심. 세계문학전집, 민음사TV 팬덤과 연결 세계문학전집 팬덤 + 유튜브 큐레이션 + 셀럽 추천 + ‘힙불교’ 사색, 여행, 고요 고전역주행 세계문학 20대 셀럽추천 텍스트힙", "characters": "싯다르타 — 브라만의 아들. 고빈다 — 싯다르타의 오랜 친구. 고타마 — 역사적 붓다를 모델로 한 깨달은 스승. 카말라 — 사랑과 감각적 삶을 가르치는 여성. 카마스와미 — 상업 세계로 이끄는 상인. 바주데바 — 강가의 뱃사공이자 싯다르타가 마지막 깨달음에 이르게 하는 인물. 싯다르타의 아들도 후반부에 중요합니다.", "full_plot": "싯다르타는 브라만 교육에 만족하지 못하고 고빈다와 출가해 사문이 됩니다. 그는 고타마의 완성된 가르침에도 감탄하지만 ‘깨달음은 가르쳐질 수 없다’며 제자가 되지 않고 혼자 떠납니다. 이후 카말라에게 사랑을 배우고 카마스와미와 돈을 벌며 쾌락과 부를 누리지만 점점 자기 자신에게 혐오를 느껴 모든 것을 버립니다. 자살 충동 직전 강가에서 다시 삶을 시작하고 뱃사공 바주데바와 함께 강의 소리를 듣습니다. 카말라는 죽기 전 싯다르타에게 둘 사이에서 태어난 아들을 남기지만, 아들은 아버지를 거부하고 떠납니다. 이 상실을 겪으며 싯다르타는 자신이 과거 아버지에게 했던 것과 같은 일을 아들에게 겪고 있음을 깨닫습니다. 마지막에 그는 강의 수많은 소리가 하나의 ‘옴’으로 합쳐지는 것을 듣고 삶의 모든 모순과 시간을 분리하지 않고 받아들이게 됩니다. 고빈다는 마지막으로 싯다르타를 만나 그의 이마에 입맞춤하고 수많은 생과 얼굴이 동시에 존재하는 환영을 보며 싯다르타의 깨달음을 체험합니다.", "spoiler_note": "전체 여정과 마지막 깨달음까지 포함합니다."}, {"type": "소설", "trend": "역주행", "title": "파과", "author": "구병모", "year": "2013", "signal": "영화 개봉을 계기로 2025년 원작이 다시 베스트셀러 TOP 10에 진입.", "evidence": "영화 개봉기 교보문고 구매자 중 20대 44.8%, 30대 22.3%로 2030이 67.1%. 여성 독자 비중은 87.6%였습니다.", "why": "60대 여성 킬러라는 설정이 ‘젊음 중심의 여성 서사’에 익숙한 독자에게 신선합니다. 노화, 몸, 돌봄, 폭력을 장르소설의 추진력으로 다루며 영화와 원작을 교차 소비하기 좋았습니다.", "author_feature": "구병모는 비현실적 장치를 쓰더라도 현실의 몸과 폭력을 매우 구체적으로 씁니다. 인물의 나이와 성별에 따라 사회가 부여하는 가치가 어떻게 달라지는지를 집요하게 건드립니다.", "episode": "출간 12년 뒤 영화화가 새로운 입구가 됐고, 영화 관객층과 20, 30대 여성 독자가 원작으로 유입되며 전형적인 ‘미디어 역주행’이 발생했습니다.", "content": "40여 년 동안 청부살인을 해온 60대 여성 ‘조각’이 노화로 인해 몸의 감각과 직업적 확신이 흔들리는 가운데 새로운 관계와 위협을 맞습니다.", "theme": "노화, 여성의 몸, 효용가치, 폭력, 돌봄, 직업 정체성, 늙어간다는 것.", "tags": ["2030", "영화화", "여성서사", "노화", "장르문학"], "grade": "A", "audience": "영화 개봉기 20대 44.8%, 30대 22.3%, 여성 87.6%로 젊은 여성 독자 유입이 매우 강함", "route": "영화화 → 원작 역주행 → 구병모 전작 탐색 → 신작 『절창』로 이동", "style": "노화한 여성 킬러라는 비현실적 직업과 매우 현실적인 몸의 쇠퇴를 맞붙입니다.", "read": "여성 킬러, 장르물, 노화와 몸에 관한 이야기, 영화 원작 비교를 좋아한다면.", "caution": "액션보다 ‘쓸모없어짐’에 대한 공포와 돌봄의 감정이 더 중요합니다. 영화와 소설의 캐릭터 해석 차이도 큽니다.", "difficulty": "보통", "pace": "빠름", "mood": "건조함, 폭력, 노화", "talk": "사회가 인간의 가치를 ‘쓸모’로 평가할 때 늙는다는 것은 무엇을 잃는 일인가?", "other": "영상화 이후 원작 역주행의 전형적인 사례라 ‘미디어셀러’ 현상을 공부하기에도 좋습니다.", "id": "book-13", "search_blob": "소설 역주행 파과 구병모 노화, 여성의 몸, 효용가치, 폭력, 돌봄, 직업 정체성, 늙어간다는 것. 영화 개봉기 20대 44.8%, 30대 22.3%, 여성 87.6%로 젊은 여성 독자 유입이 매우 강함 영화화 → 원작 역주행 → 구병모 전작 탐색 → 신작 『절창』로 이동 건조함, 폭력, 노화 2030 영화화 여성서사 노화 장르문학", "characters": "조각 — 60대 여성 청부살인업자. 오랫동안 사람을 제거하는 일을 해왔지만 노화로 신체 능력과 판단에 변화가 생깁니다. 젊은 세대의 업자와 주변 인물들은 조각이 ‘쓸모 있는 존재’로 남아 있을 수 있는지 압박합니다.", "full_plot": "조각은 평생을 효율적인 살인자로 살아왔지만, 나이가 들며 과거에는 하지 않았을 실수를 하고 자신의 몸이 더 이상 명령대로 움직이지 않는다는 사실을 자각합니다. 그는 임무 과정에서 타인과 이전보다 정서적으로 연결되고, 자신이 없애야 할 대상과 보호하고 싶은 존재 사이의 경계가 흔들리는 경험을 합니다. 동시에 조직과 젊은 킬러의 시선에서 조각은 점점 교체 가능한 낡은 노동력이 됩니다. 후반부의 대결은 단순히 누가 더 강한 킬러인가보다 ‘노화한 몸을 가진 여성은 더 이상 가치가 없는가’라는 질문으로 수렴합니다. 조각은 젊음으로 회복되지도, 과거의 완벽한 살인자로 돌아가지도 않지만 자신에게 남은 삶과 욕망을 자기 방식으로 선택합니다.", "spoiler_note": "영화판과 원작의 세부 인물, 사건 구성은 다르므로 원작의 핵심 구조 위주로 적었습니다."}, {"type": "소설", "trend": "지속", "title": "구의 증명", "author": "최진영", "year": "2015", "signal": "한동안 ‘20대가 유독 많이 사는 소설’로 반복 집계된 대표 감정 스테디셀러.", "evidence": "2024년 교보문고 20대 베스트셀러 상위권에 올랐고, 텍스트힙, SNS 문장 공유 흐름에서 꾸준히 언급됐습니다.", "why": "사랑과 상실을 극단적으로 밀어붙이는 짧고 강한 서사가 ‘한 문장을 저장하고 공유하는 독서’와 잘 맞습니다. 유행 주기가 긴 대신 계속 새로운 20대 독자가 들어오는 유형입니다.", "author_feature": "최진영은 생존, 사랑, 가난, 죽음을 감정적으로 뜨겁지만 문장은 비교적 절제된 방식으로 씁니다. 사랑을 위로나 낭만만으로 다루지 않습니다.", "episode": "출간 직후보다 시간이 지나면서 SNS의 인용 문장과 독자 추천으로 더 넓게 알려진 작품입니다. ‘모순’과 함께 젊은 독자의 스테디셀러 재발견을 설명할 때 자주 거론됩니다.", "content": "‘구’와 ‘담’의 사랑과 상실을 중심으로, 사랑하는 사람을 잃은 뒤 그 사람을 자기 몸과 기억 안에 남기려는 극단적인 애도의 서사입니다.", "theme": "사랑, 죽음, 애도, 가난, 기억, 몸, 사랑하는 사람을 잃은 뒤 살아남기.", "tags": ["20대", "감정스테디", "사랑", "상실", "문장공유"], "grade": "B", "audience": "20대 독자의 ‘사랑과 상실’ 스테디셀러. SNS 문장 공유와 친구 추천이 장기적으로 신규 독자를 공급", "route": "문장 인용 → 감정 스테디 → 독서계정 추천 → 신세대 입문서화", "style": "짧고 뜨거운 문장, 육체와 기억을 밀착시키는 강한 이미지, 사랑을 아름다움과 불쾌함 양쪽으로 밀어붙입니다.", "read": "짧지만 강렬한 사랑 이야기, 애도와 몸의 이미지를 견딜 수 있는 독자라면.", "caution": "극단적인 신체 이미지가 있으므로 ‘예쁜 사랑 이야기’만 기대하면 당황할 수 있습니다.", "difficulty": "쉬움", "pace": "빠름", "mood": "사랑, 죽음, 집착", "talk": "사랑하는 사람을 기억한다는 것은 그 사람을 놓지 않는 일과 같은가?", "other": "『급류』와 비교하면 둘 다 사랑과 상실을 다루지만, 최진영은 훨씬 더 육체적이고 극단적인 방식으로 애도를 밀어붙입니다.", "id": "book-14", "search_blob": "소설 지속 구의 증명 최진영 사랑, 죽음, 애도, 가난, 기억, 몸, 사랑하는 사람을 잃은 뒤 살아남기. 20대 독자의 ‘사랑과 상실’ 스테디셀러. SNS 문장 공유와 친구 추천이 장기적으로 신규 독자를 공급 문장 인용 → 감정 스테디 → 독서계정 추천 → 신세대 입문서화 사랑, 죽음, 집착 20대 감정스테디 사랑 상실 문장공유", "characters": "구 — 가난과 폭력적인 현실 속에서 살아온 남성. 담 — 구와 깊이 사랑하는 여성 화자. 두 사람의 관계는 어린 시절부터 삶의 거의 전부처럼 이어집니다.", "full_plot": "구와 담은 가난과 불안정한 환경 속에서 서로를 거의 유일한 생존 기반처럼 사랑합니다. 그러나 삶은 두 사람에게 안정된 미래를 허락하지 않고 구는 죽습니다. 담은 구의 시신과 마주한 뒤 상실을 정상적인 장례와 애도의 절차로 처리하지 못합니다. 그는 구를 세상에 넘겨 완전히 사라지게 하는 대신, 구의 몸을 조금씩 먹는 극단적인 방식으로 자신의 몸 안에 남기려 합니다. 이 행위는 충격을 위한 장치이면서 동시에 ‘사랑하는 사람을 기억한다는 것은 무엇인가’라는 질문을 육체적으로 밀어붙인 것입니다. 담은 구를 먹는다고 해서 죽음을 되돌리지 못하지만, 사랑과 애도가 깨끗하고 아름다운 감정만은 아니라는 사실을 독자에게 강제합니다.", "spoiler_note": "구의 죽음과 담의 식인적 애도까지 작품의 핵심 설정을 그대로 공개합니다."}, {"type": "소설", "trend": "지속", "title": "소년이 온다", "author": "한강", "year": "2014", "signal": "2024 노벨문학상 이후 2025년에도 연간 종합 1위. ‘한강 열풍’이 한국문학 전체 판매 증가로 이어졌습니다.", "evidence": "2025년 교보문고 연간 종합 1위, 예스24에서도 2년 연속 최상위. 한국소설 판매 성장의 중심축으로 평가됐습니다.", "why": "노벨상이라는 국제적 사건이 ‘읽어야 할 한국문학’의 기준점을 만들었습니다. 특히 20대에게 문학 독서가 취향, 정체성, 사회적 기억을 함께 드러내는 행위가 되면서 한강의 여러 작품을 연쇄적으로 읽는 현상이 생겼습니다.", "author_feature": "개인의 몸과 감각을 통해 역사적 폭력을 다룹니다. 폭력 자체의 자극적 묘사보다 살아남은 사람의 기억, 침묵, 애도를 여러 목소리로 겹쳐 보여줍니다.", "episode": "노벨문학상 이후 한 권만 팔린 것이 아니라 『채식주의자』, 『작별하지 않는다』, 시집과 산문까지 함께 올라가며 ‘작가 읽기’가 확산됐습니다.", "content": "1980년 광주를 배경으로 한 소년과 주변 인물들의 목소리를 따라가며 국가폭력 이후 남은 죽음, 생존, 기억, 죄책감을 다층적으로 보여줍니다.", "theme": "국가폭력, 기억, 애도, 인간 존엄, 생존자의 죄책감, 역사와 개인.", "tags": ["노벨문학상", "한국문학", "역사", "애도", "작가읽기"], "grade": "B", "audience": "노벨문학상 이후 세대를 가리지 않고 읽혔지만, 20대의 한국문학 전작 읽기 흐름에도 큰 영향을 줌", "route": "노벨문학상 → 한강 작가 전체 읽기 → 역사적 기억/한국문학 관심 확대", "style": "여러 화자의 목소리를 교차시키고, 신체 감각과 기억을 통해 국가폭력을 직접 체감하게 만드는 서술.", "read": "역사적 사건을 교과서적 설명보다 개인의 몸, 기억, 애도로 이해하고 싶다면.", "caution": "고문, 시신, 국가폭력의 기억을 다루므로 정서적으로 무겁습니다. 빠르게 소비하기보다 천천히 읽는 편이 좋습니다.", "difficulty": "보통~높음", "pace": "느림", "mood": "애도, 폭력, 존엄", "talk": "죽은 사람을 기억하는 일은 살아 있는 사람에게 어떤 책임을 요구하는가?", "other": "『작별하지 않는다』와 이어 읽으면 국가폭력과 기억을 다루는 한강의 방식이 광주에서 제주로 어떻게 확장되는지 볼 수 있습니다.", "id": "book-15", "search_blob": "소설 지속 소년이 온다 한강 국가폭력, 기억, 애도, 인간 존엄, 생존자의 죄책감, 역사와 개인. 노벨문학상 이후 세대를 가리지 않고 읽혔지만, 20대의 한국문학 전작 읽기 흐름에도 큰 영향을 줌 노벨문학상 → 한강 작가 전체 읽기 → 역사적 기억/한국문학 관심 확대 애도, 폭력, 존엄 노벨문학상 한국문학 역사 애도 작가읽기", "characters": "동호 — 1980년 5월 광주의 중학생 소년. 정대 — 동호가 찾으려는 친구. 은숙 — 이후 살아남아 출판 일을 하게 되는 인물. 진수, 선주 등 여러 생존자와 희생자의 목소리가 장별로 이어집니다.", "full_plot": "동호는 친구 정대가 총격 속에서 쓰러진 뒤 그를 찾기 위해 전남도청과 상무관 주변에 남아 시신을 수습하고 유족을 돕습니다. 계엄군의 진압이 다가오지만 동호는 떠나지 못하고, 결국 도청 진압 과정에서 죽임을 당합니다. 이후 소설은 동호의 죽음에서 끝나지 않고 살아남은 사람들에게 시간을 넘깁니다. 고문과 감옥을 겪은 사람, 살아남았다는 죄책감을 견디는 사람, 출판 검열 속에서 기억을 지키려는 사람, 몸에 남은 폭력을 평생 안고 사는 인물들이 등장합니다. 죽은 정대의 목소리까지 포함되면서 ‘죽은 사람의 시간이 끝난 뒤에도 폭력은 산 사람의 몸에서 계속된다’는 구조가 만들어집니다. 마지막에는 작가의 현재와 역사적 기억이 맞닿으며 동호를 기억하고 쓰는 행위 자체가 애도와 증언이 됩니다.", "spoiler_note": "동호의 죽음은 작품의 중심 사건이며, 이후 생존자들의 삶까지 모두 스포일러 범위에 포함합니다."}, {"type": "소설", "trend": "지속", "title": "안녕이라 그랬어", "author": "김애란", "year": "2025", "signal": "2025년 여름 출간 뒤 장기 베스트셀러, ‘소설가들이 뽑은 올해의 소설’ 선정 후 2026년 초 다시 2위까지 역주행.", "evidence": "2025년 7월 교보 주간 2위, 2026년 1월 2위, 2026년 5~6월에도 상위권에 재진입했습니다.", "why": "김애란 특유의 ‘내 주변에 실제로 있을 법한 사람’에 대한 세밀한 관찰이 20, 30대 직장, 가족, 관계 경험과 잘 맞습니다. 한 번 읽고 끝나는 화제작보다 입소문과 연말 결산을 통해 다시 살아나는 문학형 베스트셀러입니다.", "author_feature": "일상의 사소한 말투, 노동, 주거, 관계 속에서 인물의 계급감각과 외로움을 포착하는 데 강합니다. 유머와 서늘함이 한 문장 안에 같이 있는 경우가 많습니다.", "episode": "2025년 ‘올해의 책’과 동료 소설가들의 추천이 연말, 연초 판매를 다시 끌어올렸습니다. ‘집 에디션’ 같은 한정판도 젊은 독자의 소장 욕구와 맞물렸습니다.", "content": "일곱 편의 단편을 통해 ‘안녕’이라고 말하고도 끝나지 않는 관계, 뒤늦게 알아차린 감정, 집과 일터와 가족 안에서 생기는 작은 균열을 그립니다.", "theme": "관계의 끝과 잔여, 집, 노동, 가족, 뒤늦은 이해, 평범한 사람들의 취약함.", "tags": ["한국문학", "단편", "관계", "소장판", "장기베스트"], "grade": "B", "audience": "김애란의 기존 2030 독자층 + 연말 ‘올해의 소설’ 추천을 따라온 문학 독자", "route": "신작 기대 → 장기 입소문 → 동료 작가 추천/연말 결산 → 재역주행", "style": "일상어 속 계급, 노동, 가족의 균열을 포착하고, 웃긴 순간과 서늘한 순간을 한 장면에 겹치는 단편 미학.", "read": "큰 사건보다 사람 사이의 미묘한 어긋남, 집, 직장, 가족 같은 현실적 배경을 좋아한다면.", "caution": "플롯 반전보다 관찰과 정서의 미세한 변화가 핵심이라 사건 중심 독자에게는 잔잔하게 느껴질 수 있습니다.", "difficulty": "보통", "pace": "보통", "mood": "생활, 관계, 씁쓸함", "talk": "‘끝난 관계’는 실제로 언제 끝나는가?", "other": "같이 읽기: 『바깥은 여름』, 『두근두근 내 인생』. 김애란의 단편과 장편에서 같은 현실 감각이 어떻게 달라지는지 볼 수 있습니다.", "id": "book-16", "search_blob": "소설 지속 안녕이라 그랬어 김애란 관계의 끝과 잔여, 집, 노동, 가족, 뒤늦은 이해, 평범한 사람들의 취약함. 김애란의 기존 2030 독자층 + 연말 ‘올해의 소설’ 추천을 따라온 문학 독자 신작 기대 → 장기 입소문 → 동료 작가 추천/연말 결산 → 재역주행 생활, 관계, 씁쓸함 한국문학 단편 관계 소장판 장기베스트", "characters": "하나의 주인공을 따라가는 장편이 아니라 7편의 단편으로 구성됩니다. 각 작품의 화자는 가족, 연인, 직장 동료, 집과 이주를 둘러싼 서로 다른 관계를 살아가며, ‘이미 끝났다고 생각했지만 끝나지 않은 것’을 마주합니다.", "full_plot": "수록작들은 누군가와 헤어진 뒤에도 남아 있는 생활 습관, 가족 사이의 말하지 못한 감정, 주거와 노동의 조건이 관계를 바꾸는 방식 등을 서로 다른 인물을 통해 보여줍니다. 사건이 큰 반전으로 닫히기보다 인물이 평소에는 보지 않던 관계의 비대칭과 자신의 감정을 늦게 알아차리는 순간이 결말의 역할을 합니다. 그래서 ‘안녕’은 깔끔한 작별 인사가 아니라, 이미 끝났다고 선언한 뒤에도 계속 삶에 남는 감정의 잔여를 뜻합니다.", "spoiler_note": "단편집 전체를 하나의 줄거리로 뭉개지 않고, 공통되는 인물 구조와 결말 방식 중심으로 설명했습니다."}, {"type": "소설", "trend": "지속", "title": "절창", "author": "구병모", "year": "2025", "signal": "예약 판매 단계부터 2030 여성 독자가 몰렸고, 2025년 하반기~2026년 초까지 최상위권을 유지한 장편.", "evidence": "예약 판매 초기 2030 여성 구매 비중이 약 70%. 교보 집계에서는 전체 구매의 여성 비중 88.6%, 그중 20대 여성의 비중이 특히 높았습니다.", "why": "구병모 특유의 어둡고 날카로운 세계에 ‘타인의 상처를 만지면 마음을 읽는 능력’이라는 즉시 이해되는 설정이 결합했습니다. 여성 중심 팬덤, 강한 설정, 감각적인 제목이 동시에 작동했습니다.", "author_feature": "현실의 폭력과 불안을 판타지적 장치로 비틀어 보여주는 데 능합니다. 아름답지만 불편한 문장, 윤리적으로 단순하지 않은 여성 인물이 자주 등장합니다.", "episode": "영화화로 『파과』가 다시 뜬 직후 신작 『절창』이 이어지며 기존 독자와 새로 유입된 2030 여성 독자가 한꺼번에 결집했습니다.", "content": "상처에 접촉하면 상대의 내면을 감지할 수 있는 여성을 중심으로, 타인의 마음을 ‘안다’는 것이 정말 이해를 뜻하는지 묻는 장편입니다.", "theme": "상처와 접촉, 타인의 마음, 이해와 침범의 경계, 여성의 몸, 폭력, 윤리.", "tags": ["2030여성", "신작", "판타지적설정", "상처", "윤리"], "grade": "A", "audience": "예약판매부터 2030 여성 구매가 두드러진 팬덤형 신작", "route": "『파과』 영화화로 신규 독자 유입 → 구병모 작가 팬덤 → 강한 초능력 설정 → 여성 독자 집중", "style": "판타지적 규칙을 현실의 폭력, 몸, 윤리 문제에 밀착시키는 어둡고 날카로운 문체.", "read": "초능력 설정이 있지만 결국 타인의 마음과 윤리를 묻는 문학, 어두운 여성서사를 좋아한다면.", "caution": "타인의 내면을 ‘읽을 수 있음’이 곧 공감 능력이라는 식으로 단순화하지 않는 작품입니다.", "difficulty": "보통", "pace": "보통", "mood": "어둠, 감각, 윤리", "talk": "타인의 마음을 정확히 알 수 있다면, 그것은 이해인가 침범인가?", "other": "『파과』와 함께 읽으면 구병모가 여성의 몸을 ‘사회가 평가하는 대상’에서 어떻게 서사의 주체로 전환하는지 볼 수 있습니다.", "id": "book-17", "search_blob": "소설 지속 절창 구병모 상처와 접촉, 타인의 마음, 이해와 침범의 경계, 여성의 몸, 폭력, 윤리. 예약판매부터 2030 여성 구매가 두드러진 팬덤형 신작 『파과』 영화화로 신규 독자 유입 → 구병모 작가 팬덤 → 강한 초능력 설정 → 여성 독자 집중 어둠, 감각, 윤리 2030여성 신작 판타지적설정 상처 윤리", "characters": "‘아가씨’ — 상처에 손을 대면 상대의 마음, 기억을 읽을 수 있는 능력을 가진 여성. 문오언 — 아가씨의 능력을 알아보고 불법적, 폭력적인 일에 이용하는 권력자. 박 실장 — 아가씨의 피폐함을 보고 가정교사를 붙이자고 제안하는 인물. ‘선생님’ — 아가씨에게 붙은 독서/가정교사로, 이야기를 듣고 읽는 행위 자체를 작품 안에 끌어들입니다.", "full_plot": "아가씨는 상처를 만지는 순간 상대의 내면을 읽을 수 있지만, 이것은 축복이라기보다 타인의 고통과 욕망이 강제로 밀려드는 저주에 가깝습니다. 문오언은 이 능력을 알아채고 아가씨를 집 안에 두며 자신이 벌이는 불법적인 일에서 상대의 진심과 정보를 캐내는 도구로 사용합니다. 능력을 반복해서 강요받은 아가씨는 정신적으로 무너져가고, 박 실장의 제안으로 ‘선생님’이 들어오면서 처음으로 누군가와 읽기, 말하기의 관계를 맺습니다. 여기서 작품은 상처를 만져 마음을 ‘정확히 읽는’ 초능력과, 책이나 사람을 언어를 통해 ‘불완전하게 읽는’ 행위를 대비합니다. 결국 아무리 직접 타인의 내면에 접촉해도 완벽한 이해는 불가능하며, 사랑과 독해는 필연적으로 오독을 포함한다는 결론으로 나아갑니다.", "spoiler_note": "능력의 사용 방식과 문오언의 착취 구조까지 공개합니다. 다만 마지막 장면의 세부 행동보다는 작품이 도달하는 관계의 해석을 중심으로 적었습니다."}, {"type": "소설", "trend": "지속", "title": "혼모노", "author": "성해나", "year": "2025", "signal": "2025년 여름 5주 연속 1위권을 지키며 ‘젊고 새로운 한국문학’의 대표 화제작이 됐습니다.", "evidence": "2025년 6월 구매자 중 30대 41.8%, 20대 24.2%로 2030이 약 66%를 차지했습니다.", "why": "진짜/가짜, 믿음과 연기, 정체성, 권위 같은 추상적인 질문을 ‘재미있는 이야기’ 안에 넣습니다. 문학 독자가 아닌 사람도 플롯 때문에 읽고, 읽은 뒤 논쟁할 거리가 남는 구조가 SNS 확산에 유리했습니다.", "author_feature": "인물을 도덕적으로 깔끔하게 정리하지 않고, 독자가 판단을 여러 번 뒤집게 만드는 서사를 잘 씁니다. 동시대 사회의 권위와 욕망을 장르적 긴장감으로 다룹니다.", "episode": "배우이자 출판사 대표인 박정민의 강한 추천사가 화제가 되면서 유튜브, SNS를 통해 판매가 급상승했습니다. 이후 출판계에서 ‘박정민 추천사’ 자체가 화제가 될 정도였습니다.", "content": "여러 단편에서 무속, 믿음, 진짜와 가짜의 경계, 인정 욕구와 권위가 얽힌 인물들을 다룹니다. 표제작은 ‘진짜라고 믿는 것’이 어떻게 권력이 되는지 질문합니다.", "theme": "진짜/가짜, 믿음, 욕망, 권위, 정체성, 타인을 이해한다고 믿는 착각.", "tags": ["2030", "SNS", "단편", "정체성", "논쟁성"], "grade": "A", "audience": "30대 41.8%, 20대 24.2%가 확인된 대표적인 2030 베스트셀러", "route": "문학상/젊은작가 인지도 → 박정민 추천 → 유튜브, SNS → ‘진짜/가짜’ 논쟁성", "style": "독자의 판단을 여러 번 흔드는 인물 설계와 빠른 긴장, 사회적 권위와 욕망을 장르적 재미로 바꾸는 단편.", "read": "문학인데 지루하지 않고, 읽은 뒤 친구와 ‘누가 진짜인가’를 토론할 작품을 찾는다면.", "caution": "표제작만으로 책 전체를 규정하기보다 수록작 사이의 공통된 욕망, 정체성, 권위 문제를 함께 보는 편이 좋습니다.", "difficulty": "보통", "pace": "빠름", "mood": "긴장, 기묘함, 사회풍자", "talk": "‘진짜’라는 인증은 누가 부여하며, 그 권위는 어떻게 만들어지는가?", "other": "성해나의 다른 단편과 젊은작가상 수상작을 이어 읽으면 동시대 한국 단편의 속도감이 잘 보입니다.", "id": "book-18", "search_blob": "소설 지속 혼모노 성해나 진짜/가짜, 믿음, 욕망, 권위, 정체성, 타인을 이해한다고 믿는 착각. 30대 41.8%, 20대 24.2%가 확인된 대표적인 2030 베스트셀러 문학상/젊은작가 인지도 → 박정민 추천 → 유튜브, SNS → ‘진짜/가짜’ 논쟁성 긴장, 기묘함, 사회풍자 2030 SNS 단편 정체성 논쟁성", "characters": "표제작 「혼모노」: 문수 — 30년 경력의 박수무당. 장수할멈 — 문수가 모셔온 신령. 신애기 — 스무 살 남짓의 젊은 무당으로 장수할멈이 자신에게 왔다고 주장합니다. 「스무드」: 듀이 — 세계적 미술가 제프의 에이전트인 재미 한인 3세. 「우호적 감정」에는 스타트업 구성원 진, 수전(수잔) 등이 등장합니다.", "full_plot": "표제작에서 문수는 어느 날 평생 모시던 장수할멈의 신탁이 끊겼음을 깨닫습니다. 바로 앞집의 젊은 신애기는 장수할멈이 ‘문수는 너무 늙었다’며 자신에게 왔다고 말합니다. 생계와 정체성을 동시에 잃을 위기에 놓인 문수는 가짜인 상태에서도 진짜 무당처럼 버티려고 하지만, 자신이 경멸하던 신애기가 실제 힘을 갖고 있는 것처럼 보이자 집착이 커집니다. 결국 신애기가 맡은 굿판에 문수가 난입하고 피가 흐르는 상황에서도 둘의 굿은 ‘누가 진짜인가’를 증명하려는 경쟁처럼 변합니다. 그러나 작품은 어느 한쪽을 간단히 혼모노로 판정하기보다 ‘진짜/가짜’라는 이분법을 믿고 싶어 하는 욕망 자체를 무너뜨립니다. 소설집 전체에서는 「스무드」가 재미 한인 3세 듀이의 한국 방문을 통해 정치, 정체성을 낯설게 보고, 「구의 집: 갈월동 98번지」는 폭력의 기억이 건축에 남는 방식을, 「우호적 감정」은 공동체와 회사가 돈 앞에서 깨지는 방식을 다룹니다.", "spoiler_note": "『혼모노』는 7편의 소설집입니다. 표제작의 굿판까지 포함하고, 나머지 수록작은 핵심 설정과 인물 중심으로 정리했습니다."}, {"type": "시", "trend": "지속", "title": "샤워젤과 소다수", "author": "고선경", "year": "2023", "signal": "젊은 시인이 쓴 시집을 젊은 독자가 사는 흐름에서 가장 자주 언급되는 작품 중 하나.", "evidence": "예스24의 최근 10년 시집 분석에서 젊은 독자층의 관심을 이끈 상위권 작품으로 소개됐습니다.", "why": "샤워젤, 소다수처럼 촉각적이고 팝한 사물이 제목부터 전면에 나와 ‘시 = 고전적이고 무거움’이라는 인상을 깨뜨립니다. 생활감과 감정의 낙차가 SNS 시구 소비와 잘 맞습니다.", "author_feature": "발랄하고 가벼워 보이는 사물의 표면 아래 불안, 상실, 관계의 균열을 놓는 대비가 매력으로 꼽힙니다.", "episode": "2025년 시집 베스트셀러 상위 20권 중 젊은 시인 작품이 7권이었고, 이 그룹의 1020 구매 비율이 43.2%에 달했습니다. 고선경은 이 흐름의 대표 사례로 지목됩니다.", "content": "일상적인 사물, 도시의 감각, 연애와 불안, 젊은 화자의 자기 인식을 빠르고 감각적인 이미지로 엮는 시집입니다.", "theme": "도시의 청춘, 사랑과 불안, 생활 사물, 감각, 밝음과 우울의 동시성.", "tags": ["포엣코어", "1020", "팝이미지", "시집", "젊은시인"], "grade": "A", "audience": "1020 구매 비중 51.9%가 확인된 젊은 시인 대표작", "route": "젊은 시인 팬덤 → SNS 시구 공유 → 시집 베스트셀러 → 신작으로 팬덤 확장", "style": "팝하고 생활적인 사물, 유머와 불안을 동시에 놓는 문장, ‘씩씩하지만 상처가 없는 것은 아닌’ 화자.", "read": "도시적이고 발랄한 표면 아래 우울, 불안을 느끼는 시를 좋아한다면.", "caution": "제목의 청량함만 보고 가볍다고 단정하기보다 밝은 사물과 불안한 정서의 대비를 보는 것이 핵심입니다.", "difficulty": "쉬움", "pace": "짧게 읽기", "mood": "팝, 도시, 불안", "talk": "밝고 유쾌한 언어가 오히려 우울을 더 정확히 말할 수 있는가?", "other": "신작 『심장보다 단단한 토마토 한 알』과 비교하면 고선경의 ‘씩씩함’이 조금 더 단단하고 연대적인 방향으로 이동합니다.", "id": "book-19", "search_blob": "시 지속 샤워젤과 소다수 고선경 도시의 청춘, 사랑과 불안, 생활 사물, 감각, 밝음과 우울의 동시성. 1020 구매 비중 51.9%가 확인된 젊은 시인 대표작 젊은 시인 팬덤 → SNS 시구 공유 → 시집 베스트셀러 → 신작으로 팬덤 확장 팝, 도시, 불안 포엣코어 1020 팝이미지 시집 젊은시인", "characters": "화자 / 등장하는 존재 — 도시의 생활을 통과하는 젊은 화자와 연인, 친구의 흔적이 중심입니다.", "full_plot": "시집의 정서적 흐름 — 샤워젤, 소다수 같은 밝은 생활 사물이 불안, 상실과 부딪히며 ‘밝아서 더 슬픈’ 정서를 만듭니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "시", "trend": "지속", "title": "심장보다 단단한 토마토 한 알", "author": "고선경", "year": "2025", "signal": "2025년 젊은 시인 붐의 대표작. 2025년 1020 구매 비중 45.9%로 집계된 강한 세대형 시집.", "evidence": "2025년 시 분야 베스트셀러 상위권에 올랐고, YES24 젊은 시인 군집 분석에서 높은 1020 구매 비중이 확인됐습니다.", "why": "‘토마토’라는 팝한 제목으로 접근 장벽을 낮추면서도 전작보다 연대, 시간, 견딤의 감정을 더 단단하게 다룹니다. 제목, 표지로 끌고 들어와 내용에서 더 깊어지는 타입입니다.", "author_feature": "1997년생 고선경은 2022년 신춘문예로 등단했고, 밝은 사물과 유머를 사용하면서도 외로움과 불안을 숨기지 않는 문체가 특징입니다.", "episode": "신춘문예 등단이라는 전통적 문단 경로와 SNS, 젊은 독자 팬덤이라는 새로운 시장 경로를 동시에 가진 작가라는 점이 차정은과 대비됩니다.", "content": "외롭고 불안정한 시간을 함께 건너온 사람들, 작지만 단단한 사물, 계속 살아가는 태도를 토마토 같은 생활 이미지로 묶은 시집입니다.", "theme": "연대, 외로움, 견딤, 청춘, 일상 사물, 내일을 계속 살아가는 태도.", "tags": ["1020", "45.9%", "젊은시인", "토마토", "텍스트힙"], "grade": "A", "audience": "1020 핵심 + 젊은 현대시를 처음 읽는 20대 독자", "route": "『샤워젤과 소다수』 팬덤 → 신작 → 베스트셀러 → 젊은 시인 붐", "style": "톡톡 튀는 사물과 구어적 감각을 이용하지만 전작보다 정서적 깊이와 ‘함께 견딤’이 강합니다.", "read": "『샤워젤과 소다수』가 좋았고 조금 더 단단한 정서의 시를 읽고 싶다면.", "caution": "제목의 ‘힙함’과 작품 전체의 정서적 깊이를 같은 것으로 보지 않는 게 좋습니다.", "difficulty": "쉬움", "pace": "짧게 읽기", "mood": "청량함, 외로움, 연대", "talk": "요즘 시집 제목에 음식, 과일 이미지가 반복되는 것은 단순한 마케팅인가 새로운 세대 언어인가?", "other": "차정은과 고선경을 같이 읽으면 ‘젊은 시’가 하나의 문체가 아니라 독립출판형, 등단형 등 서로 다른 경로를 가진다는 점이 보입니다.", "id": "book-20", "search_blob": "시 지속 심장보다 단단한 토마토 한 알 고선경 연대, 외로움, 견딤, 청춘, 일상 사물, 내일을 계속 살아가는 태도. 1020 핵심 + 젊은 현대시를 처음 읽는 20대 독자 『샤워젤과 소다수』 팬덤 → 신작 → 베스트셀러 → 젊은 시인 붐 청량함, 외로움, 연대 1020 45.9% 젊은시인 토마토 텍스트힙", "characters": "화자 / 등장하는 존재 — 외롭지만 계속 살아가려는 화자와 곁의 사람들, ‘함께 견디는 우리’가 중요합니다.", "full_plot": "시집의 정서적 흐름 — 토마토처럼 작고 일상적인 사물이 버티는 마음과 연결되고, 전작보다 개인의 불안에서 연대와 지속으로 정서가 이동합니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "시", "trend": "지속", "title": "토마토 컵라면", "author": "차정은", "year": "2023", "signal": "최근 10년 시집 판매 상위권에 진입한 젊은 세대 대표작. 10, 20대가 시집으로 유입되는 흐름의 핵심 사례.", "evidence": "2025년 젊은 시인 작품들이 시집 베스트셀러 상위권을 차지할 때 대표작으로 반복 언급됐습니다.", "why": "제목부터 시집의 전통적 이미지와 거리가 멉니다. ‘토마토’와 ‘컵라면’처럼 생활적인 단어가 강한 시각적 훅이 되고, 짧은 시구를 사진, 캡처, 메모로 옮기기 쉽습니다.", "author_feature": "일상어를 그대로 가져오면서도 감정의 온도를 과장하지 않는 방식이 특징입니다.", "episode": "고등학생 시절 쓴 시집이 누적 수만 부 판매됐고 이후 신작까지 연속 히트하면서 ‘같은 세대가 같은 세대 시인을 읽는’ 시장을 보여줬습니다.", "content": "학교, 친구, 사랑, 외로움, 먹는 것 같은 생활 장면을 젊은 화자의 감정과 연결한 시들이 중심입니다.", "theme": "10대 후반의 감정, 일상, 사랑, 자의식, 사소한 사물에 감정을 붙이는 방식.", "tags": ["1020", "생활어", "SNS", "신예시인", "스테디"], "grade": "A", "audience": "1020 구매 비중 60.9%가 확인된 세대 편중형 히트 시집", "route": "독립출판 → X/인스타 공유 → 텍스트힙 → 상업출판/스페셜 에디션", "style": "학교, 편의점, 먹는 것, 친구, 연애 같은 가까운 어휘를 시적 이미지로 바로 전환합니다.", "read": "현대시 입문자, 자신의 세대 언어가 시에 들어오는 경험을 하고 싶은 독자라면.", "caution": "기성 문단 중심의 ‘등단 시인’ 소비와 다른 경로로 뜬 책이므로 작품 평가와 시장 현상을 분리해서 보는 것도 흥미롭습니다.", "difficulty": "매우 쉬움", "pace": "짧게 읽기", "mood": "십대, 생활, 사랑", "talk": "SNS에서 공유하기 쉬운 문장이 오늘날 시의 형식에도 영향을 주는가?", "other": "이 작품은 ‘문단이 먼저 알아본 시인’이 아니라 ‘독자가 먼저 만든 시인’이라는 현상의 대표 사례입니다.", "id": "book-21", "search_blob": "시 지속 토마토 컵라면 차정은 10대 후반의 감정, 일상, 사랑, 자의식, 사소한 사물에 감정을 붙이는 방식. 1020 구매 비중 60.9%가 확인된 세대 편중형 히트 시집 독립출판 → X/인스타 공유 → 텍스트힙 → 상업출판/스페셜 에디션 십대, 생활, 사랑 1020 생활어 SNS 신예시인 스테디", "characters": "화자 / 등장하는 존재 — 학교, 친구, 연애를 통과하는 십대 후반의 화자가 강하게 느껴지는 시집입니다.", "full_plot": "시집의 정서적 흐름 — 생활어와 음식 이미지를 통해 좋아함, 외로움, 자의식을 즉각적으로 붙잡습니다. 사건보다 감정의 순간이 연속되는 방식입니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "비문학", "trend": "지속", "title": "단 한 번의 삶", "author": "김영하", "year": "2025", "signal": "2025년 6월 문학 작품이 서점 차트를 장악할 때 종합 2위까지 올라간 산문집.", "evidence": "2025년 연간 예스24 종합 8위. 문학 작품과 에세이가 함께 읽히는 흐름의 대표작입니다.", "why": "자기계발식 ‘정답’을 주기보다 한 사람의 기억과 경험을 통해 삶을 생각하게 하는 산문이 30대 독자에게 특히 자연스럽습니다. 소설을 좋아하는 독자가 같은 작가의 산문으로 이동하기도 쉽습니다.", "author_feature": "명확한 구조와 속도감 있는 문장으로 개인 경험을 문화, 사회, 문학적 질문까지 확장하는 에세이를 씁니다.", "episode": "6년 만의 산문집이라는 점이 화제가 됐고, 2025년 ‘소설이 강한 해’에 산문까지 같이 상위권을 차지했습니다.", "content": "삶이 한 번뿐이라는 사실을 출발점으로 기억, 가족, 선택, 시간, 죽음과 같은 문제를 개인적 경험과 독서의 시선으로 돌아봅니다.", "theme": "유한한 삶, 기억, 가족, 선택, 죽음, 한 번뿐인 시간을 어떻게 바라볼 것인가.", "tags": ["산문", "김영하", "삶", "기억", "문학에세이"], "grade": "B", "audience": "30대 중심의 문학 독자와 김영하 기존 팬층, 소설에서 산문으로 이동하는 독자", "route": "작가 팬덤 → 오랜만의 산문 신작 → 문학 베스트셀러 동반 상승", "style": "개인 경험을 짧은 서사로 구성한 뒤 삶, 죽음, 선택 같은 큰 질문으로 확장하는 명료한 산문.", "read": "자기계발의 명령형 문장보다 문학적 에세이를 통해 삶을 생각하고 싶다면.", "caution": "실용 해답을 주는 책이 아니라 ‘생각할 재료’를 주는 산문입니다.", "difficulty": "쉬움", "pace": "보통", "mood": "회고, 삶, 사유", "talk": "삶이 한 번뿐이라는 사실은 선택을 더 자유롭게 하는가, 더 무겁게 하는가?", "other": "김영하 소설을 읽은 뒤 보면 작가가 허구와 산문에서 삶의 우연성을 다루는 방식 차이가 재미있습니다.", "id": "book-22", "search_blob": "비문학 지속 단 한 번의 삶 김영하 유한한 삶, 기억, 가족, 선택, 죽음, 한 번뿐인 시간을 어떻게 바라볼 것인가. 30대 중심의 문학 독자와 김영하 기존 팬층, 소설에서 산문으로 이동하는 독자 작가 팬덤 → 오랜만의 산문 신작 → 문학 베스트셀러 동반 상승 회고, 삶, 사유 산문 김영하 삶 기억 문학에세이", "characters": "비문학이므로 소설적 등장인물보다 저자의 경험, 사상가, 인용되는 인물을 중심으로 읽습니다.", "full_plot": "삶이 한 번뿐이라는 사실을 출발점으로 기억, 가족, 선택, 시간, 죽음과 같은 문제를 개인적 경험과 독서의 시선으로 돌아봅니다.", "spoiler_note": "논지와 결론을 숨기지 않고 핵심 주장까지 공개합니다."}, {"type": "시", "trend": "작가읽기", "title": "서랍에 저녁을 넣어 두었다", "author": "한강", "year": "2013", "signal": "YES24 최근 10년 시집 판매 3위권. 2024 노벨문학상 이후 판매량이 크게 뛰며 소설 독자가 시집으로 이동했습니다.", "evidence": "최근 10년 시집 판매 분석에서 3위를 기록했고, 노벨문학상 이후 판매가 전년 대비 큰 폭으로 증가했다고 집계됐습니다.", "why": "‘한강의 유명 소설만 읽기’에서 한 단계 더 들어가 작가의 시, 산문까지 전작을 탐색하는 독서가 늘었습니다. 한 작가를 하나의 세계관으로 소비하는 방식입니다.", "author_feature": "한강은 소설에서도 반복되는 몸, 상처, 빛, 어둠, 식물, 죽음의 이미지를 시에서 더 응축된 형태로 다룹니다.", "episode": "노벨문학상이라는 외부 사건이 오래된 시집을 다시 베스트셀러로 만들었습니다. 유명 작가의 ‘백리스트(backlist)’ 전체가 움직이는 전형적인 사례입니다.", "content": "저녁, 몸, 상처, 사라짐, 살아 있음의 감각을 압축된 이미지와 언어로 다루는 한강의 첫 시집입니다.", "theme": "몸, 죽음, 빛과 어둠, 고독, 생, 언어, 사라지는 것.", "tags": ["한강", "노벨이후", "작가읽기", "시집스테디", "백리스트"], "grade": "A", "audience": "한강 소설 독자에서 시로 확장한 20, 30대 + 현대시 독자", "route": "노벨문학상 → 한강 전작 구매 → 시집/산문까지 확장", "style": "서사보다 이미지와 감각을 압축하고, 말해지지 않은 여백을 크게 남기는 시.", "read": "『소년이 온다』, 『채식주의자』를 읽고 ‘한강 문장의 원형’이 궁금하다면.", "caution": "소설의 줄거리적 몰입을 기대하면 훨씬 추상적으로 느껴질 수 있습니다.", "difficulty": "보통", "pace": "천천히", "mood": "저녁, 고독, 감각", "talk": "한 작가의 소설과 시를 함께 읽으면 반복되는 이미지의 의미가 달라지는가?", "other": "최근 2030 독서에서 ‘베스트셀러 한 권’보다 ‘작가 전체 읽기’가 중요한 축임을 보여주는 책입니다.", "id": "book-23", "search_blob": "시 작가읽기 서랍에 저녁을 넣어 두었다 한강 몸, 죽음, 빛과 어둠, 고독, 생, 언어, 사라지는 것. 한강 소설 독자에서 시로 확장한 20, 30대 + 현대시 독자 노벨문학상 → 한강 전작 구매 → 시집/산문까지 확장 저녁, 고독, 감각 한강 노벨이후 작가읽기 시집스테디 백리스트", "characters": "화자 / 등장하는 존재 — 한강의 시에서 ‘나’와 ‘너’, 죽은 사람과 살아 있는 몸은 명확히 분리되지 않고 이미지처럼 교차합니다.", "full_plot": "시집의 정서적 흐름 — 저녁, 몸, 피, 식물, 어둠, 빛이 반복되며 소설보다 더 압축된 형태로 죽음과 살아 있음의 경계를 탐색합니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "시", "trend": "셀럽", "title": "불온한 검은 피", "author": "허연", "year": "2008", "signal": "가수 한로로의 추천 뒤 판매량이 약 400% 증가한 것으로 예스24가 집계.", "evidence": "2026년 시집 시장에서 ‘뮤지션이 추천한 오래된 시집이 젊은 독자에게 재발견되는’ 대표 사례.", "why": "신예 시집만 뜨는 것이 아니라, 젊은 뮤지션의 취향 목록을 따라 과거의 시집까지 탐색하는 큐레이션형 독서가 강해졌습니다.", "author_feature": "도시적이고 거친 감각, 자의식, 불온함과 고독을 직선적인 에너지로 밀어붙이는 시 세계로 알려져 있습니다.", "episode": "한로로는 자기 소설만 많이 팔린 것이 아니라 자신이 언급한 시집들의 판매까지 움직였습니다. 지금 독서 트렌드에서 ‘누가 추천했는가’가 얼마나 중요한지 보여줍니다.", "content": "도시, 욕망, 고독, 분노, 청춘의 어두운 에너지를 정제하기보다 거칠게 드러내는 시편들이 중심입니다.", "theme": "도시적 고독, 욕망, 자기혐오와 자의식, 불온함, 젊음의 어두운 에너지.", "tags": ["한로로추천", "시집역주행", "도시", "고독", "큐레이션"], "grade": "A", "audience": "한로로의 독서 콘텐츠를 따라 유입된 음악 팬덤, 젊은 독자층", "route": "민음사TV 한로로 추천 → 과거 시집 재발견 → 큐레이터 팬덤 이동", "style": "도시적이고 거친 자의식, 어둡고 밀도 높은 이미지, 정서적 폭발을 숨기지 않는 시.", "read": "말끔한 위로보다 불안, 욕망, 고독의 거친 감정을 좋아한다면.", "caution": "한로로가 추천했다는 사실과 작품 자체의 시대, 문체를 분리해 읽어보면 ‘추천을 통한 재맥락화’가 더 잘 보입니다.", "difficulty": "보통~높음", "pace": "천천히", "mood": "도시, 고독, 불온", "talk": "다른 세대가 쓴 시가 새로운 큐레이터를 만나면 ‘동시대 시’가 될 수 있는가?", "other": "뮤지션의 플레이리스트를 따라 음악을 듣듯, 이제는 ‘독서 리스트’를 따라 과거 문학을 발굴하는 흐름의 대표작입니다.", "id": "book-24", "search_blob": "시 셀럽 불온한 검은 피 허연 도시적 고독, 욕망, 자기혐오와 자의식, 불온함, 젊음의 어두운 에너지. 한로로의 독서 콘텐츠를 따라 유입된 음악 팬덤, 젊은 독자층 민음사TV 한로로 추천 → 과거 시집 재발견 → 큐레이터 팬덤 이동 도시, 고독, 불온 한로로추천 시집역주행 도시 고독 큐레이션", "characters": "화자 / 등장하는 존재 — 도시 속의 강한 자의식을 가진 화자가 욕망, 고독, 분노를 숨기지 않고 드러냅니다.", "full_plot": "시집의 정서적 흐름 — 청춘의 어두운 에너지와 도시의 감각이 반복되며, 정돈된 위로나 치유보다 불온함을 유지하는 쪽으로 나아갑니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "시", "trend": "셀럽", "title": "숲의 소실점을 향해", "author": "양안다", "year": "2020", "signal": "한로로 추천 이후 판매량이 212.5% 증가한 것으로 집계된 젊은 독자 재발견 시집.", "evidence": "예스24의 2026 시집 트렌드 분석에서 추천 효과가 수치로 확인됐습니다.", "why": "양안다의 몽환적이고 영화적인 이미지가 플레이리스트, 앨범 아트, 사진과 결합하기 좋습니다. 음악 취향에서 시 취향으로 자연스럽게 이동하는 독자층과 잘 맞습니다.", "author_feature": "현실과 꿈의 경계를 흐리는 이미지, 반복과 장면 전환, 청춘의 불안과 관계를 영화적인 감각으로 구성하는 편입니다.", "episode": "뮤지션 한로로의 추천 한 번이 수년 전 시집의 판매를 다시 끌어올리며 ‘팬덤 기반 문학 큐레이션’을 보여줬습니다.", "content": "숲, 밤, 거리, 관계처럼 명확히 잡히지 않는 공간과 감정을 이동하며 상실과 사랑, 청춘의 흔들림을 몽환적으로 기록합니다.", "theme": "상실, 사랑, 불안, 꿈과 현실, 청춘, 멀어지는 것들을 바라보는 시선.", "tags": ["한로로추천", "몽환", "시집", "청춘", "큐레이션"], "grade": "A", "audience": "양안다 기존 젊은 시 독자 + 한로로 추천으로 유입된 음악 팬덤", "route": "젊은 시인 팬덤 + 뮤지션 추천 → 몽환적 이미지가 SNS 취향과 결합", "style": "꿈, 영화, 밤, 숲 같은 장면을 반복하며 현실과 비현실의 경계를 흐리는 시적 편집.", "read": "영화적인 장면, 몽환성, 명확한 결론이 없는 청춘의 감정을 좋아한다면.", "caution": "줄거리처럼 이해하려고 하면 오히려 어려울 수 있습니다. 이미지가 어떻게 반복, 변형되는지 따라가는 편이 좋습니다.", "difficulty": "보통~높음", "pace": "천천히", "mood": "몽환, 밤, 상실", "talk": "시에서 ‘장면’은 이야기 없이도 서사가 될 수 있는가?", "other": "양안다의 다른 시집과 병렬로 읽으면 반복되는 이미지와 화자의 세계가 어떻게 구축되는지 더 잘 보입니다.", "id": "book-25", "search_blob": "시 셀럽 숲의 소실점을 향해 양안다 상실, 사랑, 불안, 꿈과 현실, 청춘, 멀어지는 것들을 바라보는 시선. 양안다 기존 젊은 시 독자 + 한로로 추천으로 유입된 음악 팬덤 젊은 시인 팬덤 + 뮤지션 추천 → 몽환적 이미지가 SNS 취향과 결합 몽환, 밤, 상실 한로로추천 몽환 시집 청춘 큐레이션", "characters": "화자 / 등장하는 존재 — 꿈과 현실 사이를 이동하는 젊은 화자와 ‘너’가 영화 장면처럼 나타났다 사라집니다.", "full_plot": "시집의 정서적 흐름 — 숲, 밤, 거리, 상실이 반복되고, 명확한 사건보다 장면의 연결이 한 관계가 멀어지는 감각을 만듭니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "시", "trend": "셀럽", "title": "이해할 수 없는 점이 마음에 듭니다", "author": "조말선", "year": "2024", "signal": "2026년 2월 BTS 뷔의 SNS 추천 뒤 판매량이 전월 대비 450% 증가.", "evidence": "예스24가 ‘젊은 세대의 시집 열풍’에서 셀럽 추천 효과의 대표 사례로 직접 제시했습니다.", "why": "시집은 한 편 전체보다 한두 구절, 제목, 표지 이미지가 SNS에서 먼저 유통되기 때문에 셀럽 추천과 특히 잘 맞습니다. ‘무슨 책을 읽는가’가 취향 표지가 되는 포엣코어와도 연결됩니다.", "author_feature": "쉽게 의미를 하나로 닫기보다 낯선 연결과 언어의 비약을 통해 독자가 빈틈을 오래 생각하게 만드는 시적 태도가 강합니다.", "episode": "오래 활동해온 시인의 책이 아이돌의 단 한 번의 SNS 소개로 젊은 독자에게 새로 발견된 사례라는 점이 흥미롭습니다.", "content": "완전히 이해되지 않는 타인, 감정, 세계의 낯섦을 제거하기보다 그 낯섦 자체를 오래 바라보는 시편들로 읽을 수 있습니다.", "theme": "이해 불가능성, 낯섦, 타인, 언어의 틈, 의미를 확정하지 않는 읽기.", "tags": ["셀럽추천", "BTS", "포엣코어", "재발견", "실험시"], "grade": "A", "audience": "기존 시 독자 + 2026년 BTS 뷔 추천 이후 신규 젊은 독자 급유입", "route": "셀럽 SNS 단일 노출 → 판매 450% 증가 → 기성 시인 재발견", "style": "의미를 하나로 닫지 않는 비약, 낯선 연결, 독자가 해석의 공백을 직접 채우게 만드는 시.", "read": "정답이 바로 보이는 시보다 ‘왜 이 문장이 이상하게 남지?’를 오래 생각하는 걸 좋아한다면.", "caution": "젊은 독자가 많이 샀다고 해서 문체 자체가 쉬운 것은 아닙니다. 이 페이지의 젊은 시집 중 난도가 높은 편입니다.", "difficulty": "높음", "pace": "천천히", "mood": "낯섦, 실험, 여백", "talk": "이해되지 않는 것을 이해하려고 애쓰는 행위 자체가 시 읽기의 핵심일 수 있는가?", "other": "셀럽 추천이 ‘쉬운 대중시’만 띄우는 게 아니라 실험적인 기성시까지 다시 유통시킬 수 있음을 보여줍니다.", "id": "book-26", "search_blob": "시 셀럽 이해할 수 없는 점이 마음에 듭니다 조말선 이해 불가능성, 낯섦, 타인, 언어의 틈, 의미를 확정하지 않는 읽기. 기존 시 독자 + 2026년 BTS 뷔 추천 이후 신규 젊은 독자 급유입 셀럽 SNS 단일 노출 → 판매 450% 증가 → 기성 시인 재발견 낯섦, 실험, 여백 셀럽추천 BTS 포엣코어 재발견 실험시", "characters": "화자 / 등장하는 존재 — 고정된 캐릭터보다 언어를 의심하고 타인의 낯섦을 바라보는 화자가 중심입니다.", "full_plot": "시집의 정서적 흐름 — 시집은 이해되지 않는 것을 억지로 해석해 없애기보다 그 불투명성을 남기는 쪽으로 움직입니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "시", "trend": "스테디", "title": "꽃을 보듯 너를 본다", "author": "나태주", "year": "2015", "signal": "2016~2026 최근 10년간 YES24에서 가장 많이 판매된 시집. 10대부터 40대까지 연령별 판매 1위를 차지한 세대 초월형 스테디.", "evidence": "최근 10년 종합 베스트셀러 20위권에 약 20주, 소설, 시, 희곡 50위권에는 약 9년 6개월 머문 장기 판매작.", "why": "지금의 1020 시집 붐을 이해하려면 ‘그 이전부터 사람들이 어떤 시를 쉽게 읽고 선물하고 필사했는가’를 봐야 합니다. 짧고 명료한 서정시가 만들어온 시장의 기준점입니다.", "author_feature": "나태주는 작은 사물과 사람을 오래 바라보는 짧고 평이한 언어로 사랑, 다정함, 감사를 전달하는 시로 대중적 인지도가 높습니다.", "episode": "최근 젊은 시인들의 과일, 탄산, 디지털 감각과는 문체가 다르지만 여전히 전 연령에서 1위라는 점이 중요합니다. ‘새 유행’과 ‘압도적 스테디’가 동시에 존재합니다.", "content": "사랑, 사람, 자연, 작은 일상의 순간을 짧고 이해하기 쉬운 언어로 포착한 시들을 모았습니다.", "theme": "사랑, 다정함, 관찰, 일상, 자연, 소중함.", "tags": ["10년1위", "세대초월", "필사", "선물", "입문시"], "grade": "A", "audience": "10대~40대 전 연령. 현대시 입문, 필사, 선물 독자", "route": "짧은 시 인용 → 선물/필사 → 장기 스테디 → 세대 반복 유입", "style": "매우 짧고 평이한 언어, 자연과 사람을 바라보는 직접적인 서정.", "read": "난해한 시보다 한 번 읽고 바로 감정이 들어오는 시를 원한다면.", "caution": "2030 ‘최신 유행’이라기보다 현재 시집 시장의 기준선 역할을 하는 스테디셀러로 보는 것이 정확합니다.", "difficulty": "매우 쉬움", "pace": "짧게 읽기", "mood": "다정함, 사랑, 일상", "talk": "쉽고 짧은 시가 오랫동안 사랑받는 이유는 문학성, 접근성, 공유 가능성 중 무엇에 더 가까운가?", "other": "『토마토 컵라면』 같은 젊은 시집과 비교하면 ‘짧고 공유하기 쉬운 시’라는 공통점과 세대 언어의 차이가 동시에 보입니다.", "id": "book-27", "search_blob": "시 스테디 꽃을 보듯 너를 본다 나태주 사랑, 다정함, 관찰, 일상, 자연, 소중함. 10대~40대 전 연령. 현대시 입문, 필사, 선물 독자 짧은 시 인용 → 선물/필사 → 장기 스테디 → 세대 반복 유입 다정함, 사랑, 일상 10년1위 세대초월 필사 선물 입문시", "characters": "화자 / 등장하는 존재 — 자연과 사랑하는 사람을 바라보는 서정적 화자가 반복됩니다.", "full_plot": "시집의 정서적 흐름 — 꽃, 풀, 사람의 작은 모습을 오래 바라보는 시들이 이어지며, 복잡한 서사보다 한 순간의 다정함을 보존합니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "시", "trend": "스테디", "title": "당신의 이름을 지어다가 며칠은 먹었다", "author": "박준", "year": "2012", "signal": "최근 10년 베스트셀러 시집 TOP 10에 들어간 장기 스테디셀러이자 젊은 독자의 시 입문서 역할을 하는 작품.", "evidence": "예스24 최근 10년 시집 판매 분석에서 6위를 기록했습니다.", "why": "짧고 평이한 문장인데 정서적 잔향이 길어 ‘시를 잘 모르는 사람도 읽을 수 있는 현대시’의 대표 입구가 됐습니다. 필사, 인용, 선물용으로도 강합니다.", "author_feature": "거창한 수사보다 생활 언어와 작은 사물, 기억을 이용해 상실과 사랑을 조용하게 밀어 올립니다.", "episode": "유행의 속도가 빠른 시집 시장에서도 10년 이상 꾸준히 팔려, ‘요즘 시를 시작하려는 사람이 다시 찾는 과거작’의 전형이 됐습니다.", "content": "떠난 사람, 가난했던 기억, 가족, 사랑했던 시간처럼 사라졌지만 일상 속에 남아 있는 것들을 조용한 언어로 불러냅니다.", "theme": "상실, 기억, 사랑, 가난, 가족, 남겨진 사람의 일상.", "tags": ["스테디", "필사", "입문시집", "사랑", "상실"], "grade": "B", "audience": "세대 스테디셀러. 시 입문자, 필사 독자, 선물 독자에게 특히 강함", "route": "입소문 → 필사/인용 → 장기 스테디 → 새 독자 반복 유입", "style": "생활어, 짧은 문장, 작은 기억을 이용해 상실을 조용히 확대합니다.", "read": "‘어렵지 않은데 오래 남는 시’를 찾거나 현대시 입문을 하고 싶다면.", "caution": "SNS에 많이 인용되는 몇 구절만으로 시집 전체를 판단하지 말고, 시집의 반복되는 기억과 빈곤, 가족의 맥락까지 보는 것이 좋습니다.", "difficulty": "쉬움", "pace": "천천히", "mood": "상실, 기억, 다정", "talk": "평범한 문장이 시가 되는 순간은 어디인가?", "other": "젊은 시집 붐의 ‘전사(前史)’ 같은 책으로, 지금의 포엣코어와 비교하면 세대별 감정 언어의 차이가 보입니다.", "id": "book-28", "search_blob": "시 스테디 당신의 이름을 지어다가 며칠은 먹었다 박준 상실, 기억, 사랑, 가난, 가족, 남겨진 사람의 일상. 세대 스테디셀러. 시 입문자, 필사 독자, 선물 독자에게 특히 강함 입소문 → 필사/인용 → 장기 스테디 → 새 독자 반복 유입 상실, 기억, 다정 스테디 필사 입문시집 사랑 상실", "characters": "화자 / 등장하는 존재 — 떠난 사람을 기억하는 화자, 가족과 가난의 기억 속 ‘너’가 중심입니다.", "full_plot": "시집의 정서적 흐름 — 생활의 작은 장면을 통해 사랑과 상실이 반복되고, 누군가가 떠난 뒤에도 이름과 습관이 일상에 남는 과정을 보여줍니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "비문학", "trend": "문학경계", "title": "빛과 실", "author": "한강", "year": "2025", "signal": "시와 산문이 함께 있는 책이 2025년 상반기 종합 TOP 10까지 올라 ‘작가 전체를 읽는’ 현상을 보여줬습니다.", "evidence": "2025년 5~6월 교보문고 상위권에 반복 진입했고, 노벨상 이후 한강의 소설 밖 글까지 독자가 확장됐습니다.", "why": "베스트셀러 한 권을 따라가는 것이 아니라 좋아하게 된 작가의 시, 산문, 인터뷰까지 읽는 ‘작가 단위 소비’가 강해졌다는 점에서 중요합니다.", "author_feature": "소설과 마찬가지로 몸의 감각, 기억, 빛과 어둠, 타인의 고통을 조심스럽게 바라보는 문장이 중심입니다.", "episode": "노벨상 이후 한강의 대표 소설뿐 아니라 첫 시집과 시, 산문까지 판매가 확대됐습니다. 문학 유행이 특정 제목에서 작가의 전작 읽기로 번진 사례입니다.", "content": "시와 산문을 오가며 글쓰기, 기억, 빛, 타인의 고통, 삶의 감각을 사유하는 책입니다.", "theme": "글쓰기, 기억, 감각, 빛과 어둠, 고통을 바라보는 태도, 문학의 역할.", "tags": ["한강", "시와산문", "작가읽기", "노벨이후", "문학경계"], "grade": "B", "audience": "노벨상 이후 한강의 소설을 넘어 시, 산문까지 전작을 탐색하는 독자", "route": "노벨문학상 → 작가 전체 읽기 → 소설 외 장르로 확장", "style": "서정적 이미지와 사유가 결합된 짧은 글. 서사보다 언어와 감각의 밀도가 중요합니다.", "read": "한강의 소설을 이미 읽었고 작가가 글쓰기, 기억을 직접 사유하는 목소리가 궁금하다면.", "caution": "전형적인 에세이의 정보성보다 문학적 산문에 가깝습니다.", "difficulty": "보통", "pace": "천천히", "mood": "빛, 기억, 글쓰기", "talk": "한 작가를 ‘대표작 한 권’이 아니라 장르 전체로 읽는 경험은 무엇을 바꾸는가?", "other": "『서랍에 저녁을 넣어 두었다』와 연결하면 한강의 시와 산문이 소설의 감각과 어떻게 이어지는지 볼 수 있습니다.", "id": "book-29", "search_blob": "비문학 문학경계 빛과 실 한강 글쓰기, 기억, 감각, 빛과 어둠, 고통을 바라보는 태도, 문학의 역할. 노벨상 이후 한강의 소설을 넘어 시, 산문까지 전작을 탐색하는 독자 노벨문학상 → 작가 전체 읽기 → 소설 외 장르로 확장 빛, 기억, 글쓰기 한강 시와산문 작가읽기 노벨이후 문학경계", "characters": "비문학이므로 소설적 등장인물보다 저자의 경험, 사상가, 인용되는 인물을 중심으로 읽습니다.", "full_plot": "시와 산문을 오가며 글쓰기, 기억, 빛, 타인의 고통, 삶의 감각을 사유하는 책입니다.", "spoiler_note": "논지와 결론을 숨기지 않고 핵심 주장까지 공개합니다."}, {"type": "소설", "trend": "역주행", "title": "홍학의 자리", "author": "정해연", "year": "2021", "signal": "SNS에서 결말 반전이 화제가 되며 역주행한 한국 미스터리. eBook 구매자의 20, 30대 비중이 71.0%로 집계된 강한 2030 사례.", "evidence": "예스24 기준 전자책 구매자에서 30대 43.8%, 20대 27.2%. 역주행 시기 eBook 판매는 전월 동기 대비 119.6%, 종이책은 61.2% 증가한 것으로 보도됐습니다.", "why": "이 작품은 ‘좋은 문장’보다 ‘절대 스포일러를 보지 말고 읽으라’는 독자 반응 자체가 바이럴 콘텐츠가 된 사례입니다. 반전의 충격을 공유하되 반전은 숨기는 역설적인 SNS 추천 구조가 신규 독자를 계속 만들어냈습니다.", "author_feature": "정해연은 빠른 전개와 장르적 훅, 독자의 선입견을 역이용하는 서술 트릭에 강한 미스터리, 스릴러 작가입니다.", "episode": "출간 직후보다 수년 뒤 SNS 리뷰와 eBook 독자층에서 더 크게 성장했습니다. ‘여름마다 다시 읽히는 미스터리’라는 계절성까지 생긴 작품입니다.", "content": "고등학교 교사 김준후가 학생 다현의 시신을 호수에 유기하는 장면으로 시작합니다. 독자는 준후가 살인범이 아니라는 사실은 알지만, 누가 다현을 죽였는지와 왜 준후가 시신을 숨겼는지를 추적하게 됩니다.", "theme": "선입견, 욕망, 불륜, 죄책감, 젠더에 대한 독자의 자동 추론, 서술이 독자를 속이는 방식.", "tags": ["2030", "eBook", "역주행", "SNS", "반전미스터리"], "grade": "A", "audience": "eBook에서 2030이 71%를 차지한 명확한 젊은 독자형 장르소설", "route": "SNS ‘반전 스포 금지’ 입소문 → eBook 급증 → 종이책 재구매/선물 → 장기 역주행", "style": "첫 장부터 사건을 던지고, 독자가 스스로 채운 성별, 관계, 도덕적 전제를 후반부에 뒤집는 서술 트릭.", "read": "반전 미스터리, 빠른 독서, 책을 덮은 뒤 첫 장부터 다시 확인하게 만드는 작품을 좋아한다면.", "caution": "반전 자체가 독서 경험의 큰 비중을 차지합니다. 이 페이지는 스포일러 모드이므로 아래 상세 줄거리는 반전을 그대로 공개합니다.", "difficulty": "쉬움", "pace": "매우 빠름", "mood": "불안, 미스터리, 반전", "talk": "작가가 거짓말을 하지 않았는데도 독자가 속았다면, 그 오독의 책임은 누구에게 있는가?", "other": "정해연의 다른 스릴러와 함께 읽으면 ‘한국형 페이지터너’가 어떻게 장르 독자를 문학 시장으로 끌어오는지 보기 좋습니다.", "characters": "김준후 — 고등학교 교사. 채다현 — 준후와 부적절한 관계에 있던 학생. 준후의 아내 — 사건의 핵심 인물. 인성, 다현의 가족, 수사 인물들이 진실을 둘러싸고 등장합니다.", "full_plot": "준후는 학교에서 다현이 쓰러져 있는 것을 발견하고 자신과 다현의 관계가 드러날 것을 두려워해 시신을 호수에 유기합니다. 이후 실종, 살인 수사가 시작되고, 누군가 준후가 시신을 버린 사실을 알고 있는 듯한 압박까지 생깁니다. 후반부의 핵심 서술 트릭은 독자가 이름과 관계만으로 다현을 여학생이라고 자동으로 상상해왔다는 점입니다. 다현은 남학생이며, 준후와 다현의 관계를 알게 된 준후의 아내가 사건의 진범으로 드러납니다. 작품은 범인 맞히기뿐 아니라 독자가 텍스트에 쓰여 있지 않은 정보를 얼마나 자연스럽게 채워 넣는지를 반전의 일부로 사용합니다.", "spoiler_note": "다현의 성별과 범인의 정체가 이 작품의 가장 큰 반전입니다. 따라서 작품을 아직 읽지 않았다면 이 카드 자체가 치명적 스포일러입니다.", "id": "book-30", "search_blob": "소설 역주행 홍학의 자리 정해연 선입견, 욕망, 불륜, 죄책감, 젠더에 대한 독자의 자동 추론, 서술이 독자를 속이는 방식. eBook에서 2030이 71%를 차지한 명확한 젊은 독자형 장르소설 SNS ‘반전 스포 금지’ 입소문 → eBook 급증 → 종이책 재구매/선물 → 장기 역주행 불안, 미스터리, 반전 2030 eBook 역주행 SNS 반전미스터리"}, {"type": "소설", "trend": "역주행", "title": "스토너", "author": "존 윌리엄스", "year": "1965", "signal": "1965년작이 한국에서 다시 읽히며 2025년 5~6월 교보문고 종합 TOP 10에 여러 차례 진입한 대표적인 ‘조용한 고전 역주행’.", "evidence": "2025년 5월 둘째 주 9위, 6월 첫째 주 8위 등 문학 강세 시기에 반복적으로 종합 10위권에 들었습니다. 작품 단위 2030 구매 비율은 공개 자료에서 명확히 확인되지 않아 근거 B로 둡니다.", "why": "극적 성공도 영웅적 인생도 없는 한 교수의 평생을 따라가면서 ‘평범하게 살았다는 것은 실패한 것인가’라는 질문을 던집니다. 성취 압박에 지친 젊은 직장인, 대학원생 독자의 정서와 연결되며 재발견됐습니다.", "author_feature": "존 윌리엄스는 절제된 문장과 감정적 과장을 피하는 서술로 한 사람의 평범한 생을 장엄하게 보이게 만듭니다.", "episode": "미국에서도 생전 대중적 성공이 크지 않았던 작품이 유럽과 한국 등에서 뒤늦게 재평가됐다는 ‘두 번째 생애’를 가진 소설입니다.", "content": "가난한 농가 출신 윌리엄 스토너가 대학에서 문학을 발견하고 교수로 평생을 살아갑니다. 결혼 실패, 대학 정치, 사랑, 딸과의 거리, 질병까지 특별하지 않은 삶을 통과합니다.", "theme": "평범한 삶, 일과 소명, 실패, 결혼, 사랑, 대학사회, 죽음, 삶의 가치.", "tags": ["고전역주행", "대학", "삶", "문학", "2025TOP10"], "grade": "B", "audience": "문학 독자 전반. 특히 일, 커리어, 평범한 삶의 의미를 고민하는 성인 독자와 강하게 맞닿는 작품", "route": "문학계 장기 추천 → 독자 입소문 → ‘인생소설’ 스테디 → 2025 문학 붐과 함께 재상승", "style": "극적인 반전 없이 세월과 실패를 건조하게 축적해 마지막에 삶 전체의 무게를 만들어냅니다.", "read": "자극적 사건보다 한 인간의 일생을 천천히 보는 소설, 대학과 연구자의 삶에 관심 있다면.", "caution": "2030 직접 구매비율이 공개된 사례가 아니므로 ‘2030 특화’라기보다 2025 문학 열풍 속 강한 역주행 사례로 분류했습니다.", "difficulty": "보통", "pace": "느림", "mood": "고독, 삶, 절제", "talk": "외부에서 보기에 실패한 인생이라도 자신이 사랑한 일을 했다면 성공한 삶이라고 말할 수 있는가?", "other": "『모순』, 『싯다르타』와 함께 읽으면 오래된 작품이 지금 독자의 문제와 다시 접속하는 서로 다른 방식을 비교할 수 있습니다.", "characters": "윌리엄 스토너 — 농가 출신 영문학 교수. 이디스 — 아내. 그레이스 — 딸. 캐서린 드리스콜 — 스토너가 중년에 사랑하게 되는 젊은 연구자. 로맥스와 워커 — 대학 내 갈등을 만드는 인물들.", "full_plot": "스토너는 농업을 배우러 대학에 갔다가 셰익스피어 강의에서 문학에 매료되어 영문학자의 길을 선택합니다. 이디스와 결혼하지만 결혼생활은 점차 파괴적이고 냉랭해지고, 딸 그레이스와의 관계도 아내의 통제 속에서 멀어집니다. 대학에서는 능력 없는 학생 워커에게 학문적 기준을 적용했다가 학과 권력자인 로맥스와 오랜 갈등을 겪습니다. 중년에는 캐서린 드리스콜과 진정한 사랑을 경험하지만 대학의 압력 때문에 관계를 끝내야 합니다. 말년에 암에 걸린 그는 큰 명예나 성취 없이 죽음을 맞습니다. 마지막 순간 자신의 책을 손에 들고, 자신이 기대했던 삶과 실제로 살아낸 삶 사이를 조용히 받아들입니다.", "spoiler_note": "스토너는 ‘무슨 일이 벌어지는가’보다 그 모든 일이 한 생애 안에서 어떤 무게가 되는지가 핵심입니다.", "id": "book-31", "search_blob": "소설 역주행 스토너 존 윌리엄스 평범한 삶, 일과 소명, 실패, 결혼, 사랑, 대학사회, 죽음, 삶의 가치. 문학 독자 전반. 특히 일, 커리어, 평범한 삶의 의미를 고민하는 성인 독자와 강하게 맞닿는 작품 문학계 장기 추천 → 독자 입소문 → ‘인생소설’ 스테디 → 2025 문학 붐과 함께 재상승 고독, 삶, 절제 고전역주행 대학 삶 문학 2025TOP10"}, {"type": "소설", "trend": "작가읽기", "title": "채식주의자", "author": "한강", "year": "2007", "signal": "노벨문학상 이후 다시 폭발적으로 읽혀 2025년 교보문고 연간 종합 9위까지 올라간 한강 ‘작가 전체 읽기’의 핵심 작품.", "evidence": "2025년 연간 교보문고 TOP 10에 『소년이 온다』와 함께 진입. 2025년 새해 첫날 예스24 종이책 2위를 기록했습니다.", "why": "노벨상이라는 사건이 독자를 한 작품에서 전작으로 이동시켰고, 『채식주의자』는 몸, 폭력, 욕망이라는 강렬한 주제와 비교적 짧은 분량 덕분에 한강 세계의 두 번째 입구가 됐습니다.", "author_feature": "한강은 인간의 폭력을 직접 설명하기보다 몸의 감각과 침묵, 이미지, 타인의 시선을 통해 독자가 폭력을 체감하게 합니다.", "episode": "인터내셔널 부커상 수상작이 노벨상 이후 다시 한국 연간 베스트셀러 TOP 10에 들어오며 한 작가의 과거 작품 전체가 움직이는 백리스트 효과를 보여줬습니다.", "content": "영혜가 반복되는 피의 꿈 이후 고기를 먹지 않겠다고 선언하면서 가족의 정상성, 결혼, 욕망이 균열됩니다. 세 부분은 영혜의 남편, 형부, 언니 인혜의 시점으로 이동합니다.", "theme": "몸의 자기결정권, 가족폭력, 욕망, 정상성, 식물성, 여성의 침묵, 타인을 대상화하는 시선.", "tags": ["한강", "노벨이후", "작가읽기", "몸", "연간TOP10"], "grade": "B", "audience": "한강 신드롬을 따라 대표작을 연쇄적으로 읽은 폭넓은 독자층", "route": "노벨문학상 → 『소년이 온다』 → 대표작 전작 읽기 → 시, 산문까지 확장", "style": "영혜 자신에게 직접적인 서술권을 거의 주지 않고 주변인의 시선으로 영혜의 몸과 침묵을 보여주는 구조.", "read": "강렬하고 불편한 이미지, 여성의 몸과 가족 규범을 다루는 현대문학을 읽고 싶다면.", "caution": "영혜의 행동을 단순한 ‘자유 선언’으로만 낭만화하면 가족, 형부, 의료 시스템의 폭력을 놓치기 쉽습니다.", "difficulty": "보통", "pace": "보통", "mood": "불안, 육체, 폭력", "talk": "영혜는 말이 없어지는가, 아니면 기존 언어로 말하기를 거부하는가?", "other": "『소년이 온다』와 같이 읽으면 한강이 개인의 몸에 가해지는 폭력과 역사적 집단폭력을 각각 어떻게 다루는지 비교할 수 있습니다.", "characters": "영혜 — 육식을 거부하기 시작하는 여성. 인혜 — 영혜의 언니. 영혜의 남편 — 첫 장의 주요 관찰자. 인혜의 남편이자 영혜의 형부 — 영혜의 몸을 예술적, 성적 대상으로 바라봅니다.", "full_plot": "영혜는 피와 육식의 악몽을 꾼 뒤 집안의 고기를 모두 버리고 채식을 시작합니다. 가족 식사에서 아버지가 강제로 고기를 먹이려 하자 영혜는 손목을 긋습니다. 이후 영혜의 형부는 몽고반점과 식물 이미지를 결합한 영상 예술에 집착하며 영혜와 성적 관계를 맺고 이를 촬영합니다. 이 사실이 드러나 가족은 붕괴하고 영혜는 정신병원에 입원합니다. 마지막 부분에서 영혜는 자신이 나무가 되어간다고 믿으며 음식 자체를 거부합니다. 언니 인혜는 영혜를 돌보면서 자신이 ‘정상적인 삶’을 유지해온 방식 역시 폭력과 억압 위에 있었음을 깨닫습니다. 작품은 영혜의 생존을 명확히 해결하지 않은 채 인혜의 시선과 불확실한 미래를 남깁니다.", "spoiler_note": "강제급식, 자해, 형부와의 관계, 정신병원 장면까지 주요 사건을 모두 포함합니다.", "id": "book-32", "search_blob": "소설 작가읽기 채식주의자 한강 몸의 자기결정권, 가족폭력, 욕망, 정상성, 식물성, 여성의 침묵, 타인을 대상화하는 시선. 한강 신드롬을 따라 대표작을 연쇄적으로 읽은 폭넓은 독자층 노벨문학상 → 『소년이 온다』 → 대표작 전작 읽기 → 시, 산문까지 확장 불안, 육체, 폭력 한강 노벨이후 작가읽기 몸 연간TOP10"}, {"type": "소설", "trend": "작가읽기", "title": "작별하지 않는다", "author": "한강", "year": "2021", "signal": "노벨문학상 이후 한강의 대표작과 함께 대규모 역주행. 2025년 1월 1일 예스24 종이책 종합 3위.", "evidence": "노벨문학상 직후 판매가 수천 배 수준으로 급증했다고 보도됐고, 2025년 새해에도 『소년이 온다』, 『채식주의자』와 나란히 최상위권을 유지했습니다.", "why": "『소년이 온다』를 읽은 독자가 ‘역사적 폭력과 기억’이라는 문제의식을 더 따라가고 싶을 때 자연스럽게 제주 4, 3을 다룬 이 작품으로 이동합니다.", "author_feature": "한강은 눈, 새, 피, 손 같은 반복 이미지를 통해 역사 자료와 개인의 기억, 현실과 환영의 경계를 흐립니다.", "episode": "노벨상 이후 단일 대표작이 아니라 역사소설, 시집, 산문까지 함께 팔리며 ‘작가 단위 독서’가 실제 판매로 확인된 사례입니다.", "content": "경하는 친구 인선의 부탁을 받고 폭설 속 제주 집으로 향합니다. 그곳에서 인선의 어머니 정심이 제주 4, 3 당시 잃어버린 가족을 평생 찾았던 기록과 마주합니다.", "theme": "제주 4, 3, 기억, 애도, 가족, 국가폭력, 기록, 죽은 사람과 작별하지 않는 윤리.", "tags": ["한강", "제주4, 3", "작가읽기", "노벨이후", "기억"], "grade": "B", "audience": "『소년이 온다』 이후 한강의 역사, 기억 서사를 이어 읽는 독자층", "route": "노벨상 → 한강 대표작 독서 → 역사, 기억 테마를 따라 전작 이동", "style": "폭설과 어둠 속 현실적 이동이 점차 환영, 기억, 죽은 자의 목소리와 겹치는 몽환적 서사.", "read": "『소년이 온다』의 문제의식이 좋았고 제주 4, 3과 가족 기억을 문학으로 읽고 싶다면.", "caution": "역사적 사실과 소설의 환영적 장면이 겹치므로 사건 설명만 찾기보다 ‘기억하는 방식’ 자체를 보는 것이 중요합니다.", "difficulty": "보통~높음", "pace": "느림", "mood": "눈, 애도, 기억", "talk": "역사적 폭력의 희생자와 ‘작별하지 않는다’는 것은 실제로 어떤 행동을 의미하는가?", "other": "『소년이 온다』와 가장 직접적으로 비교하기 좋은 한강 작품입니다.", "characters": "경하 — 서울에서 살아가는 작가. 인선 — 경하의 친구이자 제주 출신 인물. 정심 — 인선의 어머니로 제주 4, 3의 가족사를 평생 짊어지고 살아갑니다. 아마 — 인선이 기르는 새.", "full_plot": "인선이 사고로 손가락을 크게 다친 뒤 서울 병원에 입원하고, 경하에게 제주 집에 남은 새 아마를 돌봐달라고 부탁합니다. 경하는 폭설을 뚫고 제주 중산간의 집에 도착하지만 아마는 이미 죽어 있습니다. 집 안에서 경하는 정심이 제주 4, 3 당시 행방불명된 가족의 흔적을 찾기 위해 평생 모은 사진, 신문, 기록을 접합니다. 정심은 어린 시절 학살과 실종을 경험했고, 이후에도 가족의 죽음을 완전히 끝난 사건으로 만들지 못했습니다. 밤이 깊어지면서 경하가 실제 인선과 대화하는 것인지, 기억과 환영 속 인선을 만나는 것인지 경계가 무너집니다. 작품은 역사적 죽음을 ‘과거에 끝난 일’로 밀어내지 않고 현재의 살아 있는 사람이 계속 기억하고 감당하는 문제로 남깁니다.", "spoiler_note": "아마의 죽음과 정심의 가족사, 후반부 현실/환영의 경계까지 공개합니다.", "id": "book-33", "search_blob": "소설 작가읽기 작별하지 않는다 한강 제주 4, 3, 기억, 애도, 가족, 국가폭력, 기록, 죽은 사람과 작별하지 않는 윤리. 『소년이 온다』 이후 한강의 역사, 기억 서사를 이어 읽는 독자층 노벨상 → 한강 대표작 독서 → 역사, 기억 테마를 따라 전작 이동 눈, 애도, 기억 한강 제주4, 3 작가읽기 노벨이후 기억", "group": "이슈", "issue_kind": "문학상", "issue_date": "2026-03-26", "issue_event": "영역본이 미국 전미도서비평가협회상(NBCC) 소설 부문을 받았습니다. 한국어로 쓴 한국 작가의 소설이 이 상을 받은 것은 처음이라고 보도됐고, 소식이 알려진 3일간 판매가 교보문고 온라인 11.5배, 알라딘 17.8배(전년 같은 기간 대비, 문학동네 발표) 늘었습니다.", "reaction_2030": "확인 못 함"}, {"type": "소설", "trend": "지속", "title": "첫 여름, 완주", "author": "김금희", "year": "2025", "signal": "2025년 6월 교보문고 종합 3위까지 상승. 작품뿐 아니라 박정민의 출판사 ‘무제’와 ‘듣는 소설 프로젝트’ 자체가 화제가 됐습니다.", "evidence": "6월 둘째 주 4위, 셋째 주 3위. 박정민의 예능 출연, 서울국제도서전 홍보 이후 순위가 28계단 상승한 시점도 확인됩니다.", "why": "책의 내용뿐 아니라 ‘어떻게 출판했는가’가 유행 포인트가 된 사례입니다. 종이책보다 오디오를 먼저 공개하고, 시각장애인 독서 접근성을 고려해 대사 주체와 효과음까지 텍스트에 표시했습니다.", "author_feature": "김금희는 실패하거나 조금 뒤처진 인물을 연민의 대상으로 만들지 않고, 유머와 생활감 속에서 다시 살아가는 힘을 보여주는 데 강합니다.", "episode": "배우 박정민이 만든 출판사 무제의 첫 ‘듣는 소설’ 프로젝트. 김금희는 작품 준비를 위해 시각장애인들과 독서 모임을 진행했습니다.", "content": "프리랜서 성우 손열매는 함께 살던 선배 고수미에게 큰돈을 떼인 뒤 목소리가 나오지 않고 우울증 진단까지 받습니다. 수미를 찾기 위해 그의 고향 완주로 내려가지만 수미 대신 그곳 사람들과 한여름을 보내게 됩니다.", "theme": "실패, 우울, 목소리, 사기와 배신, 지역 공동체, 장애 접근성, 다시 삶을 완주하는 일.", "tags": ["김금희", "듣는소설", "박정민", "출판실험", "2025TOP3"], "grade": "A", "audience": "30~40대 여성 구매가 강하게 확인된 작품이며, 출판 프로젝트와 오디오 콘텐츠를 통해 젊은 독자에게도 넓게 노출", "route": "새 출판사/오디오 프로젝트 → 박정민 홍보 → 예능, 도서전 → 베스트셀러 급상승", "style": "인물 이름이 대사 앞에 표시되고 음향 지시가 등장해 소설과 희곡, 오디오 대본의 중간처럼 읽힙니다.", "read": "사람 냄새 나는 생활소설, 실패 후 다시 움직이는 이야기, 오디오북과 종이책의 경계를 실험한 작품이 궁금하다면.", "caution": "‘힐링’이라는 한 단어로만 묶기엔 우울증, 경제적 배신, 돌봄 공백 같은 현실 문제가 구체적입니다.", "difficulty": "쉬움", "pace": "보통", "mood": "여름, 실패, 유머, 회복", "talk": "접근성을 위해 형식을 바꾼 소설은 문학적 형식 자체도 새롭게 만들 수 있는가?", "other": "김애란 『안녕이라 그랬어』와 같이 읽으면 2025년 여름 한국소설이 ‘생활의 실패’를 다루는 서로 다른 온도를 비교할 수 있습니다.", "characters": "손열매 — 프리랜서 성우. 고수미 — 열매와 함께 살다 돈을 갚지 않고 사라진 선배. 수미의 어머니 — 완주에서 장의사 일과 간이매점을 합니다. 강동경, 한양미, 배우 정애라 등 마을 인물들이 등장합니다.", "full_plot": "열매는 어린 시절부터 목소리를 통해 타인에게 이야기를 전달해온 성우지만, 믿었던 수미에게 돈을 떼이고 수미가 사라진 뒤 목소리가 떨리기 시작합니다. 경제적으로 몰리고 우울증 진단까지 받은 그는 수미의 고향 완주로 향합니다. 정작 수미는 없고 암 투병 중인 수미의 어머니가 남아 있습니다. 열매는 그곳에 머물며 인간에게 지쳤다는 청년 강동경, 방치된 중학생 한양미, 한때 유명했으나 잊혀가는 배우 정애라 등 자기 방식으로 삶에서 비켜난 사람들을 만납니다. 수미를 찾아 돈을 돌려받는 일이 처음 목표였지만, 완주에서의 시간은 ‘실패를 깨끗이 해결하는 것’보다 실패한 상태에서도 다음 장면으로 이동하는 법을 배우는 과정이 됩니다.", "spoiler_note": "결말의 핵심은 모든 문제가 완벽히 해결되는 것이 아니라, 열매가 자기 목소리와 삶을 다시 이어갈 수 있는 상태로 이동한다는 데 있습니다.", "id": "book-34", "search_blob": "소설 지속 첫 여름, 완주 김금희 실패, 우울, 목소리, 사기와 배신, 지역 공동체, 장애 접근성, 다시 삶을 완주하는 일. 30~40대 여성 구매가 강하게 확인된 작품이며, 출판 프로젝트와 오디오 콘텐츠를 통해 젊은 독자에게도 넓게 노출 새 출판사/오디오 프로젝트 → 박정민 홍보 → 예능, 도서전 → 베스트셀러 급상승 여름, 실패, 유머, 회복 김금희 듣는소설 박정민 출판실험 2025TOP3"}, {"type": "소설", "trend": "작가읽기", "title": "이중 하나는 거짓말", "author": "김애란", "year": "2024", "signal": "김애란이 13년 만에 낸 장편으로 출간 즉시 교보문고 종합 1위. 이후 2025년 『안녕이라 그랬어』로 이어지는 김애란 재집중의 전 단계.", "evidence": "출간 첫 주 교보문고 종합 1위, 구매자의 30대가 32.6%로 가장 큰 연령층이었습니다.", "why": "거짓말 게임이라는 즉시 이해되는 장치로 시작하지만, 세 고등학생의 가난, 상실, 가족 붕괴를 매우 현실적으로 다룹니다. 김애란의 기존 30대 독자와 젊은 성장소설 독자가 만난 작품입니다.", "author_feature": "김애란은 구체적인 생활 물건과 대화를 통해 계급, 가족, 상실을 포착하며, 인물이 서로를 완전히 구원하지 못해도 작은 접촉이 삶을 바꾸는 순간을 씁니다.", "episode": "『두근두근 내 인생』 이후 13년 만의 장편이라는 사실만으로도 큰 기대를 모았고, 김애란의 작품이 처음으로 교보 종합 1위에 올랐습니다.", "content": "고2 지우, 소리, 채운은 ‘다섯 문장 중 하나는 거짓’인 자기소개 게임을 계기로 서로를 의식합니다. 세 아이는 각자의 가족과 상실, 말하기 어려운 비밀을 조금씩 알게 됩니다.", "theme": "거짓말과 진실, 청소년의 빈곤, 가족 해체, 상실, 그림과 이야기, 아주 작은 구원.", "tags": ["김애란", "30대", "성장소설", "거짓말", "2024종합1위"], "grade": "A", "audience": "구매자 중 30대 32.6%가 가장 큰 비중. 기존 김애란 독자와 성장소설 독자가 겹침", "route": "13년 만의 장편 기대 → 출간 즉시 1위 → 김애란 전작/후속 신작 관심 지속", "style": "세 인물의 비밀이 서로 직접 충돌하기보다 그림, 글, 반려동물, 우연한 목격을 통해 느슨하게 연결됩니다.", "read": "청소년 주인공이지만 성인 독자에게 더 크게 다가오는 성장소설, 김애란 특유의 생활 문학을 좋아한다면.", "caution": "제목 때문에 추리식 ‘어느 문장이 거짓인가’를 기대하면 다릅니다. 거짓말은 사람을 속이는 장치보다 상처를 말할 수 있게 하는 문턱입니다.", "difficulty": "쉬움~보통", "pace": "보통", "mood": "겨울, 청소년, 슬픔, 연대", "talk": "거짓말이 오히려 진실을 말할 수 있게 만드는 보호막이 될 수 있는가?", "other": "『안녕이라 그랬어』와 연속해서 읽으면 김애란이 청소년과 성인의 관계, 상실을 어떻게 다르게 배치하는지 볼 수 있습니다.", "characters": "지우 — 최근 엄마를 잃고 반려 도마뱀 용식과 살아가는 아이. 소리 — 그림을 그리고 타인과 신체 접촉을 피하는 아이. 채운 — 가족의 비극을 품은 전학생. 선호 — 지우의 어머니와 함께 살았던 어른.", "full_plot": "담임은 학생들에게 다섯 문장으로 자신을 소개하되 하나는 거짓말을 넣게 합니다. 지우, 소리, 채운은 서로의 문장과 학교 밖 장면을 통해 각자의 비밀을 알아가기 시작합니다. 지우는 엄마의 죽음 이후 선호에게 짐이 되기 싫어 독립하려 하고 노동 현장으로 가면서 용식을 소리에게 맡깁니다. 지우는 과거 채운의 가족에게 벌어진 장면을 목격했고 이를 만화로 그리기 시작합니다. 세 사람의 비밀은 한 사건의 범인을 찾듯 합쳐지지 않지만 서로가 감당하는 상실을 이해하게 만듭니다. 마지막에 지우는 사고를 계기로 선호와 다시 연결되고, 선호는 ‘나는 너와 살게 되어 기쁘다’는 말을 포함해 자신의 문장들이 모두 진실이라고 말합니다. 소설은 거짓말 게임을 ‘서로를 속이는 기술’에서 ‘안전하게 진실에 접근하는 방법’으로 뒤집습니다.", "spoiler_note": "지우의 어머니의 죽음과 선호와의 마지막 대화까지 포함합니다.", "id": "book-35", "search_blob": "소설 작가읽기 이중 하나는 거짓말 김애란 거짓말과 진실, 청소년의 빈곤, 가족 해체, 상실, 그림과 이야기, 아주 작은 구원. 구매자 중 30대 32.6%가 가장 큰 비중. 기존 김애란 독자와 성장소설 독자가 겹침 13년 만의 장편 기대 → 출간 즉시 1위 → 김애란 전작/후속 신작 관심 지속 겨울, 청소년, 슬픔, 연대 김애란 30대 성장소설 거짓말 2024종합1위"}, {"type": "소설", "trend": "지금", "title": "한국사 이상현상 연구원", "author": "최인서", "year": "2026", "signal": "2026년 8월 말 출간 직후 교보문고 종합 1위에 2주 연속 올랐고, 출판진흥원 10월 월간 집계에서도 종합 5위를 지켰습니다.", "evidence": "2026년 9월 첫 주 보도 기준 예스24 구매자 중 20대가 41.5%로 가장 높았습니다. 같은 주 예스24 소설/시/희곡 분야 9위였습니다.", "why": "사건을 설명해 주는 대신 탐사 지침서, 사건 보고서, 녹취록, 채팅 내역을 건네고 독자가 직접 맞춰 보게 하는 형식입니다. 웹 연재에서 이미 검증된 ‘기록물 괴담’의 재미가 종이책 굿즈와 만나 20대 구매로 이어진 것으로 보입니다.", "author_feature": "최인서는 이 책이 첫 단행본입니다. 포스타입 연재 당시 55만 명의 열람자를 모았고, 한국사에서 기록되지 못한 이면을 수집한다는 설정으로 궁궐, 고분, 사찰 같은 사적지를 괴담의 무대로 삼습니다.", "episode": "웹 연재 독자층이 그대로 단행본 구매로 옮겨 온 사례입니다. 장르소설이 교보문고 종합 1위에 오른 일 자체가 9월 서점가의 화제였고, 같은 주 다른 연령대는 김애란 산문(40대), 조정래 장편(5060)을 고른 것과 대비됐습니다.", "content": "국가가 관리하는 궁궐, 고분, 사찰, 종갓집 같은 사적지에서 벌어지는 이상현상을 추적하는 비밀 기관 ‘한국사 이상현상 연구원’의 기록을 모은 아카이브형 장편소설입니다. 독자는 신입 탐사원의 자리에서 기록을 읽어 나갑니다.", "theme": "기록되지 못한 사람들, 역사의 이면, 규칙과 생존, 공포, 기록과 진실.", "tags": ["20대", "괴담", "웹연재", "아카이브소설", "한국사"], "grade": "A", "audience": "예스24 구매자 중 20대 41.5%로, 2026년 하반기 신작 가운데 20대 쏠림이 가장 뚜렷하게 확인된 소설", "route": "포스타입 연재 → 첫 단행본 출간 → 교보문고 종합 1위 → 10월 월간 종합 5위", "style": "지침서, 보고서, 녹취록, 면담 기록, 직원 채팅 내역을 엮은 기록물 형식. 서술자가 설명하지 않고 단서만 남깁니다.", "read": "괴담, 기록물 미스터리, 규칙을 지켜야 살아남는 이야기, 한국 역사 공간을 배경으로 한 공포물을 좋아한다면.", "caution": "500쪽 분량의 기록물이라 처음에는 정보가 흩어져 보입니다. 장소별 탐사 기록 사이의 단서를 연결하며 읽어야 재미가 커집니다.", "difficulty": "보통", "pace": "빠름", "mood": "으스스함, 긴장, 수수께끼", "talk": "공식 역사에서 빠진 사람들의 이야기를 ‘괴담’의 형식으로 되살리는 것은 어떤 의미가 있을까?", "other": "같은 시기 예스24 집계에서 조정래 『서리꽃』은 50대 41.9%, 김애란 산문집 『그랬다고 적었다』는 40대 45.8%로, 연령대마다 고른 책이 뚜렷이 갈렸습니다.", "id": "book-36", "search_blob": "소설 지금 한국사 이상현상 연구원 최인서 기록되지 못한 사람들, 역사의 이면, 규칙과 생존, 공포, 기록과 진실. 예스24 구매자 중 20대 41.5%로, 2026년 하반기 신작 가운데 20대 쏠림이 가장 뚜렷하게 확인된 소설 포스타입 연재 → 첫 단행본 출간 → 교보문고 종합 1위 → 10월 월간 종합 5위 으스스함, 긴장, 수수께끼 20대 괴담 웹연재 아카이브소설 한국사", "characters": "신입 탐사원 — 독자가 서는 자리로, 연구원의 기록을 읽으며 사건을 추적합니다. 예나, 최석진 — 탐사 기록에 등장하는 탐사원. 김하늘 — 탐사2팀 탐사원. 지태성 — 탐사1팀장. 인물별 상세 설정은 출판사 소개에 많이 공개되지 않았습니다.", "full_plot": "책은 장소별 탐사 지침서로 나뉩니다. 조선 광해군 때 공사가 중단된 궁궐 터 원영궁, 지하리 4호분, 와룡사, 병자호란 때의 사건을 품은 ○○ 김씨 집안의 폐가 사덕헌, 거렁바위골을 차례로 다루고, 마지막으로 연구원 자체의 탐사 지침서 「세 갈래 길」과 종장, 고어 해독이 이어집니다. 사적지에서 이어지는 실종 사건과 혜민병원 이상 개체 폭주 사건 같은 기록이 쌓이면서 흩어진 단서가 서로 연결되고 사건의 규모가 커집니다. 출판사는 이 과정이 역사 속에 이름 없이 사라진 사람들의 삶과 한을 복원하는 쪽으로 향한다고 소개합니다. 결말의 구체적 내용은 확인하지 못했습니다.", "spoiler_note": "출판사 소개와 목차로 확인한 구성과 사건까지만 적었습니다. 결말은 확인하지 못해 쓰지 않았습니다."}, {"type": "소설", "trend": "지금", "title": "해파리 만개", "author": "김초엽", "year": "2026", "signal": "2026년 4월 나온 짧은 소설집으로, 예스24 집계에서 구매자 절반 가까이가 2030세대였습니다.", "evidence": "예스24 기준 2030세대 구매 비율 47.2%. 같은 해 상반기 소설/시/희곡 분야 전체 평균 2030 비율(28.1%)을 크게 웃돌았습니다.", "why": "쓸모와 효율에서 밀려난 존재를 다루는 짧은 SF라 부담 없이 읽히면서도 김초엽 특유의 다정한 공존 감각이 살아 있습니다. 그림이 함께 들어간 양장본이라 소장용으로도 팔렸을 가능성이 있습니다.", "author_feature": "김초엽은 1993년생으로 화학과 생화학을 공부했고 2017년 한국과학문학상으로 등단했습니다. 인간 중심의 기준 바깥에 있는 존재와 어떻게 함께 살 것인가를 꾸준히 묻는 작가입니다.", "episode": "2026년 장르소설이 2030의 주류 독서로 자리 잡았다는 예스24 분석에서 대표 사례로 꼽혔습니다. 김초엽은 8월 초 낸 장편 『태양 아래 올리브』도 4주 연속 예스24 SF 분야 2위에 올렸습니다.", "content": "마음산책 ‘짧은 소설’ 시리즈로 나온 김초엽의 두 번째 짧은 소설집입니다. 모래, 해파리, 끈적이, 버려진 인공의식, 우주에서 온 젤리처럼 인간의 질서에 잘 맞지 않는 존재들과의 만남을 그립니다.", "theme": "쓸모와 효율이라는 기준의 임의성, 낯선 존재와의 접촉, 공존, 이름 붙이기, 곁을 내어주는 태도.", "tags": ["2030", "SF", "짧은소설", "공존", "김초엽"], "grade": "A", "audience": "예스24 구매자 중 2030 47.2%로, 상반기 문학 평균(28.1%)보다 2030 비중이 19%포인트가량 높은 작품", "route": "김초엽 팬덤 → 짧은 소설 시리즈 → 장르소설 2030 확산 → 신작 장편 『태양 아래 올리브』로 이동", "style": "짧은 분량의 SF 우화. 기묘한 존재를 설정 하나로 제시하고 인물이 그 존재와 관계를 맺는 과정에 집중합니다. 박지숙의 그림이 함께 실렸습니다.", "read": "긴 장편이 부담스럽지만 SF의 상상력과 따뜻한 정서를 함께 느끼고 싶다면.", "caution": "각 편이 짧아 사건의 해결보다 설정과 여운이 중심입니다. 장편의 서사적 쾌감을 기대하면 아쉬울 수 있습니다.", "difficulty": "쉬움", "pace": "보통", "mood": "기묘함, 다정함, 고요함", "talk": "쓸모를 잃은 존재에게 곁을 내어준다는 것은 우리에게 무엇을 요구할까?", "other": "같은 기사에서 무경 『1939년 명성아파트』(2030 40.7%), 청예 『오렌지와 빵칼』(2030 54.4%)도 함께 언급됐습니다.", "id": "book-37", "search_blob": "소설 지금 해파리 만개 김초엽 쓸모와 효율이라는 기준의 임의성, 낯선 존재와의 접촉, 공존, 이름 붙이기, 곁을 내어주는 태도. 예스24 구매자 중 2030 47.2%로, 상반기 문학 평균(28.1%)보다 2030 비중이 19%포인트가량 높은 작품 김초엽 팬덤 → 짧은 소설 시리즈 → 장르소설 2030 확산 → 신작 장편 『태양 아래 올리브』로 이동 기묘함, 다정함, 고요함 2030 SF 짧은소설 공존 김초엽", "characters": "「사각의 탈출」: 네모 — 인간의 타자수 노릇을 하다 쓸모가 다해 버려진 인공의식. 성은수 — 버려진 인공의식을 돕는 구조 단체 활동가. 「끈적이」: 나 — 미라 아주머니에게 산 ‘끈적이’를 만진 뒤 바깥의 생각과 느낌이 몸 안으로 스며드는 경험을 합니다. 「젤리의 우울」: 젤리 — 우주선에 불시착한 존재로, 그것이 흘리는 물질 때문에 사람들이 눈물을 쏟습니다.", "full_plot": "소설집은 「모래 이야기」, 「해파리 만개에 관한 기록」, 「끈적이」, 「사각의 탈출」, 「젤리의 우울」, 「사모나」로 이어집니다. 「모래 이야기」에는 풍경을 응시해 순간을 고정하는 힘을 지녔다고 믿어지는 모래가 나옵니다. 표제작에서는 플라스틱과 비닐 조각에서 생겨난 해파리가 불어나 도시가 혼란에 빠지고, 사람들은 그 해파리와 공존할 방법을 찾아 나갑니다. 「사각의 탈출」은 버려진 인공의식 네모와 구조 활동가 성은수의 만남을, 「젤리의 우울」은 우주에서 온 젤리 때문에 사람들이 눈물을 쏟고 공용 화장실 앞에 ‘화장실에서 울기 금지’ 경고문이 붙는 상황을 그립니다. 마지막 「사모나」는 석상공원에서 죽어 있던 것들이 생명을 얻는 장면으로 나아갑니다. 각 편의 결말은 확인하지 못했습니다.", "spoiler_note": "출판사 소개에 나온 각 수록작의 설정과 도입까지만 적었습니다. 각 편의 결말은 확인하지 못했습니다."}, {"type": "소설", "trend": "지금", "title": "1939년 명성아파트", "author": "무경", "year": "2026", "signal": "2026년 2월 출간된 역사 미스터리로, 예스24 구매자 중 2030 비율이 40%를 넘었습니다.", "evidence": "예스24 기준 2030세대 구매 비율 40.7%. 상반기 소설/시/희곡 분야 평균(28.1%)보다 높았습니다.", "why": "일제강점기 경성의 아파트라는 닫힌 공간에서 벌어지는 본격 추리라는 장르적 재미가 분명합니다. 동시에 식민지 경찰의 수사와 ‘대한독립’ 글씨를 둘러싼 갈등이 역사적 긴장을 더해, 장르소설을 주류처럼 읽는 2030 독자에게 맞았던 것으로 보입니다.", "author_feature": "무경은 ‘장르의 경계가 없다’는 뜻의 필명을 쓰는 부산의 추리 작가입니다. 『1929년 은일당 사건 기록』 시리즈를 썼고, 2024년 한국추리문학상 황금펜상을 받았습니다. 근대 경성을 무대로 한 역사 추리를 꾸준히 써 왔습니다.", "episode": "예스24가 2026년 장르소설의 2030 확산을 분석하며 김초엽 『해파리 만개』와 함께 예로 든 작품입니다. 김홍, 박서련, 송시우가 추천의 말을 썼습니다.", "content": "1939년 여름 경성의 독신자아파트 ‘명성아파트’에서 영화 촬영이 진행되던 중 입주민 한 명이 칼에 찔려 숨진 채 발견됩니다. 현장에 남은 붉은 글씨 때문에 사건은 정치적 사건으로 번지고, 열두 살 식모 입분이 진실에 다가갑니다.", "theme": "식민지 근대, 공권력과 진실, 밀실 추리, 평범한 사람의 끈질김, 감춰진 비밀.", "tags": ["2030", "역사미스터리", "경성", "본격추리", "장르소설"], "grade": "A", "audience": "예스24 구매자 중 2030 40.7%로, 역사 추리 장르에서 젊은 독자 비중이 높게 확인된 사례", "route": "장르소설 2030 확산 → 경성 배경 역사 추리 → 무경의 『1929년 은일당 사건 기록』 시리즈로 확장", "style": "한 건물 안 입주민 전원이 용의자가 되는 고전적 본격 추리 구조에 1939년 경성의 시대 공기를 겹칩니다.", "read": "클로즈드 서클 추리, 일제강점기 경성 배경, 어린 탐정 시점의 이야기를 좋아한다면.", "caution": "트릭 풀이만큼 식민지 경찰의 수사 방식과 시대 분위기가 중요한 비중을 차지합니다.", "difficulty": "보통", "pace": "빠름", "mood": "긴장, 시대감, 수수께끼", "talk": "진실을 밝히는 힘이 공권력이 아니라 평범한 사람의 끈기에서 나온다는 설정은 어떤 시대 인식을 담고 있을까?", "other": "목차가 1938년 12월 프롤로그에서 1939년 8월 에필로그까지 날짜순으로 짜여 있어, 시간 순서대로 사건을 따라가기 좋습니다.", "id": "book-38", "search_blob": "소설 지금 1939년 명성아파트 무경 식민지 근대, 공권력과 진실, 밀실 추리, 평범한 사람의 끈질김, 감춰진 비밀. 예스24 구매자 중 2030 40.7%로, 역사 추리 장르에서 젊은 독자 비중이 높게 확인된 사례 장르소설 2030 확산 → 경성 배경 역사 추리 → 무경의 『1929년 은일당 사건 기록』 시리즈로 확장 긴장, 시대감, 수수께끼 2030 역사미스터리 경성 본격추리 장르소설", "characters": "입분 — 명성아파트에서 식모로 일하는 열두 살 소녀로, 주인공입니다. 우에다 — 아파트 관리인으로, 영화 촬영에 순사 복장으로 출연했다가 살해됩니다. 입주민들 — 402호 이유진, 202호 히로타 교수, 203호 정 작가, 204호 마쓰 감독과 조감독 김 군, 주연 배우 사토 등이 모두 용의선상에 오릅니다.", "full_plot": "1939년 여름, 명성아파트에서 영화 촬영이 진행되고 입주민과 식모들까지 촬영에 얽힙니다. 촬영 도중 단역으로 출연한 관리인 우에다가 칼에 찔려 숨진 채 발견되고, 현장에는 정체불명의 붉은 글씨가 나타납니다. 경찰은 사건을 ‘대일본제국에 대한 반역’으로 규정하고 현장의 ‘대한독립’ 글씨를 공산주의자의 소행으로 단정하며, 과거 공산주의자와 어울린 전력이 드러난 입주민을 강력한 용의자로 몹니다. 수사가 진행될수록 입주민들이 숨겨 온 비밀이 하나씩 드러나 아파트는 혼란에 빠집니다. 출판사는 진실을 밝혀내는 것이 공권력이 아니라 평범한 사람들의 끈질긴 노력이라고 소개합니다. 범인과 결말은 확인하지 못했습니다.", "spoiler_note": "출판사 소개와 목차로 확인한 사건 전개까지만 적었습니다. 범인과 결말은 확인하지 못해 쓰지 않았습니다."}, {"type": "소설", "trend": "지금", "title": "양면의 조개껍데기", "author": "김초엽", "year": "2025", "signal": "2025년 8월 말 출간 직후 예스24 소설/시/희곡 분야 3위에 올랐고, 알라딘 독자 투표 ‘2025 올해의 책’ 8위에 들었습니다.", "evidence": "예스24 9월 1주 집계에서 구매자 중 40대 30.5%, 20대 25.1%, 30대 23.2%로 2030 합계가 48.3%였습니다. 단일 연령대 1위는 40대라서 ‘2030 전용’이라기보다 전 세대가 함께 산 책입니다.", "why": "김초엽은 젊은 독자층이 두꺼운 대표적인 한국 SF 작가입니다. 4년 만의 소설집이라 기존 독자가 출간 직후 움직인 것으로 보이고, 성별이나 종의 경계가 흐린 존재를 통해 ‘인간이란 무엇인가’를 묻는 방식이 정체성 이야기에 익숙한 젊은 독자와 잘 맞습니다.", "author_feature": "장애인, 트랜스휴먼, 비인간처럼 ‘정상’에서 벗어난 존재를 중심에 두는 SF를 써 왔습니다. 이번 소설집에서는 인간이라는 형태 자체를 흐트러뜨리는 쪽으로 상상력을 넓혔다는 평을 받았습니다.", "episode": "『방금 떠나온 세계』(2021) 이후 4년 만의 소설집입니다. 출간 직후 예스24 분야 3위에 오른 뒤 연말 알라딘 독자 투표에서도 한국소설 신작들과 함께 상위 10위에 들었습니다.", "content": "래빗홀에서 나온 김초엽의 세 번째 중단편 소설집입니다. 두 개의 자아를 가진 외계 종족, 다시 기계로 돌아가려는 안드로이드, 서버로 이주한 인류 같은 비인간 존재들이 등장해 인간성의 경계를 시험합니다.", "theme": "인간과 비인간의 경계, 자아의 분열과 공존, 사랑과 질투, 기계성과 인간성, 세계를 해석하는 인간의 한계.", "tags": ["SF", "김초엽", "소설집", "비인간", "정체성"], "grade": "A", "audience": "예스24 출간 첫 주 20대 25.1%, 30대 23.2%(2030 48.3%), 40대 30.5%로 전 세대가 고르게 산 SF 소설집", "route": "김초엽 전작 팬덤 → 4년 만의 신작 소설집 → 출간 직후 분야 상위권 → 연말 독자 투표 상위권", "style": "외계 종족과 안드로이드의 고민을 매우 인간적인 감정의 언어로 풀어내는 단정한 SF 문장.", "read": "『우리가 빛의 속도로 갈 수 없다면』을 좋아했고, 사랑이나 정체성을 비인간의 눈으로 다시 보고 싶다면.", "caution": "하드 SF의 과학적 디테일보다 존재와 관계에 대한 사유가 중심입니다. 연작 세 편은 신, 평행 세계 같은 추상적 설정이 많아 표제작보다 느리게 읽힐 수 있습니다.", "difficulty": "보통", "pace": "보통", "mood": "서늘함, 다정함, 사유", "talk": "한 몸 안의 두 자아가 같은 사람을 사랑한다면, 그중 누구의 사랑이 ‘진짜’인가?", "other": "같은 해 알라딘 올해의 책 1~4위가 모두 한국소설이었고, 이 책은 그 흐름 안에서 SF로 순위에 든 드문 경우입니다.", "id": "book-39", "search_blob": "소설 지금 양면의 조개껍데기 김초엽 인간과 비인간의 경계, 자아의 분열과 공존, 사랑과 질투, 기계성과 인간성, 세계를 해석하는 인간의 한계. 예스24 출간 첫 주 20대 25.1%, 30대 23.2%(2030 48.3%), 40대 30.5%로 전 세대가 고르게 산 SF 소설집 김초엽 전작 팬덤 → 4년 만의 신작 소설집 → 출간 직후 분야 상위권 → 연말 독자 투표 상위권 서늘함, 다정함, 사유 SF 김초엽 소설집 비인간 정체성", "characters": "표제작 「양면의 조개껍데기」: 샐리 — 두 개의 자아를 가진 외계 종족 셀븐인. 경아 — 샐리가 사랑하게 되는 인간. 「수브다니의 여름휴가」: 수브다니 — 인간화에 성공했다가 다시 기계로 돌아가려는 안드로이드.", "full_plot": "표제작에서 셀븐인 샐리는 인간 경아를 사랑하게 되고, 샐리 안의 두 자아는 서로를 질투하며 갈등합니다. 샐리는 자아가 바뀌는 것을 막는 시술을 받지만, 사고로 한쪽 자아가 사라지면서 혼란에 빠집니다. 「수브다니의 여름휴가」의 안드로이드 수브다니는 피부를 금속으로 바꾸고 해변에서 천천히 녹슬기를 바라며, 그동안 지키려던 ‘인간성’이 무엇이었는지 되묻게 합니다. 연작 「고요와 소란」, 「달고 미지근한 슬픔」, 「비구름을 따라서」는 신의 존재, 서버로 이주한 인류, 평행 세계를 오가며 인간이 세계를 이해할 수 있는 한계를 탐구합니다.", "spoiler_note": "보도된 설정과 전개까지만 적었습니다. 표제작의 최종 결말은 확인하지 못해 쓰지 않았습니다."}, {"type": "시", "trend": "지금", "title": "마침내 멸망하는 여름", "author": "정", "year": "2024", "signal": "SNS에서 알려진 자가출판 시집이 2025년 7월 예스24 종합 베스트셀러 6위까지 올랐습니다.", "evidence": "예스24 7월 종합 20위권에 든 한국 시집 4종(이 책 6위 포함)의 연령별 구매 비중은 20대가 30%로 가장 높았습니다. 교보문고 상반기 집계를 분석한 칼럼도 이 책을 ‘20대의 애장 시집’으로 꼽았습니다. 작품 단독 연령 수치는 확인하지 못했습니다.", "why": "대형 출판사 시인선이 아닌 부크크 자가출판 시집이 종합 상위권에 오른 것은 2030 시집 소비가 SNS 입소문과 계절 감성으로 움직인다는 점을 보여줍니다. ‘여름’이라는 키워드가 붙은 시집 여러 권이 같은 달 함께 상위권에 오른 것도 같은 흐름입니다.", "author_feature": "저자는 ‘정’이라는 이름만 공개하고, 여름과 그 안의 영원을 위해, 잠시 머무는 것들을 붙잡기 위해 시를 쓴다고 소개합니다. 등단 경력이나 다른 이력은 서점 소개에서 확인되지 않습니다.", "episode": "2024년 6월 부크크에서 종이책으로 나온 뒤 리커버 에디션도 나왔습니다. 2025년 여름 『여름 피치 스파클링』, 『여름 언덕에서 배운 것』 등과 함께 ‘여름 시집’으로 묶여 순위에 올랐습니다.", "content": "영원할 것 같던 여름이 끝내 사라진다면 무엇을 하겠느냐고 묻는 시집입니다. 사라지는 여름과 모순으로 가득한 영원 사이에서 버티는 사람들을 위한 시라고 소개됩니다.", "theme": "여름의 소멸, 영원과 순간, 버팀, 청춘의 끝, 사라지는 것을 붙잡으려는 마음.", "tags": ["여름시집", "자가출판", "SNS", "청춘", "텍스트힙"], "grade": "B", "audience": "예스24 7월 종합 20위권 한국 시집 4종 구매자 중 20대 30%로 최다(묶음 수치). 교보 상반기 분석에서 ‘20대 애장 시집’으로 언급", "route": "SNS 입소문 → 자가출판 시집 → 여름 시즌 ‘여름 시집’ 묶음 소비 → 종합 6위", "style": "계절 이미지와 끝에 대한 예감을 짧은 호흡으로 반복하는, 감정 중심의 서정.", "read": "차정은, 고선경처럼 SNS에서 읽히는 젊은 시를 좋아하고 여름이 끝나는 감각을 시로 붙잡고 싶다면.", "caution": "문단 등단 시인의 시집과 결이 다르고, 서점 소개 외 비평 자료가 거의 없습니다. 작품 단독 연령 통계도 공개되지 않았습니다.", "difficulty": "쉬움", "pace": "빠름", "mood": "여름, 소멸, 청춘", "talk": "‘곧 끝난다’는 것을 알 때 계절이나 관계는 왜 더 아름답게 느껴지는가?", "other": "아시아경제 기사 원문은 저자를 ‘정의’로 적었는데, ‘정’의 소유격으로 읽힙니다. 교보문고 eBook 페이지의 저자 표기는 ‘정’입니다.", "id": "book-40", "search_blob": "시 지금 마침내 멸망하는 여름 정 여름의 소멸, 영원과 순간, 버팀, 청춘의 끝, 사라지는 것을 붙잡으려는 마음. 예스24 7월 종합 20위권 한국 시집 4종 구매자 중 20대 30%로 최다(묶음 수치). 교보 상반기 분석에서 ‘20대 애장 시집’으로 언급 SNS 입소문 → 자가출판 시집 → 여름 시즌 ‘여름 시집’ 묶음 소비 → 종합 6위 여름, 소멸, 청춘 여름시집 자가출판 SNS 청춘 텍스트힙", "characters": "화자 / 등장하는 존재 — 끝나가는 여름 안에서 버티는 화자가 사라질 것을 알면서도 그 계절과 순간을 붙잡으려 합니다.", "full_plot": "시집의 정서적 흐름 — 영원할 것 같던 여름에서 출발해 그 여름이 결국 끝난다는 예감, 그리고 소멸과 영원의 모순 속에서 버티는 마음으로 나아갑니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다. 개별 수록 시 목록은 확인하지 못했습니다."}, {"type": "소설", "trend": "역주행", "title": "돌이킬 수 있는", "author": "문목하", "year": "2018", "signal": "2018년 데뷔작이 2025년 개정판을 거쳐 2024년부터 2026년 상반기까지 2030 판매량이 해마다 늘었고, 예스24 SF 상위 10위권 작품군에 꼽혔습니다.", "evidence": "예스24 기준 2030세대 판매량이 2024년 136.8% 급증한 데 이어 2025년 11.1%, 2026년 상반기 34.2% 늘었습니다. 2030 구매 비율(%) 자체는 공개되지 않았습니다.", "why": "초능력물, 경찰 누아르, 첩보물을 한 권에 섞은 한국형 장르소설이라 웹소설과 영상 장르물에 익숙한 2030에게 진입 장벽이 낮습니다. 개정판 출간이 다시 읽히는 계기가 된 것으로 보입니다.", "author_feature": "문목하는 SF, 판타지, 미스터리를 섞는 작가로, 데뷔작인 이 책으로 SF 어워드 장편 부문 우수상을 받고 오늘의 작가상 본심에 올랐습니다. 두 번째 장편 『유령해마』도 SF 어워드를 받았습니다.", "episode": "출간 7년 만인 2025년 7월 개정판이 나왔고, 출판사는 이 작품을 ‘이미 고전으로 언급되는’ 한국 SF로 소개합니다. 2026년 장르소설의 2030 확산을 다룬 예스24 분석에서 천선란, 김초엽 작품과 함께 SF 상위권 작품으로 언급됐습니다.", "content": "촉망받는 신입 수사관 윤서리가 부패 경찰을 돕다 건드려선 안 될 범죄조직과 얽히고, 비공식 명령으로 대형 싱크홀 재해 뒤 폐쇄된 유령도시의 암살 작전에 투입됩니다. 그곳에서 그는 수백 명의 사람과 그들의 초능력을 목격합니다.", "theme": "재난 이후의 공동체, 국가와 비밀 조직, 선택과 되돌림, 배신, 초능력과 책임.", "tags": ["2030", "한국SF", "초능력", "누아르", "개정판"], "grade": "B", "audience": "예스24에서 2030 판매량이 3년 연속 증가(2024년 136.8%, 2025년 11.1%, 2026년 상반기 34.2%)한 한국 SF", "route": "SF 어워드 수상 데뷔작 → 2025년 개정판 → 2030 장르소설 확산 → 한국 SF 고전으로 재평가", "style": "초능력 액션과 경찰 누아르, 첩보와 배신을 빠르게 교차시키는 장르 혼합형 장편. 장 제목이 ‘당신이 시작한 이야기’, ‘당신이 선택한 이야기’처럼 2인칭으로 이어집니다.", "read": "한국을 배경으로 한 초능력물, 범죄조직과 국가 조직이 얽히는 누아르를 좋아한다면.", "caution": "세 집단의 관계와 인물의 정체가 늦게 드러나 초반에는 설정을 따라가는 집중이 필요합니다.", "difficulty": "보통", "pace": "빠름", "mood": "긴박함, 어두움, 반전", "talk": "제목처럼 ‘돌이킬 수 있다’면, 우리는 무엇을 되돌리고 무엇을 남겨 두어야 할까?", "other": "같은 기사에서 천선란 『천 개의 파랑』도 2030 판매량이 3년 연속 늘어난 작품으로 함께 언급됐습니다.", "id": "book-41", "search_blob": "소설 역주행 돌이킬 수 있는 문목하 재난 이후의 공동체, 국가와 비밀 조직, 선택과 되돌림, 배신, 초능력과 책임. 예스24에서 2030 판매량이 3년 연속 증가(2024년 136.8%, 2025년 11.1%, 2026년 상반기 34.2%)한 한국 SF SF 어워드 수상 데뷔작 → 2025년 개정판 → 2030 장르소설 확산 → 한국 SF 고전으로 재평가 긴박함, 어두움, 반전 2030 한국SF 초능력 누아르 개정판", "characters": "윤서리 — 촉망받는 신입 수사관. 부패 경찰을 돕다 범죄조직과 얽히고 유령도시 암살 작전에 투입됩니다. 여준 — 책소개 인용문에 등장하는 인물로, 자세한 역할은 출판사 소개에 공개되지 않았습니다. 세 집단 사이를 오가는 정체불명의 여성 — 목적이 드러나지 않는 인물입니다. 초능력자 집단 — 그중 한쪽은 국가 비밀 조직과 연결되어 있고, 세 집단이 서로 견제하며 의존합니다.", "full_plot": "대형 싱크홀 재해로 4만여 명이 목숨을 잃은 도시는 폐쇄된 유령도시가 됐습니다. 신입 수사관 윤서리는 부패 경찰을 돕다 건드려선 안 될 범죄조직과 얽히고, 비공식 명령으로 이 도시에서 벌어지는 암살 작전에 투입됩니다. 그곳에서 서리는 수백 명의 사람과 염동력 같은 초능력을 목격하고, 국가 비밀 조직과 연결된 초능력자 집단을 포함한 세 집단이 서로 견제하고 의존하는 구도 안으로 들어갑니다. 이야기는 경찰과 정체불명의 불법 조직 사이의 첩보와 배신으로 이어집니다. 출판사는 결말이 에필로그 성격으로 설정을 발전시켜 마무리된다고만 소개하며, 구체적 결말은 확인하지 못했습니다.", "spoiler_note": "출판사 소개로 확인한 설정과 초반 전개까지만 적었습니다. 결말은 확인하지 못해 쓰지 않았습니다."}, {"type": "비문학", "trend": "역주행", "title": "월든", "author": "헨리 데이비드 소로", "year": "1854", "signal": "2025년 10월 말 나온 리커버판이 교보문고 11월 1주 종합 3위에 깜짝 진입했습니다.", "evidence": "교보문고 집계에서 리커버판 구매자는 20대 39.1%, 30대 29.3%로 2030이 68.4%였습니다. 기존 판의 주 구매층은 30, 40대였다고 보도됐습니다.", "why": "170여 년 전 고전 산문이 새 표지 하나로 20대 독자에게 다시 열렸습니다. 소장용 디자인을 사는 ‘텍스트힙’ 소비와, 덜 소유하고 단순하게 살자는 메시지가 지금 2030의 피로감과 맞물린 사례입니다.", "author_feature": "소로는 월든 호숫가 오두막에서 직접 생계를 꾸린 경험을 바탕으로 자립, 단순한 삶, 자연 관찰을 기록했습니다. 사상서이면서도 계절과 호수를 묘사하는 문장이 길게 이어지는 문학적 산문입니다.", "episode": "교보문고 단독 리커버 에디션(‘월든 33주년 55만 부 기념’)이 10월 27일 출간된 직후 종합 3위에 올랐습니다. 싱글리스트는 리커버판의 주요 독자층이 20대 여성이며 이전 판보다 구매 연령대가 낮아졌다고 전했습니다.", "content": "1845년부터 1847년까지 매사추세츠 월든 호숫가에서 혼자 살았던 소로가 그 생활과 생각을 정리한 책입니다. 경제적 활동에 대한 이야기에서 출발해 시간, 고독, 자연에서 배우는 삶으로 나아갑니다.", "theme": "단순한 삶, 자립, 고독과 외로움의 구분, 시간의 주인 되기, 자연에서 배우기, 소유에 대한 의심.", "tags": ["고전산문", "리커버", "단순한삶", "자연", "텍스트힙"], "grade": "A", "audience": "리커버판 기준 20대 39.1%, 30대 29.3%로 2030이 약 70%. 기존 판(30, 40대 중심)보다 독자층이 젊어짐", "route": "교보 단독 리커버 출간 → 소장용 표지 화제 → 종합 3위 진입 → 20대 여성 중심 구매", "style": "생활의 구체적인 기록과, 호수와 숲을 오래 바라보는 묘사가 번갈아 나오는 사유형 산문.", "read": "미니멀리즘, 퇴사, 자급자족 같은 말에 끌리지만 실용서보다 생각할 거리가 많은 글을 원한다면.", "caution": "줄거리가 있는 책이 아니고 문장이 길고 느립니다. 처음부터 끝까지 읽기보다 마음에 드는 장을 골라 천천히 읽는 편이 맞습니다. 판본마다 번역과 분량 차이가 큽니다.", "difficulty": "보통~높음", "pace": "천천히", "mood": "고요함, 자립, 자연", "talk": "‘적게 가지면 더 자유로워진다’는 소로의 주장은 지금 20, 30대의 삶에서도 실천 가능한가?", "other": "리커버판의 판본, 역자 정보는 기사에서 확인하지 못했습니다(세계일보는 출판사를 은행나무로 적음). 리커버 디자인이 고전의 독자층을 바꾼 사례로 함께 보면 좋습니다.", "id": "book-42", "search_blob": "비문학 역주행 월든 헨리 데이비드 소로 단순한 삶, 자립, 고독과 외로움의 구분, 시간의 주인 되기, 자연에서 배우기, 소유에 대한 의심. 리커버판 기준 20대 39.1%, 30대 29.3%로 2030이 약 70%. 기존 판(30, 40대 중심)보다 독자층이 젊어짐 교보 단독 리커버 출간 → 소장용 표지 화제 → 종합 3위 진입 → 20대 여성 중심 구매 고요함, 자립, 자연 고전산문 리커버 단순한삶 자연 텍스트힙", "characters": "비문학이므로 소설적 등장인물 대신 저자 소로 자신이 화자로 등장합니다. 호숫가 오두막을 짓고 밭을 일구며 이웃, 방문객, 동물, 계절을 관찰하는 1인칭 기록자입니다.", "full_plot": "소로는 먼저 호숫가에서 스스로 생계를 꾸린 경제적 활동을 기록하며 삶을 최대한 단순하게 만들자고 말합니다. 이어 호숫가 생활 속에서 시간을 스스로 계획하는 법, 고독을 외로움과 구분하는 법, 자연을 관찰하며 배우는 법을 이야기합니다. 결론은 삶을 최대한 단순하게 만들고 남의 기준이 아닌 자기 본능과 판단에 따라 살라는 것입니다.", "spoiler_note": "논지와 결론을 숨기지 않고 핵심 주장까지 공개합니다."}, {"type": "시", "trend": "역주행", "title": "여름 언덕에서 배운 것", "author": "안희연", "year": "2020", "signal": "2020년 시집이 2025년 7월 예스24 종합 베스트셀러 16위에 다시 올랐습니다.", "evidence": "예스24 7월 종합 20위권에 든 한국 시집 4종(이 책 16위 포함)의 연령별 구매 비중은 20대가 30%로 가장 높았습니다. 작품 단독 연령 수치는 확인하지 못했습니다.", "why": "출간 5년 차 창비시선이 여름 시즌에 다시 종합 순위에 오른 것은 SNS 시집 열풍이 신예 자가출판 시집뿐 아니라 문단에서 인정받은 젊은 시인의 전작으로도 번진다는 신호입니다.", "author_feature": "1986년생으로 2012년 창비신인시인상으로 등단했고, 첫 시집 『너의 슬픔이 끼어들 때』로 신동엽문학상을 받았습니다. 슬픔과 상처를 섣불리 위로하지 않고 오래 들여다보는 서정으로 알려져 있습니다.", "episode": "2025년 4월 전자책이 나온 뒤, 7월 ‘여름 시집’들이 함께 종합 순위에 오르는 흐름 속에서 다시 상위권에 들었습니다. 수록작 「스페어」는 2020년 ‘오늘의 시’ 수상작입니다.", "content": "창비시선 446번입니다. 삶의 바닥을 바라보며 세상의 슬픔을 헤아리는 서정시집으로, 출판사는 살아 있어서 울고 있는 존재들의 상처를 어루만지는 시집이라고 소개합니다.", "theme": "슬픔, 상처, 살아 있음, 여름과 계절의 감각, 타인의 고통을 헤아리기.", "tags": ["안희연", "창비시선", "여름시집", "서정", "역주행"], "grade": "B", "audience": "예스24 7월 종합 20위권 한국 시집 4종 구매자 중 20대 30%로 최다(묶음 수치)", "route": "여름 시즌 시집 수요 → ‘여름’ 제목 시집 묶음 소비 → 등단 시인 전작 재발견", "style": "일상의 사물과 풍경에서 출발해 슬픔의 바닥까지 천천히 내려가는, 절제된 서정.", "read": "SNS 시집으로 시에 입문했고, 다음 단계로 문예지 출신 젊은 시인의 시집을 읽어 보고 싶다면.", "caution": "제목처럼 밝은 여름 시집을 기대하면 정서가 무겁게 느껴질 수 있습니다. 이미지가 압축되어 있어 천천히 읽는 편이 좋습니다.", "difficulty": "보통", "pace": "천천히", "mood": "슬픔, 위로, 여름", "talk": "섣부른 위로 대신 슬픔을 오래 바라봐 주는 시는 우리에게 무엇을 해 주는가?", "other": "같은 달 순위에 오른 『마침내 멸망하는 여름』, 『여름 피치 스파클링』과 비교해 읽으면 자가출판 시집과 문예지 출신 시인의 ‘여름’이 어떻게 다른지 보입니다.", "id": "book-43", "search_blob": "시 역주행 여름 언덕에서 배운 것 안희연 슬픔, 상처, 살아 있음, 여름과 계절의 감각, 타인의 고통을 헤아리기. 예스24 7월 종합 20위권 한국 시집 4종 구매자 중 20대 30%로 최다(묶음 수치) 여름 시즌 시집 수요 → ‘여름’ 제목 시집 묶음 소비 → 등단 시인 전작 재발견 슬픔, 위로, 여름 안희연 창비시선 여름시집 서정 역주행", "characters": "화자 / 등장하는 존재 — 삶의 바닥을 응시하는 화자가 상처 입고 울고 있는 존재들을 곁에서 바라보고 헤아립니다.", "full_plot": "시집의 정서적 흐름 — 세상의 슬픔을 마주하는 데서 시작해, 살아 있기 때문에 우는 존재들의 상처를 섣불리 지우지 않고 어루만지는 쪽으로 나아갑니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다. 부 구성은 자료마다 달라(3부, 4부) 적지 않았습니다."}, {"type": "소설", "trend": "역주행", "title": "브람스를 좋아하세요...", "author": "프랑수아즈 사강", "year": "1959", "signal": "2026년 예스24에서 이 책을 산 1020 독자가 전년 동기 대비 144.3% 늘었습니다. 같은 집계의 『싯다르타』(107.5%), 『이방인』(79.3%)보다 증가 폭이 컸습니다.", "evidence": "교보문고 2025년 상반기(1~5월) 세계문학전집 판매에서 『싯다르타』, 『데미안』, 『인간 실격』 다음으로 많이 팔렸고, 2026년 상반기 결산에서도 꾸준히 팔린 세계문학전집으로 다시 이름이 올랐습니다. 작품 단위 2030 비율은 확인 못 함.", "why": "서울경제는 1020의 ‘텍스트 힙’이 시, 소설을 넘어 고전으로 넓어졌다고 짚었고, 민음사 측은 세계문학전집을 예능 형식으로 소개한 유튜브 채널이 젊은 독자를 늘렸다고 설명했습니다. 얇은 분량과 연애 소설이라는 진입 장벽 낮은 성격도 고전 입문용으로 맞았습니다.", "author_feature": "프랑수아즈 사강은 10대에 『슬픔이여 안녕』으로 데뷔한 프랑스 작가입니다. 사랑의 권태와 고독, 자유를 짧고 건조한 문장으로 그립니다.", "episode": "민음사 세계문학전집 179권으로 나와 있습니다. 2026년 1~3월 10대의 민음사 세계문학전집 구매량은 전년 동기 대비 98.8%, 20대는 33.2% 늘었습니다.", "content": "39세의 실내장식가 폴이 오래된 연인 로제와 14살 연하의 청년 시몽 사이에서 흔들리는 이야기입니다.", "theme": "사랑의 권태, 고독, 나이 차와 사회의 시선, 관계 속 자유와 의존.", "tags": ["텍스트힙", "세계문학", "1020", "연애소설", "고전입문"], "grade": "B", "audience": "1020 독자 증가가 두드러짐(예스24 1020 구매 전년 동기 대비 144.3% 증가). 20대, 30대 단독 비중은 확인 못 함.", "route": "텍스트 힙, 출판사 유튜브의 세계문학 소개 → 얇은 고전 입문 → 『싯다르타』, 『이방인』 등 세계문학전집으로 확장", "style": "짧은 분량, 군더더기 없는 문장, 인물의 감정을 길게 설명하지 않고 행동과 대화로 보여 주는 방식입니다.", "read": "고전을 처음 시작하고 싶은데 두꺼운 책은 부담스럽거나, 연애 감정의 피로와 외로움을 정확하게 그린 소설을 찾는다면.", "caution": "144.3%는 1020 구매 증가율이고 기간은 ‘올해, 전년 동기 대비’로만 표기돼 정확한 집계 기간을 확인하지 못했습니다. 특정 SNS 게시물이나 인물이 계기였다는 보도는 찾지 못했습니다.", "difficulty": "쉬움", "pace": "보통", "mood": "권태, 쓸쓸함, 세련됨", "talk": "폴이 원하는 것은 사랑받는 것인가, 혼자가 아니라는 확신인가?", "other": "제목의 ‘브람스를 좋아하세요’는 시몽이 폴을 연주회에 초대하는 장면에서 나옵니다. 사강의 『슬픔이여 안녕』과 이어 읽으면 작가의 관계 감각이 잘 보입니다.", "id": "book-44", "search_blob": "소설 역주행 브람스를 좋아하세요... 프랑수아즈 사강 사랑의 권태, 고독, 나이 차와 사회의 시선, 관계 속 자유와 의존. 1020 독자 증가가 두드러짐(예스24 1020 구매 전년 동기 대비 144.3% 증가). 20대, 30대 단독 비중은 확인 못 함. 텍스트 힙, 출판사 유튜브의 세계문학 소개 → 얇은 고전 입문 → 『싯다르타』, 『이방인』 등 세계문학전집으로 확장 권태, 쓸쓸함, 세련됨 텍스트힙 세계문학 1020 연애소설 고전입문", "characters": "폴 — 39세의 이혼한 실내장식가로 오랜 연인 로제와 독립적인 관계를 유지하려 합니다. 로제 — 폴의 연인으로 사업을 하며 다른 여자들을 만나기도 합니다. 시몽 — 25세의 청년으로 폴의 고객인 미국인 부인의 아들이며 폴에게 적극적으로 구애합니다.", "full_plot": "폴은 로제와 띄엄띄엄 만나는 관계 속에서 외로움을 느낍니다. 고객의 아들 시몽이 그녀에게 구애하며 살 플레옐의 브람스 연주회에 초대하자, 폴은 그가 음악에 민감한 사람이라고 믿고 관계를 받아들입니다. 둘은 몇 주 동안 뜨거운 관계를 이어 가지만, 폴은 로제를 향한 사랑이 더 소중하다는 것을 깨닫고 나이 차에 대한 주변의 시선도 의식해 시몽과의 관계를 끝냅니다. 결말 이후 세 사람 관계의 세부 장면은 확인한 자료의 서술이 엇갈려 이 선택까지만 적습니다.", "spoiler_note": "폴이 시몽과 헤어지는 결정까지 공개했습니다."}, {"type": "소설", "trend": "지속", "title": "오렌지와 빵칼", "author": "청예", "year": "2024", "signal": "2024년 7월 출간 뒤 2030 구매 비율이 해마다 올라 2026년 상반기에는 구매자 절반 이상이 2030이 됐고, 7월에 개정판이 나왔습니다.", "evidence": "예스24 기준 2030세대 구매 비율이 2024년 44.2%, 2025년 53.4%, 2026년 상반기 54.4%로 계속 커졌습니다.", "why": "착한 사람으로 살기 위해 억지로 웃고 사과해 온 20대 후반 직장인이 시술로 감정의 통제를 잃는다는 설정은, 관계 속에서 자신을 누르는 2030의 경험과 바로 맞닿습니다. 독자 반응도 ‘불쾌하면서 공감되는 날것의 이야기’로 요약됐습니다.", "author_feature": "청예는 교보문고 스토리 공모전, 컴투스 글로벌 콘텐츠문학상, K-스토리 공모전, 한국과학문학상 장편 대상을 거친 작가입니다. 예스24 ‘2026 한국 문학의 미래가 될 젊은 작가’ 투표에서 1위에 올랐습니다.", "episode": "출간 직후 예스24 SF 분야 7위에 오른 뒤 9개월 연속 20위권을 지켰고, 출간 2년 차 이후 오히려 2030 비중이 늘었습니다. 2026년 7월 3일 새 서문과 새 표지를 단 개정판이 나왔고, 6월에는 신작 『주와 연』도 장르소설 10위권에 들었습니다.", "content": "27세 유치원 교사 오영아는 주변의 기대에 맞추느라 자신을 억누르다 우울과 무기력에 빠지고, 4주간 효과가 지속되는 ‘정서 조절’ 시술을 받습니다. 시술 뒤 억눌렸던 분노와 욕망이 터져 나옵니다.", "theme": "착한 사람 콤플렉스, 감정 억압, 분노와 해방, 관계 속 자기기만, 정상성.", "tags": ["2030", "SF미스터리", "분노", "착한아이", "청예"], "grade": "A", "audience": "예스24 구매자 중 2030이 2026년 상반기 54.4%로, 이번 조사에서 확인한 작품 중 2030 비중이 가장 높음", "route": "출간 직후 SF 7위 → 입소문으로 장기 판매 → 2030 비중 확대 → 개정판, 신작 『주와 연』으로 확장", "style": "SF 설정 하나(정서 변화 시술)를 리얼리즘 일상에 심고 미스터리처럼 긴장을 쌓습니다. 주인공의 불쾌한 변화를 독자가 바로 옆에서 지켜보게 합니다.", "read": "늘 참고 웃는 쪽이었던 자신이 지겹거나, 분노를 정면으로 다루는 이야기를 찾는다면.", "caution": "주인공의 분노와 공격성이 거칠게 드러나 불편하게 읽힐 수 있습니다. 그 불편함 자체가 작품의 의도에 가깝습니다.", "difficulty": "보통", "pace": "빠름", "mood": "불쾌함, 해방감, 긴장", "talk": "‘착한 사람’이라는 평가는 누구를 위해 유지되는가?", "other": "영국, 대만, 튀르키예에서 번역 출간됐고 7개국에 판권이 수출됐습니다. 2025 문학나눔 도서, 국립중앙도서관 사서추천도서로도 선정됐습니다.", "id": "book-45", "search_blob": "소설 지속 오렌지와 빵칼 청예 착한 사람 콤플렉스, 감정 억압, 분노와 해방, 관계 속 자기기만, 정상성. 예스24 구매자 중 2030이 2026년 상반기 54.4%로, 이번 조사에서 확인한 작품 중 2030 비중이 가장 높음 출간 직후 SF 7위 → 입소문으로 장기 판매 → 2030 비중 확대 → 개정판, 신작 『주와 연』으로 확장 불쾌함, 해방감, 긴장 2030 SF미스터리 분노 착한아이 청예", "characters": "오영아 — 27세 유치원 교사. 주변의 기대에 맞추려 억지로 웃고 사과하며 살아오다 우울과 무기력에 빠집니다. 서향의학연구센터 — 뇌 시술을 연구하는 기관으로, 4주간 효과가 지속되는 정서 조절 시술을 제공합니다. 영아를 ‘선함’의 틀에 묶어 둔 주변 사람들 — 시술 뒤 영아가 벗어나려는 관계들입니다.", "full_plot": "오영아는 유치원 교사로 일하며 모두에게 좋은 사람이 되려고 감정을 눌러 왔지만, 그 대가로 우울과 무기력에 시달립니다. 심리치료를 결심한 그는 서향의학연구센터에서 4주 동안 효과가 이어지는 정서 조절 시술을 받습니다. 시술 뒤 감정의 통제력이 사라지자 그동안 억눌렸던 분노와 욕망이 거침없이 터져 나옵니다. 영아는 자신을 선함의 틀에 묶어 두었던 관계에서 하나씩 벗어나려 하고, 자신이 변하고 있다는 사실을 알면서도 그 해방감에 빠져듭니다. 시술 효과가 끝나는 시점에 이야기가 어떻게 마무리되는지는 확인하지 못했습니다.", "spoiler_note": "출판사 소개에 나온 시술 이후의 변화까지 적었습니다. 결말은 확인하지 못해 쓰지 않았습니다."}, {"type": "소설", "trend": "지속", "title": "천 개의 파랑", "author": "천선란", "year": "2020", "signal": "2020년 한국과학문학상 장편 대상작이 2024년부터 2026년 상반기까지 2030 판매량을 계속 늘리며 예스24 SF 상위권을 지켰습니다.", "evidence": "예스24 기준 2030세대 판매량이 2024년 16.3%, 2025년 39.5%, 2026년 상반기 15.3% 늘었습니다. 2030 구매 비율(%) 자체는 공개되지 않았습니다.", "why": "휴머노이드 기수와 다리를 잃어 가는 경주마, 휠체어를 타는 언니, 남편을 잃은 엄마가 서로를 돌보는 이야기입니다. SF 설정이지만 돌봄과 회복의 정서가 앞에 서 있어 장르 독자가 아니어도 쉽게 들어옵니다.", "author_feature": "천선란은 1993년생으로, 이 작품으로 한국과학문학상 장편 대상을 받았습니다. 장애, 동물권, 한부모 가족, 로봇의 존재 같은 사회적 질문을 따뜻한 서사에 넣는 작가로 소개됩니다.", "episode": "출판사 소개 기준 누적 20만 부가 팔렸고 10여 개국에 판권이 수출됐습니다. 2024년 국립극단 연극과 서울예술단 창작가무극으로 무대에 올랐고, 워너 브라더스 픽쳐스와 영화화 판권 계약을 맺었습니다.", "content": "2035년, 경마 기수가 휴머노이드로 바뀐 세계에서 낙마해 폐기를 앞둔 휴머노이드 기수 콜리와, 연골이 닳아 안락사 위기에 놓인 경주마 투데이, 그리고 콜리를 사들인 소녀 연재의 가족이 만나는 이야기입니다.", "theme": "돌봄, 장애와 자유, 동물권, 상실과 회복, 로봇과 인간의 교감.", "tags": ["2030", "한국SF", "돌봄", "휴머노이드", "천선란"], "grade": "B", "audience": "예스24에서 2030 판매량이 3년 연속 증가(2024년 16.3%, 2025년 39.5%, 2026년 상반기 15.3%)한 한국 SF 스테디셀러", "route": "한국과학문학상 대상 → 연극, 창작가무극 → 2030 장르소설 확산 → 한국 SF 입문작", "style": "로봇의 시선과 인간 가족의 시선을 오가며, 큰 사건보다 서로를 알아 가는 대화와 감정의 변화를 따라갑니다.", "read": "따뜻한 SF, 동물과 로봇이 나오는 이야기, 가족이 서로를 돌보는 이야기를 좋아한다면.", "caution": "장애, 사별, 동물의 고통 같은 소재가 직접 다뤄집니다.", "difficulty": "쉬움", "pace": "보통", "mood": "따뜻함, 슬픔, 희망", "talk": "누군가를 ‘쓸모’가 아니라 존재 자체로 대한다는 것은 어떤 모습일까?", "other": "같은 기사에서 김초엽 『우리가 빛의 속도로 갈 수 없다면』, 『지구 끝의 온실』, 문목하 『돌이킬 수 있는』과 함께 예스24 SF 상위권 작품으로 언급됐습니다.", "id": "book-46", "search_blob": "소설 지속 천 개의 파랑 천선란 돌봄, 장애와 자유, 동물권, 상실과 회복, 로봇과 인간의 교감. 예스24에서 2030 판매량이 3년 연속 증가(2024년 16.3%, 2025년 39.5%, 2026년 상반기 15.3%)한 한국 SF 스테디셀러 한국과학문학상 대상 → 연극, 창작가무극 → 2030 장르소설 확산 → 한국 SF 입문작 따뜻함, 슬픔, 희망 2030 한국SF 돌봄 휴머노이드 천선란", "characters": "콜리 — 경주마 투데이의 파트너였던 휴머노이드 기수. 투데이의 다리를 지키려고 스스로 낙마를 택해 부서진 채 폐기를 앞둡니다. 투데이 — 과도한 질주로 연골이 닳아 안락사 위기에 놓인 경주마. 연재 — 로봇 기술에 재능이 있지만 집안 형편 때문에 꿈을 접은 소녀로, 콜리를 사들입니다. 은혜 — 연재의 언니로 휠체어를 타며, 투데이에게 동질감을 느낍니다. 보경 — 소방관 남편을 사고로 잃고 두 딸을 키우는 엄마로, 콜리와의 대화로 상실을 다시 봅니다. 주원 — 은혜에게 용기를 건네는 친구.", "full_plot": "2035년, 경마의 기수는 인간에서 휴머노이드로 바뀌었습니다. 휴머노이드 기수 콜리는 무리한 질주로 연골이 닳은 경주마 투데이의 다리를 지키려고 스스로 낙마하고, 부서진 채 폐기를 기다립니다. 소프트 로봇 연구원의 꿈을 접고 방황하던 연재는 경마장 마사에서 콜리를 발견해 사들이고 함께 지내기 시작합니다. 휠체어를 타는 언니 은혜는 더 달리지 못하는 투데이를 보러 다니며 자신의 처지를 겹쳐 보고, 엄마 보경은 콜리와 대화하며 남편을 잃은 아픔을 다시 마주합니다. 세 사람과 콜리는 안락사 위기의 투데이를 위해 함께 움직이게 됩니다. 출판사 소개에는 결말이 공개되지 않았고, 확인하지 못했습니다.", "spoiler_note": "출판사 소개로 확인한 설정과 인물 관계까지 적었습니다. 투데이와 콜리의 마지막 장면은 독자 리뷰에서만 언급돼 쓰지 않았습니다."}, {"type": "시", "trend": "지속", "title": "그대는 나의 여름이 되세요", "author": "서덕준", "year": "2023", "signal": "2023년 말 나온 첫 시집이 2025년 7월 예스24 종합 베스트셀러 18위에 올랐습니다.", "evidence": "예스24 7월 종합 20위권에 든 한국 시집 4종(이 책 18위 포함)의 연령별 구매 비중은 20대가 30%로 가장 높았습니다. 작품 단독 연령 수치는 확인하지 못했습니다.", "why": "오래 구독자들에게 시를 선보여 온 시인이 구독자 요청으로 낸 첫 시집입니다. 사랑의 여러 계절을 짧고 직접적인 고백체로 담아 필사하거나 공유하기 쉬운 형태라는 점이 2030의 시집 소비 방식과 맞는 것으로 보입니다.", "author_feature": "교사로 일하며 15년 전부터 시를 썼고 8년 전부터 사람들에게 시를 선보였다고 소개됩니다. 영화 〈완벽한 타인〉과 금융사 극장 광고에 시로 참여한 이력이 있습니다.", "episode": "구독자들의 출간 요청이 이어진 끝에 나온 첫 시집으로 소개됩니다. 2025년 여름 ‘여름’ 제목 시집들이 함께 순위에 오르는 흐름에 올라탔고, 2026년 2월 두 번째 시집 『함께 추락하러 왔어요』가 나왔습니다.", "content": "위즈덤하우스에서 나온 시집으로 141편을 실었습니다. 갈망하는 마음, 한 사람을 끌어안는 마음, 남겨진 슬픔, 빛바랜 추억을 보내는 시선까지 사랑의 여러 계절을 따라갑니다.", "theme": "사랑의 시작과 끝, 갈망, 이별 뒤의 슬픔, 추억, 청춘의 내면.", "tags": ["사랑시", "여름시집", "SNS시인", "고백", "필사"], "grade": "B", "audience": "예스24 7월 종합 20위권 한국 시집 4종 구매자 중 20대 30%로 최다(묶음 수치)", "route": "SNS 시 연재 → 구독자 요청으로 첫 시집 → 여름 시즌 ‘여름 시집’ 묶음 소비 → 종합 18위", "style": "사랑을 계절에 빗댄 짧고 직설적인 고백체. 한 편이 짧아 필사와 공유에 맞습니다.", "read": "연애와 이별의 감정을 쉽고 다정한 말로 정리한 시를 찾거나, 선물용 시집을 고른다면.", "caution": "141편으로 분량이 많고 사랑이라는 한 주제를 반복하므로 한 번에 읽기보다 골라 읽는 편이 좋습니다. 작품 단독 연령 통계는 공개되지 않았습니다.", "difficulty": "쉬움", "pace": "빠름", "mood": "설렘, 그리움, 여름", "talk": "사랑을 ‘계절’에 비유하는 것은 그 사랑이 언젠가 끝난다는 걸 받아들인다는 뜻일까?", "other": "대표작으로 「도둑이 든 여름」이 소개됩니다. 후속 시선집 『함께 추락하러 왔어요』와 이어 읽을 수 있습니다.", "id": "book-47", "search_blob": "시 지속 그대는 나의 여름이 되세요 서덕준 사랑의 시작과 끝, 갈망, 이별 뒤의 슬픔, 추억, 청춘의 내면. 예스24 7월 종합 20위권 한국 시집 4종 구매자 중 20대 30%로 최다(묶음 수치) SNS 시 연재 → 구독자 요청으로 첫 시집 → 여름 시즌 ‘여름 시집’ 묶음 소비 → 종합 18위 설렘, 그리움, 여름 사랑시 여름시집 SNS시인 고백 필사", "characters": "화자 / 등장하는 존재 — 사랑에 빠졌다가 남겨지는 화자가 ‘그대’에게 고백하고, 그리워하고, 끝내 추억을 떠나보냅니다.", "full_plot": "시집의 정서적 흐름 — 한 사람을 갈망하는 마음에서 시작해 그 사람을 끌어안는 시기를 지나, 남겨진 슬픔과 빛바랜 추억을 보내는 시선으로 마무리됩니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다."}, {"type": "소설", "trend": "스테디", "title": "데미안", "author": "헤르만 헤세", "year": "1919", "signal": "2026년 상반기 예스24 해외소설 4위에 오르며, 10년 사이 2030 구매 비중이 크게 늘어난 고전으로 꼽혔습니다.", "evidence": "예스24 기준 2030 구매 비중이 2016년 19% 수준에서 2026년 27%로 올랐습니다. 한 해 앞선 2025년 교보문고 상반기(1~5월) 집계에서도 외국소설 4위였고, 이때 세계문학전집의 주 독자층이 40대에서 20대로 바뀌었다는 분석이 나왔습니다.", "why": "자기 안의 선과 악, 기성의 가치와 내면의 목소리 사이에서 길을 찾는 성장 서사라, 진로와 정체성을 고민하는 20대에게 오래 읽혀 온 책입니다. 2026년 『싯다르타』가 종합 상위권에 오르며 헤세 전작으로 관심이 번진 흐름과도 맞물립니다.", "author_feature": "헤르만 헤세는 1877년 독일 칼프에서 태어나 1946년 노벨문학상을 받았습니다. 『데미안』은 1919년 ‘에밀 싱클레어’라는 필명으로 처음 발표됐습니다.", "episode": "예스24는 2026년 상반기 동향에서 20대, 30대의 해외소설 구매량이 각각 29.7%, 33.0% 늘었다고 분석하며 『데미안』과 『이방인』을 2030 비중이 커진 고전의 예로 들었습니다. 같은 해 교보문고 7월 4주 집계에서도 19위에 올랐습니다.", "content": "따뜻한 가정에서 자란 소년 싱클레어가 신비로운 소년 데미안을 만나 선과 악, 금지된 것과 자기 내면의 목소리를 마주하며 자아를 찾아가는 성장소설입니다.", "theme": "성장, 자아 찾기, 선과 악의 이분법 넘어서기, 우정, 내면의 목소리.", "tags": ["2030", "세계문학", "성장소설", "자아", "헤세"], "grade": "A", "audience": "예스24 구매자 중 2030 비중이 2016년 약 19%에서 2026년 27%로 오른 세계문학 고전", "route": "헤세 『싯다르타』 상위권 → 헤세 전작 읽기 → 해외 고전 성장소설로 확장", "style": "1인칭 회고로 내면의 갈등을 따라가는 상징적 성장소설. 카인과 아벨, 새와 알 같은 상징이 반복됩니다.", "read": "지금 내가 믿는 가치가 정말 내 것인지 묻고 싶을 때, 『싯다르타』를 읽고 헤세를 더 읽고 싶다면.", "caution": "사건보다 상징과 사유가 중심이라 후반부로 갈수록 추상적으로 느껴질 수 있습니다. 번역본마다 문체 차이가 큽니다.", "difficulty": "보통~높음", "pace": "느림", "mood": "내면, 방황, 각성", "talk": "‘내 안에서 스스로 솟아 나오려는 것’을 따라 사는 일과 공동체의 규범은 어떻게 부딪히는가?", "other": "2026년 상반기 교보문고 종합 6위에 오른 헤세의 『싯다르타』와 함께 읽으면 두 성장 서사를 비교할 수 있습니다.", "id": "book-48", "search_blob": "소설 스테디 데미안 헤르만 헤세 성장, 자아 찾기, 선과 악의 이분법 넘어서기, 우정, 내면의 목소리. 예스24 구매자 중 2030 비중이 2016년 약 19%에서 2026년 27%로 오른 세계문학 고전 헤세 『싯다르타』 상위권 → 헤세 전작 읽기 → 해외 고전 성장소설로 확장 내면, 방황, 각성 2030 세계문학 성장소설 자아 헤세", "characters": "싱클레어 — 따뜻한 가정에서 자란 소년으로, 선과 악 사이에서 갈등하며 자아를 찾아갑니다. 데미안 — 성서의 카인과 아벨 이야기를 다르게 읽어 주며 싱클레어를 이끄는 신비로운 소년. 베아트리체 — 싱클레어가 어두운 시기를 이겨 내도록 만드는 존재로, 그가 그린 초상은 데미안을 닮아 있습니다. 에바 부인 — 데미안의 어머니로, 싱클레어가 자기 내면에 품어 온 여인임을 깨닫는 인물.", "full_plot": "싱클레어는 밝고 따뜻한 가정의 세계에서 자라지만, 신비로운 소년 데미안을 만나 카인과 아벨 이야기를 새롭게 해석하는 법을 배우며 선과 악의 경계가 흔들리는 경험을 합니다. 그는 내면의 선과 악 사이에서 갈등하고 한때 금지된 쾌락에 빠지기도 하지만, 베아트리체를 만나 어두운 시기를 넘어섭니다. 그가 그린 베아트리체의 초상은 데미안을 닮아 있고, 이후 싱클레어는 데미안과 그의 어머니 에바 부인을 다시 만나 에바 부인이 자신의 내면에 있던 여인임을 깨닫습니다. 전쟁이 일어나 두 사람은 모두 참전하고, 야전 병원에서 마주한 데미안은 자신이 필요할 때 자기 안에 귀를 기울이라는 말을 남긴 뒤 다음 날 아침 사라집니다.", "spoiler_note": "출판사 책소개에 나온 결말(야전 병원에서의 마지막 대화와 데미안의 사라짐)까지 적었습니다."}, {"type": "소설", "trend": "스테디", "title": "이방인", "author": "알베르 카뮈", "year": "1942", "signal": "예스24가 2026년 상반기 동향에서 2030 구매 비중이 10년 사이 가장 크게 오른 해외 고전 가운데 하나로 꼽았습니다.", "evidence": "예스24 기준 2030 구매 비중이 2016년 25%에서 2026년 39%로 늘었습니다. 2026년 상반기 순위는 기사에 나오지 않았습니다.", "why": "주변에 무관심하고 감정을 꾸미지 않는 주인공이 사회의 ‘정상적인 반응’ 요구와 정면으로 부딪히는 이야기입니다. 감정 표현과 사회적 연기에 피로를 느끼는 젊은 독자에게 다시 읽히는 것으로 보입니다.", "author_feature": "알베르 카뮈는 1913년 프랑스 식민지 알제리에서 태어나 1942년 『이방인』으로 이름을 알렸고, 1957년 노벨문학상을 받았습니다. 부조리와 실존의 문제를 간결한 문장으로 다룬 작가입니다.", "episode": "2026년 상반기 2030의 해외소설 구매가 크게 늘어난 흐름 속에서 『데미안』과 함께 2030 비중이 커진 고전으로 언급됐습니다. 민음사판 출판사 소개에 따르면 프랑스에서만 733만여 부가 팔렸고 101개 언어로 번역됐습니다.", "content": "알제의 선박 중개인 사무실 직원 뫼르소가 어머니의 장례를 치른 직후 마리와 가까워지고, 이웃 레몽과 얽혔다가 해변에서 아랍인을 총으로 쏘아 죽인 뒤 재판을 받는 이야기입니다.", "theme": "부조리, 무관심과 진실, 사회가 요구하는 감정, 죽음, 재판과 도덕.", "tags": ["2030", "세계문학", "부조리", "실존", "카뮈"], "grade": "A", "audience": "예스24 구매자 중 2030 비중이 2016년 25%에서 2026년 39%로 14%포인트 오른 해외 고전", "route": "2030 해외소설 구매 증가 → 『데미안』, 『싯다르타』 같은 고전 탐색 → 실존주의 소설로 확장", "style": "짧고 건조한 문장으로 감정 설명을 최대한 덜어 낸 1인칭 서술. 1부의 일상과 2부의 재판이 대칭을 이룹니다.", "read": "짧지만 오래 남는 고전, 사회가 기대하는 감정 반응에 의문을 품어 본 적이 있다면.", "caution": "주인공의 무심함이 처음에는 불쾌하거나 답답하게 느껴질 수 있습니다. 식민지 알제리라는 배경과 ‘이름 없는 아랍인’의 문제도 함께 생각해 볼 만합니다.", "difficulty": "보통", "pace": "보통", "mood": "건조함, 뜨거운 햇빛, 부조리", "talk": "뫼르소는 살인 때문에 단죄되었는가, 어머니 장례식에서 울지 않았기 때문에 단죄되었는가?", "other": "민음사판 역자 김화영은 원문의 ‘엄마’와 ‘어머니’ 구분을 살렸다고 밝혔습니다. 번역본에 따라 첫 문장의 인상이 달라지니 비교해 읽어도 좋습니다.", "id": "book-49", "search_blob": "소설 스테디 이방인 알베르 카뮈 부조리, 무관심과 진실, 사회가 요구하는 감정, 죽음, 재판과 도덕. 예스24 구매자 중 2030 비중이 2016년 25%에서 2026년 39%로 14%포인트 오른 해외 고전 2030 해외소설 구매 증가 → 『데미안』, 『싯다르타』 같은 고전 탐색 → 실존주의 소설로 확장 건조함, 뜨거운 햇빛, 부조리 2030 세계문학 부조리 실존 카뮈", "characters": "뫼르소 — 알제의 선박 중개인 사무실 직원. 야심이 없고 주위에 무관심한 청년으로, 우발적 살인 뒤 사회의 ‘이방인’이 됩니다. 마리 — 어머니 장례 직후 다시 만나 가까워지는 옛 동료. 레몽 — 뫼르소의 이웃으로, 그의 계획에 뫼르소가 엮이며 사건이 시작됩니다. 사제 — 사형 선고 뒤 뫼르소를 찾아오지만 그를 이해하지 못하는 인물.", "full_plot": "뫼르소는 어머니의 죽음을 알리는 전보를 받고 장례를 치릅니다. 돌아온 뒤 옛 동료 마리와 가까워지고, 이웃 레몽과도 친해집니다. 레몽의 계획에 엮인 뫼르소는 해변에서 아랍인들과 충돌하고, 샘가에서 권총을 쏘아 아랍인을 죽입니다. 재판에서 변호사도, 재판관도 그를 온전히 이해하지 못하고 그는 사형을 선고받습니다. 사형을 앞두고 찾아온 사제 역시 그를 이해하지 못하며, 뫼르소는 신앙과 구원의 유혹을 떨쳐 내고 자신과 세계를 똑바로 마주하는 데서 이야기가 끝납니다.", "spoiler_note": "출판사 책소개와 리뷰에 나온 사형 선고와 사제와의 대면, 마지막 태도까지 적었습니다."}, {"type": "소설", "trend": "스테디", "title": "인간 실격", "author": "다자이 오사무", "year": "1948", "signal": "교보문고 2025년 상반기 세계문학전집 판매 순위에서 『싯다르타』, 『데미안』 다음인 3번째로 많이 팔렸습니다.", "evidence": "같은 집계에서 세계문학전집의 주 독자층이 40대에서 20대로 바뀌어 20대가 가장 높은 점유율을 차지했습니다. 이 작품 단독의 연령별 수치와 외국소설 분야 순위는 확인하지 못했습니다.", "why": "남에게 맞추려 익살을 부리다 무너지는 주인공의 고백이 ‘사회생활 가면’과 번아웃을 말하는 2030의 언어와 겹칩니다.", "author_feature": "다자이 오사무는 자기 파괴적인 삶과 고백적 문체로 알려진 일본 작가입니다. 이 작품은 연재 도중 작가가 세상을 떠나 유작이 됐습니다.", "episode": "2025년 상반기 교보문고에서 세계문학전집이 20대를 중심으로 다시 팔리면서 헤세 두 작품에 이어 상위권에 들었습니다.", "content": "‘나’가 우연히 얻은 한 남자의 사진과 수기 세 편을 소개하는 구조입니다. 수기의 주인 요조는 어릴 때부터 인간을 이해하지 못해 익살로 자신을 숨기고, 술과 여자, 약물에 빠져 스스로를 ‘인간 실격’이라 부르게 됩니다.", "theme": "소외, 가면과 익살, 자기혐오, 중독, 인간에 대한 공포, 순수의 상실.", "tags": ["세계문학", "일본문학", "자기혐오", "고백", "텍스트힙"], "grade": "B", "audience": "교보 2025 상반기 세계문학전집 주 독자층이 20대로 바뀐 흐름 속 상위 3위 작품(작품 단독 수치 없음)", "route": "세계문학전집 재발견 → 헤세 다음 고전으로 이동 → 짧은 분량의 일본 고전 입문", "style": "서문과 후기가 수기를 감싸는 액자 구조, 담담하지만 자기 비하가 짙은 1인칭 고백체.", "read": "사람들 앞에서 늘 ‘괜찮은 척’하느라 지친 경험이 있거나, 짧고 강렬한 고전을 찾는다면.", "caution": "자살 시도, 약물 중독, 성적 학대에 대한 서술이 있습니다. 주인공의 자기혐오에 깊이 이입되기 쉬우니 힘든 시기에는 주의가 필요합니다.", "difficulty": "보통", "pace": "보통", "mood": "우울, 고독, 자기혐오", "talk": "요조의 ‘익살’은 생존 전략이었을까, 자기 파괴의 시작이었을까?", "other": "후기에서 바의 마담이 요조를 ‘착한 아이’로 기억하는 장면이 수기의 자기 판단과 어떻게 어긋나는지 보는 것이 토론 포인트입니다.", "id": "book-50", "search_blob": "소설 스테디 인간 실격 다자이 오사무 소외, 가면과 익살, 자기혐오, 중독, 인간에 대한 공포, 순수의 상실. 교보 2025 상반기 세계문학전집 주 독자층이 20대로 바뀐 흐름 속 상위 3위 작품(작품 단독 수치 없음) 세계문학전집 재발견 → 헤세 다음 고전으로 이동 → 짧은 분량의 일본 고전 입문 우울, 고독, 자기혐오 세계문학 일본문학 자기혐오 고백 텍스트힙", "characters": "오오바 요조 — 수기의 주인. 인간을 두려워해 익살로 자신을 감추다 파멸합니다. 호리키 — 요조를 술과 유흥으로 이끈 친구. 요시코 — 요조가 마지막으로 순수하다고 믿은 여성. 바의 마담 — 후기에서 서술자에게 요조를 회상하는 인물. ‘나’ — 사진과 수기를 소개하는 서술자.", "full_plot": "유년기의 요조는 사람들의 속내를 이해하지 못해 익살로 관계를 맺고, 어른들에게 학대를 당하면서도 이를 숨깁니다. 도쿄에서 호리키와 어울리며 술, 매춘, 좌익 운동에 빠지고, 한 여성과 바다에 뛰어들어 동반자살을 시도하지만 혼자 살아남습니다. 학교에서 쫓겨난 뒤 여러 여성에게 기대 살다 순수하다고 믿은 요시코가 폭행당하는 장면을 목격하고 무너지며, 자살 시도와 객혈 끝에 모르핀에 중독됩니다. 결국 호리키 등에게 속아 정신병원에 갇힌 그는 스스로를 ‘인간 실격’이라 여기고, 고향에서 폐인처럼 지내며 모든 것은 그저 지나갈 뿐이라고 말합니다. 후기에서 서술자가 찾아간 바의 마담은 요조를 술만 마시지 않으면 착한 아이였다고 회상합니다.", "spoiler_note": "결말과 후기까지 포함했습니다."}, {"type": "소설", "trend": "지금", "title": "사탄탱고", "author": "크러스너호르커이 라슬로", "year": "1985", "signal": "2025년 노벨문학상 발표 직후 예스24, 교보문고 실시간 베스트셀러 1위에 올랐습니다.", "evidence": "예스24에서 발표 후 12시간 판매량이 2025년 1월부터 수상 직전까지 판매량의 약 12배였습니다. 교보문고에서는 10일 오전 10시 30분까지 약 1,300부, 알라딘에서는 10일 오전 9시 기준 약 1,200부가 팔렸습니다.", "why": "공산주의 체제가 무너지던 시기의 해체된 집단농장 마을이라는 배경, 구원자를 기다리다 같은 자리로 되돌아오는 구조가 ‘붕괴 이후’를 다루는 소설로 읽힙니다. 수상 직후 ‘가장 유명하지만 가장 어렵다는 책’에 도전하는 독서가 몰렸다는 점이 이 책의 화제성입니다.", "author_feature": "한국경제는 그를 ‘묵시록 거장’으로 소개했습니다. 한 문장으로 이어진 소설(『라스트 울프』)이 있을 만큼 긴 문장으로 몰락과 불안을 집요하게 쓰는 작가이며, 2015년 맨부커 인터내셔널상을 받았습니다.", "episode": "국내 번역본 6종은 모두 알마에서 나왔고, 『사탄탱고』는 조원규가 옮겼습니다. 알마는 수상 직후 특별판 출간 계획을 밝혔습니다. 벨라 타르 감독이 1994년 같은 제목의 영화로 만들었습니다.", "content": "1980년대 헝가리, 해체된 집단농장 마을에서 가난과 불신 속에 사는 사람들에게 1년 반 전에 죽은 줄 알았던 이리미아시가 돌아온다는 소문이 퍼집니다.", "theme": "체제 붕괴, 구원에 대한 기대, 불신, 무기력, 악순환, 종말의 예감.", "tags": ["노벨문학상", "묵시록", "동유럽", "긴문장", "도전독서"], "grade": "B", "audience": "알라딘 집계로 20~40대 구매가 많았고 30대 비중이 가장 높았다고 보도됐지만 % 수치는 없습니다. 노컷뉴스 비교 기사는 크러스너호르커이 수상 당시 40~50대 구매 비중을 55.8%로 적었습니다.", "route": "노벨문학상 발표 → 대표작 『사탄탱고』 → 『저항의 멜랑콜리』 → 벨라 타르 영화로 확장", "style": "앞으로 여섯 장, 다시 뒤로 여섯 장을 밟는 탱고 같은 구성에 끊기지 않는 긴 문장이 겹칩니다.", "read": "속도감 대신 문장의 압력과 분위기에 잠기는 독서, ‘어려운 고전 깨기’를 해보고 싶다면.", "caution": "문장이 매우 길고 사건이 천천히 움직여 처음 몇 장에서 포기하기 쉽습니다. 줄거리보다 마을의 정체된 공기를 따라가는 편이 낫습니다.", "difficulty": "높음", "pace": "느림", "mood": "묵시록, 정체, 불신", "talk": "기다리던 구원자가 오면 사람들은 정말 다른 삶을 고를 수 있을까?", "other": "국내 미출간이던 『헤르쉬트 07769』는 2026년 1월 알마에서 번역 출간 예정이라고 보도됐습니다(실제 출간 여부는 이번 조사에서 확인 못 함).", "id": "book-51", "search_blob": "소설 지금 사탄탱고 크러스너호르커이 라슬로 체제 붕괴, 구원에 대한 기대, 불신, 무기력, 악순환, 종말의 예감. 알라딘 집계로 20~40대 구매가 많았고 30대 비중이 가장 높았다고 보도됐지만 % 수치는 없습니다. 노컷뉴스 비교 기사는 크러스너호르커이 수상 당시 40~50대 구매 비중을 55.8%로 적었습니다. 노벨문학상 발표 → 대표작 『사탄탱고』 → 『저항의 멜랑콜리』 → 벨라 타르 영화로 확장 묵시록, 정체, 불신 노벨문학상 묵시록 동유럽 긴문장 도전독서", "characters": "이리미아시 — 1년 반 전에 죽은 것으로 알려졌다가 돌아온다는 소문이 도는 카리스마 있는 인물입니다. 마을 사람들 — 해체된 집단농장에 남아 가난과 서로에 대한 불신 속에 무기력하게 사는 주민들로, 이리미아시의 귀환에 기대와 두려움을 함께 품습니다.", "full_plot": "공산주의가 무너져 가던 1980년대 헝가리, 집단농장이 해체된 마을 사람들은 가난과 서로에 대한 불신 속에 무기력하게 지냅니다. 죽은 줄 알았던 이리미아시가 돌아온다는 소문이 돌자 주민들은 절망에서 벗어날 길이 생겼다고 기대하면서도 설명하기 어려운 두려움에 시달립니다. 종이 없는데 울리는 종소리 같은 징후가 몰락에 대한 공포를 키웁니다. 출판사 소개에 따르면 주민들이 벗어나려는 노력은 모두 실패하고 결국 같은 굴레로 되돌아가 끝없는 악순환에 묶입니다. 책은 1부가 1장에서 6장으로, 2부가 6장에서 1장으로 거꾸로 진행돼 이 되돌아옴을 구성 자체로 보여줍니다.", "spoiler_note": "결말은 출판사 소개의 ‘노력이 실패하고 같은 굴레로 돌아간다’는 수준까지만 확인해 적었습니다. 인물별 구체적 결말은 확인하지 못했습니다.", "group": "이슈", "issue_kind": "노벨 문학상", "issue_date": "2025-10-09", "issue_event": "스웨덴 한림원이 2025년 10월 9일 헝가리 작가 크러스너호르커이 라슬로를 노벨문학상 수상자로 발표했습니다.", "reaction_2030": "알라딘 집계로 30대 구매 비중이 가장 높았다고 보도됐지만 % 수치는 공개되지 않았습니다(뉴시스 2025-10-10). 수상 당시 40~50대 비중은 55.8%였다는 비교 수치가 있습니다(노컷뉴스 2026-10-13)."}, {"type": "소설", "trend": "지금", "title": "저항의 멜랑콜리", "author": "크러스너호르커이 라슬로", "year": "1989", "signal": "2025년 노벨문학상 발표 직후 『사탄탱고』 다음으로 많이 팔린 크러스너호르커이 작품입니다.", "evidence": "교보문고에서 10일 오전 10시 30분까지 약 300부, 알라딘에서 10일 오전 9시 기준 약 330부가 팔렸습니다. 교보문고 베스트셀러 5위, 예스24 소설/시/희곡 실시간 3위였습니다.", "why": "정체 모를 고래 한 마리가 작은 마을을 광기로 몰아넣는 설정이 소문, 공포, 선동이 퍼지는 방식을 떠올리게 합니다. 『사탄탱고』와 함께 수상 직후 판매의 약 80%를 차지해 ‘입문 두 권’으로 묶여 팔렸습니다.", "author_feature": "크러스너호르커이는 몰락 직전의 공동체와 그 안의 불안을 길고 끈질긴 문장으로 그립니다. 이 작품에서는 집단적 광기와 파시즘의 속성을 우화처럼 다룹니다.", "episode": "알마에서 구소영 옮김으로 나왔습니다. 알라딘 집계로 수상 다음 날 오전까지 『사탄탱고』와 이 책 두 권이 라슬로 저서 판매의 약 80%를 차지했습니다.", "content": "혹한이 이어지는 헝가리의 작은 마을에 유랑 서커스단이 ‘세상에서 가장 큰 고래’를 보여주겠다며 들어오고, 광장에 선 트럭을 둘러싸고 소문과 편집증이 번집니다.", "theme": "집단적 광기, 소문과 선동, 권력욕, 몽상과 저항, 동유럽의 격변, 멜랑콜리.", "tags": ["노벨문학상", "집단광기", "우화", "동유럽", "묵시록"], "grade": "B", "audience": "작품 단위 연령 통계는 확인 못 했습니다. 라슬로 저서 전체로는 알라딘에서 30대 비중이 가장 높았다는 보도만 있습니다.", "route": "노벨문학상 발표 → 『사탄탱고』 → 『저항의 멜랑콜리』 → 『벵크하임 남작의 귀향』", "style": "기이한 징후가 쌓이는 마을을 숨 쉴 틈 없이 긴 문장으로 밀고 갑니다. 인물의 의식과 마을의 소문이 한 문장 안에서 뒤섞입니다.", "read": "선동과 공포가 공동체를 어떻게 무너뜨리는지 우화로 읽고 싶다면.", "caution": "536쪽 분량에 문장이 매우 깁니다. 사건보다 분위기가 서서히 조여드는 방식이라 인내가 필요합니다.", "difficulty": "높음", "pace": "느림", "mood": "불길함, 혹한, 광기", "talk": "아무것도 하지 않는 고래 한 마리가 왜 마을 전체를 광기로 몰아넣었을까?", "other": "같은 작가의 『벵크하임 남작의 귀향』도 은둔하던 남작의 귀향으로 작은 도시가 광기에 휩싸이는 이야기라, ‘마을과 광기’ 연작처럼 이어 읽을 수 있습니다.", "id": "book-52", "search_blob": "소설 지금 저항의 멜랑콜리 크러스너호르커이 라슬로 집단적 광기, 소문과 선동, 권력욕, 몽상과 저항, 동유럽의 격변, 멜랑콜리. 작품 단위 연령 통계는 확인 못 했습니다. 라슬로 저서 전체로는 알라딘에서 30대 비중이 가장 높았다는 보도만 있습니다. 노벨문학상 발표 → 『사탄탱고』 → 『저항의 멜랑콜리』 → 『벵크하임 남작의 귀향』 불길함, 혹한, 광기 노벨문학상 집단광기 우화 동유럽 묵시록", "characters": "에스테르 부인 — 혼란을 틈타 마을을 장악하려는 계략을 꾸미는 인물입니다. 에스테르 죄르지 — 한때 음악학교 학장으로 존경받았지만 세상과 단절한 채 침대에서 지내는 노학자이자 에스테르 부인의 남편입니다. 벌루시커 — 별과 달과 우주에 사로잡혀 마을을 떠도는 서른다섯 살 청년으로, 에스테르 죄르지에게 식사를 챙겨 줍니다.", "full_plot": "헝가리의 작은 마을에 혹한이 이어지고 가로등이 이유 없이 꺼지며 거대한 나무가 뿌리째 뽑힙니다. 수십 년 멈춰 있던 교회 시계가 다시 움직이는 가운데 유랑 서커스단이 ‘세상에서 가장 큰 고래’를 실은 트럭을 광장에 세웁니다. 트럭은 그저 서 있을 뿐인데 주민들은 겁에 질려 소문과 편집증에 빠집니다. 그 혼란 속에서 에스테르 부인은 마을을 장악하려는 계략을 짜고, 세상과 담을 쌓은 노학자 에스테르 죄르지와 몽상가 청년 벌루시커는 침묵과 몽상으로 현실에 맞서며 기이한 우정을 이어갑니다.", "spoiler_note": "출판사 소개가 혼란과 에스테르 부인의 계략까지만 다뤄 결말은 확인하지 못했습니다. 결말은 적지 않았습니다.", "group": "이슈", "issue_kind": "노벨 문학상", "issue_date": "2025-10-09", "issue_event": "스웨덴 한림원이 2025년 10월 9일 헝가리 작가 크러스너호르커이 라슬로를 노벨문학상 수상자로 발표했습니다.", "reaction_2030": "작품 단위 2030 비율은 확인 못 함. 작가 전체로는 알라딘에서 30대 구매 비중이 가장 높았다는 보도가 있습니다(뉴시스 2025-10-10)."}, {"type": "소설", "trend": "지금", "title": "빨강의 자서전", "author": "앤 카슨", "year": "1998", "signal": "2026년 노벨문학상 발표 직후 예스24 일일 베스트셀러 4일 연속 1위, 교보문고 온라인 일간 1위에 올랐습니다.", "evidence": "예스24에서 발표 후 나흘간 판매량이 수상 전 2026년 누적 판매량의 약 71배였고, 알라딘에서는 발표 전 일주일 대비 약 260배였습니다. 예스24 발표 당일 앤 카슨 책 구매자 중 20~30대가 49.6%였습니다.", "why": "그리스 신화에서 헤라클레스에게 죽는 붉은 괴물 게리온을, 날개를 숨기고 사는 외로운 소년으로 다시 씁니다. 퀴어 성장담, 첫사랑과 실연이라는 친숙한 감정을 ‘시로 쓴 소설’이라는 낯선 형식에 담아 젊은 독자에게 입문서 역할을 했습니다.", "author_feature": "앤 카슨은 캐나다 출신 시인이자 고전학자, 번역가, 에세이스트로 시, 소설, 에세이, 번역, 논문의 경계를 넘나듭니다. 고대 그리스 문학을 지금의 감정 언어로 옮기는 데 능합니다.", "episode": "국내판은 한겨레출판에서 민승남 옮김으로 나왔습니다. 수상 직후 온라인 재고가 소진돼 예약 판매로 전환됐다는 보도가 있습니다. 15년 뒤 쓴 후속작 『레드 닥>』도 같은 출판사에서 나와 있습니다.", "content": "어깨에 작은 빨간 날개를 달고 태어난 소년 게리온이 형의 학대를 견디며 자서전을 쓰기 시작하고, 청년 헤라클레스를 만나 사랑에 빠졌다가 버림받습니다.", "theme": "고독, 첫사랑과 실연, 퀴어 성장, 몸의 다름, 신화 다시 쓰기, 자기 서사.", "tags": ["노벨문학상", "운문소설", "신화다시쓰기", "퀴어", "2030"], "grade": "A", "audience": "예스24 발표 당일 앤 카슨 책 구매자 중 30대 28.0%, 20대 21.6%로 2030이 49.6%, 여성 84.1%(20~30대 여성 44.1%)였습니다. 교보문고 집계(8일 오후 8시~11일 오전 9시)에서는 40대 28.6%, 30대 23.2%, 20대 15.5%, 여성 73.5%로 서점마다 차이가 있습니다.", "route": "노벨문학상 발표 → 『빨강의 자서전』 입문 → 후속작 『레드 닥>』 → 『남편의 아름다움』, 『녹스』로 확장", "style": "짧은 행으로 끊어 쓴 시가 장(章)처럼 이어지며 소설의 서사를 끌고 갑니다. 고대 시인 스테시코로스에 관한 글, 헬레네 일화, 작가와 스테시코로스의 가상 인터뷰가 본편을 감쌉니다.", "read": "신화를 비틀어 다시 쓴 이야기, 외톨이 소년의 첫사랑과 상처, 시와 소설 사이의 형식이 궁금하다면.", "caution": "앞부분의 스테시코로스 관련 글은 학술 에세이에 가깝습니다. 낯설면 게리온의 이야기가 시작되는 본편부터 읽어도 됩니다.", "difficulty": "보통~높음", "pace": "보통", "mood": "외로움, 빨강, 그리움", "talk": "괴물의 자리에서 다시 쓴 신화는 원래 이야기의 ‘영웅’을 어떻게 바꿔 보이게 하는가?", "other": "국내판 출간 연도는 자료마다 2016년, 2024년으로 다르게 표기돼 있어 판 차이로 보입니다(확인 못 함).", "id": "book-53", "search_blob": "소설 지금 빨강의 자서전 앤 카슨 고독, 첫사랑과 실연, 퀴어 성장, 몸의 다름, 신화 다시 쓰기, 자기 서사. 예스24 발표 당일 앤 카슨 책 구매자 중 30대 28.0%, 20대 21.6%로 2030이 49.6%, 여성 84.1%(20~30대 여성 44.1%)였습니다. 교보문고 집계(8일 오후 8시~11일 오전 9시)에서는 40대 28.6%, 30대 23.2%, 20대 15.5%, 여성 73.5%로 서점마다 차이가 있습니다. 노벨문학상 발표 → 『빨강의 자서전』 입문 → 후속작 『레드 닥>』 → 『남편의 아름다움』, 『녹스』로 확장 외로움, 빨강, 그리움 노벨문학상 운문소설 신화다시쓰기 퀴어 2030", "characters": "게리온 — 어깨에 작은 빨간 날개를 달고 태어난 내성적인 소년입니다. 형에게 학대를 받지만 엄마에게도 말하지 못하고, 커다란 외투로 날개를 숨기며 자서전을 씁니다. 헤라클레스 — 게리온이 십대 때 만나 서로를 단번에 알아보고 사랑하게 되는 청년으로, 곧 게리온을 떠납니다. 게리온의 형과 엄마 — 형은 게리온을 괴롭히고, 엄마는 그 사실을 모른 채 곁에 있습니다.", "full_plot": "게리온은 붉은 몸과 작은 날개를 지닌 채 태어나 형의 학대 속에서 자랍니다. 그는 사람에게 중요한 것은 안쪽에 있는 것뿐이라고 결론 내리고 자신의 자서전을 쓰기 시작합니다. 십대가 된 게리온은 헤라클레스를 만나 단번에 사랑에 빠지지만, 헤라클레스는 그를 떠나고 이 이별은 죽음보다 깊은 상처로 남습니다. 대학을 마친 게리온은 부에노스아이레스로 떠나고 그곳에서 새 연인과 함께 있는 헤라클레스를 다시 만납니다. 헤라클레스의 연인은 게리온의 날개를 알아보고 그 날개에 얽힌 전설을 들려줍니다.", "spoiler_note": "출판사 책소개는 부에노스아이레스 재회와 날개의 전설 이야기까지만 다뤄, 세 사람의 여행 이후 결말은 확인하지 못해 적지 않았습니다.", "group": "이슈", "issue_kind": "노벨 문학상", "issue_date": "2026-10-08", "issue_event": "스웨덴 한림원이 2026년 10월 8일 캐나다 시인이자 고전학자 앤 카슨을 노벨문학상 수상자로 발표했습니다.", "reaction_2030": "예스24 발표 당일 앤 카슨 책 구매자 중 20~30대가 49.6%(30대 28.0%, 20대 21.6%)였고, 2024년 한강, 2025년 크러스너호르커이 때 40~50대 비중이 65.8%, 55.8%였던 것과 대비됐습니다(노컷뉴스 2026-10-13). 교보문고 기준 2030은 38.7%(30대 23.2%, 20대 15.5%)입니다(경향신문 2026-10-11)."}, {"type": "시", "trend": "지금", "title": "남편의 아름다움", "author": "앤 카슨", "year": "2001", "signal": "2026년 노벨문학상 발표 뒤 예스24 주간 베스트셀러 10위, 교보문고 온라인 일간 9위에 올랐습니다.", "evidence": "예스24에서 발표 후 나흘간 판매량이 약 37배 늘었고 10월 둘째 주 주간 베스트셀러 10위였습니다. 교보문고에서는 앤 카슨 책 가운데 판매량 3위였습니다.", "why": "나쁜 사람인 줄 알면서도 끊지 못하는 관계를 다룬다는 점에서 연애와 이별 서사를 즐겨 읽는 독자에게 바로 닿는 주제입니다. 스물아홉 개의 ‘탱고’로 나눈 구성이 짧게 끊어 읽기에도 맞습니다.", "author_feature": "카슨은 고전 텍스트와 개인의 감정을 맞붙여 장르 경계를 허뭅니다. 이 책은 그에게 여성 최초 T. S. 엘리엇 상을 안긴 작품으로 소개됩니다.", "episode": "국내판은 한겨레출판에서 민승남 옮김으로 나왔습니다. 수상 직후 『빨강의 자서전』, 『녹스』와 함께 교보문고 판매 상위 3권에 들었습니다.", "content": "화자인 아내가 거짓말과 배신을 반복하는 남편을 사랑하고 결혼하고 이혼하기까지를, 존 키츠의 시와 글에서 영감을 받아 스물아홉 번의 탱고로 씁니다.", "theme": "사랑과 배신, 애증, 아름다움, 결혼과 이혼, 거짓말.", "tags": ["노벨문학상", "애증", "이혼", "허구의에세이", "탱고"], "grade": "A", "audience": "예스24 발표 당일 앤 카슨 책 구매자 중 30대 28.0%, 20대 21.6%로 2030이 49.6%, 여성 84.1%(20~30대 여성 44.1%)였습니다. 교보문고 집계(8일 오후 8시~11일 오전 9시)에서는 40대 28.6%, 30대 23.2%, 20대 15.5%, 여성 73.5%로 서점마다 차이가 있습니다. 연령 비율은 앤 카슨 책 전체 기준입니다.", "route": "노벨문학상 발표 → 『빨강의 자서전』 → 『남편의 아름다움』 → 『에로스, 달콤씁쓸한』으로 사랑의 이론까지", "style": "부제가 ‘스물아홉 번의 탱고로 쓴 허구의 에세이’로, 시와 에세이와 소설의 경계에 있는 짧은 장들이 이어집니다.", "read": "끊어내지 못한 관계, 사랑이 끝난 뒤에도 남는 감정을 정직하게 들여다보고 싶다면.", "caution": "사건 중심 이야기라기보다 장면과 사유의 파편이 이어지는 형식이라 줄거리를 기대하면 낯설 수 있습니다.", "difficulty": "보통~높음", "pace": "천천히", "mood": "애증, 관능, 씁쓸함", "talk": "상대가 나쁜 사람임을 알면서도 끊지 못하는 마음은 사랑인가, 다른 무엇인가?", "other": "국내판 출간 연도는 자료마다 2019년, 2024년으로 다르게 표기돼 있습니다(확인 못 함).", "id": "book-54", "search_blob": "시 지금 남편의 아름다움 앤 카슨 사랑과 배신, 애증, 아름다움, 결혼과 이혼, 거짓말. 예스24 발표 당일 앤 카슨 책 구매자 중 30대 28.0%, 20대 21.6%로 2030이 49.6%, 여성 84.1%(20~30대 여성 44.1%)였습니다. 교보문고 집계(8일 오후 8시~11일 오전 9시)에서는 40대 28.6%, 30대 23.2%, 20대 15.5%, 여성 73.5%로 서점마다 차이가 있습니다. 연령 비율은 앤 카슨 책 전체 기준입니다. 노벨문학상 발표 → 『빨강의 자서전』 → 『남편의 아름다움』 → 『에로스, 달콤씁쓸한』으로 사랑의 이론까지 애증, 관능, 씁쓸함 노벨문학상 애증 이혼 허구의에세이 탱고", "characters": "화자 / 등장하는 존재 — 남편을 사랑해 결혼했다가 이혼에 이르는 아내가 화자입니다. 거짓말과 부정을 거듭하면서도 아름다운 남편이 시편 전체에서 화자가 끝내 놓지 못하는 대상으로 되돌아옵니다.", "full_plot": "시집의 정서적 흐름 — 사랑에 빠지고 결혼하는 시기에서 출발해, 남편의 거짓말과 배신을 알게 된 뒤에도 그 아름다움에 끌리는 애증의 시간을 스물아홉 개의 탱고 장면으로 지나고, 이혼 뒤에도 쉽게 끊기지 않는 감정을 끝까지 따져 묻는 쪽으로 나아갑니다.", "spoiler_note": "시집은 결말 스포일러보다 화자, 반복 이미지, 정서의 변화까지 공개해 설명합니다. 결혼에서 이혼까지의 큰 흐름은 서점 소개와 기사로 확인했고, 장별 세부 장면은 확인하지 못했습니다.", "group": "이슈", "issue_kind": "노벨 문학상", "issue_date": "2026-10-08", "issue_event": "스웨덴 한림원이 2026년 10월 8일 캐나다 시인이자 고전학자 앤 카슨을 노벨문학상 수상자로 발표했습니다.", "reaction_2030": "예스24 발표 당일 앤 카슨 책 구매자 중 20~30대가 49.6%(30대 28.0%, 20대 21.6%)였고, 2024년 한강, 2025년 크러스너호르커이 때 40~50대 비중이 65.8%, 55.8%였던 것과 대비됐습니다(노컷뉴스 2026-10-13). 교보문고 기준 2030은 38.7%(30대 23.2%, 20대 15.5%)입니다(경향신문 2026-10-11)."}, {"type": "비문학", "trend": "문학경계", "title": "에로스, 달콤씁쓸한", "author": "앤 카슨", "year": "1986", "signal": "앤 카슨의 첫 책인 고전학 산문이 2026년 노벨문학상 발표 뒤 예스24 주간 베스트셀러 22위에 올랐습니다.", "evidence": "예스24에서 발표 후 나흘간 판매량이 약 28배 늘었고 10월 둘째 주 주간 베스트셀러 22위였습니다.", "why": "사랑이 왜 달콤하면서 쓴지를 사포와 플라톤으로 설명하는 책이라 연애 감정을 ‘이론’으로 읽고 싶은 독자에게 입구가 됩니다. 소설, 시 독자가 같은 작가의 학술 산문까지 넘어간 사례입니다.", "author_feature": "고전학자인 카슨이 박사학위 논문을 고쳐 쓴 데뷔작으로, 학문적 글쓰기와 창작을 섞는 이후 작품 세계를 예고합니다.", "episode": "국내에는 2025년 봄 난다에서 황유원 옮김으로 나왔습니다. 난다는 2025년 『유리, 아이러니 그리고 신』, 『플레인워터』, 『짧은 이야기들』까지 같은 역자로 카슨을 잇따라 냈고, 그다음 해 수상 발표가 나왔습니다.", "content": "사포가 에로스를 ‘달콤씁쓸하다’고 처음 부른 데서 출발해 그리스 서정시, 로맨스, 플라톤의 대화편을 따라가며 욕망과 문자, 읽기와 쓰기의 관계를 35개 장으로 탐구합니다.", "theme": "에로스, 욕망과 결핍, 사랑의 모순, 읽기와 쓰기, 그리스 서정시.", "tags": ["노벨문학상", "에로스", "사포", "고전학", "사랑론"], "grade": "A", "audience": "예스24 발표 당일 앤 카슨 책 구매자 중 30대 28.0%, 20대 21.6%로 2030이 49.6%, 여성 84.1%(20~30대 여성 44.1%)였습니다. 교보문고 집계(8일 오후 8시~11일 오전 9시)에서는 40대 28.6%, 30대 23.2%, 20대 15.5%, 여성 73.5%로 서점마다 차이가 있습니다. 연령 비율은 앤 카슨 책 전체 기준입니다.", "route": "노벨문학상 발표 → 『빨강의 자서전』, 『남편의 아름다움』 → 『에로스, 달콤씁쓸한』으로 사랑의 이론 읽기", "style": "짧은 장 35개가 이어지는 학술 에세이입니다. 고전 인용과 해석이 촘촘하지만 장마다 하나의 생각을 끝까지 밀고 갑니다.", "read": "사랑할 때 왜 상대보다 ‘결핍’이 더 선명해지는지, 그 감정을 고전으로 따져 보고 싶다면.", "caution": "소설이나 시가 아니라 고전학 산문입니다. 그리스어 개념과 인용이 많아 천천히 읽어야 합니다.", "difficulty": "높음", "pace": "천천히", "mood": "지적, 관능, 씁쓸함", "talk": "욕망은 대상을 가졌을 때가 아니라 닿지 못할 때 더 커진다는 생각에 동의하는가?", "other": "제목은 매체에 따라 ‘달콤씁쓸한’, ‘달콤씁쓸함’으로 다르게 표기됩니다. 출판사 표기는 확인 못 했고, 에스콰이어와 하퍼스 바자 표기를 따랐습니다.", "id": "book-55", "search_blob": "비문학 문학경계 에로스, 달콤씁쓸한 앤 카슨 에로스, 욕망과 결핍, 사랑의 모순, 읽기와 쓰기, 그리스 서정시. 예스24 발표 당일 앤 카슨 책 구매자 중 30대 28.0%, 20대 21.6%로 2030이 49.6%, 여성 84.1%(20~30대 여성 44.1%)였습니다. 교보문고 집계(8일 오후 8시~11일 오전 9시)에서는 40대 28.6%, 30대 23.2%, 20대 15.5%, 여성 73.5%로 서점마다 차이가 있습니다. 연령 비율은 앤 카슨 책 전체 기준입니다. 노벨문학상 발표 → 『빨강의 자서전』, 『남편의 아름다움』 → 『에로스, 달콤씁쓸한』으로 사랑의 이론 읽기 지적, 관능, 씁쓸함 노벨문학상 에로스 사포 고전학 사랑론", "characters": "비문학이므로 소설적 등장인물보다 저자와 인용되는 인물을 중심으로 읽습니다. 사포 — 에로스를 ‘달콤씁쓸하다’고 처음 표현한 그리스 시인입니다. 플라톤 — 대화편 속 사랑론이 책 후반의 주요 텍스트입니다.", "full_plot": "사포가 에로스를 ‘달콤씁쓸하다’고 부른 데서 출발해, 사랑하는 사람과 사랑받는 대상 사이에 놓인 거리와 결핍이 에로스의 핵심이라는 생각을 그리스 서정시, 고대 로맨스, 플라톤의 대화편으로 확장합니다. 문자를 읽고 쓰는 일이 욕망의 구조와 어떻게 닮았는지 따지며 사랑의 모순을 폭넓게 성찰합니다.", "spoiler_note": "논지의 큰 틀은 출판사, Princeton University Press 소개 범위에서 적었습니다. 장별 세부 논증은 확인하지 못했습니다.", "group": "이슈", "issue_kind": "노벨 문학상", "issue_date": "2026-10-08", "issue_event": "스웨덴 한림원이 2026년 10월 8일 캐나다 시인이자 고전학자 앤 카슨을 노벨문학상 수상자로 발표했습니다.", "reaction_2030": "예스24 발표 당일 앤 카슨 책 구매자 중 20~30대가 49.6%(30대 28.0%, 20대 21.6%)였고, 2024년 한강, 2025년 크러스너호르커이 때 40~50대 비중이 65.8%, 55.8%였던 것과 대비됐습니다(노컷뉴스 2026-10-13). 교보문고 기준 2030은 38.7%(30대 23.2%, 20대 15.5%)입니다(경향신문 2026-10-11)."}, {"type": "비문학", "trend": "문학경계", "title": "녹스", "author": "앤 카슨", "year": "2010", "signal": "오빠를 애도하며 만든 아코디언 형태의 책이 2026년 노벨문학상 발표 뒤 교보문고 온라인 일간 8위에 올랐습니다.", "evidence": "교보문고 집계(10월 8일 오후 8시~11일 오전 9시)에서 앤 카슨 책 가운데 판매량 2위였고, 10일 기준 온라인 일간 베스트 8위였습니다.", "why": "편지, 사진, 번역 메모를 접힌 종이 한 장에 펼친 ‘물건 같은 책’이라 소장과 인증 욕구를 함께 건드립니다. 상실과 애도를 다룬다는 점에서 개인적인 슬픔을 기록하는 독자에게 닿습니다.", "author_feature": "카슨은 번역, 시, 기록물을 한데 엮어 장르를 해체하는 실험으로 알려져 있습니다. 『녹스』는 그 실험이 책의 물리적 형태까지 바꾼 경우입니다.", "episode": "국내판은 봄날의책에서 윤경희 옮김으로 2022년에 나왔습니다. 수상 직후 교보문고에서 『빨강의 자서전』 다음으로 많이 팔린 카슨 책이었습니다.", "content": "22년간 떨어져 지내다 세상을 떠난 오빠를 애도하며 오빠와 주고받은 편지, 어린 시절 사진, 카툴루스의 시를 번역하며 떠오른 생각을 아코디언처럼 접힌 한 권에 모았습니다.", "theme": "애도, 형제, 상실, 번역, 기억의 파편, 기록.", "tags": ["노벨문학상", "애도", "아코디언북", "번역", "물성"], "grade": "B", "audience": "작품 단위 연령 통계는 확인 못 했습니다. 교보문고 기준 앤 카슨 책 전체 구매자는 40대 28.6%, 30대 23.2%, 20대 15.5%, 여성 73.5%였습니다.", "route": "노벨문학상 발표 → 『빨강의 자서전』 → 『녹스』로 애도와 기록의 형식 읽기 → 『플로트』", "style": "제본된 쪽 대신 길게 이어 접힌 종이에 편지, 사진, 사전식 낱말 풀이, 짧은 산문이 콜라주처럼 붙어 있습니다.", "read": "누군가를 잃은 뒤 그 사람을 어떻게 기록하고 기억할지 고민해 본 적이 있다면.", "caution": "일반 단행본처럼 처음부터 끝까지 이어지는 서사가 없습니다. 펼쳐 놓고 조각을 오가며 읽는 책입니다.", "difficulty": "보통~높음", "pace": "천천히", "mood": "애도, 고요, 파편", "talk": "잘 알지 못했던 가족을 애도한다는 것은 무엇을 기억하는 일인가?", "other": "같은 출판사의 『플로트』(2023, 신해경 옮김)도 PVC 케이스에 낱권 22편을 넣은 형식 실험작입니다.", "id": "book-56", "search_blob": "비문학 문학경계 녹스 앤 카슨 애도, 형제, 상실, 번역, 기억의 파편, 기록. 작품 단위 연령 통계는 확인 못 했습니다. 교보문고 기준 앤 카슨 책 전체 구매자는 40대 28.6%, 30대 23.2%, 20대 15.5%, 여성 73.5%였습니다. 노벨문학상 발표 → 『빨강의 자서전』 → 『녹스』로 애도와 기록의 형식 읽기 → 『플로트』 애도, 고요, 파편 노벨문학상 애도 아코디언북 번역 물성", "characters": "비문학이므로 소설적 등장인물보다 저자와 기록 속 인물을 중심으로 읽습니다. 저자(카슨) — 오빠의 죽음 뒤 남은 편지와 사진, 번역 메모로 오빠를 다시 불러냅니다. 오빠 — 22년간 떨어져 지내다 세상을 떠난 인물로, 책 전체가 그를 향한 비망록입니다. 카툴루스 — 저자가 번역하는 고대 로마 시인입니다.", "full_plot": "오빠의 죽음을 알게 된 뒤 저자는 남은 편지와 어린 시절 사진, 카툴루스의 시를 번역하는 작업을 나란히 펼치며 오랫동안 떨어져 지낸 오빠를 이해하려 애씁니다. 책은 완결된 결론 대신 기억의 조각을 모아 둔 비망록으로 남습니다.", "spoiler_note": "형식상 결말 스포일러가 없는 책입니다. 구성과 정서의 흐름까지 공개했습니다.", "group": "이슈", "issue_kind": "노벨 문학상", "issue_date": "2026-10-08", "issue_event": "스웨덴 한림원이 2026년 10월 8일 캐나다 시인이자 고전학자 앤 카슨을 노벨문학상 수상자로 발표했습니다.", "reaction_2030": "작품 단위 2030 비율은 확인 못 함. 앤 카슨 책 전체로는 예스24 발표 당일 20~30대 49.6%(노컷뉴스 2026-10-13), 교보문고 집계 2030 38.7%(경향신문 2026-10-11)입니다."}, {"type": "소설", "trend": "작가읽기", "title": "흰", "author": "한강", "year": "2016", "signal": "노벨문학상 이후 2024년 연간 베스트셀러 교보문고 9위, 예스24 6위에 올랐습니다.", "evidence": "2024년 연간 종합 베스트셀러에서 교보문고 9위, 예스24 6위였고 두 서점 모두 상위 10위 중 다섯 권이 한강 작품이었습니다. 교보문고는 한강 책 구매자 중 20대가 수상 직전까지 35.5%로 가장 많았다고 분석했습니다.", "why": "『소년이 온다』, 『채식주의자』 다음으로 ‘한강을 더 읽고 싶은’ 독자가 고른 짧고 개인적인 책입니다. 흰 것들의 목록으로 슬픔을 따라가는 형식이라 시와 소설 사이에서 천천히 읽기 좋습니다.", "author_feature": "한강은 몸의 감각, 애도, 생명과 죽음의 경계를 조용하고 밀도 높은 문장으로 씁니다. 『흰』은 ‘흰 것’이라는 매개로 삶과 죽음에 대한 감각을 풀어낸 작품입니다.", "episode": "2016년 5월 출간 기자간담회를 열고 나온 작품으로, 노벨상 이후 『소년이 온다』, 『채식주의자』, 『작별하지 않는다』에 이어 판매 상위권에 오르며 ‘전작 읽기’의 다음 단계가 됐습니다.", "content": "작가 레지던시로 아는 사람이 없는 낯선 도시에 머물게 된 화자가, 태어난 지 얼마 안 되어 세상을 떠난 언니와 제대로 애도하지 못한 죽음을 ‘흰 것’들을 통해 마주합니다.", "theme": "애도, 삶과 죽음의 경계, 흰색, 유한함, 기억, 자전적 슬픔.", "tags": ["한강", "노벨이후", "애도", "작가읽기", "시적소설"], "grade": "B", "audience": "작품 단위 연령 통계는 확인 못 했습니다. 한강 책 전체로는 교보문고 기준 수상 직전 20대가 35.5%로 가장 많았고, 수상 이후 50대 이상이 15.3%에서 27.3%로 늘었습니다.", "route": "노벨문학상 → 『소년이 온다』, 『채식주의자』 → 『흰』으로 전작 읽기 → 『서랍에 저녁을 넣어 두었다』, 『빛과 실』", "style": "‘흰 것’과 관련된 낱말을 실마리로 짧은 글들이 이어지는 소설입니다. 시처럼 행간이 넓습니다.", "read": "한강의 대표작을 읽은 뒤 작가 자신의 목소리에 더 가까운 책을 찾는다면.", "caution": "뚜렷한 사건 전개보다 짧은 단상이 이어집니다. 서사를 기대하면 산문집처럼 느껴질 수 있습니다.", "difficulty": "보통", "pace": "천천히", "mood": "흰빛, 애도, 고요", "talk": "만나지 못한 사람을 애도한다는 것은 무엇을 슬퍼하는 일인가?", "other": "국내판 출간 연도는 2016년(초판)과 2018년(개정판)이 함께 표기됩니다. 『희랍어 시간』은 노벨상 이후 판매 수치를 찾지 못해 이번에 넣지 않았습니다.", "id": "book-57", "search_blob": "소설 작가읽기 흰 한강 애도, 삶과 죽음의 경계, 흰색, 유한함, 기억, 자전적 슬픔. 작품 단위 연령 통계는 확인 못 했습니다. 한강 책 전체로는 교보문고 기준 수상 직전 20대가 35.5%로 가장 많았고, 수상 이후 50대 이상이 15.3%에서 27.3%로 늘었습니다. 노벨문학상 → 『소년이 온다』, 『채식주의자』 → 『흰』으로 전작 읽기 → 『서랍에 저녁을 넣어 두었다』, 『빛과 실』 흰빛, 애도, 고요 한강 노벨이후 애도 작가읽기 시적소설", "characters": "나 — 작가 레지던시로 낯선 도시에 머무는 화자입니다. 언니 — 화자가 태어나기 전, 태어난 지 얼마 안 되어 세상을 떠난 존재로 화자의 슬픔 한가운데 있습니다.", "full_plot": "화자는 아는 사람 없는 낯선 도시에 도착해 지내면서 ‘흰 것’들의 목록을 적어 나갑니다. 그 낱말들을 따라가며 태어나자마자 세상을 떠난 언니, 그리고 자신이 오랫동안 외면해 온 슬픔의 기억이 차례로 떠오릅니다. 화자는 제대로 애도하지 못했던 죽음을 이번에는 마주하기로 합니다.", "spoiler_note": "LTI Korea 작품 소개 범위(낯선 도시, 언니, 슬픔과 마주하기로 하는 결심)까지 적었습니다. 마지막 장면은 확인하지 못했습니다.", "group": "이슈", "issue_kind": "노벨 문학상", "issue_date": "2024-10-10", "issue_event": "2024년 10월 10일 한강의 노벨문학상 수상 발표 뒤 대표작에 이어 『흰』까지 판매가 늘어 연간 베스트셀러 10위권에 들었습니다.", "reaction_2030": "작품 단위 2030 비율은 확인 못 함. 한강 책 전체로는 교보문고 기준 수상 직전 20대가 35.5%로 가장 많았습니다(노컷뉴스 2024-12-02)."}, {"type": "시", "trend": "미디어", "title": "오디세이아", "author": "호메로스", "year": "기원전 8세기경(전승)", "signal": "놀런 감독의 영화 '오디세이' 개봉 달인 2026년 8월, 교보문고에서 제목에 '오디세이'가 들어간 도서 판매가 전월 대비 940.9%, 전년 동월 대비 2984.8%(약 31배) 늘었습니다.", "evidence": "개봉 전인 7월에도 교보문고 관련 도서 판매는 전년 동월 대비 595.5% 늘었습니다. 예스24에서는 개봉 2주 차에 을유문화사판 『오뒷세이아』가 전주 대비 389.8%, 현대지성판이 166.1% 늘었고, 8월 마지막 주 교보문고 관련서 1위는 현대지성 고대 그리스어 완역본이었습니다.", "why": "영화가 천만 관객을 넘기면서 ‘영화를 보고 원전을 확인하는’ 수요가 생겼습니다. 지난해 같은 달 관련서 상위권이 아동용 신화 시리즈였던 것과 달리 올해는 성인용 완역본과 입문서가 올라왔다는 점이 눈에 띕니다.", "author_feature": "호메로스는 『일리아스』와 『오디세이아』의 작가로 전해지는 고대 그리스 시인입니다. 실존 여부와 창작 방식은 지금도 논쟁 중이고, 두 서사시는 구전 전통에서 다듬어진 것으로 봅니다.", "episode": "교보문고는 관련서 판매가 1~6월에도 전년 동월 대비 55.3~291.7% 늘었고 개봉이 가까울수록 증가 폭이 커졌다고 밝혔습니다. 영화 각본집도 예술 분야 주간 1위에 올라, 영화 한 편이 고전 원전, 입문서, 각본집을 함께 끌어올린 사례입니다.", "content": "트로이 전쟁이 끝나고 10년이 지나도록 고향 이타카에 돌아가지 못한 오디세우스의 귀향 이야기입니다. 아들 텔레마코스의 아버지 찾기, 오디세우스의 방랑 모험담, 귀향 뒤 구혼자 처단이 큰 축입니다.", "theme": "귀향, 지략, 신과 인간, 환대와 무례, 정체 숨기기와 알아보기, 가족의 재회.", "tags": ["영화원작", "고전", "서사시", "그리스신화", "스크린셀러"], "grade": "B", "audience": "교보문고 7월 관련서 구매자는 40대 25.7%, 50대 23.6%, 30대 22.1%, 20대 15.4%였고, 개봉 후 예스24 집계에서는 40대 37.9%, 50대 32.6%로 4050 비중이 더 컸습니다.", "route": "영화 '오디세이' 개봉 → 원전 완역본, 입문서 구매 → 『일리아스』 세트와 그리스 신화로 확장", "style": "6보격 운율의 긴 서사시를 산문이나 운문으로 옮긴 번역본으로 읽게 됩니다. 판본마다 번역 방식이 달라 읽는 느낌 차이가 큽니다.", "read": "영화를 보고 원작의 사건 순서와 인물을 직접 확인하고 싶거나, 서양 고전을 한 권 제대로 읽어 보고 싶다면.", "caution": "판매 수치는 제목에 ‘오디세이’가 들어간 도서 전체 합산이라 아동서, 입문서, 각본집이 섞여 있습니다. 2030 비중도 특정 판본이 아니라 관련서 전체 기준입니다.", "difficulty": "보통~높음", "pace": "천천히", "mood": "모험, 귀향, 장엄함", "talk": "20년 만에 돌아온 오디세우스를 알아보게 만드는 것은 얼굴인가, 기억인가, 증거인가?", "other": "현대지성 완역본, 을유문화사(김헌 역) 『오뒷세이아』, 숲 『오뒷세이아』 등 판본이 여럿입니다. 영화와 원전을 비교하려면 각본집을 함께 보는 방법도 있습니다.", "id": "book-58", "search_blob": "시 미디어 오디세이아 호메로스 귀향, 지략, 신과 인간, 환대와 무례, 정체 숨기기와 알아보기, 가족의 재회. 교보문고 7월 관련서 구매자는 40대 25.7%, 50대 23.6%, 30대 22.1%, 20대 15.4%였고, 개봉 후 예스24 집계에서는 40대 37.9%, 50대 32.6%로 4050 비중이 더 컸습니다. 영화 '오디세이' 개봉 → 원전 완역본, 입문서 구매 → 『일리아스』 세트와 그리스 신화로 확장 모험, 귀향, 장엄함 영화원작 고전 서사시 그리스신화 스크린셀러", "characters": "오디세우스 — 이타카의 왕으로 트로이 전쟁 뒤 귀향길에 오르지만 10년을 떠돕니다. 페넬로페 — 오디세우스의 아내로 재혼을 요구하는 구혼자들을 수의 짜기 핑계로 버팁니다. 텔레마코스 — 아들로 아버지 소식을 찾아 나섭니다. 아테나 — 오디세우스 부자를 돕는 여신입니다. 포세이돈 — 아들 폴리페모스가 눈을 잃은 일로 귀향을 방해하는 바다의 신입니다. 구혼자들 — 페넬로페에게 구혼하며 이타카의 재산을 축냅니다. 에우마이오스, 에우리클레이아, 노견 아르고스 — 변장한 오디세우스를 맞거나 알아보는 집안 사람들입니다.", "full_plot": "트로이 전쟁 승리 뒤 10년이 지나도 오디세우스가 돌아오지 않자 구혼자들이 페넬로페를 압박합니다. 텔레마코스는 아테나의 권유로 네스토르와 메넬라오스를 찾아가 아버지 소식을 듣고, 제우스의 명을 받은 헤르메스 덕분에 오디세우스는 칼립소의 섬을 떠납니다. 파이아케스인의 땅에 닿은 오디세우스는 알키노오스의 궁정에서 지난 모험을 들려줍니다. 키클롭스 폴리페모스의 동굴 탈출, 아이올로스의 바람 주머니, 부하들을 돼지로 만든 키르케, 저승에서 만난 테이레시아스와 어머니의 영혼, 세이렌과 스킬라, 카리브디스, 헬리오스의 소를 잡아먹은 부하들의 몰살이 이어집니다. 파이아케스인의 배로 이타카에 돌아온 그는 아테나의 도움으로 늙은 거지로 변장하고, 돼지치기 에우마이오스의 오두막에서 아들과 재회합니다. 노견 아르고스가 주인을 알아보고 유모 에우리클레이아는 흉터로 그를 알아봅니다. 페넬로페가 오디세우스의 활로 활쏘기 대회를 열자 구혼자들은 활시위도 걸지 못하고, 오디세우스가 도끼 구멍을 꿰뚫어 우승한 뒤 구혼자들을 죽입니다. 페넬로페는 침대에 얽힌 비밀로 남편을 시험해 확인하고, 오디세우스는 아버지 라에르테스에게도 정체를 밝힙니다. 구혼자 가족들이 복수에 나서지만 아테나가 개입해 싸움을 멈춥니다.", "spoiler_note": "운문으로 된 서사시라 갈래는 ‘시’로 두었지만, 이야기가 중심인 작품이라 인물과 줄거리는 소설처럼 정리했습니다. 23~24권 결말의 원형 여부는 학계 논쟁이 있습니다.", "group": "이슈", "issue_kind": "영상 원작", "issue_date": "2026-08-05", "issue_event": "크리스토퍼 놀런 감독의 영화 '오디세이'가 2026년 8월 5일 국내 개봉해 개봉 33일째인 9월 6일 누적 관객 1000만 명을 넘었습니다.", "reaction_2030": "교보문고 7월 관련서 구매자 중 30대 22.1%, 20대 15.4%로 2030은 37.5%였고, 개봉 후 예스24 집계에서는 40대 37.9%, 50대 32.6%로 4050 중심이었습니다(디지털데일리 2026-08-04, 아시아경제 2026-08-14)."}, {"type": "소설", "trend": "미디어", "title": "폭풍의 언덕", "author": "에밀리 브론테", "year": "1847", "signal": "에메랄드 펜넬 감독의 영화가 2026년 2월 11일 국내 개봉한 뒤, 교보문고 2월 4주차(2.25~3.3) 집계에서 외국소설 분야 역주행 도서로 꼽혔습니다.", "evidence": "노컷뉴스는 교보문고 2월 4주차 베스트셀러를 전하며 최근 영화 개봉 영향으로 판매가 늘었다고 보도했습니다. 다만 구체적인 순위나 증가율은 기사에 없었습니다.", "why": "마고 로비, 제이콥 엘로디 주연의 화제작이 개봉하면서 원작을 먼저 읽거나 영화와 비교하려는 수요가 생겼습니다. 같은 시기 『죽은 왕녀를 위한 파반느』, 『프로젝트 헤일메리』와 함께 ‘영화 원작 역주행’ 흐름으로 묶여 보도됐습니다.", "author_feature": "에밀리 브론테는 엘리스 벨이라는 필명으로 이 작품을 냈습니다. 『폭풍의 언덕』은 그의 유일한 장편이며, 출간 당시에는 비윤리적이라는 비판을 받았다가 20세기에 재평가됐습니다.", "episode": "1847년 작품이 2026년 영화 개봉과 맞물려 국내 서점 외국소설 분야에서 다시 움직였습니다. 2026년 1월 윌북판이 새로 나오는 등 판본도 늘었습니다.", "content": "요크셔 황야의 두 저택 워더링 하이츠와 스러시크로스 그레인지를 배경으로, 언쇼 집안에 거둬진 고아 히스클리프와 캐서린 언쇼의 사랑, 그리고 히스클리프의 긴 복수를 그립니다.", "theme": "집착적 사랑, 계급, 복수, 학대의 대물림, 자연과 광기.", "tags": ["영화원작", "고전", "로맨스", "복수", "역주행"], "grade": "B", "audience": "확인 못 함. 국내 구매자 연령 비중은 찾지 못했습니다.", "route": "영화 '폭풍의 언덕' 개봉 → 원작 고전 역주행 → 세계문학전집 고전 읽기로 확장", "style": "외부인 화자 록우드가 하녀 넬리 딘에게 들은 이야기를 전하는 액자 구조입니다. 시간 순서가 뒤섞이고 화자를 온전히 믿기 어려운 구성이라 처음에는 인물 관계도를 그리며 읽는 편이 좋습니다.", "read": "로맨스로 소개된 작품이 실제로는 얼마나 어둡고 거친지 확인해 보고 싶거나, 영화와 원작의 차이를 비교하고 싶다면.", "caution": "영화는 원작의 2세대 이야기 비중과 인물 설정을 크게 바꿔 각색할 수 있습니다. 국내 판매 증가는 순위 서술 수준으로만 확인돼 수치가 없습니다.", "difficulty": "보통~높음", "pace": "보통", "mood": "황량함, 격정, 복수", "talk": "히스클리프의 복수는 사랑의 연장인가, 사랑을 잃은 뒤 남은 학대의 반복인가?", "other": "같은 시기 교보문고 외국소설 분야에서 세계문학전집 고전이 강세였다는 흐름(뉴시스 2026-06-08)과 함께 보면 좋습니다.", "id": "book-59", "search_blob": "소설 미디어 폭풍의 언덕 에밀리 브론테 집착적 사랑, 계급, 복수, 학대의 대물림, 자연과 광기. 확인 못 함. 국내 구매자 연령 비중은 찾지 못했습니다. 영화 '폭풍의 언덕' 개봉 → 원작 고전 역주행 → 세계문학전집 고전 읽기로 확장 황량함, 격정, 복수 영화원작 고전 로맨스 복수 역주행", "characters": "히스클리프 — 언쇼 씨가 데려온 고아로 힌들리에게 머슴처럼 취급받다 집을 떠났다가 부유해져 돌아옵니다. 캐서린 언쇼 — 히스클리프와 깊이 묶여 있지만 에드거 린턴과 결혼합니다. 에드거 린턴 — 스러시크로스 그레인지의 주인이자 캐서린의 남편입니다. 이저벨라 린턴 — 에드거의 누이로 히스클리프와 결혼합니다. 힌들리 언쇼 — 캐서린의 오빠로 히스클리프를 학대합니다. 헤어턴 — 힌들리의 아들입니다. 캐시 — 캐서린과 에드거의 딸입니다. 넬리 딘 — 두 집안을 오래 지켜본 하녀이자 이야기의 주된 전달자입니다. 록우드 — 그레인지에 세 든 외부인 화자입니다.", "full_plot": "1801년 스러시크로스 그레인지에 세 든 록우드가 집주인 히스클리프를 찾아갔다가 폭설로 워더링 하이츠에 묶이고, 이후 넬리 딘에게 두 집안의 과거를 듣습니다. 어린 시절 언쇼 집안에 들어온 히스클리프는 캐서린과 가까워지지만 힌들리의 학대를 받고, 캐서린이 에드거 린턴과 결혼할 무렵 집을 떠납니다. 3년 뒤 부유해져 돌아온 그는 이저벨라 린턴과 결혼하며 두 집안을 향한 복수를 시작합니다. 캐서린은 딸 캐시를 낳고 세상을 떠나고, 히스클리프의 복수는 다음 세대인 캐시와 헤어턴에게까지 그늘을 드리웁니다. 말년의 히스클리프는 식음을 끊고 죽은 캐서린에게 사로잡힌 채 지내다 폭우가 내린 밤 창문을 열어 둔 방에서 숨진 채 발견됩니다. 장례에서 진심으로 슬퍼한 사람은 헤어턴뿐이었고, 이듬해 캐시와 헤어턴은 결혼합니다. 마을에는 유령을 봤다는 소문이 돌지만 록우드는 죽은 이들이 평온히 잠들었으리라 믿으며 이야기를 맺습니다.", "spoiler_note": "원작 결말까지 공개했습니다. 영화판의 각색 범위는 확인하지 않았습니다.", "group": "이슈", "issue_kind": "영상 원작", "issue_date": "2026-02-11", "issue_event": "에메랄드 펜넬 감독, 마고 로비와 제이콥 엘로디 주연의 영화 '폭풍의 언덕'이 2026년 2월 11일 국내 개봉했습니다.", "reaction_2030": "확인 못 함"}, {"type": "소설", "trend": "미디어", "title": "중증외상센터: 골든 아워", "author": "한산이가", "year": "2019", "signal": "넷플릭스 시리즈가 2025년 1월 24일 공개된 뒤 열흘 만에 원작 웹소설 조회수가 179배, 동명 웹툰 조회수가 68배 늘었다고 보도됐습니다.", "evidence": "드라마는 1월 다섯째 주(1.27~2.2) 1190만 조회로 넷플릭스 비영어 TV쇼 1위에 올랐습니다. 네이버웹툰 집계로는 원작이 있는 영상 공개 전후 30일 비교 시 웹소설 조회수가 평균 178.6배, 거래액이 평균 57.9배 올랐습니다.", "why": "현직 의사 출신 작가가 쓴 의학 웹소설이 글로벌 1위 드라마로 만들어지면서 원작을 찾는 수요가 몰렸습니다. 영상이 종이책보다 연재 플랫폼의 원작 소비를 먼저 끌어올린 사례입니다.", "author_feature": "필명 한산이가, 본명 이낙준은 이비인후과 전문의 출신으로 유튜브 채널 '닥터프렌즈'를 운영합니다. 2016년 『군의관, 이계가다』로 데뷔했고, 의사 생활 약 5년 뒤 전업 작가로 집필하고 있습니다.", "episode": "웹소설은 2019년 3월 네이버시리즈 독점 연재로 시작해 같은 해 12월 웹툰으로 옮겨졌고, 5권짜리 단행본으로도 나왔습니다. 드라마 공개를 기념해 네이버시리즈는 웹소설 50화를 무료로 풀었습니다.", "content": "전장을 누비던 천재 외과 전문의 백강혁이 이름만 남은 중증외상팀을 되살리기 위해 부임하면서 벌어지는 의학 드라마입니다.", "theme": "골든 아워, 생명의 우선순위, 의료 현장의 구조적 문제, 천재 영웅 서사.", "tags": ["넷플릭스", "웹소설", "의학물", "영상원작", "조회수급증"], "grade": "B", "audience": "확인 못 함. 원작 웹소설 독자의 연령 비중은 찾지 못했습니다.", "route": "넷플릭스 드라마 → 원작 웹소설, 웹툰 정주행 → 작가 유튜브와 전작 탐색", "style": "초인적 능력의 주인공이 막힌 상황을 정면 돌파하는 웹소설 특유의 속도감에, 현직 의사 경험을 바탕으로 한 의료 현장 고증을 얹었습니다.", "read": "드라마의 통쾌함이 원작에서는 어떻게 쌓이는지 궁금하거나, 의학물을 빠른 호흡으로 읽고 싶다면.", "caution": "급증 지표는 판매량이 아니라 조회수입니다. 종이책 판매 증가 수치는 확인하지 못했습니다. 아래 인물 정보 일부는 드라마 기준 보도에서 확인한 것입니다.", "difficulty": "쉬움", "pace": "빠름", "mood": "긴박함, 통쾌함, 사명감", "talk": "한 명의 천재가 구조적 문제를 해결하는 이야기는 현실의 의료 문제를 비추는가, 가리는가?", "other": "웹소설 원작 영상화가 원작 소비를 얼마나 끌어올리는지 보여 주는 수치가 남은 사례입니다. 같은 기사에서 MBC '지금 거신 전화는' 원작 웹소설도 방영 전 대비 조회수 5배, 매출 15배가 늘었다고 전했습니다.", "id": "book-60", "search_blob": "소설 미디어 중증외상센터: 골든 아워 한산이가 골든 아워, 생명의 우선순위, 의료 현장의 구조적 문제, 천재 영웅 서사. 확인 못 함. 원작 웹소설 독자의 연령 비중은 찾지 못했습니다. 넷플릭스 드라마 → 원작 웹소설, 웹툰 정주행 → 작가 유튜브와 전작 탐색 긴박함, 통쾌함, 사명감 넷플릭스 웹소설 의학물 영상원작 조회수급증", "characters": "백강혁 — 전장을 누비던 천재 외과 전문의로, 유명무실한 중증외상팀을 살리기 위해 부임합니다. 양재원 — 드라마에서 백강혁의 제자가 되는 엘리트 펠로우입니다(추영우 분, 원작 웹소설에서의 비중은 확인 못 함).", "full_plot": "백강혁은 이름뿐인 중증외상팀에 부임해 골든 아워 안에 환자를 살리기 위해 병원 안팎의 관행과 부딪칩니다. 확인한 자료는 이 기본 설정과 주인공의 성격까지만 다루고 있어, 이후 전개와 결말은 적지 않았습니다.", "spoiler_note": "원작 웹소설의 결말은 확인하지 못해 설정 중심으로만 정리했습니다.", "group": "이슈", "issue_kind": "영상 원작", "issue_date": "2025-01-24", "issue_event": "원작 웹소설을 바탕으로 한 넷플릭스 시리즈 '중증외상센터'가 2025년 1월 24일 공개돼 열흘 만에 비영어 TV쇼 글로벌 1위에 올랐습니다.", "reaction_2030": "확인 못 함"}, {"type": "소설", "trend": "셀럽", "title": "그 후에", "author": "기욤 뮈소", "year": "2004", "signal": "라이즈 성찬이 2026년 2월 추천한 뒤 예스24에서 추천 월 판매가 전월 대비 200% 늘었습니다.", "evidence": "뉴시스는 스타가 읽거나 추천한 책을 모은 기사에서 예스24 자료를 인용해 이 수치를 전했습니다. 같은 기사에 고아성 추천 『집착』 158.3%, 뷔 추천 『열한 계단』 61.9%, 이승윤 추천 『대성당』 21.1%가 함께 나옵니다.", "why": "좋아하는 아이돌이 읽은 책을 따라 읽는 팬덤의 ‘같은 책 읽기’가 판매로 이어졌습니다. 스타가 읽은 책과 출처를 모은 ‘최애의 독서’ 사이트에 9월 1일 기준 368명의 책장이 등록될 만큼 팬덤 독서가 하나의 장르가 됐습니다.", "author_feature": "기욤 뮈소는 프랑스의 대표 베스트셀러 작가로, 『그 후에』부터 이후 작품들이 프랑스 베스트셀러 1위에 올랐다고 소개됩니다. 사랑과 죽음, 초현실적 장치를 스릴러 문법으로 묶는 데 능합니다.", "episode": "국내에서는 『완전한 죽음』이라는 제목으로 먼저 나왔고, 다시 번역해 『그 후에』로 냈습니다. 밝은세상이 맞춤법과 대화체를 손본 개정판 전자책을 2025년 5월 29일 냈습니다.", "content": "뉴욕 맨해튼의 잘나가는 변호사 네이선 앞에 죽음을 미리 알아보는 ‘메신저’라고 자처하는 의사 굿리치가 나타나고, 그가 예고한 사람들이 차례로 죽습니다.", "theme": "죽음의 예고, 남은 시간, 이혼 뒤에도 남은 사랑, 삶에서 정말 중요한 것.", "tags": ["아이돌추천", "팬덤독서", "기욤뮈소", "프랑스소설", "스릴러"], "grade": "B", "audience": "아이돌 팬덤을 통해 유입된 독자. 연령 비중은 확인 못 함.", "route": "라이즈 성찬 추천 → 팬덤 ‘최애의 독서’ → 기욤 뮈소 전작 탐색", "style": "짧은 장과 빠른 장면 전환, 반전으로 끌고 가는 대중 스릴러 문법에 임사 체험과 사후 세계 같은 초현실적 요소를 섞습니다.", "read": "가볍게 시작해 빠르게 읽히면서도 죽음과 사랑에 대해 생각할 거리가 남는 소설을 찾는다면.", "caution": "판매 증가율은 추천 월 기준 전월 대비라 기저가 낮았을 수 있습니다. 절대 판매량과 순위는 확인하지 못했습니다.", "difficulty": "쉬움", "pace": "빠름", "mood": "미스터리, 애틋함, 초현실", "talk": "죽을 날을 미리 안다면, 지금 가장 먼저 연락할 사람은 누구인가?", "other": "영화로도 만들어졌고(로맹 뒤리스, 존 말코비치 주연) 모나코 국제영화제 최우수 각색상을 받았다고 소개됩니다.", "id": "book-61", "search_blob": "소설 셀럽 그 후에 기욤 뮈소 죽음의 예고, 남은 시간, 이혼 뒤에도 남은 사랑, 삶에서 정말 중요한 것. 아이돌 팬덤을 통해 유입된 독자. 연령 비중은 확인 못 함. 라이즈 성찬 추천 → 팬덤 ‘최애의 독서’ → 기욤 뮈소 전작 탐색 미스터리, 애틋함, 초현실 아이돌추천 팬덤독서 기욤뮈소 프랑스소설 스릴러", "characters": "네이선 델 아미코 — 뉴욕 맨해튼의 변호사로 소송에서 연승하며 성공했지만 평생 사랑한 말로리와 이혼한 상처가 있습니다. 가렛 굿리치 — 죽음을 예견할 수 있다며 ‘메신저’를 자처하는 의사입니다. 말로리 — 네이선의 전 아내입니다.", "full_plot": "성공한 변호사 네이선의 로펌에 의사 가렛 굿리치가 찾아와 자신은 곧 죽을 사람을 알아보는 메신저라고 말합니다. 굿리치가 죽음을 예견한 사람들이 실제로 차례로 숨지자 네이선은 자신에게도 죽음이 다가오고 있다는 공포와 마주합니다. 소설은 메신저가 정말 존재하는지, 굿리치가 네이선에게 전하려는 메시지가 무엇인지를 따라가며 네이선이 남은 시간 동안 무엇을 선택할지 묻습니다. 결말은 확인한 자료에 나오지 않아 적지 않았습니다.", "spoiler_note": "출판사 소개에서 확인한 설정과 전개까지만 정리했습니다.", "group": "이슈", "issue_kind": "SNS 화제", "issue_date": "2026-02", "issue_event": "그룹 라이즈 성찬이 2026년 2월 이 소설을 추천했고, 예스24에서 추천 월 판매가 전월 대비 200% 늘었습니다.", "reaction_2030": "확인 못 함"}, {"type": "소설", "trend": "역주행", "title": "단종애사", "author": "이광수", "year": "1928", "signal": "단종 이야기를 다룬 영화 '왕과 사는 남자' 개봉(2026.2.4) 후 한 달간 예스24에서 여러 출판사 『단종애사』 판매 합산이 전년 동기 대비 약 80배로 늘었습니다.", "evidence": "같은 기간 예스24 '단종' 키워드 도서 판매는 전년 동기 대비 2565.4% 늘었습니다. 『단종애사』 판매 1위인 새움판(2026년 2월 출간)은 3주차(2.18~24)에 전주 대비 336.8%, 4주차(2.25~3.3)에 18.1% 더 올랐습니다.", "why": "영화가 원작 없이 만들어졌는데도, 관객이 단종의 실제 역사와 그 비극을 다룬 고전 소설을 찾아 읽었습니다. 저작권이 풀린 근대 소설이 여러 출판사에서 동시에 다시 나온 것도 판매를 키웠습니다.", "author_feature": "이광수는 한국 근대소설의 출발점에 있는 작가지만 친일 행적으로 비판받는 인물입니다. 『단종애사』 뒤인 1940년에는 승리한 세조의 시점에서 같은 사건을 다시 쓴 『세조대왕』을 냈습니다.", "episode": "1928년 11월 30일부터 1929년 12월 11일까지 『동아일보』에 217회 연재됐고 1930년 단행본으로 나왔습니다. 2026년에는 새움이 재출간하고 열림원, 더스토리가 예약 판매에 들어갔으며, 1954년 박문출판 초판본 표지를 살린 판도 나왔습니다.", "content": "1441년 단종의 탄생부터 즉위, 숙부 수양대군의 왕위 찬탈, 사육신의 복위 시도, 영월 유배와 죽음까지를 그린 역사소설입니다.", "theme": "왕위 찬탈, 충의와 배신, 어린 왕의 비극, 권력의 정당성.", "tags": ["왕사남", "단종", "역사소설", "근대고전", "스크린셀러"], "grade": "B", "audience": "책 단위 연령 비중은 확인 못 함. 영화 이후 역사 관심 전반에서 2030 유입이 관찰됨(당근 역사 모임 가입자 중 2030 비중 30.7%→35.8%).", "route": "영화 '왕과 사는 남자' 흥행 → '단종' 키워드 도서 → 근대 역사소설 『단종애사』와 조선왕조실록 입문서로 확장", "style": "1920년대 신문 연재소설이라 문체가 예스럽고 장면마다 비장미를 강조합니다. 4편(고명편, 실국편, 충의편, 혈루편) 구성이 단종의 하강하는 운명에 맞춰져 있습니다.", "read": "영화를 보고 단종의 실제 이야기가 궁금해졌거나, 같은 역사를 근대 작가가 어떤 시선으로 썼는지 보고 싶다면.", "caution": "역사 기록과 다른 소설적 일화가 섞여 있습니다. 예를 들어 사육신 국문 날 신숙주 부인이 자결했다는 일화는 사실이 아닌 것으로 알려져 있습니다. 작품이 패권 정치를 숙명론으로 받아들인다는 비판적 평가도 있습니다.", "difficulty": "보통~높음", "pace": "보통", "mood": "비장함, 애통함, 역사", "talk": "같은 사건을 패배한 쪽(『단종애사』)과 승리한 쪽(『세조대왕』)에서 쓴 한 작가의 선택을 어떻게 볼 것인가?", "other": "예스24에서 어린이 역사 동화 『어린 임금의 눈물』은 같은 기간 4614.3% 늘어 '단종' 키워드 1위였고, 교보문고에서는 '조선왕조실록' 키워드 도서가 개봉 전 대비 2.9배 팔렸습니다.", "id": "book-62", "search_blob": "소설 역주행 단종애사 이광수 왕위 찬탈, 충의와 배신, 어린 왕의 비극, 권력의 정당성. 책 단위 연령 비중은 확인 못 함. 영화 이후 역사 관심 전반에서 2030 유입이 관찰됨(당근 역사 모임 가입자 중 2030 비중 30.7%→35.8%). 영화 '왕과 사는 남자' 흥행 → '단종' 키워드 도서 → 근대 역사소설 『단종애사』와 조선왕조실록 입문서로 확장 비장함, 애통함, 역사 왕사남 단종 역사소설 근대고전 스크린셀러", "characters": "단종 — 어린 나이에 왕위에 올랐다가 폐위되어 영월에서 죽음을 맞는 비극의 주인공입니다. 수양대군(세조) — 단종의 숙부로 왕위를 빼앗습니다. 문종 — 단종의 아버지로 병약해 일찍 세상을 떠납니다. 한명회, 정인지 일파 — 수양대군을 왕으로 옹립하려 합니다. 김종서 — 수양의 정변 과정에서 아들과 함께 죽습니다. 사육신 — 단종 복위를 꾀한 신하들입니다. 엄흥도 — 영월의 호장으로 단종의 시신을 몰래 거둡니다.", "full_plot": "1441년 동궁 자선당에서 단종이 태어납니다. 병약한 문종이 일찍 세상을 떠나고 어린 단종이 즉위하자 한명회의 모의로 수양대군의 찬탈이 시작됩니다. 김종서 부자가 죽고 단종을 따르던 이들이 쫓겨나거나 죽으며, 단종은 세조에게 왕위를 넘기고 상왕으로 물러납니다. 사육신이 중심이 된 복위 시도(병자옥사)가 실패하자 단종은 노산군으로 강등돼 영월로 유배됩니다. 후환을 없애야 한다는 주장에 따라 사약이 내려지고 단종은 쓸쓸히 죽습니다. 강에 버려진 시신은 영월 호장 엄흥도가 몰래 거두어 산기슭에 묻습니다.", "spoiler_note": "역사적 사건 그대로 결말까지 공개했습니다.", "group": "이슈", "issue_kind": "다시 읽힌 책", "issue_date": "2026-02-04", "issue_event": "단종과 영월 유배를 다룬 영화 '왕과 사는 남자'가 2026년 2월 4일 개봉해 1000만 관객을 넘기면서 단종 관련 책을 찾는 독자가 급증했습니다.", "reaction_2030": "책 단위 2030 비중은 확인 못 함. 같은 시기 당근 역사 모임 신규 가입자는 전년 동기 대비 133% 늘었고 그중 2030 비중이 30.7%에서 35.8%로 올랐습니다(뉴시스 2026-03-14)."}, {"type": "소설", "trend": "작가읽기", "title": "투명한 나선", "author": "히가시노 게이고", "year": "2021", "signal": "작가 별세 소식이 알려진 뒤 예스24 판매가 전주 대비 326.5% 늘며 7월 5주 종합 1위에 올랐습니다.", "evidence": "교보문고 7월 4주차에는 출간 직후 4위였고, 예스24 8월 1주 종합 2위를 이어 갔습니다. 교보문고 10년(2016.7~2026.7) 소설 판매 분석에서 히가시노 게이고는 한강에 이어 국내외 소설가 전체 2위, 해외 작가 1위였습니다.", "why": "갈릴레오 시리즈 신작이 국내에 나온 지 열흘 만에 작가의 별세 소식이 전해지면서 추모 구매와 대표작 다시 읽기가 겹쳤습니다. 교보문고, 예스24, 알라딘이 추모 페이지와 매대를 열었고 알라딘, 예스24 추모 공간에는 각각 1000개, 600개 넘는 댓글이 달렸습니다.", "author_feature": "히가시노 게이고는 일본 추리소설 작가로 105편의 작품을 남겼고 일본 내 종이책 누적 판매가 1억 부를 넘었습니다. 트릭보다 범행 동기와 인물의 사정에 무게를 두는 작풍으로 한국에서도 『나미야 잡화점의 기적』, 『용의자 X의 헌신』 등으로 폭넓게 읽혔습니다.", "episode": "작가는 2026년 7월 23일 지병으로 별세했습니다(향년 68세). 국내판은 7월 13일 북다에서 나왔고, 생전 마지막 작품 『매스커레이드 라이프』도 예스24 eBook 10위권에 새로 들어왔습니다.", "content": "갈릴레오 시리즈 10번째 책입니다. 바다에서 총상을 입은 남성의 시신이 떠오르고 함께 살던 여성이 사라진 사건을 따라가며, 그동안 가려져 있던 물리학자 유가와 마나부의 과거와 비밀이 처음으로 드러납니다.", "theme": "가정폭력, 돌봄, 숨겨진 가족사, 사람은 혼자 살 수 없다는 것.", "tags": ["작가별세", "추모열기", "갈릴레오", "추리소설", "일본소설"], "grade": "A", "audience": "예스24 별세 직후 구매자는 40대 38.2%, 50대 30.2%, 30대 14.8%로 4050 중심. 교보문고 10년 누적 히가시노 독자는 30대 30.0%, 40대 26.3%로 30대가 가장 많았습니다.", "route": "작가 별세 소식 → 신작 『투명한 나선』 추모 구매 → 『나미야 잡화점의 기적』, 『용의자 X의 헌신』 등 대표작 다시 읽기", "style": "경찰 수사와 물리학자 유가와의 독자적 추리를 교차시키는 갈릴레오 시리즈 형식을 따르면서, 이번에는 탐정 쪽의 개인사를 사건 한가운데에 놓습니다. 국내판은 장편과 단편이 함께 묶인 첫 갈릴레오 시리즈 책으로 소개됩니다.", "read": "히가시노 게이고를 오래 읽어 왔거나, 갈릴레오 시리즈의 유가와가 어떤 사람인지 궁금했다면.", "caution": "시리즈 10번째 책이라 처음 읽는다면 『용의자 X의 헌신』 등 앞 권으로 인물을 먼저 익히는 편이 좋습니다. 326.5%는 예스24 단일 집계이고 교보문고 증가율은 확인하지 못했습니다.", "difficulty": "보통", "pace": "빠름", "mood": "추리, 쓸쓸함, 가족", "talk": "탐정의 개인사가 드러나면 그가 내리는 판단을 이전처럼 중립적이라고 믿을 수 있는가?", "other": "다음 권 『영원의 기억』도 북다와 국내 판권 계약이 끝난 상태로 보도됐습니다. 『나미야 잡화점의 기적』 국내 누적 부수는 매체마다 170만 부 이상, 200만 부 돌파로 다르게 전합니다.", "id": "book-63", "search_blob": "소설 작가읽기 투명한 나선 히가시노 게이고 가정폭력, 돌봄, 숨겨진 가족사, 사람은 혼자 살 수 없다는 것. 예스24 별세 직후 구매자는 40대 38.2%, 50대 30.2%, 30대 14.8%로 4050 중심. 교보문고 10년 누적 히가시노 독자는 30대 30.0%, 40대 26.3%로 30대가 가장 많았습니다. 작가 별세 소식 → 신작 『투명한 나선』 추모 구매 → 『나미야 잡화점의 기적』, 『용의자 X의 헌신』 등 대표작 다시 읽기 추리, 쓸쓸함, 가족 작가별세 추모열기 갈릴레오 추리소설 일본소설", "characters": "유가와 마나부 — 대학 물리학과 교수이자 시리즈 주인공으로, 치매를 앓는 어머니를 돌보는 아버지를 돕기 위해 부모 집에 머물던 중 사건에 얽힙니다. 구사나기, 우쓰미 — 경시청 수사1과 형사로 유가와에게 도움을 청합니다. 시마우치 소노카 — 숨진 남성과 동거하다 사라진 여성으로 가정폭력을 당한 정황이 있습니다. 가미쓰지 료타 — 총상을 입고 바다에서 발견된 남성입니다. 아사히 나나 — 소노카 모녀와 교류한 그림책 작가입니다(인물명은 일본어판 기준이며 한국어판 표기는 확인 못 함).", "full_plot": "지바현 미나미보소 앞바다에서 총상을 입은 남성의 시신이 떠오르고, 신원은 가미쓰지 료타로 확인됩니다. 같은 무렵 그와 동거하던 시마우치 소노카가 사라집니다. 소노카는 가정폭력을 당한 정황이 있지만 사건 당일 알리바이가 있어 왜 사라졌는지 알 수 없습니다. 형사 구사나기와 우쓰미는 소노카의 소지품에서 그림책 작가 아사히 나나의 책과, 그 책의 참고문헌에 적힌 유가와 마나부의 이름을 발견합니다. 구사나기가 연락했을 때 유가와는 요코스카의 부모 집에서 치매를 앓는 어머니와 아버지를 돌보고 있었고, 그는 경찰과 다른 각도에서 여러 사람의 사정이 얽힌 사건을 쫓습니다. 이 과정에서 시리즈 내내 다뤄지지 않았던 유가와 자신의 과거가 드러납니다. 결말은 확인한 자료에 나오지 않아 적지 않았습니다.", "spoiler_note": "사건의 발단과 수사 구도까지만 정리했고, 유가와의 비밀과 진상은 확인하지 못해 비워 두었습니다.", "group": "이슈", "issue_kind": "다시 읽힌 책", "issue_date": "2026-07-23", "issue_event": "히가시노 게이고가 2026년 7월 23일 별세했고, 소식이 국내에 알려진 7월 27~28일부터 서점가에 추모 구매가 몰렸습니다.", "reaction_2030": "예스24 별세 직후 구매자 중 30대는 14.8%(40대 38.2%, 50대 30.2%)였고, 교보문고 10년 누적 히가시노 소설 구매자는 30대가 30.0%로 가장 많았습니다(매일신문 2026-07-31)."}];
+const grid = document.getElementById('grid');
+const matrixBody = document.getElementById('matrixBody');
+const search = document.getElementById('search');
+const count = document.getElementById('count');
+const empty = document.getElementById('empty');
+const filters = [...document.querySelectorAll('.filter')];
+let active='전체';
+
+const esc=s=>String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
+function cclass(t){return t==='시'?'poetry':t==='비문학'?'nonfiction':'fiction'}
+function poem(b){return b.type==='시'&&b.full_plot.startsWith('시집')}
+function matches(b, q){
+ const hay=(b.search_blob+' '+b.signal+' '+b.evidence+' '+b.why+' '+b.author_feature+' '+b.content+' '+b.characters+' '+b.full_plot+' '+b.read+' '+b.talk+' '+(b.issue_kind||'')+' '+(b.issue_event||'')).toLowerCase();
+ const f=active==='전체'||b.type===active||b.trend===active||
+   (active==='역주행'&&(b.trend==='역주행'||b.tags.some(t=>t.includes('역주행'))))||
+   (active==='지금'&&b.trend==='지금')||
+   (active==='이슈'&&b.group==='이슈');
+ return f&&(!q||hay.includes(q));
+}
+function visible(){
+ const q=search.value.trim().toLowerCase();
+ return books.filter(b=>matches(b, q));
+}
+function render(){
+ const list=visible();
+ grid.innerHTML=list.map(b=>`
+ <article class="book card" id="${esc(b.id)}">
+   <div class="booktop">
+    <div class="cover ${cclass(b.type)}"><small>${esc(b.type)}, ${esc(b.year)}</small><span class="covertitle">${esc(b.title)}</span></div>
+    <div>
+      <div class="metahead"><span class="author">${esc(b.author)}</span><span class="grade">근거 ${esc(b.grade)}</span></div>
+      <h3>${esc(b.title)}</h3>
+      <div class="submeta">${esc(b.year)}, ${esc(b.type)}, ${esc(b.trend)}</div>
+      <div class="chips">${b.tags.slice(0, 5).map(t=>`<span class="chip">#${esc(t)}</span>`).join('')}</div>
+    </div>
+   </div>
+   <div class="hot"><div class="lab">🔥 왜 유행?</div><p>${esc(b.why)}</p></div>
+   <div class="signalbox"><div class="lab">DATA, 지금 뜨는 근거</div><p><b>${esc(b.signal)}</b><br>${esc(b.evidence)}</p></div>
+   ${b.group==='이슈'?`<div class="signalbox issuebox"><div class="lab">📌 ISSUE, ${esc(b.issue_kind)}</div><p><b>${esc(b.issue_date)}</b> ${esc(b.issue_event)}<br>2030 반응: ${esc(b.reaction_2030)}</p></div>`:''}
+   <div class="quickfacts">
+     <div class="qf"><b>READING LEVEL</b><span>${esc(b.difficulty)}</span></div>
+     <div class="qf"><b>PACE</b><span>${esc(b.pace)}</span></div>
+     <div class="qf"><b>MOOD</b><span>${esc(b.mood)}</span></div>
+   </div>
+   <details>
+    <summary>+ 상세 분석 전체 펼치기</summary>
+    <div class="deep">
+      <div class="box"><h4>주 독자층</h4><p>${esc(b.audience)}</p></div>
+      <div class="box"><h4>유행 경로</h4><p>${esc(b.route)}</p></div>
+      <div class="box"><h4>작가의 특징 / 문체</h4><p>${esc(b.author_feature)} ${esc(b.style)}</p></div>
+      <div class="box"><h4>확인된 에피소드</h4><p>${esc(b.episode)}</p></div>
+      <div class="box wide"><h4>${poem(b)?'화자, 반복되는 존재':'주요 인물, 관계'}</h4><p>${esc(b.characters)}</p></div>
+      <div class="box wide" style="background:linear-gradient(135deg, rgba(255, 235, 244, .72), rgba(235, 246, 255, .74))"><h4>${poem(b)?'시집의 정서 흐름, 이미지':'⚠ 인물, 사건, 결말 포함 상세 줄거리'}</h4><p>${esc(b.full_plot)}</p></div>
+      <div class="box wide"><h4>스포일러 해설 포인트</h4><p>${esc(b.spoiler_note)}</p></div>
+      <div class="box"><h4>핵심 주제</h4><p>${esc(b.theme)}</p></div>
+      <div class="box"><h4>이런 사람에게 추천</h4><p>${esc(b.read)}</p></div>
+      <div class="box"><h4>읽을 때 놓치기 쉬운 점</h4><p>${esc(b.caution)}</p></div>
+      <div class="box"><h4>독서모임에서 물을 질문</h4><p>${esc(b.talk)}</p></div>
+      <div class="box wide"><h4>같이 읽기 / 더 파보기</h4><p>${esc(b.other)}</p></div>
+    </div>
+   </details>
+ </article>`).join('');
+ matrixBody.innerHTML=list.map(b=>`<tr><td><b>${esc(b.title)}</b><br><span style="color:#d45a97">${esc(b.author)}</span></td><td>${esc(b.type)}</td><td>${esc(b.trend)}${b.group==='이슈'?`<br><span class="issue-tag">📌 ${esc(b.issue_kind)}</span>`:''}</td><td>${esc(b.audience)}</td><td>${esc(b.route)}</td><td>${esc(b.difficulty)}</td><td>${esc(b.mood)}</td></tr>`).join('');
+ count.textContent=`${list.length} / ${books.length}권`;
+ empty.style.display=list.length?'none':'block';
+}
+const issueGrid = document.getElementById('issueGrid');
+const issueKinds = [
+ ['노벨 문학상', '수상 발표 직후 국내 판매가 얼마나 뛰었는지, 한강 이후 한 해 만에 같은 일이 반복됐는지 봤습니다.'],
+ ['문학상', '노벨상 말고도 부커상처럼 해외 문학상 소식이 번역서 판매로 바로 이어진 경우입니다.'],
+ ['영상 원작', '드라마, 영화, OTT 공개 뒤 원작이 다시 순위에 올라온 책입니다.'],
+ ['SNS 화제', '릴스, 틱톡, 유튜브, 셀럽 언급이 실제 판매 증가로 확인된 책입니다.'],
+ ['다시 읽힌 책', '정치적 사건, 사회적 논쟁, 기념일처럼 바깥의 일이 계기가 되어 다시 꺼내 읽힌 책입니다.']
+];
+function renderIssues(){
+ issueGrid.innerHTML=issueKinds.map(([kind, desc])=>{
+  const list=books.filter(b=>b.group==='이슈'&&b.issue_kind===kind);
+  if(!list.length) return '';
+  return `<article class="issue-col card${list.length>4?' wide':''}"><span class="author-mode">${esc(kind)}</span><h3>${list.length}권</h3><p>${esc(desc)}</p><div class="issue-list">${list.map((b, i)=>`<a class="issue-item" href="#${esc(b.id)}" data-target="${esc(b.id)}"><span class="when">${esc(b.issue_date)}</span><b>『${esc(b.title)}』 ${esc(b.author)}</b>${i&&list[i-1].issue_event===b.issue_event?'':`<p>${esc(b.issue_event)}</p>`}<p>2030 반응: ${esc(b.reaction_2030)}</p></a>`).join('')}</div></article>`;
+ }).join('');
+}
+issueGrid.addEventListener('click', e=>{
+ const a=e.target.closest('.issue-item');
+ if(!a) return;
+ e.preventDefault();
+ if(!document.getElementById(a.dataset.target)){
+  search.value='';
+  active='전체';
+  filters.forEach(x=>x.classList.toggle('active', x.dataset.filter==='전체'));
+  render();
+ }
+ const target=document.getElementById(a.dataset.target);
+ const offset=[...document.querySelectorAll('.nav, .controls')]
+  .filter(n=>getComputedStyle(n).position==='sticky')
+  .reduce((m, n)=>Math.max(m, (parseFloat(getComputedStyle(n).top)||0)+n.offsetHeight), 0)+12;
+ window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-offset, behavior:'smooth'});
+});
+filters.forEach(btn=>btn.addEventListener('click', ()=>{filters.forEach(x=>x.classList.remove('active'));btn.classList.add('active');active=btn.dataset.filter;render();}));
+search.addEventListener('input', render);
+renderIssues();
+render();
+</script>
+</body></html>

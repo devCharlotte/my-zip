@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f2f0e9">
+  <meta name="description" content="2026 FRIEZE WEEK — 퇴근 후 갈 수 있는 Frieze Nights 중심 행사 지도, 케이터링, 타임테이블, 공식 출처.">
+  <title>2026 FRIEZE WEEK</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../shared.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<nav class="zip-topnav"><a class="zip-home" href="../">← my culture</a><span class="zip-date">Created Aug 26, 2026</span></nav>
+<header class="topbar">
+  <a class="brand" href="#/">2026 FRIEZE WEEK <span>SEOUL</span></a>
+  <div class="top-actions">
+    <button class="quiet-btn" id="infoBtn">TIMETABLE</button>
+    <button class="quiet-btn" id="savedBtn">MY PLACES <span id="savedCount">0</span></button>
+  </div>
+</header>
+
+<main class="shell" id="listView">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">SEOUL, AUG 31 — SEP 03</p>
+      <h1>2026<br>FRIEZE WEEK</h1>
+    </div>
+    <div class="hero-copy">
+      <p class="catch">프리즈 위크 행사,<br>근데 퇴근 후 갈 수 있게 <b>프리즈 나잇 위주로 !!!</b></p>
+      <p class="muted">을지로, 한남, 청담, 삼청. 17시 이후 오프닝, 아티스트 토크, 파티, 퍼포먼스를 우선하고 낮 프로그램은 보조로 정리했습니다.</p>
+      <div class="legend">
+        <span class="legend-food">FOOD</span><span>케이터링, 다과, 핑거푸드, 테이스팅</span>
+        <span class="legend-drinks">DRINKS</span><span>술, 음료 중심</span>
+      </div>
+      <div class="hero-status"><span>2026 DATA CHECK</span><b id="updatedText"></b></div>
+    </div>
+  </section>
+
+  
+  <section class="filter-stack" aria-label="Frieze Week filters">
+    <div class="date-filter-card filter-card">
+      <div class="filter-heading">
+        <div class="filter-number">1</div>
+        <div><b>DATE</b><span>날짜를 먼저 선택하세요</span></div>
+      </div>
+      <nav class="day-tabs" id="dayTabs"></nav>
+    </div>
+
+    <div class="category-filter-card filter-card">
+      <div class="filter-heading">
+        <div class="filter-number">2</div>
+        <div><b>CATEGORY</b><span>선택한 날짜에서 보고 싶은 유형을 고르세요</span></div>
+      </div>
+      <div class="filters" aria-label="event categories">
+        <button class="chip active" data-filter="all">ALL</button>
+        <button class="chip" data-filter="afterwork">AFTER 5</button>
+        <button class="chip food-chip" data-filter="food">FOOD</button>
+        <button class="chip" data-filter="drinks">DRINKS</button>
+        <button class="chip" data-filter="아티스트 토크">TALK</button>
+        <button class="chip" data-filter="오프닝">OPENING</button>
+        <button class="chip" data-filter="파티">PARTY</button>
+        <button class="chip" data-filter="퍼포먼스">PERFORMANCE</button>
+        <button class="chip" data-filter="public">PUBLIC</button>
+        <button class="chip" data-filter="late">LATE</button>
+        <button class="chip" data-filter="extra">FRIEZE EXTRA</button>
+      </div>
+    </div>
+
+    <div class="search-filter-card filter-card">
+      <label class="search compact-search">
+        <span>SEARCH</span>
+        <input id="searchInput" type="search" placeholder="장소, 전시, 프로그램 검색" autocomplete="off">
+      </label>
+    </div>
+  </section>
+
+
+  <section class="content-grid">
+    <div class="results-pane">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" id="sectionEyebrow">ALL NIGHTS</p>
+          <h2 id="sectionTitle">퇴근 후 먼저 볼 일정</h2>
+        </div>
+        <div class="result-meta"><span id="resultCount">0</span> ITEMS</div>
+      </div>
+      <div id="coverageBanner" class="coverage-banner"></div>
+      <div id="eventList" class="event-list"></div>
+    </div>
+
+    <aside class="map-pane">
+      <div class="map-head">
+        <span>NAVER MAP / MY PLACES</span>
+        <button id="exportBtn" class="text-btn">EXPORT</button>
+      </div>
+      <div id="naverMap" class="naver-map">
+        <div class="map-empty"><b>LOADING NAVER MAP</b><span>Web Dynamic Map을 불러오는 중입니다.</span></div>
+      </div>
+      <div class="map-help">NAVER MAP과 북마크는 <b>행사가 아니라 장소 단위</b>입니다. 임의 좌표를 만들지 않으며, 정확한 장소는 각 카드의 NAVER MAP 링크로 직접 확인할 수 있습니다.</div>
+      <div class="saved-panel">
+        <div class="saved-title-row"><div class="saved-title">MY PLACES <span id="savedPanelCount">0</span></div><div class="saved-tools"><button id="sharePicksBtn" class="text-btn">SHARE PICKS</button><button id="calendarBtn" class="text-btn">CALENDAR</button></div></div>
+        <div id="savedList" class="saved-list"></div>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<main class="shell detail-shell" id="detailView" hidden>
+  <a href="#/" class="back-link">← ALL EVENTS</a>
+  <article id="detailContent"></article>
+</main>
+
+<div class="drawer-wrap" id="drawerWrap" aria-hidden="true">
+  <div class="drawer-backdrop" data-close></div>
+  <aside class="drawer" role="dialog" aria-modal="true">
+    <div class="drawer-top">
+      <div><p class="eyebrow" id="drawerDate"></p><h2 id="drawerTitle"></h2></div>
+      <button class="close-btn" data-close aria-label="닫기">×</button>
+    </div>
+    <div id="drawerContent"></div>
+  </aside>
+</div>
+
+<footer>
+  <div>2026 FRIEZE WEEK, SEOUL</div>
+</footer>
+
+<script src="./config.js"></script>
+<script src="./data.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
