@@ -1,3 +1,4 @@
+2024 - 2026
 <a href="https://devcharlotte.github.io/my-zip/"><img src="gif/main-index.gif" width="49%" alt="index"></a>
 <a href="https://devcharlotte.github.io/my-zip/ai/offline-prof/"><img src="gif/ai-offline-prof.gif" width="49%" alt="offline-prof"></a>
 <a href="https://devcharlotte.github.io/my-zip/ai/local-agent/"><img src="gif/ai-local-agent.gif" width="49%" alt="local-agent"></a>
