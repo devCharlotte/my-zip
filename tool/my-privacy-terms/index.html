@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#fff7ec">
+<title>My Privacy & Terms | my zip</title>
+<link rel="stylesheet" href="../../shared.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="zip-soft">
+<nav class="zip-topnav"><a class="zip-home" href="../">← my tool</a><span class="zip-date">My Privacy & Terms</span></nav>
+<main class="page">
+  <header class="hero zip-card">
+    <div>
+      <span class="eyebrow">my tool / legal writing</span>
+      <h1>My Privacy & Terms</h1>
+      <p>서비스에서 사용하는 기능을 고르면 관련 법률과 페이지에 쓸 문구 초안을 정리해 줘요.</p>
+    </div>
+    <div class="hero-note"><strong>KR / EU / US</strong><span>브라우저에서만 작동</span></div>
+  </header>
+  <div class="notice"><strong>법률 검토를 대신하지 않아요.</strong> 관련 조항의 제목과 공식 원문 링크를 제공하고, 조건에 맞는 문장 초안을 제안해요. 법률 적용 여부, 동의 요건, 실제 데이터 처리 방식은 별도로 확인해야 합니다.</div>
+  <div class="workspace">
+    <form class="zip-card config" id="config" autocomplete="off">
+      <div class="section-title"><h2>서비스 정보</h2><span>01</span></div>
+      <div class="fields">
+        <label>서비스 이름<input id="service" placeholder="예: My Zip" maxlength="120"></label>
+        <label>운영자 또는 회사 이름<input id="owner" placeholder="예: 운영자 이름" maxlength="120"></label>
+        <label>문의 이메일<input id="email" type="email" placeholder="예: contact@example.com" maxlength="180"></label>
+        <label>서비스 유형<select id="serviceType"><option value="website">웹사이트 또는 블로그</option><option value="webapp">웹앱 또는 도구</option><option value="community">커뮤니티</option><option value="shop">쇼핑몰 또는 유료 서비스</option><option value="ai">AI 기반 서비스</option></select></label>
+      </div>
+
+      <div class="section-title"><h2>대상 지역</h2><span>02</span></div>
+      <p class="help">실제로 이용자를 대상으로 운영하는 지역을 선택해 주세요. 지역만 선택해도 모든 법률이 적용되는 것은 아니에요.</p>
+      <div class="regions">
+        <label><input name="region" type="checkbox" value="kr" checked><strong>한국</strong><small>개인정보 보호법</small></label>
+        <label><input name="region" type="checkbox" value="eu"><strong>EU</strong><small>GDPR</small></label>
+        <label><input name="region" type="checkbox" value="us"><strong>미국</strong><small>주별 개인정보보호법</small></label>
+      </div>
+      <div id="usDetail" class="extra" hidden>
+        <label>미국 이용자 지역<select id="usArea"><option value="unknown">아직 확인하지 않았어요</option><option value="ca">캘리포니아 포함</option><option value="other">캘리포니아 이외의 일부 주</option><option value="multiple">여러 주 또는 미국 전역</option></select></label>
+      </div>
+
+      <div class="section-title"><h2>서비스 동작</h2><span>03</span></div>
+      <p class="help">해당하는 기능을 선택하면 관련 검토 항목과 문구가 추가돼요. 선택하지 않았다고 해당 법률상 의무가 없다는 뜻은 아니에요.</p>
+      <div class="features">
+        <label><input id="local" type="checkbox"><span>입력 내용을 기기나 브라우저에만 저장</span></label>
+        <label><input id="account" type="checkbox"><span>로그인과 회원 계정</span></label>
+        <label><input id="analytics" type="checkbox"><span>방문 분석과 추적 기술</span></label>
+        <label><input id="third" type="checkbox"><span>외부 업체에 데이터 처리 위탁</span></label>
+        <label><input id="payment" type="checkbox"><span>결제와 유료 판매</span></label>
+        <label><input id="marketing" type="checkbox"><span>마케팅 메시지와 맞춤형 광고</span></label>
+        <label><input id="transfer" type="checkbox"><span>국외로 개인정보 이전</span></label>
+        <label><input id="children" type="checkbox"><span>아동 이용자 대상 서비스</span></label>
+        <label><input id="automated" type="checkbox"><span>개인에게 영향을 주는 자동화된 결정</span></label>
+      </div>
+
+      <div class="extra" id="collectionDetail">
+        <label>실제로 수집하는 개인정보<input id="dataTypes" placeholder="예: 이메일, 닉네임. 없으면 '없음'"></label>
+        <label>개인정보의 사용 목적<input id="purposes" placeholder="예: 문의 답변, 계정 관리"></label>
+        <label>보유 기간과 삭제 기준<input id="retention" placeholder="예: 탈퇴 시 삭제. 근거를 확인해 입력"></label>
+      </div>
+      <div class="extra" id="thirdDetail" hidden>
+        <label>위탁업체와 업무<input id="vendors" placeholder="예: 업체명 — 호스팅"></label>
+      </div>
+      <div class="extra" id="transferDetail" hidden>
+        <label>이전 국가와 수령자<input id="transferTo" placeholder="예: 국가명, 업체명"></label>
+      </div>
+      <div class="button-row">
+        <button type="button" id="reset" class="ghost">선택 초기화</button>
+      </div>
+    </form>
+
+    <section class="zip-card results" aria-label="관련 조항과 문구 초안">
+      <div class="results-head">
+        <div><h2>관련 조항과 문구 초안</h2><p>선택이 바뀌면 즉시 반영돼요. 해당하는 문구만 골라 사용하세요.</p></div>
+        <button type="button" id="copyAll" class="primary">결과 복사</button>
+      </div>
+      <div id="summary" class="summary" role="status" aria-live="polite"></div>
+      <div id="resultsList" class="results-list"></div>
+      <div id="checks" class="checks"></div>
+      <p class="footnote">이 도구는 공식 법령 원문을 대신 게시하지 않으며, 선택과 문구 생성은 브라우저 내부에서 이루어지고 자동 저장이나 서버 전송은 하지 않습니다. 외부 링크를 클릭하면 해당 공식 사이트로 이동합니다.</p>
+    </section>
+  </div>
+</main>
+<script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko"><head><meta name="color-scheme" content="light"><meta name="theme-color" content="#fff7ec"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Travel Ledger | my zip</title><link rel="stylesheet" href="../../shared.css">
+<style>
+:root{color-scheme:light}body{font-family:'HakgyoansimNadeuriTTF-B',system-ui,sans-serif;background:#faf7fb;color:#313546;margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid #e5dae5;background:#fff;padding:10px 14px;border-radius:13px;color:inherit}button.primary{background:#ebcfe1;border-color:#ebcfe1}button.danger{color:#9e465b}button:disabled{opacity:.45;cursor:not-allowed}.wrap{max-width:1160px;padding:22px 18px 70px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.muted{color:#818294;font-size:.9rem}.panel{background:#fff;border:1px solid #eee4ed;border-radius:24px;padding:21px;box-shadow:0 12px 28px #6b55700c;margin:14px 0}.hero{background:linear-gradient(110deg,#fae4ef,#e7f4f4)}h1{font-size:2.3rem;margin:9px 0}h2{font-size:1.2rem;margin:0 0 15px}h3{font-size:1rem}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-size:.9rem;color:#585b68}input,select,textarea{background:#fff;border:1px solid #e5dfe8;border-radius:12px;min-width:0;width:100%;padding:11px;color:#333}textarea{resize:vertical}.wide{grid-column:1/-1}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{padding:16px;border-radius:17px;background:#f9f3f8}.stat strong{display:block;font-size:1.4rem;margin-top:9px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tabs button.active{background:#e9d1e3}.items{display:grid;gap:9px}.item{border:1px solid #f0e9f0;border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:12px}.money{font-variant-numeric:tabular-nums;white-space:nowrap}.bar{background:#f4edf3;height:10px;border-radius:8px;overflow:hidden;margin:8px 0}.bar span{display:block;background:#bfa3ba;height:100%}.chip{background:#f6eff4;padding:5px 9px;border-radius:20px;font-size:.8rem}.checklist{display:flex;gap:12px;flex-wrap:wrap}.checklist label{display:flex;align-items:center;gap:4px}.checklist input{width:auto}table{width:100%;border-collapse:collapse;font-size:.88rem}th,td{text-align:left;padding:11px 7px;border-bottom:1px solid #eee7ef}th{color:#818294}.scroll{overflow-x:auto}.hidden{display:none!important}.hint{font-size:.82rem;color:#898494}.right{text-align:right}.receipt{max-width:80px;max-height:70px;border-radius:8px;object-fit:cover}.empty{padding:18px;color:#888;text-align:center}@media(max-width:700px){.grid,.grid.two,.stats{grid-template-columns:1fr}.wrap{padding:15px 12px 70px}.item{align-items:flex-start}.panel{padding:16px}}
+</style><link rel="stylesheet" href="refined.css"></head>
+<body><div class="wrap"><div class="top"><a href="../" class="muted">← my tool</a><span class="ledger-pill">브라우저에 저장하고 필요할 때 내보내기</span></div>
+<section class="panel hero"><span class="muted">my zip / travel</span><h1>Travel Ledger</h1><p>여행에서 쓴 돈을 기록하고, 누가 얼마를 내야 하는지 확인해요.</p><p class="travel-memory">내 여행 메이트는 언제나 서연언니! 예슬언니와의 짧은 당일치기도 아주아주 알차고 즐거웠어!<span style="display:block;margin-top:6px">다정한 언니들에게 힘이 되는 든든하고 현명한 동생이 될게에</span></p><div class="row"><select id="tripSelect" style="max-width:340px" aria-label="여행 선택"></select><button id="newTrip" class="primary">여행 추가</button><button id="editTrip">여행 설정</button></div></section>
+<section id="tripEditor" class="panel hidden"><h2>여행 정보</h2><form id="tripForm" class="grid two"><label>여행 제목<input id="tripName" required maxlength="80"></label><label>여행지<input id="tripPlace" placeholder="예: 일본 도쿄"></label><label>시작일<input type="date" id="tripStart"></label><label>종료일<input type="date" id="tripEnd"></label><label>기본 통화<select id="tripCurrency"><option>KRW</option><option>JPY</option><option>USD</option><option>EUR</option><option>CNY</option><option>TWD</option><option>THB</option><option>VND</option><option>GBP</option><option>HKD</option><option>SGD</option></select></label><label>함께 가는 사람<input id="tripMembers" required placeholder="예: 준희, 서연언니, 예슬언니"><span class="hint">이름은 쉼표로 구분해 주세요.</span></label><div class="row wide"><button class="primary" type="submit">여행 정보 저장</button><button type="button" id="tripCancel">취소</button><button type="button" class="danger" id="tripDelete">여행 삭제</button></div></form></section>
+<div id="workspace" class="hidden"><section class="stats" id="stats"></section><div class="row" style="margin:10px 3px 6px"><span class="ledger-pill" id="tripOverview"></span><span class="ledger-pill">외부 전송 없이 저장</span><span class="hint" id="lastSaved"></span></div><nav class="tabs"><button data-tab="entries" class="active">지출 기록</button><button data-tab="settle">더치페이</button><button data-tab="analysis">분석</button><button data-tab="report">리포트와 백업</button></nav>
+<section data-page="entries"><div class="panel"><h2 id="expenseTitle">지출 추가</h2><p class="hint">누가 결제했는지, 누구의 지출인지 각각 선택해 주세요. 한 사람의 지출도 따로 기록할 수 있어요.</p><form id="expenseForm" class="grid"><label>날짜<input type="date" id="eDate" required></label><label>제목<input id="eTitle" required placeholder="저녁 식사"></label><label>국가<input id="eCountry" list="knownCountries" placeholder="일본"></label><label>도시<input id="eCity" list="knownCities" placeholder="도쿄, 오사카"></label><label>동네 또는 지역<input id="eDistrict" list="knownDistricts" placeholder="신주쿠, 우메다"></label><label>매장명 또는 장소 (원문)<input id="ePlace" placeholder="예: 一蘭 新宿店"></label><label>한국어 매장명 (선택)<input id="ePlaceKorean" placeholder="예: 이치란 신주쿠점"><span class="hint">영수증의 원문은 남겨두고, 한국어 이름을 따로 적을 수 있어요.</span></label><datalist id="knownCountries"></datalist><datalist id="knownCities"></datalist><datalist id="knownDistricts"></datalist><label>금액<input id="eAmount" type="number" min="0.000001" step="any" required></label><label>통화<select id="eCurrency"></select></label><label>카테고리<select id="eCategory"><option>식비</option><option>카페</option><option>교통</option><option>숙박</option><option>쇼핑</option><option>관광</option><option>항공</option><option>기타</option></select></label><label>실제로 결제한 사람<select id="ePayer"></select></label><label>지출 유형<select id="eMode"><option value="shared">공동 지출</option><option value="personal">개인 소비</option></select></label><div class="wide"><span class="muted">이 돈을 함께 쓴 사람</span><div id="eParticipants" class="checklist"></div></div>
+<div class="wide" id="splitFields"><div class="row" style="justify-content:space-between"><label class="check-inline"><input id="useExchange" type="checkbox" checked> 원화로 계산하기</label><span class="hint" id="exchangeHint"></span></div><label id="exchangeRateField">환율 (외화 1단위당 원화 금액)<input id="eRate" type="number" min=".000001" step="any" value="1"></label><label>금액 나누는 방법<select id="eSplit"><option value="equal">균등 분할</option><option value="ratio">비율로 분할</option><option value="amount">인원별 금액 지정</option></select></label><div id="splitHelp">균등 분할은 선택된 사람에게 같은 금액을 부담시킵니다.</div><div id="splitGrid"></div><div id="splitPreview" aria-live="polite"></div></div><label class="wide">메모<textarea id="eNote" rows="2"></textarea></label><label class="wide">영수증 사진 (이 기기에만 저장)<input type="file" id="eReceipt" accept="image/*"><span class="hint">사진은 이 브라우저에 저장해요. 다른 기기에서는 보이지 않으니 필요하면 백업해 주세요.</span></label><div class="wide ocr-panel"><div class="row ocr-head"><div><strong>영수증 자동 입력</strong><p class="hint">사진을 선택하면 날짜와 금액, 매장명을 읽어요. 인식한 내용을 확인한 뒤 입력할 수 있어요.</p></div><div class="row"><select id="ocrLanguage" aria-label="영수증 문자 언어"><option value="kor">한국어 + 영어</option><option value="jpn">일본어 + 영어</option><option value="eng">영어</option><option value="chi_sim">중국어 간체 + 영어</option><option value="chi_tra">중국어 번체 + 영어</option><option value="tha">태국어 + 영어</option><option value="vie">베트남어 + 영어</option><option value="fra">프랑스어 + 영어</option><option value="spa">스페인어 + 영어</option><option value="deu">독일어 + 영어</option><option value="ita">이탈리아어 + 영어</option><option value="por">포르투갈어 + 영어</option><option value="ind">인도네시아어 + 영어</option><option value="rus">러시아어 + 영어</option><option value="ara">아랍어 + 영어</option></select><button id="scanReceipt" type="button" class="primary">다시 인식</button></div></div><p id="ocrStatus" role="status" aria-live="polite" class="hint">처음 사용 시 OCR 실행 파일과 언어 데이터를 다운로드합니다. 영수증 사진은 브라우저 안에서 처리합니다.</p><div id="ocrReview" class="hidden"><h3>인식 결과 확인</h3><p class="hint">아는 매장명은 한국어로 제안해요. 모르는 이름은 원문을 유지하고, 한국어 이름을 직접 적을 수 있어요.</p><div id="ocrCandidates" class="grid two"></div><div class="row"><button id="translateMerchant" type="button">한국어 이름 번역해 보기</button><span class="hint" id="translationStatus">지원되는 브라우저에서만 사용할 수 있으며, 원문은 보존됩니다.</span></div><details><summary>인식된 원문 확인</summary><pre id="ocrText"></pre></details><div class="row"><button id="applyOCR" type="button" class="primary">선택한 내용 입력</button><button id="discardOCR" type="button">취소</button></div></div></div><label class="wide" id="removeReceiptLabel" style="display:none"><span class="row"><input type="checkbox" id="removeReceipt" style="width:auto"> 기존 영수증 사진 제거</span></label><div class="row wide"><button type="submit" class="primary">지출 저장</button><button type="button" id="clearEntry">다시 입력</button></div></form></div><div class="panel"><div class="row" style="justify-content:space-between"><h2>지출 내역</h2><div class="row"><input id="filterSearch" placeholder="제목, 장소, 메모 검색" aria-label="지출 검색" style="width:205px"><select id="filterCategory"><option value="">모든 카테고리</option></select><select id="filterCountry" aria-label="국가 필터"><option value="">모든 국가</option></select><select id="filterCity" aria-label="도시 필터"><option value="">모든 도시</option></select><select id="filterDistrict" aria-label="동네 필터"><option value="">모든 동네</option></select><input type="date" id="filterDate" aria-label="날짜 필터" style="width:165px"><button id="resetFilters">필터 초기화</button></div></div><div id="entryList" class="items"></div></div></section>
+<section data-page="settle" class="hidden"><div class="panel"><h2>개인별 정산</h2><p class="hint">결제한 사람과 실제로 돈을 부담할 사람을 구분해 계산해요. 환율을 적용하지 않은 외화는 원화와 합치지 않고 따로 보여줘요.</p><div id="balanceTable" class="scroll"></div><h3>추천 송금</h3><div id="transfers" class="items"></div><div id="settlementDetails" class="hint">송금할 금액은 통화별로 나눠 보여줘요. 소수점이 생기면 실제 송금액은 함께 정해 주세요.</div></div></section>
+<section data-page="analysis" class="hidden"><div class="panel"><h2>지역별 지출</h2><p class="hint">국가, 도시, 동네를 선택해 지출을 살펴보세요. 선택한 지역은 아래 카테고리와 날짜 분석에도 적용돼요.</p><div class="row"><label>국가<select id="analysisCountry"><option value="">전체 국가</option></select></label><label>도시<select id="analysisCity"><option value="">전체 도시</option></select></label><label>동네<select id="analysisDistrict"><option value="">전체 동네</option></select></label></div><div id="geoChart"></div></div><div class="panel"><h2>카테고리별 지출</h2><div id="categoryChart"></div></div><div class="panel"><h2>날짜별 지출</h2><div id="dateChart"></div></div></section>
+<section data-page="report" class="hidden"><div class="panel"><h2>정산 리포트</h2><p class="hint">여행 지출과 정산 결과를 이미지로 저장하거나 공유할 수 있어요. 저장 버튼을 눌러도 외부 서버에 자동 업로드하지 않아요.</p><div class="row"><button class="primary" id="saveImage">리포트 이미지 저장</button><button id="shareImage">이미지 공유</button><button id="exportCsv">지출 내역 CSV 저장</button><button id="exportShares">사람별 내역 CSV 저장</button><button id="exportJson">전체 기록 백업</button><button id="importButton">백업 파일 가져오기</button><input type="file" id="importJson" accept=".json,application/json" hidden></div><p class="hint">Google Sheets에서 CSV 파일을 가져오면 표로 볼 수 있어요. Google 계정과 자동 연결하지 않으며, 환율은 입력한 값을 사용해요.</p></div><div class="panel"><h2>리포트 미리보기</h2><canvas id="reportCanvas" style="width:100%;max-width:650px;background:white;border:1px solid #eee;border-radius:14px"></canvas></div></section>
+</div><div id="welcome" class="panel empty">먼저 여행을 추가해 주세요. 그다음 지출을 기록하고 정산할 수 있어요.</div><p class="hint">기록은 이 브라우저에만 저장해요. 시크릿 모드를 사용하거나 브라우저 데이터를 지우면 사라질 수 있으니, 중요한 기록은 백업해 주세요.</p></div>
+<script>
+'use strict';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const currencies=['KRW','JPY','USD','EUR','CNY','TWD','THB','VND','GBP','HKD','SGD'];
+const uid=()=>crypto.randomUUID();
+const fmt=n=>new Intl.NumberFormat('ko-KR',{maximumFractionDigits:6}).format(n);
+const round=n=>Math.round((n+Number.EPSILON)*1e6)/1e6;
+async function saveChange(next){const previous=state;state=next;try{await persist();const status=$('#lastSaved');if(status)status.textContent='이 브라우저에 저장했어요 ('+new Intl.DateTimeFormat('ko-KR',{hour:'2-digit',minute:'2-digit'}).format(new Date())+')'}catch(err){state=previous;throw err}}
+function safeNotice(err){alert('저장하지 못했습니다. 기존 로컬 기록은 유지됩니다. 저장 공간을 확인하세요.\n'+err.message)}
+
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let db,state={trips:[],entries:[]},active=null,editing=null;
+function openDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open('travel-ledger-v1',1);r.onupgradeneeded=()=>{const d=r.result;d.createObjectStore('data')};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+function load(){return new Promise((resolve,reject)=>{const t=db.transaction('data','readonly').objectStore('data').get('state');t.onsuccess=()=>resolve(t.result||{trips:[],entries:[]});t.onerror=()=>reject(t.error)})}
+function persist(){return new Promise((resolve,reject)=>{const t=db.transaction('data','readwrite');t.objectStore('data').put(state,'state');t.oncomplete=resolve;t.onerror=()=>reject(t.error)})}
+const trip=()=>state.trips.find(t=>t.id===active);
+const entries=()=>state.entries.filter(e=>e.tripId===active);
+const catNames=['식비','카페','교통','숙박','쇼핑','관광','항공','기타'];
+const geoValue=(e,k)=>String(e?.[k]||'').trim()||'미분류';
+const originalPlace=e=>e.placeOriginal||e.place||'';
+const koreanPlace=e=>e.placeKorean||(e.placeOriginal&&e.place!==e.placeOriginal?e.place:'');
+const geoPath=e=>[geoValue(e,'country'),geoValue(e,'city'),geoValue(e,'district'),koreanPlace(e)||originalPlace(e)].filter(Boolean).join(' / ');
+function fillGeoInputs(){const list=entries();for(const [key,id] of [['country','#knownCountries'],['city','#knownCities'],['district','#knownDistricts']]){const vals=[...new Set(list.map(e=>e[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ko'));$(id).replaceChildren(...vals.map(v=>{const o=document.createElement('option');o.value=v;return o}))}}
+function selectValues(sel,vals,label){const el=$(sel),prev=el.value;el.replaceChildren(new Option(label,''),...[...new Set(vals)].sort((a,b)=>a.localeCompare(b,'ko')).map(v=>new Option(v,v)));el.value=[...el.options].some(o=>o.value===prev)?prev:''}
+function syncGeoFilters(prefix){const b=prefix==='analysis'?'#analysis':'#filter',all=entries();selectValues(b+'Country',all.map(e=>geoValue(e,'country')),prefix==='analysis'?'전체 국가':'모든 국가');const country=$(b+'Country').value;const first=all.filter(e=>!country||geoValue(e,'country')===country);selectValues(b+'City',first.map(e=>geoValue(e,'city')),prefix==='analysis'?'전체 도시':'모든 도시');const city=$(b+'City').value;const second=first.filter(e=>!city||geoValue(e,'city')===city);selectValues(b+'District',second.map(e=>geoValue(e,'district')),prefix==='analysis'?'전체 동네':'모든 동네')}
+function matchesGeo(e,prefix){const b=prefix==='analysis'?'#analysis':'#filter';return [['country','Country'],['city','City'],['district','District']].every(([k,s])=>!$(b+s).value||geoValue(e,k)===$(b+s).value)}
+function groupedTotals(list,keyFn){const totals=new Map();for(const e of list){const currency=settledCurrency(e),name=keyFn(e),key=currency+'|'+name;totals.set(key,{name,currency,value:(totals.get(key)?.value||0)+expenseValue(e)})}return [...totals.values()]}
+function totalByCurrency(list){return groupedTotals(list,()=> 'total').map(x=>amountLabel(x.value,x.currency)).join(', ')||'0원'}
+function bars(rows,el){const max=Math.max(1,...rows.map(x=>x.value));$(el).innerHTML=rows.length?rows.map(x=>'<div style="margin:16px 0"><div class="row" style="justify-content:space-between"><span>'+esc(x.name)+' <span class="chip">'+esc(x.currency)+'</span></span><strong>'+amountLabel(x.value,x.currency)+'</strong></div><div class="bar"><span style="width:'+Math.min(100,x.value/max*100)+'%"></span></div></div>').join(''):'<div class="empty">선택한 조건에 맞는 지출이 없어요.</div>'}
+
+function converted(e){return e.currency==='KRW'||e.useExchange!==false}
+function entryRate(e){return converted(e)?e.currency==='KRW'?1:Number(e.rate):1}
+function expenseValue(e){return e.amount*entryRate(e)}
+function settledCurrency(e){return converted(e)?'KRW':e.currency}
+function amountLabel(n,c){return fmt(round(n))+(c==='KRW'?'원':' '+c)}
+
+function weightsFor(e){const ps=e.participants||[];if(!ps.length)return {};const input=e.splitValues||{};const kind=e.splitType||'equal';const total=expenseValue(e);const result={};if(kind==='amount'){let sum=0;ps.forEach((p,i)=>{if(i===ps.length-1)result[p]=round(total-sum);else {result[p]=round(Number(input[p]||0)*entryRate(e));sum+=result[p]}});return result}const w=ps.map(p=>kind==='ratio'?Number(input[p]||0):1);const denom=w.reduce((a,b)=>a+b,0);let assigned=0;ps.forEach((p,i)=>{result[p]=i===ps.length-1?round(total-assigned):round(total*w[i]/denom);assigned+=result[p]});return result}
+function updateSplit(){const chosen=$$('input[name="member"]:checked').map(x=>x.value),kind=$('#eSplit').value;$('#splitFields').classList.toggle('hidden',$('#eMode').value==='personal');const help={equal:'선택한 사람들에게 같은 금액을 나눠요. 딱 나눠지지 않으면 소수점도 보여줘요.',ratio:'얼마씩 나눌지 비율을 적어 주세요. 예: 2 : 1 : 1',amount:'각자 낼 금액을 결제 통화로 적어 주세요. 모두 더하면 결제 금액과 같아야 해요.'};$('#splitHelp').textContent=help[kind];const old={};$$('#splitGrid input').forEach(x=>old[x.dataset.person]=x.value);$('#splitGrid').innerHTML=(kind==='equal'||$('#eMode').value==='personal')?'':chosen.map(p=>'<label>'+esc(p)+' ('+(kind==='ratio'?'비율':esc($('#eCurrency').value))+')<input type="number" min="0" step="any" data-person="'+esc(p)+'" value="'+esc(old[p]??(kind==='ratio'?'1':''))+'"></label>').join('');updateSplitPreview()}
+function divisibleSuggestion(amount,currency,count){if(count<2||!(amount>0))return '';const decimals=['KRW','JPY','VND'].includes(currency)?0:2;const factor=10**decimals;const units=Math.round(amount*factor);if(!Number.isSafeInteger(units)||Math.abs(units/factor-amount)>1e-7)return '';const remainder=units%count;if(!remainder)return '';const lower=remainder/factor,upper=(count-remainder)/factor;return '정산 참고: '+fmt(lower)+' '+currency+' 제외 → '+fmt((units-remainder)/factor)+' '+currency+' / '+count+'명 = '+fmt(round((units-remainder)/factor/count))+' '+currency+'씩\n또는 '+fmt(upper)+' '+currency+' 추가 → '+fmt(round((units+count-remainder)/factor/count))+' '+currency+'씩\n실제 금액과 정산액은 변경되지 않습니다.'}
+function updateSplitPreview(){const ps=$$('input[name="member"]:checked').map(x=>x.value),amount=Number($('#eAmount').value),rate=$('#useExchange').checked?Number($('#eRate').value):1,kind=$('#eMode').value==='personal'?'equal':$('#eSplit').value,values={};$$('#splitGrid input').forEach(x=>values[x.dataset.person]=Number(x.value));if(!ps.length||!(amount>0)||!(rate>0)){$('#splitPreview').textContent='금액을 입력하고 함께 쓴 사람을 선택하면 각자 낼 돈이 보여요.';return}const input={amount,rate,currency:$('#eCurrency').value,useExchange:$('#useExchange').checked,participants:ps,splitType:kind,splitValues:values};if(kind==='ratio'&&ps.every(p=>!(values[p]>0))){$('#splitPreview').textContent='비율을 입력해 주세요. 모든 사람이 0이면 나눌 수 없어요.';return}if(kind==='amount'){const total=ps.reduce((s,p)=>s+(values[p]||0),0);if(Math.abs(total-amount)>1e-6){$('#splitPreview').textContent='분할 금액 합계 '+fmt(total)+' / 전체 '+fmt(amount)+' '+$('#eCurrency').value+' — 일치해야 저장할 수 있습니다.';return}}const result=weightsFor(input);$('#splitPreview').textContent=ps.map(p=>p+'  '+fmt(kind==='amount'?values[p]:result[p]/entryRate(input))+' '+$('#eCurrency').value+' → '+amountLabel(result[p],settledCurrency(input))).join('\n')+'\n(소수점 여섯째 자리까지 표시하며, 발생한 최소 단위 잔여값은 마지막 참여자에게 배정됩니다.)'+(kind==='equal'&&ps.length>1?'\n\n'+divisibleSuggestion(amount,$('#eCurrency').value,ps.length):'')}
+
+function money(n){return fmt(round(n))+'원'}
+function initialize(){currencies.forEach(c=>$('#eCurrency').add(new Option(c,c)));catNames.forEach(c=>$('#filterCategory').add(new Option(c,c)));render()}
+function render(){const t=trip();$('#tripSelect').innerHTML=state.trips.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.name)+'</option>').join('');if(t)$('#tripSelect').value=active;$('#workspace').classList.toggle('hidden',!t);$('#welcome').classList.toggle('hidden',!!t);$('#editTrip').disabled=!t;if(!t)return;const list=entries();$('#ePayer').innerHTML=t.members.map(m=>'<option>'+esc(m)+'</option>').join('');const prev=$$('input[name="member"]:checked').map(x=>x.value);const matched=prev.some(p=>t.members.includes(p));$('#eParticipants').innerHTML=t.members.map(m=>'<label><input type="checkbox" name="member" value="'+esc(m)+'" '+(!matched||prev.includes(m)?'checked':'')+'>'+esc(m)+'</label>').join('');$('#eCurrency').value=currencies.includes(t.currency)?t.currency:'KRW';$('#eRate').value=t.currency==='KRW'?1:$('#eRate').value;$('#tripOverview').textContent=[t.place,(t.start&&t.end?t.start+' ~ '+t.end:t.start||t.end)].filter(Boolean).join(', ')||'여행 정보';$('#stats').innerHTML=[['기록',list.length+'건'],['전체 지출',totalByCurrency(list)],['참여 인원',t.members.length+'명']].map(a=>'<div class="stat"><small>'+a[0]+'</small><strong>'+a[1]+'</strong></div>').join('');refreshExchange();fillGeoInputs();syncGeoFilters('filter');syncGeoFilters('analysis');renderEntries();renderSettlement();renderAnalysis();renderCanvas();updateSplit()}
+function showTripEditor(isNew){const t=isNew?null:trip();$('#tripEditor').classList.remove('hidden');$('#tripName').value=t?.name||'';$('#tripPlace').value=t?.place||'';$('#tripStart').value=t?.start||'';$('#tripEnd').value=t?.end||'';$('#tripCurrency').value=t?.currency||'KRW';$('#tripMembers').value=t?.members.join(', ')||'';$('#tripEditor').dataset.id=t?.id||'';$('#tripDelete').classList.toggle('hidden',isNew);$('#tripName').focus()}
+$('#newTrip').onclick=()=>showTripEditor(true);$('#editTrip').onclick=()=>showTripEditor(false);$('#tripCancel').onclick=()=>$('#tripEditor').classList.add('hidden');$('#tripSelect').onchange=e=>{active=e.target.value;editing=null;render()};
+$('#tripForm').onsubmit=async e=>{e.preventDefault();if($('#tripStart').value&&$('#tripEnd').value&&$('#tripEnd').value<$('#tripStart').value)return alert('여행 종료일은 시작일과 같거나 더 늦어야 해요.');const members=[...new Set($('#tripMembers').value.split(',').map(x=>x.trim()).filter(Boolean))];if(!members.length)return alert('함께 가는 사람의 이름을 입력해 주세요.');const id=$('#tripEditor').dataset.id||uid();const old=state.trips.find(t=>t.id===id);if(old){const removed=old.members.filter(m=>!members.includes(m));if(removed.some(m=>state.entries.some(e=>e.tripId===id&&(e.payer===m||e.participants.includes(m)))))return alert('이미 지출을 기록한 사람은 지울 수 없어요. 해당 지출을 먼저 수정해 주세요.')}const next={id,name:$('#tripName').value.trim(),place:$('#tripPlace').value.trim(),start:$('#tripStart').value,end:$('#tripEnd').value,currency:$('#tripCurrency').value,members};try{await saveChange({...state,trips:state.trips.filter(t=>t.id!==id).concat(next)});active=id;$('#tripEditor').classList.add('hidden');resetEntry();render()}catch(err){safeNotice(err)}};
+$('#tripDelete').onclick=async()=>{if(!$('#tripEditor').dataset.id||!trip()||$('#tripEditor').dataset.id!==active||!confirm('이 여행을 삭제할까요? 지출 내역과 영수증도 함께 삭제하며 되돌릴 수 없어요.'))return;try{await saveChange({trips:state.trips.filter(t=>t.id!==active),entries:state.entries.filter(e=>e.tripId!==active)});active=state.trips[0]?.id||null;$('#tripEditor').classList.add('hidden');render()}catch(err){safeNotice(err)}};
+function resetEntry(){$('#expenseForm').reset();$('#eDate').value=new Date().toLocaleDateString('en-CA');$('#eCountry').value='';$('#eCity').value='';$('#eDistrict').value='';$('#ePlaceKorean').value='';editing=null;$('#expenseTitle').textContent='지출 추가';$('#removeReceiptLabel').style.display='none';$('#removeReceipt').checked=false;if(trip()){$('#eCurrency').value=trip().currency;$('#useExchange').checked=true;$('#eRate').value=trip().currency==='KRW'?1:'';refreshExchange();$$('input[name="member"]').forEach(x=>x.checked=true);$('#eSplit').value='equal';updateSplit()}}
+$('#clearEntry').onclick=resetEntry;
+function refreshExchange(){const isKRW=$('#eCurrency').value==='KRW';if(isKRW){$('#useExchange').checked=true;$('#useExchange').disabled=true;$('#eRate').value=1}else $('#useExchange').disabled=false;const on=$('#useExchange').checked;$('#exchangeRateField').classList.toggle('hidden',!on);$('#eRate').required=on;$('#exchangeHint').textContent=isKRW?'원화 결제라 환율을 입력하지 않아도 돼요.':on?'입력한 환율을 적용해 원화로 계산해요.':'환율을 적용하지 않고 결제 통화로 나눠요.';updateSplitPreview()}
+$('#useExchange').onchange=refreshExchange;
+$('#eCurrency').onchange=()=>{if($('#eCurrency').value!=='KRW'&&$('#eRate').value==='1')$('#eRate').value='';refreshExchange();updateSplit()};
+$('#eMode').onchange=()=>{if($('#eMode').value==='personal'){$$('input[name="member"]').forEach((x,i)=>x.checked=i===0)}else $$('input[name="member"]').forEach(x=>x.checked=true);updateSplit()};
+$('#eSplit').onchange=()=>{$('#splitGrid').innerHTML='';updateSplit()};
+$('#eParticipants').addEventListener('change',e=>{if(e.target.matches('input[name="member"]')){if($('#eMode').value==='personal'&&e.target.checked)$$('input[name="member"]').forEach(x=>x.checked=x===e.target);updateSplit()}});
+$('#splitGrid').addEventListener('input',updateSplitPreview);
+$('#eAmount').addEventListener('input',updateSplitPreview);
+$('#eRate').addEventListener('input',updateSplitPreview);
+$('#expenseForm').onsubmit=async ev=>{ev.preventDefault();const ps=$$('input[name="member"]:checked').map(x=>x.value);if(!ps.length)return alert('이 돈을 함께 쓴 사람을 한 명 이상 선택해 주세요.');if($('#eMode').value==='personal'&&ps.length!==1)return alert('개인 지출은 돈을 쓴 사람을 한 명만 선택해 주세요.');const amount=Number($('#eAmount').value),useExchange=$('#eCurrency').value==='KRW'||$('#useExchange').checked,rate=useExchange?Number($('#eRate').value):null;if(!Number.isFinite(amount)||amount<=0||amount>1e12||(useExchange&&(!Number.isFinite(rate)||rate<=0||!Number.isFinite(amount*rate)||amount*rate>1e12)))return alert('결제 금액과 환율을 다시 확인해 주세요. 원화 계산을 켰다면 환율도 입력해야 해요.');if($('#eCurrency').value==='KRW'&&rate!==1)return alert('원화로 결제했다면 환율은 1을 사용해요.');const splitType=$('#eMode').value==='personal'?'equal':$('#eSplit').value,splitValues={};$$('#splitGrid input').forEach(x=>splitValues[x.dataset.person]=Number(x.value));if(splitType==='ratio'&&(!ps.every(p=>Number.isFinite(splitValues[p])&&splitValues[p]>=0)||ps.every(p=>splitValues[p]===0)))return alert('각자 부담할 비율을 입력해 주세요. 비율 합계는 0보다 커야 해요.');if(splitType==='amount'&&(!ps.every(p=>Number.isFinite(splitValues[p])&&splitValues[p]>=0)||Math.abs(ps.reduce((s,p)=>s+splitValues[p],0)-amount)>1e-6))return alert('사람별로 적은 금액을 더했을 때 전체 결제 금액과 같아야 해요.');const old=state.entries.find(x=>x.id===editing);let receipt=$('#removeReceipt').checked?null:old?.receipt||null;const file=$('#eReceipt').files[0];if(file){if(!file.type.startsWith('image/'))return alert('영수증은 사진 파일로 올려 주세요.');if(file.size>8*1024*1024)return alert('8MB 이하의 영수증 사진을 선택해 주세요.');receipt=await new Promise((resolve,reject)=>{const r=new FileReader;r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}const item={id:editing||uid(),tripId:active,date:$('#eDate').value,title:$('#eTitle').value.trim(),place:$('#ePlace').value.trim(),placeOriginal:$('#ePlace').value.trim(),placeKorean:$('#ePlaceKorean').value.trim(),country:$('#eCountry').value.trim(),city:$('#eCity').value.trim(),district:$('#eDistrict').value.trim(),amount,rate,useExchange,currency:$('#eCurrency').value,category:$('#eCategory').value,payer:$('#ePayer').value,mode:$('#eMode').value,participants:ps,splitType,splitValues,note:$('#eNote').value.trim(),receipt};try{await saveChange({...state,entries:state.entries.filter(x=>x.id!==item.id).concat(item)});resetEntry();render()}catch(err){safeNotice(err)}};
+function expenseSuggestion(e){return (e.splitType||'equal')==='equal'&&e.participants.length>1?divisibleSuggestion(e.amount,e.currency,e.participants.length):''}
+function renderEntries(){const list=entries().filter(e=>matchesGeo(e,'filter')&&(!$('#filterCategory').value||$('#filterCategory').value===e.category)&&(!$('#filterDate').value||$('#filterDate').value===e.date)&&(!$('#filterSearch').value||[e.title,e.place,e.placeOriginal,e.placeKorean,e.note,e.country,e.city,e.district,e.payer,...e.participants].join(' ').toLocaleLowerCase().includes($('#filterSearch').value.toLocaleLowerCase()))).sort((a,b)=>b.date.localeCompare(a.date));$('#entryList').innerHTML=list.length?list.map(e=>'<div class="item"><div><div class="row"><strong>'+esc(e.title)+'</strong><span class="chip">'+esc(e.category)+'</span><span class="chip">'+(e.mode==='personal'?'개인':'공동')+'</span></div><div class="muted">'+esc(e.date)+' / '+esc(geoPath(e))+(koreanPlace(e)&&originalPlace(e)!==koreanPlace(e)?' (원문 '+esc(originalPlace(e))+')':'')+' / 결제 '+esc(e.payer)+' / 부담 '+esc(e.participants.join(', '))+'</div>'+ (e.note?'<div class="hint">'+esc(e.note)+'</div>':'')+'<div class="hint" style="margin-top:8px">각자 부담: '+Object.entries(weightsFor(e)).map(([p,v])=>esc(p)+' '+amountLabel(v,settledCurrency(e))).join(', ')+(expenseSuggestion(e)?'<div class="hint" style="margin-top:8px;white-space:pre-line">'+esc(expenseSuggestion(e))+'</div>':'')+'</div></div><div class="right"><strong class="money">'+fmt(e.amount)+' '+esc(e.currency)+'</strong><div class="muted money">≈ '+amountLabel(expenseValue(e),settledCurrency(e))+'</div><div class="row" style="justify-content:end;margin-top:7px">'+(e.receipt?'<button data-img="'+e.id+'">영수증</button>':'')+'<button data-edit="'+e.id+'">수정</button><button class="danger" data-delete="'+e.id+'">삭제</button></div></div></div>').join(''):'<div class="empty">아직 지출이 없어요. 첫 지출을 기록해 보세요.</div>'}
+$('#entryList').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const id=b.dataset.edit||b.dataset.delete||b.dataset.img;const item=state.entries.find(x=>x.id===id);if(!item)return;if(b.dataset.img){const w=window.open('','_blank');if(!w)return alert('팝업 허용 후 다시 시도하세요.');w.document.body.style.margin='0';const img=w.document.createElement('img');img.src=item.receipt;img.style.maxWidth='100%';w.document.body.append(img);return}if(b.dataset.delete){if(!confirm('이 지출을 삭제할까요? 삭제한 기록은 되돌릴 수 없어요.'))return;try{await saveChange({...state,entries:state.entries.filter(x=>x.id!==id)});render()}catch(err){safeNotice(err)}return}editing=id;$('#eDate').value=item.date;$('#eTitle').value=item.title;$('#ePlace').value=originalPlace(item);$('#ePlaceKorean').value=koreanPlace(item);$('#eCountry').value=item.country||'';$('#eCity').value=item.city||'';$('#eDistrict').value=item.district||'';$('#eAmount').value=item.amount;$('#eCurrency').value=item.currency;$('#eRate').value=item.rate??'';$('#useExchange').checked=item.useExchange!==false;refreshExchange();$('#eCategory').value=item.category;$('#ePayer').value=item.payer;$('#eMode').value=item.mode;$('#eNote').value=item.note;$('#removeReceiptLabel').style.display=item.receipt?'grid':'none';$('#removeReceipt').checked=false;$$('input[name="member"]').forEach(x=>x.checked=item.participants.includes(x.value));$('#eSplit').value=item.splitType||'equal';$('#splitGrid').innerHTML='';updateSplit();$$('#splitGrid input').forEach(x=>{x.value=item.splitValues?.[x.dataset.person]??(item.splitType==='ratio'?1:'')});updateSplitPreview();$('#expenseTitle').textContent='지출 수정';$('#expenseForm').scrollIntoView({behavior:'smooth'})};
+$('#filterCategory').onchange=renderEntries;$('#filterDate').onchange=renderEntries;for(const s of ['Country','City','District'])$('#filter'+s).onchange=()=>{syncGeoFilters('filter');renderEntries()};for(const s of ['Country','City','District'])$('#analysis'+s).onchange=()=>{syncGeoFilters('analysis');renderAnalysis()};$('#filterSearch').oninput=renderEntries;$('#resetFilters').onclick=()=>{$('#filterCategory').value='';$('#filterDate').value='';$('#filterSearch').value='';for(const s of ['Country','City','District'])$('#filter'+s).value='';syncGeoFilters('filter');renderEntries()};
+function settle(){
+ const t=trip();if(!t)return {balances:[],transfers:[],groups:[]};
+ const byCurrency=new Map();
+ for(const e of entries()){
+  const unit=settledCurrency(e);
+  if(!byCurrency.has(unit))byCurrency.set(unit,new Map(t.members.map(name=>[name,{name,paid:0,share:0,unit}])));
+  const map=byCurrency.get(unit);
+  if(!map.has(e.payer))continue;
+  map.get(e.payer).paid+=expenseValue(e);
+  for(const [name,value] of Object.entries(weightsFor(e)))if(map.has(name))map.get(name).share+=value;
+ }
+ const groups=[];
+ for(const [unit,map] of byCurrency){
+  const balances=[...map.values()].map(x=>({...x,paid:round(x.paid),share:round(x.share),net:round(x.paid-x.share)}));
+  const owed=balances.filter(x=>x.net<-.0000005).map(x=>({name:x.name,amount:-x.net}));
+  const due=balances.filter(x=>x.net>.0000005).map(x=>({name:x.name,amount:x.net}));
+  let i=0,j=0;const transfers=[];
+  while(i<owed.length&&j<due.length){const amount=round(Math.min(owed[i].amount,due[j].amount));if(amount>0)transfers.push({from:owed[i].name,to:due[j].name,amount,unit});owed[i].amount=round(owed[i].amount-amount);due[j].amount=round(due[j].amount-amount);if(owed[i].amount<.0000005)i++;if(due[j].amount<.0000005)j++}
+  groups.push({unit,balances,transfers});
+ }
+ return {groups,balances:groups.flatMap(g=>g.balances),transfers:groups.flatMap(g=>g.transfers)};
+}
+function renderSettlement(){
+ const s=settle(),table=$('#balanceTable'),transfers=$('#transfers');
+ table.innerHTML=s.groups.length?s.groups.map(group=>'<h3>'+esc(group.unit)+' 기준</h3><table><thead><tr><th>참여자</th><th>실제 결제</th><th>본인 부담</th><th>차액 (+ 받을 돈)</th></tr></thead><tbody>'+group.balances.map(x=>'<tr><td>'+esc(x.name)+'</td><td>'+amountLabel(x.paid,group.unit)+'</td><td>'+amountLabel(x.share,group.unit)+'</td><td>'+amountLabel(x.net,group.unit)+'</td></tr>').join('')+'</tbody></table>').join(''):'<div class="empty">아직 정산할 지출이 없어요.</div>';
+ transfers.innerHTML=s.transfers.length?s.transfers.map(x=>'<div class="item"><strong>'+esc(x.from)+' → '+esc(x.to)+'</strong><strong>'+amountLabel(x.amount,x.unit)+'</strong></div>').join(''):'<div class="empty">서로 송금할 돈이 없어요.</div>';
+ $('#settlementDetails').textContent='서로 다른 통화는 임의 환산하여 합산하지 않습니다. 환율 OFF 지출은 원래 통화로 정산하고 ON 지출은 입력한 환율에 따라 원화로 정산합니다. 소수점은 최대 6자리까지 표시합니다.';
+}
+function renderAnalysis(){
+ const list=entries(),geos=list.filter(e=>matchesGeo(e,'analysis'));
+ const next=$('#analysisCountry').value?'city':'country',key=$('#analysisCity').value?'district':next;
+ bars(groupedTotals(geos,e=>geoValue(e,key)).sort((a,b)=>b.value-a.value),'#geoChart');
+ bars(groupedTotals(geos,e=>e.category).sort((a,b)=>b.value-a.value),'#categoryChart');
+ bars(groupedTotals(geos,e=>e.date).sort((a,b)=>a.name.localeCompare(b.name)),'#dateChart');
+}
+$('[data-tab]').forEach(b=>{
+ if(b.classList.contains('active'))b.setAttribute('aria-current','page');
+ b.onclick=()=>{
+  $('[data-tab]').forEach(x=>{const current=x===b;x.classList.toggle('active',current);if(current)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current')});
+  $('[data-page]').forEach(x=>x.classList.toggle('hidden',x.dataset.page!==b.dataset.tab));
+  if(b.dataset.tab==='report')renderCanvas();
+ };
+});
+function download(blob,name){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+function csvCell(v){return '"'+String(v??'').replace(/^[=+@\-\t\r]/,match=>"'"+match).replace(/"/g,'""')+'"'}
+function csv(rows){return '\ufeff'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n')}
+$('#exportCsv').onclick=()=>{const t=trip(),s=settle();const rows=[['날짜','제목','국가','도시','동네','원문 매장명','한국어 매장명','카테고리','유형','원금액','결제통화','환율 적용','환율 (KRW/단위)','정산 금액','정산 통화','결제자','부담자','메모'],...entries().map(e=>[e.date,e.title,e.country||'',e.city||'',e.district||'',originalPlace(e),koreanPlace(e),e.category,e.mode==='personal'?'개인':'공동',e.amount,e.currency,converted(e)?'ON':'OFF',converted(e)?entryRate(e):'',round(expenseValue(e)),settledCurrency(e),e.payer,e.participants.join(' / '),e.note]),[],['개인별 정산','결제액','부담액','차액','통화'],...s.balances.map(x=>[x.name,x.paid,x.share,x.net,x.unit]),[],['송금자','받는 사람','금액','통화'],...s.transfers.map(x=>[x.from,x.to,x.amount,x.unit])];download(new Blob([csv(rows)],{type:'text/csv;charset=utf-8'}),t.name+'-ledger.csv')};
+$('#exportShares').onclick=()=>{const t=trip();const rows=[['날짜','제목','국가','도시','동네','원문 매장명','한국어 매장명','카테고리','유형','원금액','결제통화','환율 적용','환율','결제자','부담자','개인 부담액','정산 통화','분할 방식'],...entries().flatMap(e=>Object.entries(weightsFor(e)).map(([person,value])=>[e.date,e.title,e.country||'',e.city||'',e.district||'',originalPlace(e),koreanPlace(e),e.category,e.mode==='personal'?'개인':'공동',e.amount,e.currency,converted(e)?'ON':'OFF',converted(e)?entryRate(e):'',e.payer,person,value,settledCurrency(e),e.splitType||'equal']))];download(new Blob([csv(rows)],{type:'text/csv;charset=utf-8'}),t.name+'-individual-shares.csv')};
+$('#exportJson').onclick=()=>download(new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),data:state},null,2)],{type:'application/json'}),'travel-ledger-backup.json');
+$('#importButton').onclick=()=>$('#importJson').click();
+function validateBackup(d){if(!d||!Array.isArray(d.trips)||!Array.isArray(d.entries)||d.trips.length>10000||d.entries.length>100000)throw Error('백업 구조를 확인할 수 없습니다.');const trips=new Map();for(const t of d.trips){if(!t||typeof t.id!=='string'||!t.id||typeof t.name!=='string'||!Array.isArray(t.members)||!t.members.length||t.members.some(m=>typeof m!=='string'||!m.trim())||new Set(t.members).size!==t.members.length||trips.has(t.id))throw Error('여행 정보가 손상되었습니다.');trips.set(t.id,t)}for(const e of d.entries){const t=trips.get(e?.tripId);if(!t||typeof e.id!=='string'||typeof e.date!=='string'||typeof e.title!=='string'||!Number.isFinite(e.amount)||e.amount<=0||(converted(e)&&(!Number.isFinite(e.rate)||e.rate<=0))||(!converted(e)&&e.rate!=null)||!t.members.includes(e.payer)||!Array.isArray(e.participants)||!e.participants.length||e.participants.some(p=>!t.members.includes(p))||(e.receipt!=null&&(typeof e.receipt!=='string'||!e.receipt.startsWith('data:image/'))))throw Error('지출 기록이 손상되었거나 연결 정보가 누락되었습니다.')}return d}
+$('#importJson').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const payload=JSON.parse(await file.text());const d=payload.data;if(payload.version!==1)throw Error('지원하지 않는 백업 버전입니다.');validateBackup(d);if(!confirm('현재 기록을 백업 파일로 바꿀까요? 기존 기록은 덮어쓰므로 먼저 전체 기록을 백업해 주세요.'))return;await saveChange(d);active=state.trips[0]?.id||null;resetEntry();render();alert('백업에서 기록을 가져왔어요.')}catch(err){alert('복원 실패: '+err.message)}finally{e.target.value=''}};
+function drawText(ctx,text,x,y,maxWidth){const value=String(text);let shown=value;while(ctx.measureText(shown).width>maxWidth&&shown.length>1)shown=shown.slice(0,-2)+'…';ctx.fillText(shown,x,y)}
+function renderCanvas(){
+ const t=trip();if(!t)return;
+ const canvas=$('#reportCanvas'),ctx=canvas.getContext('2d'),s=settle(),all=entries();
+ const totals=groupedTotals(all,()=> '총액');
+ const cats=groupedTotals(all,e=>e.category).sort((a,b)=>b.value-a.value);
+ const areas=groupedTotals(all,e=>[geoValue(e,'country'),geoValue(e,'city')].join(' / ')).sort((a,b)=>b.value-a.value);
+ const w=940,heads=totals.length||1;
+ const sections=[
+  {name:'통화별 지출 요약',meta:'TOTAL',rows:totals.map(x=>[x.currency,amountLabel(x.value,x.currency),''])},
+  {name:'국가와 도시별 지출',meta:'REGION',rows:areas.map(x=>[x.name,amountLabel(x.value,x.currency),x.currency])},
+  {name:'카테고리별 지출',meta:'CATEGORY',rows:cats.map(x=>[x.name,amountLabel(x.value,x.currency),x.currency])},
+  {name:'인원별 결제, 부담, 차액',meta:'SETTLEMENT',rows:s.balances.map(x=>[x.name+' ('+x.unit+')',amountLabel(x.net,x.unit), '결제 '+amountLabel(x.paid,x.unit)+'  /  부담 '+amountLabel(x.share,x.unit)])},
+  {name:'최종 송금',meta:'TRANSFER',rows:s.transfers.map(x=>[x.from+' → '+x.to,amountLabel(x.amount,x.unit),x.unit])}
+ ];
+ const sectionHeight=section=>95+Math.max(section.rows.length,1)*57;
+ const h=245+sections.reduce((sum,sec)=>sum+sectionHeight(sec),0)+100;
+ canvas.width=w*2;canvas.height=h*2;ctx.setTransform(2,0,0,2,0,0);
+ ctx.fillStyle='#fffafd';ctx.fillRect(0,0,w,h);
+ ctx.fillStyle='#f0deeb';ctx.fillRect(0,0,w,216);
+ const gradient=ctx.createLinearGradient(570,0,940,220);gradient.addColorStop(0,'#f3e0ec');gradient.addColorStop(1,'#e5f5fc');ctx.fillStyle=gradient;ctx.beginPath();ctx.arc(940,0,240,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#605568';ctx.font='bold 19px sans-serif';ctx.fillText('MY ZIP  /  TRAVEL LEDGER',49,47);
+ ctx.fillStyle='#263244';ctx.font='bold 40px sans-serif';drawText(ctx,t.name,49,111,830);
+ ctx.fillStyle='#736d79';ctx.font='18px sans-serif';drawText(ctx,[t.place,[t.start,t.end].filter(Boolean).join(' ~ ')].filter(Boolean).join(' / ')||'여행 정산',49,150,830);
+ ctx.font='16px sans-serif';ctx.fillText(all.length+'건의 지출, '+t.members.length+'명 참여, 원화와 외화 별도 정산',49,184);
+ let y=260;
+ for(const section of sections){
+  ctx.fillStyle='#514757';ctx.font='bold 23px sans-serif';ctx.fillText(section.name,49,y);
+  ctx.textAlign='right';ctx.fillStyle='#968d98';ctx.font='14px sans-serif';ctx.fillText(section.meta,888,y);ctx.textAlign='left';
+  y+=19;ctx.fillStyle='#e9e1e9';ctx.fillRect(49,y,839,1);y+=45;
+  const rows=section.rows.length?section.rows:[['내역 없음','—','']];
+  for(const [name,value,sub] of rows){
+   ctx.fillStyle='#51495a';ctx.font='18px sans-serif';drawText(ctx,name,55,y,475);
+   ctx.fillStyle='#363140';ctx.font='bold 19px sans-serif';ctx.textAlign='right';drawText(ctx,value,887,y,350);ctx.textAlign='left';
+   if(sub){ctx.font='14px sans-serif';ctx.fillStyle='#8c8490';drawText(ctx,sub,55,y+18,780)}
+   y+=57;
+  }
+  y+=31;
+ }
+ ctx.fillStyle='#e9e1e9';ctx.fillRect(49,h-72,839,1);
+ ctx.fillStyle='#918894';ctx.font='14px sans-serif';ctx.fillText('입력한 환율을 적용하고 통화를 구분해 소수점 6자리까지 계산',49,h-43);
+ ctx.textAlign='right';ctx.fillText('Generated locally',888,h-43);ctx.textAlign='left';
+}
+const imgBlob=()=>new Promise(resolve=>$('#reportCanvas').toBlob(resolve,'image/png'));
+$('#saveImage').onclick=async()=>{renderCanvas();download(await imgBlob(),trip().name+'-report.png')};
+$('#shareImage').onclick=async()=>{renderCanvas();const blob=await imgBlob();const file=new File([blob],trip().name+'-report.png',{type:'image/png'});if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:trip().name+' 정산 리포트'})}catch(err){if(err.name!=='AbortError')alert('공유에 실패했습니다: '+err.message)}}else{download(blob,file.name);alert('이 브라우저에서는 바로 공유할 수 없어 이미지를 저장했어요.')}};
+let ocrResult=null;
+const ocrFields=[
+ ['date','날짜','#eDate'],['merchant','매장명 원문','#ePlace'],['merchantKorean','한국어 매장명 (선택)','#ePlaceKorean'],
+ ['amount','결제 총금액','#eAmount'],['currency','결제 통화','#eCurrency']
+];
+function setOCRStatus(message){$('#ocrStatus').textContent=message}
+function showOCRResult(data){
+ ocrResult=data;
+ const fields=ocrFields.filter(([key])=>key==='merchantKorean'?!!data.merchant:data[key]!==null&&data[key]!==undefined&&data[key]!=='');
+ const candidates=$('#ocrCandidates');
+ candidates.replaceChildren();
+ for(const [key,label] of fields){
+  const wrapper=document.createElement('label');wrapper.className='ocr-choice';
+  const title=document.createElement('span');
+  const check=document.createElement('input');check.type='checkbox';check.value=key;check.checked=key!=='merchantKorean'||!!data.koreanMapped;
+  const name=document.createElement('strong');name.textContent=label;
+  title.append(check,' ',name);
+  const value=document.createElement(key==='merchantKorean'?'input':'span');
+  if(key==='merchantKorean'){value.type='text';value.value=data.koreanMapped?String(data.merchantKorean):'';value.placeholder='한국어 이름 직접 입력 (선택)';value.dataset.ocrEdit='merchantKorean';value.setAttribute('aria-label','한국어 매장명 수정');}
+  else value.textContent=String(data[key]);
+  wrapper.append(title,value);
+  if(key==='merchantKorean'){
+    const hint=document.createElement('small');hint.className='hint';
+    hint.textContent='영수증 원문: '+(data.merchant||'없음')+(data.koreanMapped?' (한국어 표기 제안)':' (번역 확인 필요)');
+    wrapper.append(hint);
+  }
+  candidates.append(wrapper);
+ }
+ const evidence=document.createElement('p');evidence.className='hint';
+ evidence.textContent=data.amountEvidence?'금액 판독 근거: '+data.amountEvidence:'총금액을 확실히 찾지 못했습니다. 영수증 원문을 확인해 주세요.';
+ candidates.append(evidence);
+ $('#ocrText').textContent=data.text||'인식된 텍스트 없음';
+ $('#ocrReview').classList.remove('hidden');
+ $('#translateMerchant').disabled=!data.merchant||$('#ocrLanguage').value==='kor';$('#translationStatus').textContent=data.koreanMapped?'알려진 매장 표기 제안을 표시했습니다.':'외국어 매장명은 원문으로 유지했습니다. 번역이 필요하면 선택해 주세요.';setOCRStatus('인식이 끝났습니다. 항목별 값을 확인하고 필요한 것만 입력하세요. 자동 저장되지 않습니다.');
+}
+const translationLang={kor:'ko',jpn:'ja',eng:'en',chi_sim:'zh',chi_tra:'zh',tha:'th',vie:'vi',fra:'fr',spa:'es',deu:'de',ita:'it',por:'pt',ind:'id',rus:'ru',ara:'ar'};
+$('#translateMerchant').onclick=async()=>{
+ if(!ocrResult?.merchant)return;
+ const output=$('#ocrCandidates input[data-ocr-edit="merchantKorean"]');
+ if(!output)return;
+ const lang=translationLang[$('#ocrLanguage').value];
+ if(!lang||lang==='ko'){ $('#translationStatus').textContent='번역 대상 언어를 선택해 주세요.';return }
+ const api=window.Translator;
+ if(!api||typeof api.availability!=='function'||typeof api.create!=='function'){
+  $('#translationStatus').textContent='이 브라우저는 기기 내 번역 기능을 지원하지 않습니다. 한국어 매장명을 직접 입력할 수 있습니다.';
+  return;
+ }
+ const options={sourceLanguage:lang,targetLanguage:'ko'};
+ const button=$('#translateMerchant');button.disabled=true;
+ let translator=null;
+ try{
+  const available=await api.availability(options);
+  if(available==='unavailable')throw Error('이 언어 쌍의 내장 번역 모델이 지원되지 않습니다.');
+  $('#translationStatus').textContent=available==='available'?'기기 안에서 번역 중입니다.':'내장 언어 모델을 준비한 뒤 기기 안에서 번역합니다.';
+  translator=await api.create(options);
+  const text=String(await translator.translate(ocrResult.merchant)).trim();
+  if(!text)throw Error('번역 결과가 비어 있습니다.');
+  output.value=text;
+  $('#translationStatus').textContent='한국어 번역 제안이 입력되었습니다. 고유명사는 정확하지 않을 수 있으니 원문과 대조해 주세요.';
+ }catch(err){ $('#translationStatus').textContent='번역하지 못했습니다: '+err.message+' 원문을 보존했으므로 직접 수정할 수 있습니다.' }
+ finally{try{translator?.destroy?.()}catch(_err){}button.disabled=false}
+};
+$('#scanReceipt').onclick=async()=>{
+ const file=$('#eReceipt').files[0];
+ if(!file)return alert('먼저 영수증 사진을 선택해 주세요.');
+ if(!window.ReceiptOCR)return alert('문자인식 기능을 불러오지 못했습니다. 페이지를 새로고침해 주세요.');
+ const button=$('#scanReceipt');button.disabled=true;$('#ocrReview').classList.add('hidden');ocrResult=null;
+ setOCRStatus('브라우저에서 OCR 실행 파일과 언어 데이터를 준비하고 있습니다.');
+ try{
+  const result=await window.ReceiptOCR.recognize(file,$('#ocrLanguage').value,m=>{
+    if(typeof m.progress==='number')setOCRStatus('로컬 문자인식 진행률: '+Math.round(m.progress*100)+'% ('+m.status+')');
+  });
+  showOCRResult(result);
+ }catch(err){setOCRStatus('인식 실패: '+err.message+'. 사진을 다시 촬영하거나 직접 입력해 주세요.')}
+ finally{button.disabled=false}
+};
+$('#applyOCR').onclick=()=>{
+ if(!ocrResult)return;
+ let changed=0;
+ for(const checkbox of $('#ocrCandidates input[type="checkbox"]:checked')){
+  const key=checkbox.value,field=ocrFields.find(f=>f[0]===key);
+  if(!field)continue;
+  const destination=$(field[2]);
+  if(!destination)continue;
+  if(key==='currency'&&![...destination.options].some(opt=>opt.value===ocrResult.currency))continue;
+  const candidate=key==='merchantKorean'?$('#ocrCandidates input[data-ocr-edit="merchantKorean"]')?.value:ocrResult[key];
+  if(candidate==null||String(candidate).trim()==='')continue;
+  destination.value=String(candidate).trim();
+  
+  destination.dispatchEvent(new Event('change',{bubbles:true}));
+  destination.dispatchEvent(new Event('input',{bubbles:true}));
+  changed++;
+ }
+ $('#ocrReview').classList.add('hidden');
+ setOCRStatus(changed+'개 항목을 입력했습니다. 금액, 통화, 날짜를 영수증 원본과 대조한 뒤 지출 저장을 눌러 주세요.');
+};
+$('#discardOCR').onclick=()=>{$('#ocrReview').classList.add('hidden');ocrResult=null;setOCRStatus('인식 결과를 닫았습니다. 영수증 사진은 그대로 유지됩니다.')};
+$('#eReceipt').addEventListener('change',()=>{ocrResult=null;$('#ocrReview').classList.add('hidden');if(!$('#eReceipt').files[0]){setOCRStatus('영수증 이미지를 선택해 주세요.');return}setOCRStatus('영수증 사진을 인식하고 있습니다. 첫 실행 시 OCR 언어 데이터 다운로드가 필요합니다.');$('#scanReceipt').click()});
+
+function updateOCRLanguageFromLocation(){const country=($('#eCountry').value+' '+(trip()?.place||'')).toLowerCase();const regions=[[/일본|japan|日本|도쿄|오사카/,'jpn'],[/한국|korea|대한민국/,'kor'],[/중국|china|中国|베이징|상하이/,'chi_sim'],[/대만|taiwan|台湾|타이베이/,'chi_tra'],[/태국|thailand|방콕/,'tha'],[/베트남|vietnam|하노이|호찌민/,'vie'],[/프랑스|france|파리/,'fra'],[/독일|germany|베를린/,'deu'],[/스페인|spain|마드리드/,'spa'],[/이탈리아|italy|로마/,'ita'],[/포르투갈|portugal/,'por'],[/인도네시아|indonesia|발리/,'ind'],[/러시아|russia/,'rus']];
+for(const [pattern,code] of regions)if(pattern.test(country)){$('#ocrLanguage').value=code;break}}
+$('#eCountry').addEventListener('change',updateOCRLanguageFromLocation);
+(async()=>{try{db=await openDB();state=await load();active=state.trips[0]?.id||null;initialize();resetEntry()}catch(err){alert('브라우저의 로컬 저장소를 열 수 없습니다: '+err.message)}})();
+</script><script src="receipt-ocr.js" defer></script></body></html>

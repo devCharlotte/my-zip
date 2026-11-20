@@ -257,7 +257,7 @@ body.zip-soft .seg button[aria-pressed=true] {
 <nav class="zip-topnav"><a class="zip-home" href="../">← my tool</a><span class="zip-date">Created Nov 16, 2026</span></nav>
 <main class="zip-page">
 <h1 class="page-title">My QR</h1>
-<p class="intro">URL, 텍스트, 연락처를 QR 코드로 만듭니다.</p>
+<p class="intro">주소나 텍스트, 연락처를 입력해 QR 코드를 만들 수 있어요.</p>
 <div class="layout">
 <section class="zip-card panel" aria-label="QR 설정">
 <h2>QR 설정</h2>
@@ -267,7 +267,7 @@ body.zip-soft .seg button[aria-pressed=true] {
 <button type="button" data-kind="contact" aria-pressed="false">연락처</button>
 </div>
 <div id="url-fields"><div class="field"><label for="url">URL</label><input id="url" type="url" placeholder="https://example.com" autocomplete="url"></div></div>
-<div id="text-fields" hidden><div class="field"><label for="plain">텍스트</label><textarea id="plain" placeholder="내용 입력"></textarea></div></div>
+<div id="text-fields" hidden><div class="field"><label for="plain">텍스트</label><textarea id="plain" placeholder="QR 코드에 담을 내용을 입력해 주세요."></textarea></div></div>
 <div id="contact-fields" hidden>
 <div class="field"><label for="contact-name">이름</label><input id="contact-name" autocomplete="name" placeholder="이름"></div>
 <div class="field"><label for="contact-phone">전화번호</label><input id="contact-phone" type="tel" autocomplete="tel" placeholder="010-0000-0000"></div>
@@ -277,16 +277,16 @@ body.zip-soft .seg button[aria-pressed=true] {
 <div class="field"><label for="foreground">QR 코드 색상</label><div class="picker"><input id="foreground" type="color" value="#253044"><span id="color-code">#253044</span></div></div>
 <div class="field"><label for="background">배경색</label><div class="picker"><input id="background" type="color" value="#ffffff"><span id="bg-code">#ffffff</span></div></div>
 </div>
-<div class="field"><label for="logo">중앙 이미지</label><div class="filepick"><input id="logo" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></div><p class="helper">PNG, JPG, WebP, GIF · 최대 2MB</p></div>
+<div class="field"><label for="logo">중앙 이미지</label><div class="filepick"><input id="logo" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></div><p class="helper">PNG·JPG·WebP·GIF 이미지를 넣을 수 있어요. 파일 크기는 2MB까지 지원해요.</p></div>
 <button class="action" id="generate" type="button">QR 생성</button>
-<p class="helper">색상 대비가 낮으면 생성할 수 없습니다.</p>
+<p class="helper">QR 코드와 배경색이 너무 비슷하면 인식하기 어려워요. 색을 다르게 선택해 주세요.</p>
 </section>
 <section class="zip-card panel preview-panel" aria-label="생성된 QR 코드">
 <h2>미리보기</h2>
 <div class="qr-frame"><canvas id="qr" width="1024" height="1024" role="img" aria-label="생성된 QR 코드"></canvas><div id="placeholder">미리보기</div></div>
 <p id="status" role="status" aria-live="polite"></p>
 <div class="actions"><button id="png" type="button" disabled>PNG 저장</button><button id="svg" type="button" disabled>SVG 저장</button></div>
-<p class="privacy">입력 내용은 브라우저에서 처리되며 QR 코드에 포함됩니다.</p>
+<p class="privacy">입력한 정보는 이 브라우저에서 QR 코드로 만들어요. QR 코드를 공유하면 그 안의 정보도 다른 사람이 읽을 수 있어요.</p>
 </section>
 </div>
 </main>

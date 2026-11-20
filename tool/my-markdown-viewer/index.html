@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#fff7ec">
+<title>My Markdown Viewer | my zip</title>
+<link rel="stylesheet" href="../../shared.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="zip-soft">
+<nav class="zip-topnav"><a class="zip-home" href="../">← my tool</a><span class="zip-date">My Markdown Viewer</span></nav>
+<main class="viewer-page">
+  <header class="viewer-header zip-card">
+    <div class="viewer-intro">
+      <span class="eyebrow">my tool / markdown</span>
+      <h1>My Markdown Viewer</h1>
+      <p>Markdown 파일을 열거나 내용을 붙여넣어 읽어 보세요. 표가 길어도 편하게 볼 수 있어요.</p>
+    </div>
+    <div class="header-actions">
+      <label class="action primary" for="mdFile">MD 파일 열기<input id="mdFile" type="file" accept=".md,.markdown,.mdown,.txt,text/markdown,text/plain" hidden></label>
+      <button id="pasteButton" type="button">붙여넣기</button>
+      <button id="clearButton" type="button">내용 비우기</button>
+    </div>
+  </header>
+
+  <div class="tool-bar zip-card" role="toolbar" aria-label="화면 설정">
+    <div class="segmented" role="group" aria-label="화면 배치">
+      <button type="button" id="modeView" aria-pressed="false">뷰어만 보기</button>
+      <button type="button" id="modeSplit" aria-pressed="true">나란히 보기</button>
+    </div>
+    <div class="toolbar-group">
+      <button type="button" id="toggleEditor" aria-expanded="true">입력창 접기</button>
+      <button type="button" id="resetLayout">크기 초기화</button>
+      <button type="button" id="openFullscreen">전체 화면</button>
+    </div>
+    <span id="layoutHint" class="toolbar-hint">가운데 선을 드래그하면 입력창과 뷰어 크기가 바뀌어요.</span>
+  </div>
+
+  <section class="workbench" id="workbench" data-mode="split" aria-label="Markdown 작업대">
+    <section class="editor-pane zip-card" id="editorPane" aria-label="Markdown 입력">
+      <div class="pane-heading">
+        <div><h2>Markdown 입력</h2><p id="sourceLabel">내용을 붙여넣거나 파일을 열어 주세요.</p></div>
+        <span id="charCount">0자</span>
+      </div>
+      <textarea id="editor" spellcheck="false" aria-label="Markdown 원문 입력" placeholder="# 여기에 Markdown을 붙여넣어 주세요.
+
+| 항목 | 설명 |
+| --- | --- |
+| 표 | 긴 표는 가로로 움직이며 읽을 수 있어요. |"></textarea>
+      <p class="pane-footer">입력한 내용은 이 화면에서만 사용하며 자동 저장하지 않아요.</p>
+    </section>
+
+    <div class="splitter" id="splitter" role="separator" tabindex="0" aria-orientation="vertical" aria-label="입력창과 뷰어 크기 조절" aria-valuemin="12" aria-valuemax="75" aria-valuenow="34" aria-valuetext="입력창 34퍼센트">
+      <span class="split-handle" aria-hidden="true"><span></span><span></span><span></span></span>
+    </div>
+
+    <section class="preview-pane zip-card" id="previewPane" aria-label="Markdown 뷰어">
+      <div class="pane-heading preview-heading">
+        <div><h2>미리보기</h2><p id="viewInfo">내용을 입력하면 바로 보여요.</p></div>
+        <div class="preview-options">
+          <label for="fontSize">본문 크기</label>
+          <button type="button" id="smallerText" aria-label="글자 크기 1pt 줄이기">A−</button>
+          <input id="fontSize" type="number" min="8" max="36" step="0.5" value="12" inputmode="decimal" aria-label="본문 글자 크기(pt)">
+          <span class="font-unit">pt</span>
+          <button type="button" id="largerText" aria-label="글자 크기 1pt 키우기">A+</button>
+          <input id="fontRange" type="range" min="8" max="36" step="0.5" value="12" aria-label="본문 글자 크기 슬라이더">
+          <button type="button" id="copyRendered">텍스트 복사</button>
+        </div>
+      </div>
+      <div id="renderStatus" class="render-status" role="status" aria-live="polite"></div>
+      <div id="preview" class="markdown-body" tabindex="0">
+        <div class="empty"><strong>Markdown을 보여드릴게요.</strong><p>왼쪽에 내용을 붙여넣거나 위에서 MD 파일을 선택해 주세요.</p></div>
+      </div>
+    </section>
+  </section>
+  <p class="privacy-note">파일과 텍스트는 서버에 업로드하지 않아요. Markdown 안의 HTML은 실행하지 않고, 외부 이미지는 자동으로 불러오지 않아요. 문서 표시용 라이브러리는 처음 사용할 때 인터넷에서 내려받아요.</p>
+</main>
+<script defer src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+<script defer src="app.js"></script>
+</body>
+</html>
