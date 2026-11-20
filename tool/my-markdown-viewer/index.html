@@ -19,9 +19,10 @@
       <p>Markdown 파일을 열거나 내용을 붙여넣어 읽어 보세요. 표가 길어도 편하게 볼 수 있어요.</p>
     </div>
     <div class="header-actions">
-      <label class="action primary" for="mdFile">MD 파일 열기<input id="mdFile" type="file" accept=".md,.markdown,.mdown,.txt,text/markdown,text/plain" hidden></label>
-      <button id="pasteButton" type="button">붙여넣기</button>
-      <button id="clearButton" type="button">내용 비우기</button>
+      <button id="downloadButton" type="button" disabled>Markdown 다운로드</button>
+      <button id="clearButton" type="button" disabled>내용 비우기</button>
+      <button id="undoClear" type="button" hidden>비우기 취소</button>
+      <input id="mdFile" type="file" accept=".md,.markdown,.mdown,.txt,text/markdown,text/plain" hidden>
     </div>
   </header>
 
@@ -31,7 +32,6 @@
       <button type="button" id="modeSplit" aria-pressed="true">나란히 보기</button>
     </div>
     <div class="toolbar-group">
-      <button type="button" id="toggleEditor" aria-expanded="true">입력창 접기</button>
       <button type="button" id="resetLayout">크기 초기화</button>
       <button type="button" id="openFullscreen">전체 화면</button>
     </div>
@@ -44,12 +44,21 @@
         <div><h2>Markdown 입력</h2><p id="sourceLabel">내용을 붙여넣거나 파일을 열어 주세요.</p></div>
         <span id="charCount">0자</span>
       </div>
-      <textarea id="editor" spellcheck="false" aria-label="Markdown 원문 입력" placeholder="# 여기에 Markdown을 붙여넣어 주세요.
+      <div id="dropZone" class="drop-zone" role="group" aria-label="Markdown 시작하기">
+        <div class="drop-message"><strong>Markdown 파일을 여기에 놓으세요</strong><span>파일을 열거나 내용을 붙여넣어 시작할 수 있어요.</span></div>
+        <div class="drop-actions">
+          <button type="button" id="openInEditor">파일 열기</button>
+          <button type="button" id="pasteButton">붙여넣기</button>
+          <button type="button" id="startWriting">직접 작성하기</button>
+        </div>
+      </div>
+      <textarea id="editor" hidden spellcheck="false" aria-label="Markdown 원문 입력" placeholder="# 여기에 Markdown을 붙여넣어 주세요.
 
 | 항목 | 설명 |
 | --- | --- |
 | 표 | 긴 표는 가로로 움직이며 읽을 수 있어요. |"></textarea>
-      <p class="pane-footer">입력한 내용은 이 화면에서만 사용하며 자동 저장하지 않아요.</p>
+      <p id="editorNotice" class="pane-footer" hidden role="status" aria-live="polite"></p>
+      <p class="pane-footer">입력 중에는 Ctrl+Z로 최근 수정을 되돌릴 수 있어요. 자동 저장은 하지 않아요.</p>
     </section>
 
     <div class="splitter" id="splitter" role="separator" tabindex="0" aria-orientation="vertical" aria-label="입력창과 뷰어 크기 조절" aria-valuemin="12" aria-valuemax="75" aria-valuenow="34" aria-valuetext="입력창 34퍼센트">
@@ -71,7 +80,7 @@
       </div>
       <div id="renderStatus" class="render-status" role="status" aria-live="polite"></div>
       <div id="preview" class="markdown-body" tabindex="0">
-        <div class="empty"><strong>Markdown을 보여드릴게요.</strong><p>왼쪽에 내용을 붙여넣거나 위에서 MD 파일을 선택해 주세요.</p></div>
+        <div class="empty"><strong>Markdown을 보여드릴게요.</strong><p>왼쪽에서 파일 열기, 붙여넣기 또는 직접 작성하기를 선택해 주세요.</p></div>
       </div>
     </section>
   </section>

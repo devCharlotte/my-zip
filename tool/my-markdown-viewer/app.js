@@ -6,6 +6,8 @@
   const preview = $('#preview');
   const workbench = $('#workbench');
   const splitter = $('#splitter');
+  const dropZone = $('#dropZone');
+  const editorPane = $('#editorPane');
   const sourceLabel = $('#sourceLabel');
   const status = $('#renderStatus');
   const hint = $('#layoutHint');
@@ -18,6 +20,10 @@
   let renderFrame = 0;
   let activePointer = null;
   let documentName = '';
+  let lastSavedText = '';
+  let dragDepth = 0;
+  let started = false;
+  let clearedDocument = null;
 
   const renderer = window.markdownit ? window.markdownit({
     html: false,
@@ -55,7 +61,7 @@
     const heading = document.createElement('strong');
     heading.textContent = 'Markdown을 보여드릴게요.';
     const detail = document.createElement('p');
-    detail.textContent = '왼쪽에 내용을 붙여넣거나 위에서 MD 파일을 선택해 주세요.';
+    detail.textContent = '왼쪽에서 파일 열기, 붙여넣기 또는 직접 작성하기를 선택해 주세요.';
     wrapper.append(heading, detail);
     preview.append(wrapper);
   }
@@ -63,7 +69,14 @@
   function updateSource() {
     const text = editor.value;
     $('#charCount').textContent = text.length.toLocaleString('ko-KR') + '자';
-    sourceLabel.textContent = documentName ? documentName : '직접 입력한 내용';
+    sourceLabel.textContent = !started
+      ? '파일을 열거나 직접 작성해 주세요.'
+      : documentName
+        ? '열린 파일: ' + documentName
+        : '새 Markdown 문서';
+    $('#downloadButton').disabled = !text.trim();
+    $('#clearButton').disabled = !text;
+    $('#undoClear').hidden = !clearedDocument;
   }
 
   function renderMarkdown() {
@@ -73,7 +86,7 @@
     if (!input.trim()) {
       showPlaceholder();
       $('#viewInfo').textContent = '내용을 입력하면 바로 보여요.';
-      report('');
+      if (!clearedDocument) report('');
       return;
     }
     if (!renderer) {
@@ -110,10 +123,53 @@
     renderFrame = requestAnimationFrame(renderMarkdown);
   }
 
-  function setMarkdown(text, name) {
-    editor.value = text.replace(/^\uFEFF/, '');
+  function beginEditing(text, name, method) {
+    if (started) return false;
+    started = true;
+    clearedDocument = null;
+    editor.hidden = false;
+    dropZone.hidden = true;
     documentName = name || '';
+    editor.value = text.replace(/^\uFEFF/, '');
+    lastSavedText = editor.value;
+    const notice = $('#editorNotice');
+    notice.hidden = false;
+    notice.textContent = method === 'file'
+      ? documentName + ' 파일을 열었어요. 수정한 뒤 다운로드하면 파일명에 -JH가 붙어요. 다른 파일을 열려면 페이지를 새로고침해 주세요.'
+      : method === 'paste'
+        ? '붙여넣은 내용으로 시작했어요. 수정한 내용은 Markdown으로 다운로드할 수 있어요. 다른 파일을 열려면 페이지를 새로고침해 주세요.'
+        : '직접 작성을 시작했어요. Markdown으로 다운로드할 수 있어요. 다른 파일을 열려면 페이지를 새로고침해 주세요.';
+    $('#modeView').disabled = false;
+    setMode('split');
     queueRender();
+    return true;
+  }
+
+  function openPicker() {
+    $('#mdFile').click();
+  }
+
+  function downloadMarkdown() {
+    if (!editor.value.trim()) {
+      report('다운로드할 내용이 없어요.');
+      return;
+    }
+    const baseName = documentName
+      ? documentName.replace(/\.(md|markdown|mdown|txt)$/i, '')
+      : 'markdown';
+    const currentName = (baseName.endsWith('-JH') ? baseName : baseName + '-JH') + '.md';
+    const safeName = currentName.replace(/[\\/:*?"<>|\x00-\x1f]/g, '_');
+    const file = new Blob([editor.value], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(file);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = safeName;
+    document.body.append(anchor);
+    anchor.click();
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    lastSavedText = editor.value;
+    report('Markdown 파일을 다운로드했어요.');
   }
 
   async function readFile(file) {
@@ -126,8 +182,13 @@
       report('Markdown 또는 텍스트 파일을 선택해 주세요.');
       return;
     }
+    if (started) {
+      report('다른 파일을 열려면 페이지를 새로고침해 주세요. 수정한 내용은 먼저 다운로드해 주세요.');
+      return;
+    }
     try {
-      setMarkdown(await file.text(), file.name);
+      const text = await file.text();
+      beginEditing(text, file.name, 'file');
       report('');
     } catch (error) {
       report('파일을 읽지 못했어요. 다른 파일을 선택해 주세요.');
@@ -135,12 +196,12 @@
   }
 
   function setMode(next) {
+    if (!started && next === 'view') return;
     mode = next;
     workbench.dataset.mode = mode;
     $('#modeView').setAttribute('aria-pressed', String(mode === 'view'));
     $('#modeSplit').setAttribute('aria-pressed', String(mode === 'split'));
-    $('#toggleEditor').setAttribute('aria-expanded', String(mode === 'split'));
-    $('#toggleEditor').textContent = mode === 'split' ? '입력창 접기' : '입력창 펼치기';
+
     hint.textContent = mode === 'view'
       ? '입력창을 다시 펼치면 원문을 수정할 수 있어요.'
       : isCompact()
@@ -220,9 +281,9 @@
     refreshSplitter();
   });
 
+  $('#modeView').disabled = true;
   $('#modeView').addEventListener('click', () => setMode('view'));
   $('#modeSplit').addEventListener('click', () => setMode('split'));
-  $('#toggleEditor').addEventListener('click', () => setMode(mode === 'split' ? 'view' : 'split'));
 
   $('#resetLayout').addEventListener('click', () => {
     editorSize = 34;
@@ -244,6 +305,12 @@
     $('#openFullscreen').textContent = document.fullscreenElement ? '전체 화면 종료' : '전체 화면';
   });
 
+  $('#openInEditor').addEventListener('click', openPicker);
+  $('#startWriting').addEventListener('click', () => {
+    if (beginEditing('', '', 'write')) editor.focus();
+  });
+  $('#downloadButton').addEventListener('click', downloadMarkdown);
+
   $('#mdFile').addEventListener('change', async event => {
     await readFile(event.target.files[0]);
     event.target.value = '';
@@ -256,34 +323,62 @@
         report('클립보드에 복사된 텍스트가 없어요.');
         return;
       }
-      setMarkdown(text, '');
+      if (started) {
+        report('새 내용을 열려면 페이지를 새로고침해 주세요. 수정한 내용은 먼저 다운로드해 주세요.');
+        return;
+      }
+      beginEditing(text, '', 'paste');
       report('');
     } catch (error) {
-      setMode('split');
+      if (!started) beginEditing('', '', 'write');
       editor.focus();
-      report('클립보드에 접근할 수 없어요. 입력창을 눌러 Ctrl+V 또는 붙여넣기를 이용해 주세요.');
+      report('클립보드에 접근할 수 없어요. 입력창에서 Ctrl+V로 붙여넣어 주세요.');
     }
   });
 
-  $('#clearButton').addEventListener('click', () => {
-    if (editor.value && !window.confirm('입력한 내용을 비울까요? 이 화면에 자동 저장한 내용은 없어요.')) return;
-    setMarkdown('', '');
-    setMode('split');
+  function restoreClear() {
+    if (!clearedDocument) return;
+    editor.value = clearedDocument.text;
+    documentName = clearedDocument.name;
+    lastSavedText = clearedDocument.savedText;
+    clearedDocument = null;
+    queueRender();
     editor.focus();
+    report('내용을 되돌렸어요.');
+  }
+
+  $('#clearButton').addEventListener('click', () => {
+    if (!editor.value) return;
+    if (!window.confirm('입력한 내용을 모두 비울까요? 비운 직후에는 되돌릴 수 있지만 자동 저장되지는 않아요.')) return;
+    clearedDocument = {
+      text: editor.value,
+      name: documentName,
+      savedText: lastSavedText
+    };
+    editor.value = '';
+    queueRender();
+    editor.focus();
+    report('내용을 비웠어요. 위쪽의 비우기 취소를 누르거나 Ctrl+Z로 되돌릴 수 있어요.');
   });
 
+  $('#undoClear').addEventListener('click', restoreClear);
+
   editor.addEventListener('input', () => {
-    documentName = '';
+    clearedDocument = null;
     queueRender();
   });
 
   editor.addEventListener('keydown', event => {
+    if (clearedDocument && (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'z' && !event.shiftKey) {
+      event.preventDefault();
+      restoreClear();
+      return;
+    }
     if (event.key !== 'Tab' || event.shiftKey) return;
     event.preventDefault();
     const start = editor.selectionStart;
     const end = editor.selectionEnd;
     editor.setRangeText('  ', start, end, 'end');
-    documentName = '';
     queueRender();
   });
 
@@ -317,14 +412,90 @@
     }
   });
 
-  window.addEventListener('dragover', event => {
-    if (event.dataTransfer && [...event.dataTransfer.types].includes('Files')) event.preventDefault();
+  function hasFileDrag(event) {
+    return event.dataTransfer && [...event.dataTransfer.types].includes('Files');
+  }
+
+  function resetDropState() {
+    dragDepth = 0;
+    dropZone.classList.remove('is-over');
+    editorPane.classList.remove('is-over');
+  }
+
+  editorPane.addEventListener('dragenter', event => {
+    if (!hasFileDrag(event)) return;
+    event.preventDefault();
+    dragDepth++;
+    editorPane.classList.add('is-over');
+    dropZone.classList.add('is-over');
   });
 
-  window.addEventListener('drop', async event => {
-    if (!event.dataTransfer || !event.dataTransfer.files.length) return;
+  editorPane.addEventListener('dragleave', event => {
+    if (!hasFileDrag(event)) return;
+    dragDepth = Math.max(0, dragDepth - 1);
+    if (!dragDepth) resetDropState();
+  });
+
+  editorPane.addEventListener('dragover', event => {
+    if (!hasFileDrag(event)) return;
     event.preventDefault();
-    await readFile(event.dataTransfer.files[0]);
+    event.dataTransfer.dropEffect = 'copy';
+  });
+
+  editorPane.addEventListener('drop', async event => {
+    if (!event.dataTransfer) return;
+    const file = event.dataTransfer.files[0];
+    resetDropState();
+    if (file) {
+      event.preventDefault();
+      if (started) {
+        report('다른 파일을 열려면 페이지를 새로고침해 주세요. 수정한 내용은 먼저 다운로드해 주세요.');
+        return;
+      }
+      await readFile(file);
+    }
+  });
+
+  dropZone.addEventListener('dragover', event => {
+    if (event.dataTransfer && ([...event.dataTransfer.types].includes('text/plain') || hasFileDrag(event))) {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = 'copy';
+    }
+  });
+
+  dropZone.addEventListener('drop', async event => {
+    event.preventDefault();
+    event.stopPropagation();
+    const file = event.dataTransfer.files[0];
+    resetDropState();
+    if (file) {
+      await readFile(file);
+      return;
+    }
+    const text = event.dataTransfer.getData('text/plain');
+    if (!text) return;
+    if (started) {
+      report('새 내용을 열려면 페이지를 새로고침해 주세요. 수정한 내용은 먼저 다운로드해 주세요.');
+      return;
+    }
+    beginEditing(text, '', 'paste');
+  });
+
+  window.addEventListener('dragover', event => {
+    if (hasFileDrag(event)) event.preventDefault();
+  });
+
+  window.addEventListener('drop', event => {
+    if (hasFileDrag(event)) {
+      event.preventDefault();
+      resetDropState();
+    }
+  });
+
+  window.addEventListener('beforeunload', event => {
+    if (!started || (editor.value === lastSavedText && !clearedDocument)) return;
+    event.preventDefault();
+    event.returnValue = '';
   });
 
   if (compact.addEventListener) compact.addEventListener('change', refreshSplitter);
